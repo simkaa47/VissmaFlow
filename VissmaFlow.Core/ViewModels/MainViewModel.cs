@@ -15,7 +15,7 @@ namespace VissmaFlow.Core.ViewModels
         {
             _logger = logger;
             _timer = new Timer(OnTimerExecute);
-            _timer.Change(0, 5000);
+            _timer.Change(0, 2000);
         }
 
         [ObservableProperty]
@@ -53,11 +53,35 @@ namespace VissmaFlow.Core.ViewModels
             }
             catch (Exception ex)
             {
-                Status = $"{ex.Message}({PortName})";
+                Status = $"{DateTime.Now}{ex.Message}({PortName} c настройками: Baudrate = {Baudrate}, Parity = {Parity}, StopBits = {StopBit})";
                 Disconnect();
             }
         }
 
+
+        [ObservableProperty]
+        private Parity _parity = Parity.None;
+
+        [ObservableProperty]
+        private int _baudrate = 115200;
+
+        [ObservableProperty]
+        private StopBits _stopBit = System.IO.Ports.StopBits.One;
+
+        public List<int> Baudrates { get; } = new List<int>
+        {
+            9600,19200,38500,57600,115200
+        };
+
+        public List<Parity> Parities { get; } = new List<Parity>
+        {
+            Parity.None, Parity.Even, Parity.Odd
+        };
+
+        public List<StopBits> StopBits { get; } = new List<StopBits>
+        {
+            System.IO.Ports.StopBits.One, System.IO.Ports.StopBits.Two
+        };
 
         public void Disconnect()
         {
@@ -75,12 +99,17 @@ namespace VissmaFlow.Core.ViewModels
         public void Connect()
         {
             try
-            {
-                _modbusClient.Baudrate = 115200;
-                _modbusClient.Parity = Parity.None;
-                _modbusClient.StopBits = StopBits.One;
+            {                
+                _modbusClient.Baudrate = Baudrate;
+                _modbusClient.Parity = Parity;
+                _modbusClient.StopBits = StopBit;
                 _modbusClient.SerialPort = PortName;
+                 Status = $"{DateTime.Now.ToString("G")} выполняется подключение  c настройками: Baudrate = {Baudrate}, Parity = {Parity}, StopBits = {StopBit})";
                 _modbusClient.Connect();
+                if (_modbusClient.Connected)
+                    Status = "Подключение выполнено";
+                else
+                    Status = "Подключение не выполнено";
             }
             catch (Exception ex)
             {

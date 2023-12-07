@@ -4,25 +4,49 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="VissmaFlow.View.MainWindow"
+		xmlns:scg="clr-namespace:System.Collections.Generic;assembly=netstandard"
+		xmlns:sys="clr-namespace:System;assembly=netstandard"
 		xmlns:vm="using:VissmaFlow.Core.ViewModels"
 		x:DataType="vm:MainViewModel"
         Title="VissmaFlow.View">
-	<Grid>
-		<StackPanel>
-			<ComboBox Items="{Binding Ports}"
-				  SelectedItem="{Binding PortName}"
-					  Margin="5"/>
+	<Grid>		
+		<StackPanel Orientation="Horizontal">
+			<StackPanel>
+				<StackPanel Margin="5">
+					<TextBlock Text="Имя порта"/>
+					<ComboBox Items="{Binding Ports}"
+					  SelectedItem="{Binding PortName}"/>
+				</StackPanel>
+				<StackPanel Margin="5">
+					<TextBlock Text="Скорость"/>
+					<ComboBox Items="{Binding Baudrates}"
+					  SelectedItem="{Binding Baudrate}"/>
+				</StackPanel>
+				<StackPanel Margin="5">
+					<TextBlock Text="Четность"/>
+					<ComboBox Items="{Binding Parities}"
+					  SelectedItem="{Binding Parity}"/>
+				</StackPanel>
+				<StackPanel Margin="5">
+					<TextBlock Text="Стоповые биты"/>
+					<ComboBox Items="{Binding StopBits}"
+					  SelectedItem="{Binding StopBit}"/>
+				</StackPanel>
+			</StackPanel>	
+			
+			
+			
 			<ListBox Items="{Binding Registers}"
 					  Width="100"
 					 Margin="5"
 					 VerticalAlignment="Top"
-					 HorizontalAlignment="Right">
+					 HorizontalAlignment="Left">
 				
 			</ListBox>
 			
 		</StackPanel>
 		
-		<TextBlock Text="{Binding Status}"
+		<TextBlock Text="{Binding Status}" TextWrapping="Wrap"				   
 				   VerticalAlignment="Bottom"/>
 				   
 	</Grid>

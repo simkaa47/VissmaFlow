@@ -25,4 +25,10 @@
     </Reference>
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="EasyModbus.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
