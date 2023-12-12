@@ -11,6 +11,11 @@ namespace VissmaFlow.Core.Models.Parameters
         public string Name { get; set; } = string.Empty;
         #endregion
 
+        #region Тип данных
+        [ObservableProperty]
+        private DataType _data;
+        #endregion
+
         #region Описание
         [ObservableProperty]
         [Required]
@@ -55,7 +60,17 @@ namespace VissmaFlow.Core.Models.Parameters
         [ObservableProperty]
         [Range(0, 255)]
         [NotifyDataErrorInfo]
-        private int _strLength; 
+        private int _strLength;
+        #endregion
+
+        #region Порядок байт
+        [ObservableProperty]
+        private ByteOrder _byteOrder;
+        #endregion
+
+        #region Нужность
+        [ObservableProperty]
+        private bool _isRequired;
         #endregion
 
     }

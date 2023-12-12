@@ -5,6 +5,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using VissmaFlow.Core.ViewModels;
 using VissmaFlow.Core;
+using VissmaFlow.Core.Contracts.Parameters;
+using VissmaFlow.View.Dialogs.Parameters;
+using VissmaFlow.Core.Contracts.Common;
+using VissmaFlow.View.Dialogs.Common;
 
 namespace VissmaFlow.View
 {
@@ -23,7 +27,8 @@ namespace VissmaFlow.View
                 ConfigureServices(services => 
                 {
                     services.AddApplicationServices();
-                    services.AddSingleton<MainViewModel>();
+                    services.AddTransient<IParameterDialogService, ParameterDialogService>();
+                    services.AddTransient<IQuestionDialog, AskDialog>();
                 }).Build();
         }
 

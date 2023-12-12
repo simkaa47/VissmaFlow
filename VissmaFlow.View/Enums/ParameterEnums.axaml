@@ -1,0 +1,25 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:scg="clr-namespace:System.Collections.Generic;assembly=netstandard"
+					xmlns:sys="clr-namespace:System;assembly=netstandard">
+	<scg:List x:TypeArguments="sys:String" x:Key="DataTypes">
+		<sys:String>INT16</sys:String>
+		<sys:String>UINT16</sys:String>
+		<sys:String>INT32</sys:String>
+		<sys:String>UINT32</sys:String>
+		<sys:String>FLOAT</sys:String>
+		<sys:String>DOUBLE</sys:String>
+		<sys:String>STRING</sys:String>
+		<sys:String>BOOL</sys:String>
+	</scg:List>
+	<scg:List x:TypeArguments="sys:String" x:Key="ModbusRegisters">
+		<sys:String>HOLDING</sys:String>
+		<sys:String>READING</sys:String>		
+	</scg:List>
+	<scg:List x:TypeArguments="sys:String" x:Key="ByteOrders">
+		<sys:String>ABCD</sys:String>
+		<sys:String>CDAB</sys:String>
+		<sys:String>BADC</sys:String>
+		<sys:String>DCBA</sys:String>
+	</scg:List>
+</ResourceDictionary>

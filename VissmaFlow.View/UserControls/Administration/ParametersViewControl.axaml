@@ -1,0 +1,83 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:vm="using:VissmaFlow.Core.ViewModels"
+		     x:DataType="vm:ParameterVm"
+			 xmlns:material="using:Material.Icons.Avalonia"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="VissmaFlow.View.UserControls.Administration.ParametersViewControl">
+	<Grid RowDefinitions="Auto,*">
+		<StackPanel Orientation="Horizontal">
+			<Button Height="50" Width="100"
+					Content="Добавить"
+					VerticalContentAlignment="Center"
+					HorizontalContentAlignment="Center"
+					Margin="5" Command="{Binding AddParameterCommand}"/>
+			<Button Height="50" Width="100"
+					Content="Сохранить"
+					VerticalContentAlignment="Center"
+					HorizontalContentAlignment="Center"
+					Margin="5" Command="{Binding SaveParametersCommand}"/>
+		</StackPanel>
+		<DataGrid Items="{Binding Parameters}"
+				  Grid.Row="1"
+				  AutoGenerateColumns="False">
+			<DataGrid.Columns>
+				<DataGridTextColumn Header="Id" Binding="{Binding Id}" IsReadOnly="True"/>
+				<DataGridTextColumn Header="Описание" Binding="{Binding Description}"/>
+				<DataGridTemplateColumn Header="Тип данных">
+					<DataGridTemplateColumn.CellTemplate>
+						<DataTemplate>
+							<ComboBox Margin="5"
+									  Items="{StaticResource DataTypes}"
+									  SelectedIndex="{Binding Data}"
+									  Width="100"
+									  HorizontalAlignment="Right"/>
+						</DataTemplate>
+					</DataGridTemplateColumn.CellTemplate>
+				</DataGridTemplateColumn>
+				<DataGridTemplateColumn Header="Тип регистра">
+					<DataGridTemplateColumn.CellTemplate>
+						<DataTemplate>
+							<ComboBox Margin="5"
+									  Items="{StaticResource ModbusRegisters}"
+									  SelectedIndex="{Binding ModbusRegType}"
+									  Width="100"
+									  HorizontalAlignment="Right"/>
+						</DataTemplate>
+					</DataGridTemplateColumn.CellTemplate>
+				</DataGridTemplateColumn>
+				<DataGridTextColumn Header="№ регистра" Binding="{Binding ModbRegNum}"/>
+				<DataGridTextColumn Header="№ бита" Binding="{Binding BitNum}"/>
+				<DataGridTextColumn Header="Мин. значение" Binding="{Binding MinValue}" IsReadOnly="False"/>
+				<DataGridTextColumn Header="Макс. значение" Binding="{Binding MaxValue}" IsReadOnly="False"/>
+				<DataGridTextColumn Header="Длина строки" Binding="{Binding StrLength}"/>
+				<DataGridTemplateColumn Header="Порядок байт">
+					<DataGridTemplateColumn.CellTemplate>
+						<DataTemplate>
+							<ComboBox Margin="5"
+									  Items="{StaticResource ByteOrders}"
+									  SelectedIndex="{Binding ByteOrder}"
+									  Width="100"
+									  HorizontalAlignment="Right"/>
+						</DataTemplate>
+					</DataGridTemplateColumn.CellTemplate>
+				</DataGridTemplateColumn>
+				<DataGridCheckBoxColumn Header="Нужность" Binding="{Binding IsRequired}"/>
+				<DataGridTemplateColumn>
+					<DataGridTemplateColumn.CellTemplate>
+						<DataTemplate>							
+							<Button Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=DataContext.DeleteParameterCommand}"
+									Background="Transparent"
+									CommandParameter="{Binding}"
+									Height="30" Width="30">
+								<material:MaterialIcon Kind="RemoveBox"/>								
+							</Button>
+						</DataTemplate>
+					</DataGridTemplateColumn.CellTemplate>
+				</DataGridTemplateColumn>
+			</DataGrid.Columns>
+		</DataGrid>
+	</Grid>
+</UserControl>

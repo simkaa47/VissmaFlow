@@ -8,46 +8,10 @@
 		xmlns:sys="clr-namespace:System;assembly=netstandard"
 		xmlns:vm="using:VissmaFlow.Core.ViewModels"
 		x:DataType="vm:MainViewModel"
+		xmlns:uc="using:VissmaFlow.View.UserControls"
         Title="VissmaFlow.View">
-	<Grid>		
-		<StackPanel Orientation="Horizontal">
-			<StackPanel>
-				<StackPanel Margin="5">
-					<TextBlock Text="Имя порта"/>
-					<ComboBox Items="{Binding Ports}"
-					  SelectedItem="{Binding PortName}"/>
-				</StackPanel>
-				<StackPanel Margin="5">
-					<TextBlock Text="Скорость"/>
-					<ComboBox Items="{Binding Baudrates}"
-					  SelectedItem="{Binding Baudrate}"/>
-				</StackPanel>
-				<StackPanel Margin="5">
-					<TextBlock Text="Четность"/>
-					<ComboBox Items="{Binding Parities}"
-					  SelectedItem="{Binding Parity}"/>
-				</StackPanel>
-				<StackPanel Margin="5">
-					<TextBlock Text="Стоповые биты"/>
-					<ComboBox Items="{Binding StopBits}"
-					  SelectedItem="{Binding StopBit}"/>
-				</StackPanel>
-			</StackPanel>	
-			
-			
-			
-			<ListBox Items="{Binding Registers}"
-					  Width="100"
-					 Margin="5"
-					 VerticalAlignment="Top"
-					 HorizontalAlignment="Left">
-				
-			</ListBox>
-			
-		</StackPanel>
+	<Grid RowDefinitions="80,*">	
 		
-		<TextBlock Text="{Binding Status}" TextWrapping="Wrap"				   
-				   VerticalAlignment="Bottom"/>
-				   
+		<uc:MainTabControl Grid.Row="1"/>   
 	</Grid>
 </Window>
