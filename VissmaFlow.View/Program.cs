@@ -1,5 +1,8 @@
 ﻿using Avalonia;
 using System;
+using System.Diagnostics;
+using System.Linq;
+using System.Threading;
 
 namespace VissmaFlow.View
 {
@@ -9,8 +12,22 @@ namespace VissmaFlow.View
         // SynchronizationContext-reliant code before AppMain is called: things aren't initialized
         // yet and stuff might break.
         [STAThread]
-        public static void Main(string[] args) => BuildAvaloniaApp()
+        public static void Main(string[] args)
+        {            
+            if (args.Contains("--wait-for-attach"))
+            {
+                Console.WriteLine("Attach debugger and use 'Set next statement'");
+                while (true)
+                {
+                    Thread.Sleep(100);
+                    if (Debugger.IsAttached)
+                        break;
+                }
+            }
+            BuildAvaloniaApp()
             .StartWithClassicDesktopLifetime(args);
+        }
+            
 
         // Avalonia configuration, don't remove; also used by visual designer.
         public static AppBuilder BuildAvaloniaApp()

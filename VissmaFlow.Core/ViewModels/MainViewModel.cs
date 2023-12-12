@@ -11,10 +11,13 @@ namespace VissmaFlow.Core.ViewModels
         private readonly Timer _timer;
         ModbusClient _modbusClient = new ModbusClient();
 
-        public MainViewModel(ILogger<MainViewModel> logger, ParameterVm parameterVm)
+        public MainViewModel(ILogger<MainViewModel> logger, 
+            ParameterVm parameterVm, 
+            CommunicationVm communicationVm)
         {
             _logger = logger;
             ParameterVm = parameterVm;
+            CommunicationVm = communicationVm;
             _timer = new Timer(OnTimerExecute);
             _timer.Change(0, 2000);
         }
@@ -84,6 +87,7 @@ namespace VissmaFlow.Core.ViewModels
             System.IO.Ports.StopBits.One, System.IO.Ports.StopBits.Two
         };
         public ParameterVm ParameterVm { get; }
+        public CommunicationVm CommunicationVm { get; }
 
         public void Disconnect()
         {

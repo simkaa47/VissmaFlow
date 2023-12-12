@@ -11,6 +11,7 @@ namespace VissmaFlow.Core
             services.AddLogging();
             services.AddSingleton<MainViewModel>();
             services.AddSingleton<ParameterVm>();
+            services.AddSingleton<CommunicationVm>();
             services.AddDbContext<VissmaDbContext>();
 
             return services;
