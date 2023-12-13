@@ -28,12 +28,9 @@ namespace VissmaFlow.Core.ViewModels
         [ObservableProperty]
         private string _portName;
 
-        private string[] GetComPorts()
-        {
-            return SerialPort.GetPortNames();
-        }
+        
 
-        public IEnumerable<string> Ports => GetComPorts();
+        
 
         [ObservableProperty]
         private string _status;
@@ -72,20 +69,11 @@ namespace VissmaFlow.Core.ViewModels
         [ObservableProperty]
         private StopBits _stopBit = System.IO.Ports.StopBits.One;
 
-        public List<int> Baudrates { get; } = new List<int>
-        {
-            9600,19200,38500,57600,115200
-        };
+        
 
-        public List<Parity> Parities { get; } = new List<Parity>
-        {
-            Parity.None, Parity.Even, Parity.Odd
-        };
+        
 
-        public List<StopBits> StopBits { get; } = new List<StopBits>
-        {
-            System.IO.Ports.StopBits.One, System.IO.Ports.StopBits.Two
-        };
+        
         public ParameterVm ParameterVm { get; }
         public CommunicationVm CommunicationVm { get; }
 

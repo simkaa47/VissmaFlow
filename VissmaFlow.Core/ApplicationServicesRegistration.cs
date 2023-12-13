@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using VissmaFlow.Core.Contracts.DataAccess;
 using VissmaFlow.Core.Infrastructure.DataAccess;
 using VissmaFlow.Core.ViewModels;
 
@@ -13,6 +14,7 @@ namespace VissmaFlow.Core
             services.AddSingleton<ParameterVm>();
             services.AddSingleton<CommunicationVm>();
             services.AddDbContext<VissmaDbContext>();
+            services.AddTransient(typeof(IRepository<>), typeof(BaseRepository<>));
 
             return services;
         }

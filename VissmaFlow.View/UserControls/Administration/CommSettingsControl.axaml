@@ -1,0 +1,68 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 xmlns:vm="using:VissmaFlow.Core.ViewModels"
+			 x:DataType="vm:CommunicationVm"
+             x:Class="VissmaFlow.View.UserControls.Administration.CommSettingsControl">
+	<UserControl.Styles>
+		<Style Selector="Border">
+			<Setter Property="BorderBrush" Value="Gray"/>
+			<Setter Property="BorderThickness" Value="1"/>
+			<Setter Property="Margin" Value="5"/>
+			<Setter Property="CornerRadius" Value="4"/>
+		</Style>
+		<Style Selector="ComboBox">			
+			<Setter Property="Margin" Value="5"/>
+			<Setter Property="HorizontalAlignment" Value="Right"/>
+			<Setter Property="VerticalAlignment" Value="Center"/>
+			<Setter Property="Width" Value="160"/>
+		</Style>
+		<Style Selector="TextBlock">
+			<Setter Property="Margin" Value="5"/>
+			<Setter Property="HorizontalAlignment" Value="Left"/>
+			<Setter Property="VerticalAlignment" Value="Center"/>			
+		</Style>
+	</UserControl.Styles>
+	<Grid ColumnDefinitions="*,*">	
+		<Grid RowDefinitions="Auto,*">
+			<TextBlock Text="Настройки связи с РТК"
+					   HorizontalAlignment="Center"/>
+			<Border Grid.Row="1">
+				<ListBox>
+					<DockPanel>
+						<ComboBox Items="{Binding Ports}"
+								  DockPanel.Dock="Right"
+								  SelectedItem="{Binding CommSettings.PortName}"/>
+						<TextBlock Text="Имя порта"/>
+					</DockPanel>
+					<DockPanel>
+						<ComboBox Items="{Binding Baudrates}"
+								  DockPanel.Dock="Right"
+								  SelectedItem="{Binding CommSettings.Baudrate}"/>
+						<TextBlock Text="Скорость"/>
+					</DockPanel>
+					<DockPanel>
+						<ComboBox Items="{Binding Parities}"
+								  DockPanel.Dock="Right"
+								  SelectedItem="{Binding CommSettings.Parity}"/>
+						<TextBlock Text="Четность"/>
+					</DockPanel>
+					<DockPanel>
+						<ComboBox Items="{Binding StopBitsList}"
+								  DockPanel.Dock="Right"
+								  SelectedItem="{Binding CommSettings.StopBitsNum}"/>
+						<TextBlock Text="Стоповые биты"/>
+					</DockPanel>
+					<Button HorizontalAlignment="Stretch"
+							Command="{Binding SaveCommSettCommand}">
+						<TextBlock Text="Сохранить настройки"								   
+								   HorizontalAlignment="Center"/>
+					</Button>
+					
+				</ListBox>
+			</Border>
+		</Grid>
+	</Grid>
+</UserControl>

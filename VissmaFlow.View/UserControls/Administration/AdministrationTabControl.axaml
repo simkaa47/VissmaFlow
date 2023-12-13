@@ -11,5 +11,8 @@
 		<TabItem Header="Параметры">
 			<adm:ParametersViewControl DataContext="{Binding ParameterVm}"/>
 		</TabItem>
+		<TabItem Header="Связь">
+			<adm:CommSettingsControl DataContext="{Binding CommunicationVm}"/>
+		</TabItem>
 	</TabControl>
 </UserControl>
