@@ -9,6 +9,8 @@ using VissmaFlow.Core.Contracts.Parameters;
 using VissmaFlow.View.Dialogs.Parameters;
 using VissmaFlow.Core.Contracts.Common;
 using VissmaFlow.View.Dialogs.Common;
+using VissmaFlow.Core.Contracts.Communication;
+using VissmaFlow.View.Dialogs.Communication;
 
 namespace VissmaFlow.View
 {
@@ -29,6 +31,7 @@ namespace VissmaFlow.View
                     services.AddApplicationServices();
                     services.AddTransient<IParameterDialogService, ParameterDialogService>();
                     services.AddTransient<IQuestionDialog, AskDialog>();
+                    services.AddTransient<IRtkUnitDialog, AddRtkUnitDialog>();
                 }).Build();
         }
 

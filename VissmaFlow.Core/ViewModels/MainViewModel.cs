@@ -11,10 +11,13 @@ namespace VissmaFlow.Core.ViewModels
         private readonly Timer _timer;
         ModbusClient _modbusClient = new ModbusClient();
 
-        public MainViewModel(ILogger<MainViewModel> logger, ParameterVm parameterVm)
+        public MainViewModel(ILogger<MainViewModel> logger, 
+            ParameterVm parameterVm, 
+            CommunicationVm communicationVm)
         {
             _logger = logger;
             ParameterVm = parameterVm;
+            CommunicationVm = communicationVm;
             _timer = new Timer(OnTimerExecute);
             _timer.Change(0, 2000);
         }
@@ -25,12 +28,9 @@ namespace VissmaFlow.Core.ViewModels
         [ObservableProperty]
         private string _portName;
 
-        private string[] GetComPorts()
-        {
-            return SerialPort.GetPortNames();
-        }
+        
 
-        public IEnumerable<string> Ports => GetComPorts();
+        
 
         [ObservableProperty]
         private string _status;
@@ -69,21 +69,13 @@ namespace VissmaFlow.Core.ViewModels
         [ObservableProperty]
         private StopBits _stopBit = System.IO.Ports.StopBits.One;
 
-        public List<int> Baudrates { get; } = new List<int>
-        {
-            9600,19200,38500,57600,115200
-        };
+        
 
-        public List<Parity> Parities { get; } = new List<Parity>
-        {
-            Parity.None, Parity.Even, Parity.Odd
-        };
+        
 
-        public List<StopBits> StopBits { get; } = new List<StopBits>
-        {
-            System.IO.Ports.StopBits.One, System.IO.Ports.StopBits.Two
-        };
+        
         public ParameterVm ParameterVm { get; }
+        public CommunicationVm CommunicationVm { get; }
 
         public void Disconnect()
         {

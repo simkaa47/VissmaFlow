@@ -1,12 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using VissmaFlow.Core.Models.Communication;
 using VissmaFlow.Core.Models.Parameters;
 
 namespace VissmaFlow.Core.Infrastructure.DataAccess
 {
     public class VissmaDbContext:DbContext
     {
-
+        public DbSet<RtkUnit> RtkUnits => Set<RtkUnit>();
         public DbSet<ParameterBase> ParameterBases  => Set<ParameterBase>();
+        public DbSet<CommSettings> CommSettings => Set<CommSettings>();
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
