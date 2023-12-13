@@ -5,6 +5,7 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 			 xmlns:vm="using:VissmaFlow.Core.ViewModels"
 			 x:DataType="vm:CommunicationVm"
+			 xmlns:mat="using:Material.Icons.Avalonia"
              x:Class="VissmaFlow.View.UserControls.Administration.CommSettingsControl">
 	<UserControl.Styles>
 		<Style Selector="Border">
@@ -62,6 +63,44 @@
 					</Button>
 					
 				</ListBox>
+			</Border>
+		</Grid>
+		<Grid Grid.Column="1" RowDefinitions="Auto,*">
+			<TextBlock Text="Расходомеры"
+					   HorizontalAlignment="Center"/>
+			<Border Grid.Row="1">
+				<Grid RowDefinitions="Auto,*">
+					<StackPanel Orientation="Horizontal">
+						<Button Content="Добавить"
+								Margin="5"
+								Command="{Binding AddRtkUnitCommand}"/>
+						<Button Content="Сохранить"
+								Margin="5"
+								Command="{Binding SaveCommSettCommand}"/>
+					</StackPanel>
+					<DataGrid HorizontalAlignment="Stretch"
+							  Grid.Row="1"
+						  VerticalAlignment="Stretch"
+						  Items="{Binding RtkUnits}">
+						<DataGrid.Columns>
+							<DataGridTextColumn IsReadOnly="True" Binding="{Binding Id}" Header="№"/>
+							<DataGridTextColumn Binding="{Binding Name}" Header="Имя РТК"/>
+							<DataGridTextColumn Binding="{Binding UnitId}" Header="Номер в сети"/>
+							<DataGridTemplateColumn>
+								<DataGridTemplateColumn.CellTemplate>
+									<DataTemplate>
+										<Button Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=DataContext.DeleteRtkCommand}"
+												CommandParameter="{Binding}"
+												>
+											<mat:MaterialIcon Height="30" Width="30" Kind="Remove" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+										</Button>
+									</DataTemplate>
+								</DataGridTemplateColumn.CellTemplate>
+							</DataGridTemplateColumn>
+						</DataGrid.Columns>
+					</DataGrid>
+				</Grid>
+
 			</Border>
 		</Grid>
 	</Grid>

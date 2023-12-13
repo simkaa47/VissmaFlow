@@ -1,0 +1,39 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+		SizeToContent="WidthAndHeight"	
+		xmlns:m="using:VissmaFlow.Core.Models.Communication"
+		x:DataType="m:RtkUnit"
+        x:Class="VissmaFlow.View.Dialogs.Communication.RtkDialogWindow"
+        Title="RtkDialogWindow">
+	<StackPanel>
+		<StackPanel.Styles>
+			<Style Selector="TextBlock">
+				<Setter Property="TextWrapping" Value="Wrap"/>
+				<Setter Property="Margin" Value="5,5,55,5"/>
+				<Setter Property="VerticalAlignment" Value="Center"/>
+			</Style>
+			<Style Selector="TextBox">
+				<Setter Property="Margin" Value="5,5,5,5"/>
+				<Setter Property="VerticalAlignment" Value="Center"/>
+				<Setter Property="HorizontalAlignment" Value="Right"/>
+			</Style>
+		</StackPanel.Styles>
+		<DockPanel>
+			<TextBlock Text="Имя ртк"/>
+			<TextBox Width="100"
+					 Text="{Binding Name}"/>
+		</DockPanel>
+		<DockPanel>
+			<TextBlock Text="Номер в сети"/>
+			<TextBox Width="100"
+					 Text="{Binding UnitId}"/>
+		</DockPanel>
+		<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+			<Button Margin="5" Width="100" Content="Отмена" Click="Cancel_Click" HorizontalContentAlignment="Center"/>
+			<Button Margin="5" Width="100" Content="Ок" IsEnabled="{Binding !HasErrors}" HorizontalContentAlignment="Center"  Click="Accept_Click"/>
+		</StackPanel>
+	</StackPanel>
+</Window>

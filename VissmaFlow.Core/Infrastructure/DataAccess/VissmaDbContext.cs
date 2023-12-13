@@ -6,7 +6,7 @@ namespace VissmaFlow.Core.Infrastructure.DataAccess
 {
     public class VissmaDbContext:DbContext
     {
-
+        public DbSet<RtkUnit> RtkUnits => Set<RtkUnit>();
         public DbSet<ParameterBase> ParameterBases  => Set<ParameterBase>();
         public DbSet<CommSettings> CommSettings => Set<CommSettings>();
 
