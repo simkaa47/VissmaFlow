@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using VissmaFlow.Core.Contracts.Communication;
 using VissmaFlow.Core.Contracts.DataAccess;
 using VissmaFlow.Core.Infrastructure.DataAccess;
+using VissmaFlow.Core.Services.Communication;
 using VissmaFlow.Core.ViewModels;
 
 namespace VissmaFlow.Core
@@ -12,6 +14,8 @@ namespace VissmaFlow.Core
             services.AddLogging();
             services.AddSingleton<MainViewModel>();
             services.AddSingleton<ParameterVm>();
+            services.AddSingleton<MainCommunicationService>();
+            services.AddTransient<IComminicationService,ModbusRtuService>();
             services.AddSingleton<CommunicationVm>();
             services.AddDbContext<VissmaDbContext>();
             services.AddTransient(typeof(IRepository<>), typeof(BaseRepository<>));

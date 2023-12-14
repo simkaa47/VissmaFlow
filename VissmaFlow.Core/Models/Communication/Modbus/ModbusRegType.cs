@@ -1,6 +1,6 @@
 ﻿namespace VissmaFlow.Core.Models.Communication.Modbus
 {
-    public enum MosbusRegType
+    public enum ModbusRegType
     {
         Holding,
         Reading

@@ -27,10 +27,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Services\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Reference Include="EasyModbus">
       <HintPath>EasyModbus.dll</HintPath>
     </Reference>

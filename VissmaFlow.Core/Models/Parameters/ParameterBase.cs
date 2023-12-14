@@ -25,7 +25,7 @@ namespace VissmaFlow.Core.Models.Parameters
 
         #region Тип регистра
         [ObservableProperty]
-        private MosbusRegType _modbusRegType;
+        private ModbusRegType _modbusRegType;
         #endregion
 
         #region Номер Modbus регистра
@@ -42,17 +42,13 @@ namespace VissmaFlow.Core.Models.Parameters
         private int _bitNum;
         #endregion
 
-        #region Минимальное значение
-        [Required]
-        [ObservableProperty]
-        [NotifyDataErrorInfo]
+        #region Минимальное значение        
+        [ObservableProperty]        
         private string _minValueString = string.Empty;
         #endregion
 
-        #region Максимальное значение
-        [Required]
-        [ObservableProperty]
-        [NotifyDataErrorInfo]
+        #region Максимальное значение        
+        [ObservableProperty]        
         private string _maxValueString = string.Empty;
         #endregion
 
