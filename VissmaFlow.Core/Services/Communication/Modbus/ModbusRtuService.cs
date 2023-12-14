@@ -213,10 +213,11 @@ namespace VissmaFlow.Core.Services.Communication
                 (sequence.Start < diapasone.Start && sequence.End > diapasone.End);
         }
 
-        public void ReadAllData(IEnumerable<ParameterBase>? parameters)
+        public void ReadAllData(IEnumerable<ParameterBase>? parameters,  int unitId)
         {
             if (parameters is null) return;
             Init(parameters);
+            _client.UnitIdentifier = (byte)unitId;
             foreach (var command in commands)
             {
                 if (command.RegType == ModbusRegType.Holding)
@@ -237,6 +238,7 @@ namespace VissmaFlow.Core.Services.Communication
 
         public void WriteParameter(ParameterBase parameter)
         {
+            _client.UnitIdentifier = (byte)parameter.ModbusUnitId;
             if (parameter is Parameter<short> parShort)
             {
                 var bytes = BitConverter.GetBytes(parShort.WriteValue);

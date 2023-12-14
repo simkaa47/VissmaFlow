@@ -2,6 +2,7 @@
 using EasyModbus;
 using Microsoft.Extensions.Logging;
 using System.IO.Ports;
+using VissmaFlow.Core.Services.Communication;
 
 namespace VissmaFlow.Core.ViewModels
 {
@@ -11,15 +12,17 @@ namespace VissmaFlow.Core.ViewModels
         ModbusClient _modbusClient = new ModbusClient();
 
         public MainViewModel(ILogger<MainViewModel> logger, 
-            ParameterVm parameterVm, 
+            ParameterVm parameterVm, MainCommunicationService communicationService,
             CommunicationVm communicationVm)
         {
             _logger = logger;
             ParameterVm = parameterVm;
+            CommunicationService = communicationService;
             CommunicationVm = communicationVm;            
         }
         
         public ParameterVm ParameterVm { get; }
+        public MainCommunicationService CommunicationService { get; }
         public CommunicationVm CommunicationVm { get; }        
 
         

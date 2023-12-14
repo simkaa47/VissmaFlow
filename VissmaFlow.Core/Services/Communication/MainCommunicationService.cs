@@ -44,7 +44,12 @@ namespace VissmaFlow.Core.Services.Communication
                             var par = WriteCommands.Dequeue();
                             _askService.WriteParameter(par);
                         }
-                        _askService.ReadAllData(ParameterVm.Parameters);
+                        if (ParameterVm.CommunicationVm.RtkUnits is null) continue;
+                        foreach (var rtk in ParameterVm.CommunicationVm.RtkUnits)
+                        {
+                            _askService.ReadAllData(rtk.Parameters, rtk.UnitId);
+                        }                        
+                        
                         Thread.Sleep(100);
                     }
                     catch (Exception ex)

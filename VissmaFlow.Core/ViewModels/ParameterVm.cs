@@ -17,12 +17,14 @@ namespace VissmaFlow.Core.ViewModels
         private readonly VissmaDbContext _dbContext;
         private readonly IParameterDialogService _parameterDialogService;
 
-        public ParameterVm(ILogger<ParameterVm> logger,
+        public ParameterVm(ILogger<ParameterVm> logger, 
+            CommunicationVm communicationVm,
             IQuestionDialog questionDialog,
             VissmaDbContext dbContext, 
             IParameterDialogService parameterDialogService)
         {
             _logger = logger;
+            CommunicationVm = communicationVm;
             _questionDialog = questionDialog;
             _dbContext = dbContext;
             _parameterDialogService = parameterDialogService;
@@ -30,6 +32,10 @@ namespace VissmaFlow.Core.ViewModels
         }
         [ObservableProperty]
         private List<ParameterBase>? _parameters;
+
+        public CommunicationVm CommunicationVm { get; }
+
+
 
         #region Добавить параметр
         [RelayCommand]
@@ -108,6 +114,16 @@ namespace VissmaFlow.Core.ViewModels
                     .AsNoTracking()
                     .ToListAsync();
                 Parameters = parBases.Select(p => CreateParameter(p)).ToList();
+                if (CommunicationVm.RtkUnits is null) return;
+                foreach (var rtk in CommunicationVm.RtkUnits)
+                {
+                    rtk.Parameters = Parameters.Select(p =>
+                    {
+                        var par = CreateParameter(p);
+                        p.ModbusUnitId = rtk.UnitId;
+                        return par;
+                    });
+                }
             }
             catch (Exception ex)
             {
