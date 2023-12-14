@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using VissmaFlow.Core.Infrastructure.DataAccess;
 using VissmaFlow.Core.Models.Communication.Modbus;
 
@@ -68,6 +69,9 @@ namespace VissmaFlow.Core.Models.Parameters
         [ObservableProperty]
         private bool _isRequired;
         #endregion
+
+        [NotMapped]
+        public int ModbusUnitId { get; set; }
 
     }
 }
