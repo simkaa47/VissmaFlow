@@ -1,0 +1,35 @@
+<local:ParameterCommon xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:local="using:VissmaFlow.View.UserControls.Parameters"
+		     xmlns:mat="using:Material.Icons.Avalonia"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="VissmaFlow.View.UserControls.Parameters.NumericParameter">
+	<local:ParameterCommon.Resources>
+		
+	</local:ParameterCommon.Resources>
+	<DockPanel>
+		<StackPanel Orientation="Horizontal" DockPanel.Dock="Right">
+			<TextBox Width="{Binding RelativeSource={RelativeSource AncestorType=local:ParameterCommon} Path=ParamWidth}"
+					 Text="{Binding WriteValue}">
+				<TextBox.KeyBindings>
+					<KeyBinding Gesture="Enter"
+								Command="{Binding RelativeSource={RelativeSource AncestorType=local:ParameterCommon} Path=Command}"
+								CommandParameter="{Binding}">
+
+					</KeyBinding>
+				</TextBox.KeyBindings>
+			</TextBox>
+			<mat:MaterialIcon Kind="DownloadCircle" Height="30" Width="30"
+								   HorizontalAlignment="Center" VerticalAlignment="Center"
+								   Margin="5,0,0,0" IsVisible="{Binding IsWriting}"/>
+		</StackPanel>
+		<TextBlock Text="{Binding Description}"
+				   DockPanel.Dock="Left"
+				   Margin="5"
+				   VerticalAlignment="Center"
+				   TextWrapping="Wrap"/>
+		
+	</DockPanel>
+</local:ParameterCommon>

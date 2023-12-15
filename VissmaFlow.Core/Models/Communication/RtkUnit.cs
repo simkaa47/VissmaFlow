@@ -22,7 +22,17 @@ namespace VissmaFlow.Core.Models.Communication
         private int _unitId = 1;
         #endregion
 
+        #region Параметры
+        private IEnumerable<ParameterBase> _parameters = new List<ParameterBase>();
+
         [NotMapped]
-        public IEnumerable<ParameterBase> Parameters { get; set; } = new List<ParameterBase>();
+        public IEnumerable<ParameterBase> Parameters 
+        { 
+            get => _parameters; 
+            set => SetProperty(ref _parameters, value);
+            
+        } 
+        #endregion
+
     }
 }

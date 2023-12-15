@@ -5,9 +5,13 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 			 xmlns:vm="using:VissmaFlow.Core.ViewModels"
 		     x:DataType="vm:MainViewModel"
+			 xmlns:par="using:VissmaFlow.View.UserControls.Parameters"
 			 xmlns:adm="using:VissmaFlow.View.UserControls.Administration"
              x:Class="VissmaFlow.View.UserControls.MainTabControl">
 	<TabControl TabStripPlacement="Bottom">
+		<TabItem Header="Параметры">
+			<par:ParametersViewControl/>
+		</TabItem>
 		<TabItem Header="Администрирование">
 			<adm:AdministrationTabControl/>
 		</TabItem>
