@@ -11,6 +11,8 @@ using VissmaFlow.Core.Contracts.Common;
 using VissmaFlow.View.Dialogs.Common;
 using VissmaFlow.Core.Contracts.Communication;
 using VissmaFlow.View.Dialogs.Communication;
+using VissmaFlow.View.UserControls.Keyboard.Layout;
+using VissmaFlow.View.UserControls.Keyboard;
 
 namespace VissmaFlow.View
 {
@@ -25,6 +27,9 @@ namespace VissmaFlow.View
         private readonly IHost _host;
         public App()
         {
+            VirtualKeyboard.AddLayout<VirtualKeyboardLayoutRU>();
+            VirtualKeyboard.AddLayout<VirtualKeyboardLayoutUS>();
+            VirtualKeyboard.SetDefaultLayout(() => typeof(VirtualKeyboardLayoutRU));
             _host = Host.CreateDefaultBuilder().
                 ConfigureServices(services => 
                 {
