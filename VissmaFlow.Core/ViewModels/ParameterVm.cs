@@ -17,12 +17,14 @@ namespace VissmaFlow.Core.ViewModels
         private readonly VissmaDbContext _dbContext;
         private readonly IParameterDialogService _parameterDialogService;
 
-        public ParameterVm(ILogger<ParameterVm> logger,
+        public ParameterVm(ILogger<ParameterVm> logger, 
+            CommunicationVm communicationVm,
             IQuestionDialog questionDialog,
             VissmaDbContext dbContext, 
             IParameterDialogService parameterDialogService)
         {
             _logger = logger;
+            CommunicationVm = communicationVm;
             _questionDialog = questionDialog;
             _dbContext = dbContext;
             _parameterDialogService = parameterDialogService;
@@ -30,6 +32,10 @@ namespace VissmaFlow.Core.ViewModels
         }
         [ObservableProperty]
         private List<ParameterBase>? _parameters;
+
+        public CommunicationVm CommunicationVm { get; }
+
+
 
         #region Добавить параметр
         [RelayCommand]
@@ -108,6 +114,16 @@ namespace VissmaFlow.Core.ViewModels
                     .AsNoTracking()
                     .ToListAsync();
                 Parameters = parBases.Select(p => CreateParameter(p)).ToList();
+                if (CommunicationVm.RtkUnits is null) return;
+                foreach (var rtk in CommunicationVm.RtkUnits)
+                {
+                    rtk.Parameters = Parameters.Select(p =>
+                    {
+                        var par = CreateParameter(p);
+                        p.ModbusUnitId = rtk.UnitId;
+                        return par;
+                    });
+                }
             }
             catch (Exception ex)
             {
@@ -123,28 +139,28 @@ namespace VissmaFlow.Core.ViewModels
             switch (pBase.Data)
             {
                 case DataType.boolean:
-                    par = new Parameter<bool>() {MinValue = false, MaxValue = true };
+                    par = new Parameter<bool>() { Data = pBase.Data, MinValue = false, MaxValue = true };
                     break;
                 case DataType.int16:
-                    par = new Parameter<short>() { MinValue = short.MinValue, MaxValue = short.MaxValue };
+                    par = new Parameter<short>() { Data = pBase.Data, MinValue = short.MinValue, MaxValue = short.MaxValue };
                     break;
                 case DataType.uint16:
-                    par = new Parameter<ushort>() { MinValue = ushort.MinValue, MaxValue = ushort.MaxValue };
+                    par = new Parameter<ushort>() { Data = pBase.Data, MinValue = ushort.MinValue, MaxValue = ushort.MaxValue };
                     break;
                 case DataType.int32:
-                    par = new Parameter<int>(){ MinValue = int.MinValue, MaxValue = int.MaxValue };
+                    par = new Parameter<int>(){ Data = pBase.Data, MinValue = int.MinValue, MaxValue = int.MaxValue };
                     break;
                 case DataType.uint32:
-                    par = new Parameter<uint>() { MinValue = uint.MinValue, MaxValue = uint.MaxValue };
+                    par = new Parameter<uint>() { Data = pBase.Data, MinValue = uint.MinValue, MaxValue = uint.MaxValue };
                     break;
                 case DataType.float32:
-                    par = new Parameter<float>() { MinValue = float.MinValue, MaxValue = float.MaxValue };
+                    par = new Parameter<float>() { Data = pBase.Data, MinValue = float.MinValue, MaxValue = float.MaxValue };
                     break;
                 case DataType.double64:
-                    par = new Parameter<double>() { MinValue = double.MinValue, MaxValue = double.MaxValue };
+                    par = new Parameter<double>() {Data = pBase.Data, MinValue = double.MinValue, MaxValue = double.MaxValue };
                     break;
                 case DataType.str:
-                    par = new Parameter<string>();
+                    par = new Parameter<string>() {Data = pBase.Data };
                     break;
                 default:
                     break;

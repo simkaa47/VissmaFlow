@@ -25,7 +25,17 @@
 				  AutoGenerateColumns="False">
 			<DataGrid.Columns>
 				<DataGridTextColumn Header="Id" Binding="{Binding Id}" IsReadOnly="True"/>
-				<DataGridTextColumn Header="Описание" Binding="{Binding Description}"/>
+				<DataGridTemplateColumn Header="Описание"  >
+					<DataGridTemplateColumn.CellTemplate>
+						<DataTemplate>
+							<TextBox Margin="5" VerticalAlignment="Center"
+									 Width="300"
+									 HorizontalAlignment="Left" Text="{Binding Description}"
+									 TextWrapping="Wrap"
+									 BorderThickness="0"/>
+						</DataTemplate>
+					</DataGridTemplateColumn.CellTemplate>
+				</DataGridTemplateColumn>
 				<DataGridTemplateColumn Header="Тип данных">
 					<DataGridTemplateColumn.CellTemplate>
 						<DataTemplate>

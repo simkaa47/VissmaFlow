@@ -27,10 +27,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Services\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Reference Include="EasyModbus">
       <HintPath>EasyModbus.dll</HintPath>
     </Reference>
@@ -38,7 +34,7 @@
 
   <ItemGroup>
     <None Update="EasyModbus.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 

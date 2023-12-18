@@ -21,7 +21,11 @@ namespace VissmaFlow.View
                 {
                     Thread.Sleep(100);
                     if (Debugger.IsAttached)
+                    {
+                        Console.WriteLine("Debugger was attached");
                         break;
+                    }
+                        
                 }
             }
             BuildAvaloniaApp()

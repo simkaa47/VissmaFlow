@@ -1,6 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using VissmaFlow.Core.Infrastructure.DataAccess;
+using VissmaFlow.Core.Models.Parameters;
 
 namespace VissmaFlow.Core.Models.Communication
 {
@@ -17,7 +19,20 @@ namespace VissmaFlow.Core.Models.Communication
         [Range(0, 255)]
         [ObservableProperty]
         [NotifyDataErrorInfo]
-        private int _unitId = 1; 
+        private int _unitId = 1;
         #endregion
+
+        #region Параметры
+        private IEnumerable<ParameterBase> _parameters = new List<ParameterBase>();
+
+        [NotMapped]
+        public IEnumerable<ParameterBase> Parameters 
+        { 
+            get => _parameters; 
+            set => SetProperty(ref _parameters, value);
+            
+        } 
+        #endregion
+
     }
 }

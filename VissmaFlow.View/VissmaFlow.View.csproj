@@ -38,6 +38,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="UserControls\Parameters\" />
+    <Folder Include="UserControls\Keyboard\" />
   </ItemGroup>
 </Project>
