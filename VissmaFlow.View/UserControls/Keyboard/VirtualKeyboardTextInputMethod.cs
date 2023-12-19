@@ -1,6 +1,7 @@
 ﻿using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Input.TextInput;
+using System.Linq;
 
 namespace VissmaFlow.View.UserControls.Keyboard
 {
@@ -14,13 +15,16 @@ namespace VissmaFlow.View.UserControls.Keyboard
             {
                 return;
             }
+            var owner = desktop.Windows.LastOrDefault();
+            if (owner is null) return;
             if (active && !_isOpen && _textInputOptions != null)
             {
                 _isOpen = true;
-                await VirtualKeyboard.ShowDialog(_textInputOptions);
+                await VirtualKeyboard.ShowDialog(_textInputOptions, owner);
                 _isOpen = false;
                 _textInputOptions = null;
-                desktop.MainWindow.Focus(); // remove focus from the last control (TextBox)
+                //desktop.MainWindow.Focus(); // remove focus from the last control (TextBox)
+                owner.Focus(); // remove focus from the last control (TextBox)
             }
         }
 

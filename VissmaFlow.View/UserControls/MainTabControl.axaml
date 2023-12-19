@@ -12,8 +12,14 @@
 		<TabItem Header="Параметры">
 			<par:ParametersViewControl/>
 		</TabItem>
-		<TabItem Header="Администрирование">
-			<adm:AdministrationTabControl/>
+		<TabItem Header="Администрирование" HorizontalContentAlignment="Stretch" VerticalAlignment="Stretch">
+			<LayoutTransformControl>
+				<LayoutTransformControl.LayoutTransform>
+					<RotateTransform Angle="0"/>
+				</LayoutTransformControl.LayoutTransform>
+				<adm:AdministrationTabControl/>
+			</LayoutTransformControl>
+			
 		</TabItem>
 	</TabControl>
 </UserControl>

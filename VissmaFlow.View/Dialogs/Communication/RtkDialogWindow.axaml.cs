@@ -1,12 +1,14 @@
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Input.TextInput;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using VissmaFlow.Core.Models.Communication;
+using VissmaFlow.View.UserControls.Keyboard;
 
 namespace VissmaFlow.View.Dialogs.Communication;
 
-public partial class RtkDialogWindow : Window
+public partial class RtkDialogWindow : Window, ITextInputMethodRoot
 {
     public RtkDialogWindow()
     {
@@ -29,5 +31,14 @@ public partial class RtkDialogWindow : Window
     void Cancel_Click(object sender, RoutedEventArgs e)
     {
         Close();
+    }
+
+    private VirtualKeyboardTextInputMethod virtualKeyboardTextInput = new VirtualKeyboardTextInputMethod();
+    ITextInputMethodImpl ITextInputMethodRoot.InputMethod
+    {
+        get
+        {
+            return virtualKeyboardTextInput;
+        }
     }
 }
