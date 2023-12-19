@@ -160,7 +160,7 @@ namespace VissmaFlow.Core.ViewModels
                     par = new Parameter<double>() {Data = pBase.Data, MinValue = double.MinValue, MaxValue = double.MaxValue };
                     break;
                 case DataType.str:
-                    par = new Parameter<string>() {Data = pBase.Data };
+                    par = new Parameter<string>() {Data = pBase.Data, MinValue = string.Empty};
                     break;
                 default:
                     break;
