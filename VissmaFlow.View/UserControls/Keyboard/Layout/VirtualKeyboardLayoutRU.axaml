@@ -11,84 +11,80 @@
 	</UserControl.Resources>
   <UserControl.Styles>
     <Style Selector="keyboard|VirtualKey">
-      <Setter Property="Width" Value="45"/>
+      <Setter Property="Width" Value="50"/>
       <Setter Property="Height" Value="45"/>
     </Style>
   </UserControl.Styles>
 	<StackPanel>
 		<StackPanel Orientation="Horizontal">
-			<keyboard:VirtualKey NormalKey="`" ShiftKey="~" AltCtrlKey="" Name="VirtualKey1" />
-			<keyboard:VirtualKey NormalKey="1" ShiftKey="!" AltCtrlKey="" />
-			<keyboard:VirtualKey NormalKey="2" ShiftKey="@" AltCtrlKey="" />
-			<keyboard:VirtualKey NormalKey="3" ShiftKey="#" AltCtrlKey="" />
-			<keyboard:VirtualKey NormalKey="4" ShiftKey="$" AltCtrlKey="" />
-			<keyboard:VirtualKey NormalKey="5" ShiftKey="%" AltCtrlKey="" />
-			<keyboard:VirtualKey NormalKey="6" ShiftKey="^" AltCtrlKey="" />
-			<keyboard:VirtualKey NormalKey="7" ShiftKey="&amp;" AltCtrlKey="" />
-			<keyboard:VirtualKey NormalKey="8" ShiftKey="*" AltCtrlKey="" />
-			<keyboard:VirtualKey NormalKey="9" ShiftKey="(" AltCtrlKey="" />
-			<keyboard:VirtualKey NormalKey="0" ShiftKey=")" AltCtrlKey="" />
-			<keyboard:VirtualKey NormalKey="-" ShiftKey="_" AltCtrlKey="" />
-			<keyboard:VirtualKey NormalKey="=" ShiftKey="+" AltCtrlKey="" />
-			<keyboard:VirtualKey SpecialKey="Back" SpecialIcon="KeyboardBackspace" Width="{Binding #VirtualKey1.Bounds.Width, Converter={StaticResource VirtualKeyWidthMultiplayer}, ConverterParameter=20}" />
+			<keyboard:VirtualKey NormalKey="1" ShiftKey="1" AltCtrlKey="`"  Width="{Binding #VirtualKey1.Bounds.Width, Converter={StaticResource VirtualKeyWidthMultiplayer}, ConverterParameter=11}" />
+			<keyboard:VirtualKey NormalKey="2" ShiftKey="2" AltCtrlKey="~" Width="{Binding #VirtualKey1.Bounds.Width, Converter={StaticResource VirtualKeyWidthMultiplayer}, ConverterParameter=11}"/>
+			<keyboard:VirtualKey NormalKey="3" ShiftKey="3" AltCtrlKey="\" Width="{Binding #VirtualKey1.Bounds.Width, Converter={StaticResource VirtualKeyWidthMultiplayer}, ConverterParameter=11}"/>
+			<keyboard:VirtualKey NormalKey="4" ShiftKey="4" AltCtrlKey="|" Width="{Binding #VirtualKey1.Bounds.Width, Converter={StaticResource VirtualKeyWidthMultiplayer}, ConverterParameter=11}"/>
+			<keyboard:VirtualKey NormalKey="5" ShiftKey="5" AltCtrlKey="&#125;" Width="{Binding #VirtualKey1.Bounds.Width, Converter={StaticResource VirtualKeyWidthMultiplayer}, ConverterParameter=10}" />
+			<keyboard:VirtualKey NormalKey="6" ShiftKey="6" AltCtrlKey="&#125;"  Width="{Binding #VirtualKey1.Bounds.Width, Converter={StaticResource VirtualKeyWidthMultiplayer}, ConverterParameter=11}"/>
+			<keyboard:VirtualKey NormalKey="7" ShiftKey="7;" AltCtrlKey="&#128512;" Width="{Binding #VirtualKey1.Bounds.Width, Converter={StaticResource VirtualKeyWidthMultiplayer}, ConverterParameter=11}"/>
+			<keyboard:VirtualKey NormalKey="8" ShiftKey="8" AltCtrlKey="&#128514;" Width="{Binding #VirtualKey1.Bounds.Width, Converter={StaticResource VirtualKeyWidthMultiplayer}, ConverterParameter=11}"/>
+			<keyboard:VirtualKey NormalKey="9" ShiftKey="9" AltCtrlKey="°" Width="{Binding #VirtualKey1.Bounds.Width, Converter={StaticResource VirtualKeyWidthMultiplayer}, ConverterParameter=11}"/>
+			<keyboard:VirtualKey NormalKey="0" ShiftKey="0" AltCtrlKey="€" Width="{Binding #VirtualKey1.Bounds.Width, Converter={StaticResource VirtualKeyWidthMultiplayer}, ConverterParameter=11}"/>
+
 		</StackPanel>
+		<StackPanel Orientation="Horizontal" >
+			<keyboard:VirtualKey NormalKey="й" ShiftKey="Й" AltCtrlKey="`"/>
+			<keyboard:VirtualKey NormalKey="ц" ShiftKey="Ц" AltCtrlKey="~" />
+			<keyboard:VirtualKey NormalKey="у" ShiftKey="У" AltCtrlKey="\" />
+			<keyboard:VirtualKey NormalKey="к" ShiftKey="К" AltCtrlKey="|" />
+			<keyboard:VirtualKey NormalKey="е" ShiftKey="Е" AltCtrlKey="&#125;" />
+			<keyboard:VirtualKey NormalKey="н" ShiftKey="Н" AltCtrlKey="&#125;" />
+			<keyboard:VirtualKey NormalKey="г" ShiftKey="Г" AltCtrlKey="&#128512;" />
+			<keyboard:VirtualKey NormalKey="ш" ShiftKey="Ш" AltCtrlKey="&#128514;" />
+			<keyboard:VirtualKey NormalKey="щ" ShiftKey="Щ" AltCtrlKey="°" />
+			<keyboard:VirtualKey NormalKey="з" ShiftKey="З" AltCtrlKey="€" />
+			<keyboard:VirtualKey NormalKey="х" ShiftKey="Х" AltCtrlKey="]" />
+		</StackPanel>
+		
+		<StackPanel Orientation="Horizontal" >
+			<keyboard:VirtualKey NormalKey="ф" ShiftKey="Ф" AltCtrlKey="+" Name="VirtualKey1"/>
+			<keyboard:VirtualKey NormalKey="ы" ShiftKey="Ы" AltCtrlKey="×" />
+			<keyboard:VirtualKey NormalKey="в" ShiftKey="В" AltCtrlKey="÷" />
+			<keyboard:VirtualKey NormalKey="а" ShiftKey="А" AltCtrlKey="=" />
+			<keyboard:VirtualKey NormalKey="п" ShiftKey="П" AltCtrlKey="/" />
+			<keyboard:VirtualKey NormalKey="р" ShiftKey="Р" AltCtrlKey="_" />
+			<keyboard:VirtualKey NormalKey="о" ShiftKey="О" AltCtrlKey="&#60;" />
+			<keyboard:VirtualKey NormalKey="л" ShiftKey="Л" AltCtrlKey="&#62;" />
+			<keyboard:VirtualKey NormalKey="д" ShiftKey="Д" AltCtrlKey="[" />
+			<keyboard:VirtualKey NormalKey="ж" ShiftKey="Ж" AltCtrlKey="]" />
+			<keyboard:VirtualKey NormalKey="э" ShiftKey="Э" AltCtrlKey="°" />
+		</StackPanel>	
+
+		
+
 		<StackPanel Orientation="Horizontal">
-			<keyboard:VirtualKey SpecialKey="Tab" SpecialIcon="KeyboardTab" Width="{Binding #VirtualKey1.Bounds.Width, Converter={StaticResource VirtualKeyWidthMultiplayer}, ConverterParameter=15}"/>
-			<keyboard:VirtualKey NormalKey="й" ShiftKey="Й" AltCtrlKey="@" />
-			<keyboard:VirtualKey NormalKey="ц" ShiftKey="Ц" AltCtrlKey="°C" />
-			<keyboard:VirtualKey NormalKey="у" ShiftKey="У" AltCtrlKey="€" />
-			<keyboard:VirtualKey NormalKey="к" ShiftKey="К" AltCtrlKey="" />
-			<keyboard:VirtualKey NormalKey="е" ShiftKey="Е" AltCtrlKey="" />
-			<keyboard:VirtualKey NormalKey="н" ShiftKey="Н" AltCtrlKey="" />
-			<keyboard:VirtualKey NormalKey="г" ShiftKey="Г" AltCtrlKey="" />
-			<keyboard:VirtualKey NormalKey="ш" ShiftKey="Ш" AltCtrlKey="" />
-			<keyboard:VirtualKey NormalKey="щ" ShiftKey="Щ" AltCtrlKey="" />
-			<keyboard:VirtualKey NormalKey="з" ShiftKey="З" AltCtrlKey="" />
-			<keyboard:VirtualKey NormalKey="х" ShiftKey="Х" AltCtrlKey="" />
-			<keyboard:VirtualKey NormalKey="ъ" ShiftKey="Ъ" AltCtrlKey="~"/>
-			<keyboard:VirtualKey SpecialKey="Enter" SpecialIcon="KeyboardReturn" Margin="0,0,0,-45" Height="90" Width="{Binding #VirtualKey1.Bounds.Width, Converter={StaticResource VirtualKeyWidthMultiplayer}, ConverterParameter=15}">
-			</keyboard:VirtualKey>
+			<keyboard:VirtualKey SpecialKey="LeftShift" SpecialIcon="AppleKeyboardShift"/>
+			<keyboard:VirtualKey NormalKey="я" ShiftKey="Я" AltCtrlKey="-" />
+			<keyboard:VirtualKey NormalKey="ч" ShiftKey="Ч" AltCtrlKey="'" />
+			<keyboard:VirtualKey NormalKey="с" ShiftKey="С" AltCtrlKey="&#34;" />
+			<keyboard:VirtualKey NormalKey="м" ShiftKey="М" AltCtrlKey=":" />
+			<keyboard:VirtualKey NormalKey="и" ShiftKey="И" AltCtrlKey=";" />
+			<keyboard:VirtualKey NormalKey="т" ShiftKey="Т" AltCtrlKey="," />
+			<keyboard:VirtualKey NormalKey="ь" ShiftKey="Ь" AltCtrlKey="?" />
+			<keyboard:VirtualKey NormalKey="б" ShiftKey="Б" AltCtrlKey="?" />
+			<keyboard:VirtualKey NormalKey="ю" ShiftKey="Ю" AltCtrlKey="?" />
+			<keyboard:VirtualKey SpecialKey="Back" SpecialIcon="KeyboardBackspace" />
 		</StackPanel>
+
 		<StackPanel Orientation="Horizontal">
-			<keyboard:VirtualKey SpecialKey="CapsLock" SpecialIcon="KeyboardCapslock" Width="{Binding #VirtualKey1.Bounds.Width, Converter={StaticResource VirtualKeyWidthMultiplayer}, ConverterParameter=18}"/>
-			<keyboard:VirtualKey NormalKey="ф" ShiftKey="Ф" AltCtrlKey="" />
-			<keyboard:VirtualKey NormalKey="ы" ShiftKey="Ы" AltCtrlKey="" />
-			<keyboard:VirtualKey NormalKey="в" ShiftKey="В" AltCtrlKey="" />
-			<keyboard:VirtualKey NormalKey="а" ShiftKey="А" AltCtrlKey="" />
-			<keyboard:VirtualKey NormalKey="п" ShiftKey="П" AltCtrlKey="" />
-			<keyboard:VirtualKey NormalKey="р" ShiftKey="Р" AltCtrlKey="" />
-			<keyboard:VirtualKey NormalKey="о" ShiftKey="О" AltCtrlKey="" />
-			<keyboard:VirtualKey NormalKey="л" ShiftKey="Л" AltCtrlKey="" />
-			<keyboard:VirtualKey NormalKey="д" ShiftKey="Д" AltCtrlKey="" />
-			<keyboard:VirtualKey NormalKey="ж" ShiftKey="Ж" AltCtrlKey="" />
-			<keyboard:VirtualKey NormalKey="э" ShiftKey="Э" AltCtrlKey="" />
-			<keyboard:VirtualKey NormalKey="#" ShiftKey="'" AltCtrlKey="" />
+			<keyboard:VirtualKey SpecialKey="RightAlt" SpecialIcon="Symbol" Width="{Binding #VirtualKey1.Bounds.Width, Converter={StaticResource VirtualKeyWidthMultiplayer}, ConverterParameter=15}" />
+
+			<keyboard:VirtualKey SpecialKey="Help" SpecialIcon="Translate"
+                           Width="{Binding #VirtualKey1.Bounds.Width, Converter={StaticResource VirtualKeyWidthMultiplayer}, ConverterParameter=15}" />
+			<keyboard:VirtualKey NormalKey="," ShiftKey="," AltCtrlKey="," />
+			<keyboard:VirtualKey NormalKey=" " Width="{Binding #VirtualKey1.Bounds.Width, Converter={StaticResource VirtualKeyWidthMultiplayer}, ConverterParameter=25}" />
+			<keyboard:VirtualKey NormalKey="." ShiftKey="." AltCtrlKey="." />
+			<keyboard:VirtualKey SpecialKey="Left" SpecialIcon="ChevronLeft"/>
+			<keyboard:VirtualKey SpecialKey="Right" SpecialIcon="ChevronRight"/>
+			<keyboard:VirtualKey SpecialKey="Enter" SpecialIcon="KeyboardReturn" Width="{Binding #VirtualKey1.Bounds.Width, Converter={StaticResource VirtualKeyWidthMultiplayer}, ConverterParameter=15}" />
 		</StackPanel>
-		<StackPanel Orientation="Horizontal">
-			<keyboard:VirtualKey SpecialKey="LeftShift" SpecialIcon="AppleKeyboardShift" Width="{Binding #VirtualKey1.Bounds.Width, Converter={StaticResource VirtualKeyWidthMultiplayer}, ConverterParameter=15}"/>
-			<keyboard:VirtualKey NormalKey="&lt;" ShiftKey="&gt;" AltCtrlKey="|" />
-			<keyboard:VirtualKey NormalKey="я" ShiftKey="Я" AltCtrlKey="" />
-			<keyboard:VirtualKey NormalKey="ч" ShiftKey="Ч" AltCtrlKey="³" />
-			<keyboard:VirtualKey NormalKey="с" ShiftKey="С" AltCtrlKey="" />
-			<keyboard:VirtualKey NormalKey="м" ShiftKey="М" AltCtrlKey="" />
-			<keyboard:VirtualKey NormalKey="и" ShiftKey="И" AltCtrlKey="" />
-			<keyboard:VirtualKey NormalKey="т" ShiftKey="Т" AltCtrlKey="" />
-			<keyboard:VirtualKey NormalKey="ь" ShiftKey="Ь" AltCtrlKey="" />
-			<keyboard:VirtualKey NormalKey="," ShiftKey=";" AltCtrlKey="" />
-			<keyboard:VirtualKey NormalKey="." ShiftKey=":" AltCtrlKey="" />
-			<keyboard:VirtualKey NormalKey="/" ShiftKey="|" AltCtrlKey="" />
-			<keyboard:VirtualKey SpecialKey="RightShift" SpecialIcon="AppleKeyboardShift" Width="{Binding #VirtualKey1.Bounds.Width, Converter={StaticResource VirtualKeyWidthMultiplayer}, ConverterParameter=25}">
-			</keyboard:VirtualKey>
-		</StackPanel>
-		<StackPanel Orientation="Horizontal">
-			<keyboard:VirtualKey SpecialKey="Home" SpecialIcon="KeyboardTabReverse" Width="{Binding #VirtualKey1.Bounds.Width, Converter={StaticResource VirtualKeyWidthMultiplayer}, ConverterParameter=12}"/>
-			<keyboard:VirtualKey SpecialKey="Left" SpecialIcon="ChevronLeft" Width="{Binding #VirtualKey1.Bounds.Width, Converter={StaticResource VirtualKeyWidthMultiplayer}, ConverterParameter=12}"/>
-			<keyboard:VirtualKey SpecialKey="Right" SpecialIcon="ChevronRight" Width="{Binding #VirtualKey1.Bounds.Width, Converter={StaticResource VirtualKeyWidthMultiplayer}, ConverterParameter=12}"/>
-			<keyboard:VirtualKey SpecialKey="End" SpecialIcon="KeyboardTab" Width="{Binding #VirtualKey1.Bounds.Width, Converter={StaticResource VirtualKeyWidthMultiplayer}, ConverterParameter=12}"/>
-			<keyboard:VirtualKey NormalKey=" " Width="{Binding #VirtualKey1.Bounds.Width, Converter={StaticResource VirtualKeyWidthMultiplayer}, ConverterParameter=57}"/>
-			<keyboard:VirtualKey SpecialKey="RightAlt" SpecialIcon="AppleKeyboardControl" Width="{Binding #VirtualKey1.Bounds.Width, Converter={StaticResource VirtualKeyWidthMultiplayer}, ConverterParameter=15}"/>
-			<keyboard:VirtualKey SpecialKey="Clear" SpecialIcon="DeleteForever" Width="{Binding #VirtualKey1.Bounds.Width, Converter={StaticResource VirtualKeyWidthMultiplayer}, ConverterParameter=15}"/>
-			<keyboard:VirtualKey SpecialKey="Help" SpecialIcon="Translate" Width="{Binding #VirtualKey1.Bounds.Width, Converter={StaticResource VirtualKeyWidthMultiplayer}, ConverterParameter=15}"/>
-		</StackPanel>
+
 	</StackPanel>
 </UserControl>

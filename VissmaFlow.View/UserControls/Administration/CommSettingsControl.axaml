@@ -22,16 +22,24 @@
 		</Style>
 		<Style Selector="TextBlock">
 			<Setter Property="Margin" Value="5"/>
+			<Setter Property="FontSize"  Value="12"/>
 			<Setter Property="HorizontalAlignment" Value="Left"/>
 			<Setter Property="VerticalAlignment" Value="Center"/>			
 		</Style>
+		<Style Selector="TextBox">			
+			<Setter Property="HorizontalAlignment" Value="Left"/>
+			<Setter Property="VerticalAlignment" Value="Center"/>
+			<Setter Property="FontSize"  Value="12"/>
+			<Setter Property="VerticalContentAlignment" Value="Center"/>
+			<Setter Property="BorderThickness" Value="0"/>
+		</Style>
 	</UserControl.Styles>
-	<Grid ColumnDefinitions="*,*">	
-		<Grid RowDefinitions="Auto,*">
+	<Grid RowDefinitions="*,*">	
+		<Grid RowDefinitions="Auto,*" Grid.Row="0">
 			<TextBlock Text="Настройки связи с РТК"
 					   HorizontalAlignment="Center"/>
 			<Border Grid.Row="1">
-				<ListBox>
+				<ListBox VirtualizationMode="None">
 					<DockPanel>
 						<ComboBox Items="{Binding Ports}"
 								  DockPanel.Dock="Right"
@@ -65,7 +73,7 @@
 				</ListBox>
 			</Border>
 		</Grid>
-		<Grid Grid.Column="1" RowDefinitions="Auto,*">
+		<Grid Grid.Row="1" RowDefinitions="Auto,*">
 			<TextBlock Text="Расходомеры"
 					   HorizontalAlignment="Center"/>
 			<Border Grid.Row="1">
@@ -84,8 +92,22 @@
 						  Items="{Binding RtkUnits}">
 						<DataGrid.Columns>
 							<DataGridTextColumn IsReadOnly="True" Binding="{Binding Id}" Header="№"/>
-							<DataGridTextColumn Binding="{Binding Name}" Header="Имя РТК"/>
-							<DataGridTextColumn Binding="{Binding UnitId}" Header="Номер в сети"/>
+							<DataGridTemplateColumn Header="Имя РТК" SortMemberPath="Name">
+								<DataGridTemplateColumn.CellTemplate>
+									<DataTemplate>
+										<TextBox Text="{Binding Name}"/>
+									</DataTemplate>
+								</DataGridTemplateColumn.CellTemplate>
+							</DataGridTemplateColumn>
+
+							<DataGridTemplateColumn Header="Номер в сети" SortMemberPath="UnitId">
+								<DataGridTemplateColumn.CellTemplate>
+									<DataTemplate>
+										<TextBox Text="{Binding UnitId}"/>
+									</DataTemplate>
+								</DataGridTemplateColumn.CellTemplate>
+							</DataGridTemplateColumn>							
+							
 							<DataGridTemplateColumn>
 								<DataGridTemplateColumn.CellTemplate>
 									<DataTemplate>

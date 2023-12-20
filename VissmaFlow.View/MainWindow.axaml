@@ -9,7 +9,9 @@
 		xmlns:vm="using:VissmaFlow.Core.ViewModels"
 		x:DataType="vm:MainViewModel"	
 		Width="480" Height="800"
-		
+		BorderBrush="Red"
+		BorderThickness="1"
+		HasSystemDecorations="False"
 		xmlns:uc="using:VissmaFlow.View.UserControls"
         Title="VissmaFlow.View">
 	<Grid RowDefinitions="80,*">

@@ -1,0 +1,42 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 xmlns:keyboard="using:VissmaFlow.View.UserControls.Keyboard"
+			 xmlns:avalonia="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+             x:Class="VissmaFlow.View.UserControls.Keyboard.Layout.NumericKeyboard">
+	<UserControl.Resources>
+		<keyboard:VirtualKeyWidthMultiplayer x:Key="VirtualKeyWidthMultiplayer" />
+	</UserControl.Resources>
+	<UserControl.Styles>
+		<Style Selector="keyboard|VirtualKey">
+			<Setter Property="Width" Value="160"/>
+			<Setter Property="Height" Value="65" />
+		</Style>
+	</UserControl.Styles>
+	<StackPanel>
+		<StackPanel Orientation="Horizontal">
+			<keyboard:VirtualKey NormalKey="1" Name="VirtualKey1" />
+			<keyboard:VirtualKey NormalKey="2"/>
+			<keyboard:VirtualKey NormalKey="3"/>
+			<keyboard:VirtualKey SpecialKey="Back" SpecialIcon="KeyboardBackspace"/>
+		</StackPanel>
+		<StackPanel Orientation="Horizontal">
+			<keyboard:VirtualKey NormalKey="4"/>
+			<keyboard:VirtualKey NormalKey="5"/>
+			<keyboard:VirtualKey NormalKey="6"/>
+			<keyboard:VirtualKey SpecialKey="Left" SpecialIcon="ChevronLeft"/>
+		</StackPanel>
+		<StackPanel Orientation="Horizontal">
+			<keyboard:VirtualKey NormalKey="7"/>
+			<keyboard:VirtualKey NormalKey="8"/>
+			<keyboard:VirtualKey NormalKey="9"/>
+			<keyboard:VirtualKey SpecialKey="Right" SpecialIcon="ChevronRight"/>
+		</StackPanel>
+		<StackPanel Orientation="Horizontal">			
+			<keyboard:VirtualKey NormalKey="0"/>
+			<keyboard:VirtualKey SpecialKey="Enter" SpecialIcon="KeyboardReturn" Width="{Binding #VirtualKey1.Bounds.Width, Converter={StaticResource VirtualKeyWidthMultiplayer}, ConverterParameter=30}" />
+		</StackPanel>
+	</StackPanel>
+</UserControl>

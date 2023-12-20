@@ -8,6 +8,14 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="VissmaFlow.View.UserControls.Administration.ParametersViewControl">
 	<Grid RowDefinitions="Auto,*">
+		<Grid.Styles>
+			<Style Selector="TextBox">
+				<Setter Property="BorderThickness" Value="0"/>
+				<Setter Property="FontSize" Value="12"/>
+				<Setter Property="VerticalAlignment" Value="Center"/>
+				<Setter Property="VerticalContentAlignment" Value="Center"/>
+			</Style>
+		</Grid.Styles>
 		<StackPanel Orientation="Horizontal">
 			<Button Height="50" Width="100"
 					Content="Добавить"
@@ -21,56 +29,120 @@
 					Margin="5" Command="{Binding SaveParametersCommand}"/>
 		</StackPanel>
 		<DataGrid Items="{Binding Parameters}"
-				  Grid.Row="1"
+				  Grid.Row="1"	
+				  Focusable="True"
 				  AutoGenerateColumns="False">
 			<DataGrid.Columns>
-				<DataGridTextColumn Header="Id" Binding="{Binding Id}" IsReadOnly="True"/>
-				<DataGridTemplateColumn Header="Описание"  >
+				<DataGridTextColumn Header="Id" Binding="{Binding Id}" FontSize="10" IsReadOnly="True"/>
+				<DataGridTemplateColumn Header="Описание"  SortMemberPath="Description">
 					<DataGridTemplateColumn.CellTemplate>
 						<DataTemplate>
 							<TextBox Margin="5" VerticalAlignment="Center"
-									 Width="300"
+									 Width="160"
+									 FontSize="10"
 									 HorizontalAlignment="Left" Text="{Binding Description}"
 									 TextWrapping="Wrap"
 									 BorderThickness="0"/>
 						</DataTemplate>
 					</DataGridTemplateColumn.CellTemplate>
 				</DataGridTemplateColumn>
-				<DataGridTemplateColumn Header="Тип данных">
+				<DataGridTemplateColumn Header="Тип данных" SortMemberPath="Data">
+					<DataGridTemplateColumn.Header>
+						<TextBlock Text="Тип данных" Width="50" TextWrapping="Wrap"/>
+					</DataGridTemplateColumn.Header>
 					<DataGridTemplateColumn.CellTemplate>
 						<DataTemplate>
-							<ComboBox Margin="5"
+							<ComboBox Margin="2"
+									  FontSize="10"
 									  Items="{StaticResource DataTypes}"
 									  SelectedIndex="{Binding Data}"
-									  Width="100"
-									  HorizontalAlignment="Right"/>
+									  Width="80"
+									  HorizontalAlignment="Center"/>
 						</DataTemplate>
 					</DataGridTemplateColumn.CellTemplate>
 				</DataGridTemplateColumn>
-				<DataGridTemplateColumn Header="Тип регистра">
+				<DataGridTemplateColumn SortMemberPath="ModbusRegType">
+					<DataGridTemplateColumn.Header>
+						<TextBlock Text="Тип регистра" Width="60" TextWrapping="Wrap"/>
+					</DataGridTemplateColumn.Header>
 					<DataGridTemplateColumn.CellTemplate>
 						<DataTemplate>
-							<ComboBox Margin="5"
+							<ComboBox Margin="2"
+									  FontSize="10"
 									  Items="{StaticResource ModbusRegisters}"
 									  SelectedIndex="{Binding ModbusRegType}"
-									  Width="100"
-									  HorizontalAlignment="Right"/>
+									  Width="80"
+									  HorizontalAlignment="Center"/>
+						</DataTemplate>
+					</DataGridTemplateColumn.CellTemplate>
+				</DataGridTemplateColumn>				
+				<DataGridTemplateColumn SortMemberPath="ModbRegNum">
+					<DataGridTemplateColumn.Header>
+						<TextBlock Text="№ регистра" Width="60" TextWrapping="Wrap"/>
+					</DataGridTemplateColumn.Header>
+					<DataGridTemplateColumn.CellTemplate>
+						<DataTemplate>
+							<TextBox DataContext="{Binding ModbRegNum}" Text="{Binding}" Width="50"/>
 						</DataTemplate>
 					</DataGridTemplateColumn.CellTemplate>
 				</DataGridTemplateColumn>
-				<DataGridTextColumn Header="№ регистра" Binding="{Binding ModbRegNum}"/>
-				<DataGridTextColumn Header="№ бита" Binding="{Binding BitNum}"/>
-				<DataGridTextColumn Header="Мин. значение" Binding="{Binding MinValue}" IsReadOnly="False"/>
-				<DataGridTextColumn Header="Макс. значение" Binding="{Binding MaxValue}" IsReadOnly="False"/>
-				<DataGridTextColumn Header="Длина строки" Binding="{Binding StrLength}"/>
-				<DataGridTemplateColumn Header="Порядок байт">
+
+				<DataGridTemplateColumn SortMemberPath="BitNum">
+					<DataGridTemplateColumn.Header>
+						<TextBlock Text="№ бита" Width="60" TextWrapping="Wrap"/>
+					</DataGridTemplateColumn.Header>
 					<DataGridTemplateColumn.CellTemplate>
 						<DataTemplate>
-							<ComboBox Margin="5"
+							<TextBox DataContext="{Binding BitNum}" Text="{Binding}" Width="40"/>
+						</DataTemplate>
+					</DataGridTemplateColumn.CellTemplate>
+				</DataGridTemplateColumn>
+
+				<DataGridTemplateColumn SortMemberPath="MinValue">
+					<DataGridTemplateColumn.Header>
+						<TextBlock Text="Мин. значение" Width="60" TextWrapping="Wrap"/>
+					</DataGridTemplateColumn.Header>
+					<DataGridTemplateColumn.CellTemplate>
+						<DataTemplate>
+							<TextBox Text="{Binding}" DataContext="{Binding MinValue}" Width="60"/>
+						</DataTemplate>
+					</DataGridTemplateColumn.CellTemplate>
+				</DataGridTemplateColumn>
+
+				<DataGridTemplateColumn SortMemberPath="MaxValue">
+					<DataGridTemplateColumn.Header>
+						<TextBlock Text="Макс. значение" Width="60" TextWrapping="Wrap"/>
+					</DataGridTemplateColumn.Header>
+					<DataGridTemplateColumn.CellTemplate>
+						<DataTemplate>
+							<TextBox Text="{Binding}" DataContext="{Binding MaxValue}" Width="60"/>
+						</DataTemplate>
+					</DataGridTemplateColumn.CellTemplate>
+				</DataGridTemplateColumn>
+
+				<DataGridTemplateColumn SortMemberPath="StrLength">
+					<DataGridTemplateColumn.Header>
+						<TextBlock Text="Длина строки" Width="60" TextWrapping="Wrap"/>
+					</DataGridTemplateColumn.Header>
+					<DataGridTemplateColumn.CellTemplate>
+						<DataTemplate>
+							<TextBox Text="{Binding}" DataContext="{Binding StrLength}" Width="40"/>
+						</DataTemplate>
+					</DataGridTemplateColumn.CellTemplate>
+				</DataGridTemplateColumn>											
+									
+				<DataGridTemplateColumn SortMemberPath="ByteOrder">
+					<DataGridTemplateColumn.Header>
+						<TextBlock Text="Порядок байт" Width="60" TextWrapping="Wrap"/>
+					</DataGridTemplateColumn.Header>
+					<DataGridTemplateColumn.CellTemplate>
+						<DataTemplate>
+							<ComboBox Margin="2"
+									  FontSize="12"
 									  Items="{StaticResource ByteOrders}"
 									  SelectedIndex="{Binding ByteOrder}"
-									  Width="100"
-									  HorizontalAlignment="Right"/>
+									  Width="80"
+									  HorizontalAlignment="Center"/>
 						</DataTemplate>
 					</DataGridTemplateColumn.CellTemplate>
 				</DataGridTemplateColumn>
