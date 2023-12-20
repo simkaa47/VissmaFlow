@@ -52,9 +52,11 @@ public partial class VirtualKeyboard : UserControl
 
         KeyboardInputType inputType = KeyboardInputType.Text;
 
-        if (textBox.DataContext is Parameter<float> || textBox.DataContext is Parameter<double>)
+        if (textBox.DataContext is float || textBox.DataContext is double)
             inputType = KeyboardInputType.Float;
-
+        else if (textBox.DataContext is short || textBox.DataContext is ushort
+            || textBox.DataContext is int || textBox.DataContext is uint)
+            inputType = KeyboardInputType.Decimal;
 
 
 
@@ -105,6 +107,10 @@ public partial class VirtualKeyboard : UserControl
             if(inputType == KeyboardInputType.Float)
             {
                 TransitioningContentControl.Content = new FloatKeyboard();
+            }
+            else if(inputType == KeyboardInputType.Decimal)
+            {
+                TransitioningContentControl.Content = new NumericKeyboard();
             }
             else
             {

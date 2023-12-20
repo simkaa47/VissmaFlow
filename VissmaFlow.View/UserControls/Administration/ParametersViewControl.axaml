@@ -82,7 +82,7 @@
 					</DataGridTemplateColumn.Header>
 					<DataGridTemplateColumn.CellTemplate>
 						<DataTemplate>
-							<TextBox Text="{Binding ModbRegNum}" Width="50"/>
+							<TextBox DataContext="{Binding ModbRegNum}" Text="{Binding}" Width="50"/>
 						</DataTemplate>
 					</DataGridTemplateColumn.CellTemplate>
 				</DataGridTemplateColumn>
@@ -93,7 +93,7 @@
 					</DataGridTemplateColumn.Header>
 					<DataGridTemplateColumn.CellTemplate>
 						<DataTemplate>
-							<TextBox Text="{Binding BitNum}" Width="40"/>
+							<TextBox DataContext="{Binding BitNum}" Text="{Binding}" Width="40"/>
 						</DataTemplate>
 					</DataGridTemplateColumn.CellTemplate>
 				</DataGridTemplateColumn>
@@ -104,7 +104,7 @@
 					</DataGridTemplateColumn.Header>
 					<DataGridTemplateColumn.CellTemplate>
 						<DataTemplate>
-							<TextBox Text="{Binding MinValue}" Width="60"/>
+							<TextBox Text="{Binding}" DataContext="{Binding MinValue}" Width="60"/>
 						</DataTemplate>
 					</DataGridTemplateColumn.CellTemplate>
 				</DataGridTemplateColumn>
@@ -115,7 +115,7 @@
 					</DataGridTemplateColumn.Header>
 					<DataGridTemplateColumn.CellTemplate>
 						<DataTemplate>
-							<TextBox Text="{Binding MaxValue}" Width="60"/>
+							<TextBox Text="{Binding}" DataContext="{Binding MaxValue}" Width="60"/>
 						</DataTemplate>
 					</DataGridTemplateColumn.CellTemplate>
 				</DataGridTemplateColumn>
@@ -126,7 +126,7 @@
 					</DataGridTemplateColumn.Header>
 					<DataGridTemplateColumn.CellTemplate>
 						<DataTemplate>
-							<TextBox Text="{Binding StrLength}" Width="40"/>
+							<TextBox Text="{Binding}" DataContext="{Binding StrLength}" Width="40"/>
 						</DataTemplate>
 					</DataGridTemplateColumn.CellTemplate>
 				</DataGridTemplateColumn>											
