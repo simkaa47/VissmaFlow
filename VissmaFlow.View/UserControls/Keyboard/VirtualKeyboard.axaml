@@ -12,7 +12,7 @@
 		<Grid DockPanel.Dock="Bottom">
 			<!-- QuickAndDirty resize bugfix -->
 			<layout:VirtualKeyboardLayoutRU Opacity="0" IsHitTestVisible="False"/>
-			<controls:TransitioningContentControl Name="TransitioningContentControl"/>
+			<controls:TransitioningContentControl Name="TransitioningContentControl" VerticalAlignment="Center"/>
 		</Grid>
 	</DockPanel>
 </UserControl>

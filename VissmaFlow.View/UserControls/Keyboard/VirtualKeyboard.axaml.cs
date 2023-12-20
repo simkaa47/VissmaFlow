@@ -7,11 +7,13 @@ using Avalonia.Input.TextInput;
 using Avalonia.Markup.Xaml;
 using Avalonia.Threading;
 using Avalonia.VisualTree;
+using Mapster.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Subjects;
 using System.Threading.Tasks;
+using VissmaFlow.Core.Models.Parameters;
 using VissmaFlow.View.UserControls.Keyboard.Layout;
 
 namespace VissmaFlow.View.UserControls.Keyboard;
@@ -28,6 +30,11 @@ public partial class VirtualKeyboard : UserControl
     private static List<Type> Layouts { get; } = new();
     private static Func<Type> DefaultLayout { get; set; }
 
+    public VirtualKeyboard()
+    {
+        
+    }
+
     public static void AddLayout<TLayout>() where TLayout : KeyboardLayout => Layouts.Add(typeof(TLayout));
 
     public static void SetDefaultLayout(Func<Type> getDefaultLayout) => DefaultLayout = getDefaultLayout;
@@ -38,16 +45,27 @@ public partial class VirtualKeyboard : UserControl
         {
             return string.Empty;
         }
-        var keyboard = new VirtualKeyboard();
-        
-
-
-
-        if (options.Source is TextBox textBox)
+        if (!(options.Source is TextBox textBox))
         {
-            keyboard.TextBox.Text = textBox.Text;
-            keyboard.TextBox.PasswordChar = textBox.PasswordChar;
+            return string.Empty;
         }
+
+        KeyboardInputType inputType = KeyboardInputType.Text;
+
+        if (textBox.DataContext is Parameter<float> || textBox.DataContext is Parameter<double>)
+            inputType = KeyboardInputType.Float;
+
+
+
+
+
+        var keyboard = new VirtualKeyboard(inputType);
+        keyboard.TextBox.Text = textBox.Text;
+        keyboard.TextBox.PasswordChar = textBox.PasswordChar;
+
+
+
+
 
         var window = new CoporateWindow();
         window.Height = desktop.MainWindow.Height / 3;
@@ -76,7 +94,7 @@ public partial class VirtualKeyboard : UserControl
 
     private Window _parentWindow;
 
-    public VirtualKeyboard()
+    public VirtualKeyboard(KeyboardInputType inputType)
     {
         InitializeComponent();
         TextBox = this.Get<TextBox>(nameof(TextBox));
@@ -84,7 +102,14 @@ public partial class VirtualKeyboard : UserControl
 
         Initialized += async (sender, args) =>
         {
-            TransitioningContentControl.Content = Activator.CreateInstance(DefaultLayout.Invoke());
+            if(inputType == KeyboardInputType.Float)
+            {
+                TransitioningContentControl.Content = new FloatKeyboard();
+            }
+            else
+            {
+                TransitioningContentControl.Content = Activator.CreateInstance(DefaultLayout.Invoke());
+            }            
             _parentWindow = this.GetVisualAncestors().OfType<Window>().First();
             await Task.Delay(TimeSpan.FromMilliseconds(100));
             Dispatcher.UIThread.Post(() =>
@@ -114,7 +139,7 @@ public partial class VirtualKeyboard : UserControl
     public void ProcessText(string text)
     {
         TextBox.Focus();
-        InputManager.Instance.ProcessInput(new RawTextInputEventArgs(KeyboardDevice.Instance, (ulong)DateTime.Now.Ticks, (Window)TextBox.GetVisualRoot(), text));
+        InputManager.Instance?.ProcessInput(new RawTextInputEventArgs(KeyboardDevice.Instance, (ulong)DateTime.Now.Ticks, (Window)TextBox.GetVisualRoot(), text));
         if (_keyboardStateStream.Value == VirtualKeyboardState.Shift)
         {
             _keyboardStateStream.OnNext(VirtualKeyboardState.Default);
@@ -173,6 +198,7 @@ public partial class VirtualKeyboard : UserControl
                 _keyboardStateStream.OnNext(VirtualKeyboardState.Default);
                 if (TransitioningContentControl.Content is KeyboardLayout layout)
                 {
+                    
                     var index = Layouts.IndexOf(layout.GetType());
                     if (Layouts.Count - 1 > index)
                     {
@@ -187,8 +213,8 @@ public partial class VirtualKeyboard : UserControl
             else
             {
                 TextBox.Focus();
-                InputManager.Instance.ProcessInput(new RawKeyEventArgs(KeyboardDevice.Instance, (ulong)DateTime.Now.Ticks, (Window)TextBox.GetVisualRoot(), RawKeyEventType.KeyDown, key, RawInputModifiers.None));
-                InputManager.Instance.ProcessInput(new RawKeyEventArgs(KeyboardDevice.Instance, (ulong)DateTime.Now.Ticks, (Window)TextBox.GetVisualRoot(), RawKeyEventType.KeyUp, key, RawInputModifiers.None));
+                InputManager.Instance?.ProcessInput(new RawKeyEventArgs(KeyboardDevice.Instance, (ulong)DateTime.Now.Ticks, (Window)TextBox.GetVisualRoot(), RawKeyEventType.KeyDown, key, RawInputModifiers.None));
+                InputManager.Instance?.ProcessInput(new RawKeyEventArgs(KeyboardDevice.Instance, (ulong)DateTime.Now.Ticks, (Window)TextBox.GetVisualRoot(), RawKeyEventType.KeyUp, key, RawInputModifiers.None));
             }
         }
     }
