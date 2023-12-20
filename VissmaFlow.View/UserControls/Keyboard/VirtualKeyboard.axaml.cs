@@ -1,3 +1,4 @@
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Input;
@@ -38,6 +39,7 @@ public partial class VirtualKeyboard : UserControl
             return string.Empty;
         }
         var keyboard = new VirtualKeyboard();
+        
 
 
 
@@ -48,6 +50,12 @@ public partial class VirtualKeyboard : UserControl
         }
 
         var window = new CoporateWindow();
+        window.Height = desktop.MainWindow.Height / 3;
+        window.Width = desktop.MainWindow.Width;
+        window.WindowStartupLocation = WindowStartupLocation.Manual;
+        
+        window.Position = new PixelPoint(desktop.MainWindow.Position.X, desktop.MainWindow.Position.Y + (int)window.Height*2);
+
         window.CoporateContent = keyboard;
         window.Title = "MyFancyKeyboard";
         await window.ShowDialog(owner ?? desktop.MainWindow);
@@ -88,6 +96,7 @@ public partial class VirtualKeyboard : UserControl
         };
         KeyDown += (sender, args) =>
         {
+            if (_parentWindow is null) return;
             TextBox.Focus();
             if (args.Key == Key.Escape)
             {

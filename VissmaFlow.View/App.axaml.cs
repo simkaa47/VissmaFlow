@@ -29,7 +29,7 @@ namespace VissmaFlow.View
         {
             VirtualKeyboard.AddLayout<VirtualKeyboardLayoutRU>();
             VirtualKeyboard.AddLayout<VirtualKeyboardLayoutUS>();
-            VirtualKeyboard.SetDefaultLayout(() => typeof(VirtualKeyboardLayoutRU));
+            VirtualKeyboard.SetDefaultLayout(() => typeof(VirtualKeyboardLayoutUS));
             _host = Host.CreateDefaultBuilder().
                 ConfigureServices(services => 
                 {

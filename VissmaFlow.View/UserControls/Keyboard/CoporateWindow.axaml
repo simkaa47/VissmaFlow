@@ -7,10 +7,8 @@
         Title="CoporateWindow"
 		TransparencyLevelHint="AcrylicBlur"
       ExtendClientAreaToDecorationsHint="True"
-      Background="Red"
-		
-	  Topmost="True"
-      SizeToContent="WidthAndHeight"
+      Background="Red"		
+	  Topmost="True"      
       WindowStartupLocation="Manual"
 	  VerticalAlignment="Bottom">
 	<Panel>
@@ -23,8 +21,10 @@
 				  MaterialOpacity="0.65" />
 			</ExperimentalAcrylicBorder.Material>
 		</ExperimentalAcrylicBorder>
-		<Panel Margin="10,20,10,10">
-			<ContentPresenter Content="{Binding Path=CoporateContent}"/>
+		<Panel Margin="0,20,0,10">
+			<Viewbox>
+				<ContentPresenter Content="{Binding Path=CoporateContent}"/>
+			</Viewbox>			
 		</Panel>
 	</Panel>
 </Window>
