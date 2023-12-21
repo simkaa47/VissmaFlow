@@ -2,15 +2,15 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" 
-		SizeToContent="WidthAndHeight"		
+        mc:Ignorable="d" 			
 		xmlns:par="using:VissmaFlow.Core.Models.Parameters"
 		xmlns:vm="using:VissmaFlow.Core.ViewModels"
 		x:DataType="par:ParameterBase"
+		Background="Gray"
 		xmlns:adm="using:VissmaFlow.View.UserControls.Administration"
         x:Class="VissmaFlow.View.Dialogs.Parameters.ParameterChangeWindow"
         Title="Окно параметра">
-	<StackPanel>
+	<StackPanel Margin="5" Background="White">
 		<StackPanel.Styles>
 			<Style Selector="TextBlock">
 				<Setter Property="TextWrapping" Value="Wrap"/>				
@@ -47,16 +47,19 @@
 		<DockPanel>
 			<TextBlock Text="№ регистра"/>
 			<TextBox Width="100"
+					 Tag="{x:Static par:DataType.int16}"
 					 Text="{Binding ModbRegNum}"/>
 		</DockPanel>
 		<DockPanel IsVisible="{Binding Data, Converter={StaticResource IfEqualConverter}, ConverterParameter={x:Static par:DataType.boolean}}">
 			<TextBlock Text="№ бита"/>
 			<TextBox Width="100"
+					 Tag="{x:Static par:DataType.int16}"
 					 Text="{Binding BitNum}"/>
 		</DockPanel>		
 		<DockPanel IsVisible="{Binding Data, Converter={StaticResource IfEqualConverter}, ConverterParameter={x:Static par:DataType.str}}">
 			<TextBlock Text="Длина строки, символов"/>
 			<TextBox Width="100"
+					 Tag="{x:Static par:DataType.int16}"
 					 Text="{Binding StrLength}"/>
 		</DockPanel>		
 		<DockPanel IsVisible="{Binding Data, Converter={StaticResource IfNotEqualConverter}, ConverterParameter={x:Static par:DataType.str}}">

@@ -3,4 +3,6 @@
 					xmlns:conv="using:VissmaFlow.View.Converters">
 	<conv:IfEqualConverter  x:Key="IfEqualConverter"/>
 	<conv:IfNotEqualConverter  x:Key="IfNotEqualConverter"/>
+	<conv:UserVisibilityConverter x:Key="UserVisibilityConverter"/>
+	<conv:ParameterVisibilityMultivalueConverter x:Key="ParameterVisibilityMultivalueConverter"/>
 </ResourceDictionary>

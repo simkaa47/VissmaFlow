@@ -1,0 +1,88 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 xmlns:vm="using:VissmaFlow.Core.ViewModels"
+			 x:DataType="vm:AccessViewModel"
+			 xmlns:mat="using:Material.Icons.Avalonia"
+			 xmlns:mod="using:VissmaFlow.Core.Models.AccessControl"
+             x:Class="VissmaFlow.View.UserControls.Administration.AccessControlControl">
+	<Grid RowDefinitions="Auto,*">
+		<Grid.Styles>
+			<Style Selector="TextBlock">
+				<Setter Property="Margin" Value="2"/>				
+				<Setter Property="VerticalAlignment" Value="Center"/>
+				<Setter Property="FontSize" Value="12"/>				
+			</Style>
+		</Grid.Styles>
+		<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+			<Button Content="Добавить"
+					Height="50"
+					VerticalContentAlignment="Center"
+					HorizontalContentAlignment="Center"
+					Width="100"
+					Margin="5"
+					Command="{Binding AddUserCommand}"/>			
+		</StackPanel>
+		<DataGrid Items="{Binding Users}"
+				  Grid.Row="1"
+				  VerticalAlignment="Top"
+				  HorizontalAlignment="Left"
+				  IsReadOnly="True"
+				  FontSize="12"
+				  AutoGenerateColumns="False">
+			<DataGrid.Columns>				
+				<DataGridTemplateColumn Header="Логин" SortMemberPath="Login">
+					<DataGridTemplateColumn.CellTemplate>
+						<DataTemplate DataType="mod:User">
+							<TextBlock Text="{Binding Login}"/>
+						</DataTemplate>
+					</DataGridTemplateColumn.CellTemplate>
+				</DataGridTemplateColumn>
+				<DataGridTemplateColumn Header="Имя" SortMemberPath="FirstName">
+					<DataGridTemplateColumn.CellTemplate>
+						<DataTemplate DataType="mod:User">
+							<TextBlock Text="{Binding FirstName}"/>
+						</DataTemplate>
+					</DataGridTemplateColumn.CellTemplate>
+				</DataGridTemplateColumn>
+				<DataGridTemplateColumn Header="Фамилия" SortMemberPath="LastName">
+					<DataGridTemplateColumn.CellTemplate>
+						<DataTemplate DataType="mod:User">
+							<TextBlock Text="{Binding LastName}"/>
+						</DataTemplate>
+					</DataGridTemplateColumn.CellTemplate>
+				</DataGridTemplateColumn>
+				<DataGridTemplateColumn Header="Уровень" SortMemberPath="UserAccessLevel">
+					<DataGridTemplateColumn.CellTemplate>
+						<DataTemplate DataType="mod:User">
+							<TextBlock Text="{Binding AccessLevel}"/>
+						</DataTemplate>
+					</DataGridTemplateColumn.CellTemplate>
+				</DataGridTemplateColumn>
+				<DataGridTemplateColumn>
+					<DataGridTemplateColumn.CellTemplate>
+						<DataTemplate>
+							<StackPanel Orientation="Horizontal">
+								<Button Height="25" Width="25"
+									Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=DataContext.DeleteUserCommand}"
+									CommandParameter="{Binding}"
+									Margin="4">
+									<mat:MaterialIcon Kind="Remove"/>
+								</Button>
+								<Button Height="25" Width="25"
+									Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=DataContext.UpdateUserCommand}"
+									CommandParameter="{Binding}"
+									Margin="4">
+									<mat:MaterialIcon Kind="Edit"/>
+								</Button>
+							</StackPanel>
+							
+						</DataTemplate>
+					</DataGridTemplateColumn.CellTemplate>
+				</DataGridTemplateColumn>
+			</DataGrid.Columns>
+		</DataGrid>
+	</Grid>
+</UserControl>

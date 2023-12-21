@@ -148,6 +148,20 @@
 					</DataGridTemplateColumn.CellTemplate>
 				</DataGridTemplateColumn>
 				<DataGridCheckBoxColumn Header="Нужность" Binding="{Binding IsRequired}"/>
+				<DataGridCheckBoxColumn Binding="{Binding IsReadOnly}">
+					<DataGridCheckBoxColumn.Header>
+						<TextBlock Text="Только чтение" Width="60" TextWrapping="Wrap"/>
+					</DataGridCheckBoxColumn.Header>
+				</DataGridCheckBoxColumn>
+				<DataGridTemplateColumn Header="Уровень" SortMemberPath="UserAccessLevel">
+					<DataGridTemplateColumn.CellTemplate>
+						<DataTemplate>
+							<ComboBox Width="100"
+									  SelectedIndex="{Binding UserAccessLevel}"
+									  Items="{StaticResource AccessLevels}"/>
+						</DataTemplate>
+					</DataGridTemplateColumn.CellTemplate>
+				</DataGridTemplateColumn>
 				<DataGridTemplateColumn>
 					<DataGridTemplateColumn.CellTemplate>
 						<DataTemplate>							

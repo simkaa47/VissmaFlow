@@ -10,6 +10,12 @@
 			 xmlns:par="using:VissmaFlow.View.UserControls.Parameters"
              x:Class="VissmaFlow.View.UserControls.Parameters.ParametersViewControl">
 	<TabControl Items="{Binding CommunicationVm.RtkUnits}" TabStripPlacement="Top">
+		<TabControl.Styles>
+			<Style Selector="ListBoxItem">
+				<Setter Property="Margin" Value="0"/>
+				<Setter Property="Padding" Value="0"/>
+			</Style>
+		</TabControl.Styles>
 		<TabControl.ItemTemplate>
 			<DataTemplate DataType="rtk:RtkUnit">
 				<TextBlock Text="{Binding Name}"/>
@@ -19,9 +25,16 @@
 			<DataTemplate DataType="rtk:RtkUnit">
 				<ListBox Items="{Binding Parameters}">
 					<ListBox.ItemTemplate>
-						<DataTemplate>
-							<par:NumericParameter 
-								Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=DataContext.CommunicationService.WriteParameterCommand}"/>
+						<DataTemplate DataType="p:ParameterBase">
+							<par:NumericParameter Margin="5"
+									Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=DataContext.CommunicationService.WriteParameterCommand}">
+								<par:NumericParameter.IsVisible>
+									<MultiBinding Converter="{StaticResource ParameterVisibilityMultivalueConverter}">
+										<Binding/>
+										<Binding RelativeSource="{RelativeSource AncestorType=Window}" Path="DataContext.AccessViewModel.CurrentUser"/>
+									</MultiBinding>
+								</par:NumericParameter.IsVisible>
+							</par:NumericParameter>
 						</DataTemplate>
 					</ListBox.ItemTemplate>
 				</ListBox>

@@ -3,12 +3,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-		SizeToContent="WidthAndHeight"	
+		xmlns:par="using:VissmaFlow.Core.Models.Parameters"
+		Background="Gray"
 		xmlns:m="using:VissmaFlow.Core.Models.Communication"
 		x:DataType="m:RtkUnit"
         x:Class="VissmaFlow.View.Dialogs.Communication.RtkDialogWindow"
         Title="RtkDialogWindow">
-	<StackPanel>
+	<StackPanel Margin="5" Background="White">
 		<StackPanel.Styles>
 			<Style Selector="TextBlock">
 				<Setter Property="TextWrapping" Value="Wrap"/>
@@ -29,6 +30,7 @@
 		<DockPanel>
 			<TextBlock Text="Номер в сети"/>
 			<TextBox Width="100"
+					 Tag="{x:Static par:DataType.int16}"
 					 Text="{Binding UnitId}"/>
 		</DockPanel>
 		<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">

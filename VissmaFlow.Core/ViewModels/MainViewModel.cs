@@ -13,18 +13,18 @@ namespace VissmaFlow.Core.ViewModels
 
         public MainViewModel(ILogger<MainViewModel> logger, 
             ParameterVm parameterVm, MainCommunicationService communicationService,
-            CommunicationVm communicationVm)
+            CommunicationVm communicationVm, AccessViewModel accessViewModel)
         {
             _logger = logger;
             ParameterVm = parameterVm;
             CommunicationService = communicationService;
-            CommunicationVm = communicationVm;            
+            CommunicationVm = communicationVm;
+            AccessViewModel = accessViewModel;
         }
         
         public ParameterVm ParameterVm { get; }
         public MainCommunicationService CommunicationService { get; }
-        public CommunicationVm CommunicationVm { get; }        
-
-        
+        public CommunicationVm CommunicationVm { get; }
+        public AccessViewModel AccessViewModel { get; }
     }
 }
