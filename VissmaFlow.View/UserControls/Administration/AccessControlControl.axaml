@@ -54,7 +54,7 @@
 						</DataTemplate>
 					</DataGridTemplateColumn.CellTemplate>
 				</DataGridTemplateColumn>
-				<DataGridTemplateColumn Header="Уровень" SortMemberPath="AccessLevel">
+				<DataGridTemplateColumn Header="Уровень" SortMemberPath="UserAccessLevel">
 					<DataGridTemplateColumn.CellTemplate>
 						<DataTemplate DataType="mod:User">
 							<TextBlock Text="{Binding AccessLevel}"/>

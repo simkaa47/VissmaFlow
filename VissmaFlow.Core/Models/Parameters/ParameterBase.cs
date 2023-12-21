@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using VissmaFlow.Core.Infrastructure.DataAccess;
+using VissmaFlow.Core.Models.AccessControl;
 using VissmaFlow.Core.Models.Communication.Modbus;
 
 namespace VissmaFlow.Core.Models.Parameters
@@ -34,6 +35,16 @@ namespace VissmaFlow.Core.Models.Parameters
         [NotifyDataErrorInfo]
         [ObservableProperty]
         private int _modbRegNum;
+        #endregion
+
+        #region Видимость параметра
+        [ObservableProperty]
+        private UserAccessLevel _userAccessLevel;
+        #endregion
+
+        #region Только для чтения
+        [ObservableProperty]
+        private bool _isReadOnly; 
         #endregion
 
         #region Номер бита в регистре(Для битовых переменных)

@@ -18,7 +18,7 @@ namespace VissmaFlow.Core.ViewModels
         [ObservableProperty]
         private IEnumerable<User>? _users;
         [ObservableProperty]
-        private User? _currentUser;
+        private User? _currentUser = new User() {FirstName="Пользователь", LastName = "не авторизован" };
 
         public AccessViewModel(ILogger<AccessViewModel> logger, 
             IRepository<User> userRepository, 
