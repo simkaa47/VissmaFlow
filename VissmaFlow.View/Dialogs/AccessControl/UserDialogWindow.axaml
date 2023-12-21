@@ -1,0 +1,68 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+		Background="Gray"		
+		xmlns:mod="using:VissmaFlow.Core.Models.AccessControl"
+		x:DataType="mod:User"
+        x:Class="VissmaFlow.View.Dialogs.AccessControl.UserDialogWindow"
+        Title="UserDialogWindow">
+	<Window.Styles>
+		<Style Selector="TextBlock">
+			<Setter Property="TextWrapping" Value="Wrap"/>
+			<Setter Property="Margin" Value="5,5,55,5"/>
+			<Setter Property="VerticalAlignment" Value="Center"/>
+		</Style>
+		<Style Selector="TextBox">
+			<Setter Property="Margin" Value="5,5,5,5"/>
+			<Setter Property="VerticalAlignment" Value="Center"/>
+			<Setter Property="HorizontalAlignment" Value="Right"/>
+		</Style>
+	</Window.Styles>
+	<Window.Resources>
+		
+	</Window.Resources>
+	<Grid Background="White" Margin="5" RowDefinitions="*,Auto">
+		<ScrollViewer VerticalScrollBarVisibility="Auto">
+			<StackPanel>
+				<DockPanel >
+					<TextBlock Text="Имя"/>
+					<TextBox HorizontalAlignment="Right" TabIndex="1"	
+							 Width="100" 
+							 Text="{Binding FirstName}"/>
+				</DockPanel>
+				<DockPanel >
+					<TextBlock Text="Фамилия"/>
+					<TextBox HorizontalAlignment="Right" 
+							 TabIndex="2"
+							 Width="100" Text="{Binding LastName}"/>
+				</DockPanel>
+				<DockPanel >
+					<TextBlock Text="Логин"/>
+					<TextBox HorizontalAlignment="Right" TabIndex="2"
+							Width="100" Text="{Binding Login}"/>
+				</DockPanel>
+				<DockPanel >
+					<TextBlock Text="Пароль"/>					
+					<TextBox Margin="100,5,5,5" TabIndex="3" 
+							 Text="{Binding Password}" 							 
+							 HorizontalAlignment="Right"/>
+
+				</DockPanel>
+				<DockPanel >
+					<TextBlock Text="Уровень доступа"/>
+					<ComboBox HorizontalAlignment="Right"
+							  Items="{StaticResource AccessLevels}"
+							  SelectedIndex="{Binding AccessLevel}"
+							  Margin="100,5,5,5"
+							  TabIndex="4"/>
+				</DockPanel>
+			</StackPanel>
+		</ScrollViewer>
+		<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="1">
+			<Button Margin="5" Width="100" Content="Отмена" Click="Cancel_Click" HorizontalContentAlignment="Center"/>
+			<Button Margin="5" Width="100" Content="Ок" IsEnabled="{Binding !HasErrors}" HorizontalContentAlignment="Center"  Click="Accept_Click"/>
+		</StackPanel>
+	</Grid>
+</Window>

@@ -42,5 +42,8 @@
 		<TabItem Header="Связь" MinHeight="30" MinWidth="60">
 			<adm:CommSettingsControl DataContext="{Binding CommunicationVm}"/>
 		</TabItem>
+		<TabItem Header="Пользователи" MinHeight="30" MinWidth="90">
+			<adm:AccessControlControl DataContext="{Binding AccessViewModel}"/>
+		</TabItem>
 	</TabControl>
 </UserControl>

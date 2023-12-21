@@ -84,7 +84,7 @@ public partial class VirtualKeyboard : UserControl
             if (options.Source is TextBox tb)
             {
                 tb.Text = s;
-                var binding = tb.KeyBindings.First();
+                var binding = tb.KeyBindings.FirstOrDefault();
                 if(binding is not null)
                 {
                     var cmd = binding.Command;

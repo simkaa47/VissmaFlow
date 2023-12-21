@@ -5,6 +5,7 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 			 xmlns:vm="using:VissmaFlow.Core.ViewModels"
 			 x:DataType="vm:CommunicationVm"
+			 xmlns:par="using:VissmaFlow.Core.Models.Parameters"
 			 xmlns:mat="using:Material.Icons.Avalonia"
              x:Class="VissmaFlow.View.UserControls.Administration.CommSettingsControl">
 	<UserControl.Styles>
@@ -103,7 +104,7 @@
 							<DataGridTemplateColumn Header="Номер в сети" SortMemberPath="UnitId">
 								<DataGridTemplateColumn.CellTemplate>
 									<DataTemplate>
-										<TextBox Text="{Binding UnitId}"/>
+										<TextBox Tag="{x:Static par:DataType.int16}" Text="{Binding UnitId}"/>
 									</DataTemplate>
 								</DataGridTemplateColumn.CellTemplate>
 							</DataGridTemplateColumn>							

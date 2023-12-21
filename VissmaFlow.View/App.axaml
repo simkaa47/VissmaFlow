@@ -5,14 +5,17 @@
     <Application.Styles>
 		<StyleInclude Source="avares://Material.Icons.Avalonia/App.xaml"></StyleInclude>
         <FluentTheme Mode="Light"/>
+		<StyleInclude Source="/Styles/Validation/ValidationErrors.xaml"/>
 		<StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml"/>
     </Application.Styles>
 
 	<Application.Resources>
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
-				<ResourceInclude Source="/Enums/ParameterEnums.axaml"/>				
+				<ResourceInclude Source="/Enums/ParameterEnums.axaml"/>
+				<ResourceInclude Source="/Enums/UserEnums.axaml"/>
 				<ResourceInclude Source="/Converters/GlobalConverters.axaml"/>
+				
 			</ResourceDictionary.MergedDictionaries>
 		</ResourceDictionary>
 	</Application.Resources>
