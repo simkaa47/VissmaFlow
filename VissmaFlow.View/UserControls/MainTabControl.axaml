@@ -8,21 +8,19 @@
 			 xmlns:par="using:VissmaFlow.View.UserControls.Parameters"
 			 xmlns:adm="using:VissmaFlow.View.UserControls.Administration"
              x:Class="VissmaFlow.View.UserControls.MainTabControl">
-	<Border BorderThickness="2" BorderBrush="Gray">
-		<TabControl TabStripPlacement="Bottom">
-			<TabItem Header="Параметры">
-				<par:ParametersViewControl/>
-			</TabItem>
-			<TabItem Header="Администрирование" HorizontalContentAlignment="Stretch" VerticalAlignment="Stretch">
-				<LayoutTransformControl>
-					<LayoutTransformControl.LayoutTransform>
-						<RotateTransform Angle="0"/>
-					</LayoutTransformControl.LayoutTransform>
-					<adm:AdministrationTabControl/>
-				</LayoutTransformControl>
+	<TabControl TabStripPlacement="Bottom">
+		<TabItem Header="Параметры">
+			<par:ParametersViewControl/>
+		</TabItem>
+		<TabItem Header="Администрирование" HorizontalContentAlignment="Stretch" VerticalAlignment="Stretch">
+			<LayoutTransformControl>
+				<LayoutTransformControl.LayoutTransform>
+					<RotateTransform Angle="0"/>
+				</LayoutTransformControl.LayoutTransform>
+				<adm:AdministrationTabControl/>
+			</LayoutTransformControl>
 
-			</TabItem>
-		</TabControl>
-	</Border>
+		</TabItem>
+	</TabControl>
 
 </UserControl>

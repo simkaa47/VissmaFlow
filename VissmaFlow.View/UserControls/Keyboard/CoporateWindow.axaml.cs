@@ -1,5 +1,6 @@
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 
 namespace VissmaFlow.View.UserControls.Keyboard;
@@ -27,4 +28,11 @@ public partial class CoporateWindow : Window
     {
         AvaloniaXamlLoader.Load(this);
     }
+
+
+    private void CloseWindow(object? sender, RoutedEventArgs args)
+    {
+        Close();
+    }
+
 }

@@ -52,10 +52,10 @@ public partial class VirtualKeyboard : UserControl
 
         KeyboardInputType inputType = KeyboardInputType.Text;
 
-        if (textBox.DataContext is float || textBox.DataContext is double)
+        if (textBox.Tag is DataType.float32 || textBox.Tag is DataType.double64)
             inputType = KeyboardInputType.Float;
-        else if (textBox.DataContext is short || textBox.DataContext is ushort
-            || textBox.DataContext is int || textBox.DataContext is uint)
+        else if (textBox.Tag is DataType.int16 || textBox.Tag is DataType.uint16
+            || textBox.Tag is DataType.uint32 || textBox.Tag is DataType.int32)
             inputType = KeyboardInputType.Decimal;
 
 
@@ -82,7 +82,20 @@ public partial class VirtualKeyboard : UserControl
         if (window.Tag is string s)
         {
             if (options.Source is TextBox tb)
+            {
                 tb.Text = s;
+                var binding = tb.KeyBindings.First();
+                if(binding is not null)
+                {
+                    var cmd = binding.Command;
+                    if(cmd is not null)
+                    {
+                        cmd.Execute(binding.CommandParameter);
+                    }
+                }
+                
+            }
+                
             return s;
         }
         return null;

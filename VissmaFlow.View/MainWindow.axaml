@@ -8,13 +8,15 @@
 		xmlns:sys="clr-namespace:System;assembly=netstandard"
 		xmlns:vm="using:VissmaFlow.Core.ViewModels"
 		x:DataType="vm:MainViewModel"	
-		Width="480" Height="800"
-		BorderBrush="Red"
-		BorderThickness="1"
+		Width="480" Height="800"		
 		HasSystemDecorations="False"
 		xmlns:uc="using:VissmaFlow.View.UserControls"
         Title="VissmaFlow.View">
-	<Grid RowDefinitions="80,*">
-		<uc:MainTabControl Grid.Row="1"/>   
-	</Grid>
+	<Border BorderBrush="Gray"
+		BorderThickness="2">
+		<Grid RowDefinitions="80,*">
+			<uc:MainTabControl Grid.Row="1"/>
+		</Grid>
+	</Border>
+	
 </Window>

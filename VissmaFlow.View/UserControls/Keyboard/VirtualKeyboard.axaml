@@ -7,8 +7,8 @@
              xmlns:layout="using:VissmaFlow.View.UserControls.Keyboard.Layout"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="VissmaFlow.View.UserControls.Keyboard.VirtualKeyboard">
-	<DockPanel Margin="10">
-		<TextBox Name="TextBox" DockPanel.Dock="Top"></TextBox>
+	<DockPanel Margin="5">
+		<TextBox Name="TextBox" FontSize="20" DockPanel.Dock="Top"></TextBox>
 		<Grid DockPanel.Dock="Bottom">
 			<!-- QuickAndDirty resize bugfix -->
 			<layout:VirtualKeyboardLayoutRU Opacity="0" IsHitTestVisible="False"/>

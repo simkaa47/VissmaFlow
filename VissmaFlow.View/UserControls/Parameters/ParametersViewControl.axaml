@@ -20,7 +20,8 @@
 				<ListBox Items="{Binding Parameters}">
 					<ListBox.ItemTemplate>
 						<DataTemplate>
-							<par:NumericParameter />
+							<par:NumericParameter 
+								Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=DataContext.CommunicationService.WriteParameterCommand}"/>
 						</DataTemplate>
 					</ListBox.ItemTemplate>
 				</ListBox>

@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:vm="using:VissmaFlow.Core.ViewModels"
 		     x:DataType="vm:ParameterVm"
+			 xmlns:par="using:VissmaFlow.Core.Models.Parameters"
 			 xmlns:material="using:Material.Icons.Avalonia"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="VissmaFlow.View.UserControls.Administration.ParametersViewControl">
@@ -82,7 +83,7 @@
 					</DataGridTemplateColumn.Header>
 					<DataGridTemplateColumn.CellTemplate>
 						<DataTemplate>
-							<TextBox DataContext="{Binding ModbRegNum}" Text="{Binding}" Width="50"/>
+							<TextBox Tag="{x:Static par:DataType.int16}" Text="{Binding ModbRegNum}" Width="50"/>
 						</DataTemplate>
 					</DataGridTemplateColumn.CellTemplate>
 				</DataGridTemplateColumn>
@@ -93,7 +94,7 @@
 					</DataGridTemplateColumn.Header>
 					<DataGridTemplateColumn.CellTemplate>
 						<DataTemplate>
-							<TextBox DataContext="{Binding BitNum}" Text="{Binding}" Width="40"/>
+							<TextBox Tag="{x:Static par:DataType.int16}" Text="{Binding BitNum}" Width="40"/>
 						</DataTemplate>
 					</DataGridTemplateColumn.CellTemplate>
 				</DataGridTemplateColumn>
@@ -104,7 +105,7 @@
 					</DataGridTemplateColumn.Header>
 					<DataGridTemplateColumn.CellTemplate>
 						<DataTemplate>
-							<TextBox Text="{Binding}" DataContext="{Binding MinValue}" Width="60"/>
+							<TextBox Text="{Binding MinValue}" Tag="{Binding Data}" Width="60"/>
 						</DataTemplate>
 					</DataGridTemplateColumn.CellTemplate>
 				</DataGridTemplateColumn>
@@ -115,7 +116,7 @@
 					</DataGridTemplateColumn.Header>
 					<DataGridTemplateColumn.CellTemplate>
 						<DataTemplate>
-							<TextBox Text="{Binding}" DataContext="{Binding MaxValue}" Width="60"/>
+							<TextBox Tag="{Binding Data}" Text="{Binding MaxValue}" Width="60"/>
 						</DataTemplate>
 					</DataGridTemplateColumn.CellTemplate>
 				</DataGridTemplateColumn>
@@ -126,7 +127,7 @@
 					</DataGridTemplateColumn.Header>
 					<DataGridTemplateColumn.CellTemplate>
 						<DataTemplate>
-							<TextBox Text="{Binding}" DataContext="{Binding StrLength}" Width="40"/>
+							<TextBox Tag="{x:Static par:DataType.int16}" Text="{Binding StrLength}" Width="40"/>
 						</DataTemplate>
 					</DataGridTemplateColumn.CellTemplate>
 				</DataGridTemplateColumn>											
