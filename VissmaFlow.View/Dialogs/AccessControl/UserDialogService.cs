@@ -1,6 +1,6 @@
 ﻿using Avalonia.Controls.ApplicationLifetimes;
 using System.Threading.Tasks;
-using VissmaFlow.Core.Infrastructure.AccessControl;
+using VissmaFlow.Core.Contracts.AccessControl;
 using VissmaFlow.Core.Models.AccessControl;
 
 namespace VissmaFlow.View.Dialogs.AccessControl

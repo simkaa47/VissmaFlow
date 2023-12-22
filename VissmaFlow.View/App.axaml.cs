@@ -13,8 +13,8 @@ using VissmaFlow.Core.Contracts.Communication;
 using VissmaFlow.View.Dialogs.Communication;
 using VissmaFlow.View.UserControls.Keyboard.Layout;
 using VissmaFlow.View.UserControls.Keyboard;
-using VissmaFlow.Core.Infrastructure.AccessControl;
 using VissmaFlow.View.Dialogs.AccessControl;
+using VissmaFlow.Core.Contracts.AccessControl;
 
 namespace VissmaFlow.View
 {
@@ -39,7 +39,7 @@ namespace VissmaFlow.View
                     services.AddTransient<IParameterDialogService, ParameterDialogService>();
                     services.AddTransient<IQuestionDialog, AskDialog>();
                     services.AddTransient<IRtkUnitDialog, AddRtkUnitDialog>();
-                    services.AddTransient<IAccessDialogService, UserDialogService>();
+                    services.AddTransient<IAccessDialogService, UserDialogService>();                    
                 }).Build();
         }
 

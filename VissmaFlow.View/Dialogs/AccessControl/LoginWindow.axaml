@@ -1,0 +1,39 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+		Background="Gray"
+		xmlns:mod="using:VissmaFlow.Core.Models.AccessControl"
+		x:DataType="mod:Login"
+		xmlns:scg="clr-namespace:System.Collections.Generic;assembly=netstandard"
+		xmlns:sys="clr-namespace:System;assembly=netstandard"
+        x:Class="VissmaFlow.View.Dialogs.AccessControl.LoginWindow"
+        Title="Авторизация">
+	<Window.Resources>
+		<scg:List x:TypeArguments="sys:Object" x:Key="TextBoxErrorColors">
+			<SolidColorBrush Color="Black"/>
+			<SolidColorBrush Color="Red"/>
+		</scg:List>
+	</Window.Resources>
+	<Grid RowDefinitions="*,Auto" Margin="5" Background="WhiteSmoke">
+		<StackPanel VerticalAlignment="Center">
+			<TextBox Margin="10" Height="40" Width="200" 
+					 Text="{Binding LoginName}" 
+					 Foreground="{Binding FaliledLogin, Converter={StaticResource GetIfTrueConverter}, ConverterParameter={StaticResource TextBoxErrorColors}}"
+					 VerticalContentAlignment="Center"
+					 Watermark="Логин"/>
+			<TextBox Margin="10" Height="40" Width="200"
+					 VerticalContentAlignment="Center"
+					 Foreground="{Binding FaliledLogin, Converter={StaticResource GetIfTrueConverter}, ConverterParameter={StaticResource TextBoxErrorColors}}"
+					 Text="{Binding Password}" 
+					 Watermark="Пароль"/>
+		</StackPanel>
+		
+		
+		<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="1">
+			<Button Margin="5" Width="100" Content="Отмена" Click="Cancel_Click" HorizontalContentAlignment="Center"/>
+			<Button Margin="5" Width="100" Content="Ок" IsEnabled="{Binding !HasErrors}" HorizontalContentAlignment="Center"  Click="Login_Click"/>
+		</StackPanel>
+	</Grid>
+</Window>

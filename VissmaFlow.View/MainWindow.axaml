@@ -7,7 +7,8 @@
 		xmlns:scg="clr-namespace:System.Collections.Generic;assembly=netstandard"
 		xmlns:sys="clr-namespace:System;assembly=netstandard"
 		xmlns:vm="using:VissmaFlow.Core.ViewModels"
-		x:DataType="vm:MainViewModel"	
+		x:DataType="vm:MainViewModel"
+		xmlns:hb="using:VissmaFlow.View.UserControls.HighBar"
 		Width="480" Height="800"		
 		HasSystemDecorations="False"
 		xmlns:uc="using:VissmaFlow.View.UserControls"
@@ -15,6 +16,7 @@
 	<Border BorderBrush="Gray"
 		BorderThickness="2">
 		<Grid RowDefinitions="80,*">
+			<hb:HighBarControl/>
 			<uc:MainTabControl Grid.Row="1"/>
 		</Grid>
 	</Border>

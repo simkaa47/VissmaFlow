@@ -1,6 +1,6 @@
 ﻿using VissmaFlow.Core.Models.AccessControl;
 
-namespace VissmaFlow.Core.Infrastructure.AccessControl
+namespace VissmaFlow.Core.Contracts.AccessControl
 {
     public interface IAccessDialogService
     {
