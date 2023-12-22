@@ -16,6 +16,7 @@ namespace VissmaFlow.Core
             services.AddSingleton<ParameterVm>();
             services.AddSingleton<AccessViewModel>();
             services.AddSingleton<MainCommunicationService>();
+            services.AddSingleton<ErrorsViewModel>();
             services.AddTransient<IComminicationService,ModbusRtuService>();            
             services.AddSingleton<CommunicationVm>();
             services.AddDbContext<VissmaDbContext>();
