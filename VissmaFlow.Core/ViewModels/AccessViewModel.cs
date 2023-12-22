@@ -1,9 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.Logging;
+using VissmaFlow.Core.Contracts.AccessControl;
 using VissmaFlow.Core.Contracts.Common;
 using VissmaFlow.Core.Contracts.DataAccess;
-using VissmaFlow.Core.Infrastructure.AccessControl;
 using VissmaFlow.Core.Models.AccessControl;
 using VissmaFlow.Core.Services.AccessControl;
 
@@ -18,7 +18,7 @@ namespace VissmaFlow.Core.ViewModels
         [ObservableProperty]
         private IEnumerable<User>? _users;
         [ObservableProperty]
-        private User? _currentUser = new User() {FirstName="Пользователь", LastName = "не авторизован" };
+        private User? _currentUser;
 
         public AccessViewModel(ILogger<AccessViewModel> logger, 
             IRepository<User> userRepository, 

@@ -5,4 +5,6 @@
 	<conv:IfNotEqualConverter  x:Key="IfNotEqualConverter"/>
 	<conv:UserVisibilityConverter x:Key="UserVisibilityConverter"/>
 	<conv:ParameterVisibilityMultivalueConverter x:Key="ParameterVisibilityMultivalueConverter"/>
+	<conv:UserToNameConverter x:Key="UserToNameConverter"/>
+	<conv:GetIfTrueConverter x:Key="GetIfTrueConverter"/>
 </ResourceDictionary>

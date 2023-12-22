@@ -7,7 +7,11 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Resources\Images\Logo_Konvels_blue.png" />
     <None Remove="Styles\Validation\ValidationErrors.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AvaloniaResource Include="Resources\Images\Logo_Konvels_blue.png" />
   </ItemGroup>
   <ItemGroup>
     <AvaloniaXaml Include="Styles\Validation\ValidationErrors.xaml">
