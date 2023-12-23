@@ -9,7 +9,8 @@
 		xmlns:vm="using:VissmaFlow.Core.ViewModels"
 		x:DataType="vm:MainViewModel"
 		xmlns:hb="using:VissmaFlow.View.UserControls.HighBar"
-		Width="480" Height="800"		
+		
+		WindowState="FullScreen"
 		HasSystemDecorations="False"
 		xmlns:uc="using:VissmaFlow.View.UserControls"
         Title="VissmaFlow.View">

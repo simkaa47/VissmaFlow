@@ -52,17 +52,7 @@ namespace VissmaFlow.Core.Models.Parameters
         [Range(0, 15)]
         [NotifyDataErrorInfo]
         private int _bitNum;
-        #endregion
-
-        #region Минимальное значение        
-        [ObservableProperty]        
-        private string _minValueString = string.Empty;
-        #endregion
-
-        #region Максимальное значение        
-        [ObservableProperty]        
-        private string _maxValueString = string.Empty;
-        #endregion
+        #endregion        
 
         #region Длина (если строка)
         [ObservableProperty]
@@ -83,6 +73,21 @@ namespace VissmaFlow.Core.Models.Parameters
 
         [NotMapped]
         public int ModbusUnitId { get; set; }
+        #region IsOnlyRead
+        [ObservableProperty]
+        private bool _isOnlyRead;
+        #endregion
+
+        #region ValidationOk
+        [ObservableProperty]
+        private bool _validationOk;
+        #endregion
+
+        #region IsWriting
+        [ObservableProperty]
+        private bool _isWriting;
+        #endregion
+
 
     }
 }

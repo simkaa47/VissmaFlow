@@ -4,9 +4,11 @@ using Mapster;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using VissmaFlow.Core.Contracts.Common;
+using VissmaFlow.Core.Contracts.DataAccess;
 using VissmaFlow.Core.Contracts.Parameters;
 using VissmaFlow.Core.Infrastructure.DataAccess;
 using VissmaFlow.Core.Models.Parameters;
+using VissmaFlow.Core.Services.Parameters;
 
 namespace VissmaFlow.Core.ViewModels
 {
@@ -14,24 +16,24 @@ namespace VissmaFlow.Core.ViewModels
     {
         private readonly ILogger<ParameterVm> _logger;
         private readonly IQuestionDialog _questionDialog;
-        private readonly VissmaDbContext _dbContext;
+        private readonly IRepository<ParameterBase> _parameterRepository;        
         private readonly IParameterDialogService _parameterDialogService;
 
         public ParameterVm(ILogger<ParameterVm> logger, 
             CommunicationVm communicationVm,
             IQuestionDialog questionDialog,
-            VissmaDbContext dbContext, 
+            IRepository<ParameterBase> parameterRepository,
             IParameterDialogService parameterDialogService)
         {
             _logger = logger;
             CommunicationVm = communicationVm;
             _questionDialog = questionDialog;
-            _dbContext = dbContext;
+            _parameterRepository = parameterRepository;            
             _parameterDialogService = parameterDialogService;
             InitParameters();
         }
         [ObservableProperty]
-        private List<ParameterBase>? _parameters;
+        private IEnumerable<ParameterBase>? _parameters;
 
         public CommunicationVm CommunicationVm { get; }
 
@@ -47,9 +49,7 @@ namespace VissmaFlow.Core.ViewModels
                 _logger.LogInformation($"Добавление параметра \"{par.Description}\"");
                 try
                 {
-                    await _dbContext.Set<ParameterBase>().AddAsync(par);
-                    await _dbContext.SaveChangesAsync();
-                    InitParameters();
+                    await _parameterRepository.AddAsync(par);                   
                 }
                 catch (Exception ex)
                 {
@@ -70,9 +70,7 @@ namespace VissmaFlow.Core.ViewModels
                 if (await _questionDialog.Ask($"Удаление параметра {par.Description}", "Удалить ошибку?"))
                 {
                     _logger.LogInformation($"Выполняется удаление параметра {par.Description}");
-                   _dbContext.Set<ParameterBase>().Remove(par);
-                    await _dbContext.SaveChangesAsync();
-                    InitParameters();
+                    await _parameterRepository.AddAsync(par);                    
                 }
             }
             catch (Exception ex)
@@ -93,8 +91,7 @@ namespace VissmaFlow.Core.ViewModels
                 if (par == null) continue;
                 try
                 {
-                    _dbContext.Entry(par).State = EntityState.Modified;
-                    await _dbContext.SaveChangesAsync();
+                    await _parameterRepository.UpdateAsync(par);
                 }
                 catch (Exception ex)
                 {
@@ -110,10 +107,7 @@ namespace VissmaFlow.Core.ViewModels
         {
             try
             {
-                var parBases = await _dbContext.Set<ParameterBase>()
-                    .AsNoTracking()
-                    .ToListAsync();
-                Parameters = parBases.Select(p => CreateParameter(p)).ToList();
+                Parameters = await _parameterRepository.InitAsync(ParametersDataFactory.GetDefaultParameters(),1);                
                 if (CommunicationVm.RtkUnits is null) return;
                 foreach (var rtk in CommunicationVm.RtkUnits)
                 {
