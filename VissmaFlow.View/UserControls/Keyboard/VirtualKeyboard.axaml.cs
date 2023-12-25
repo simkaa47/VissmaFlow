@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Subjects;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using VissmaFlow.Core.Models.Parameters;
 using VissmaFlow.View.UserControls.Keyboard.Layout;
@@ -72,9 +73,22 @@ public partial class VirtualKeyboard : UserControl
         var window = new CoporateWindow();
         window.Height = desktop.MainWindow.Height / 3;
         window.Width = desktop.MainWindow.Width;
+        window.ExtendClientAreaToDecorationsHint = false;
         window.WindowStartupLocation = WindowStartupLocation.Manual;
         
-        window.Position = new PixelPoint(desktop.MainWindow.Position.X, desktop.MainWindow.Position.Y + (int)window.Height*2);
+       
+
+        if(RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+        {
+            window.Position = new PixelPoint(desktop.MainWindow.Position.X, desktop.MainWindow.Position.Y + (int)window.Height * 2);
+        }
+        else
+        {
+            window.Position = new PixelPoint(desktop.MainWindow.Position.X, desktop.MainWindow.Position.Y + (int)window.Height * 2);
+        }
+
+        
+
 
         window.CoporateContent = keyboard;
         window.Title = "MyFancyKeyboard";

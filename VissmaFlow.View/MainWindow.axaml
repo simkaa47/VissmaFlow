@@ -8,8 +8,9 @@
 		xmlns:sys="clr-namespace:System;assembly=netstandard"
 		xmlns:vm="using:VissmaFlow.Core.ViewModels"
 		x:DataType="vm:MainViewModel"
-		xmlns:hb="using:VissmaFlow.View.UserControls.HighBar"
-		Width="480" Height="800"		
+		MaxWidth="480"
+		MaxHeight="800"
+		xmlns:hb="using:VissmaFlow.View.UserControls.HighBar"	
 		HasSystemDecorations="False"
 		xmlns:uc="using:VissmaFlow.View.UserControls"
         Title="VissmaFlow.View">

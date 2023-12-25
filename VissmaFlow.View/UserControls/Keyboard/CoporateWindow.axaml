@@ -9,7 +9,7 @@
 		xmlns:mat="using:Material.Icons.Avalonia"
 		HasSystemDecorations="False"
 		TransparencyLevelHint="AcrylicBlur"
-      ExtendClientAreaToDecorationsHint="True"
+      WindowState="FullScreen"
       Background="Red"		
 	  Topmost="True"      
       WindowStartupLocation="Manual"
