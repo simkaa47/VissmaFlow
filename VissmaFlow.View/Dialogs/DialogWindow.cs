@@ -16,6 +16,7 @@ namespace VissmaFlow.View.Dialogs
             this.HasSystemDecorations = false;
             if (App.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
+                this.WindowState = WindowState.FullScreen;
                 this.Position = desktop.MainWindow.Position;
                 this.Width = desktop.MainWindow.Width;
                 this.Height = desktop.MainWindow.Height;

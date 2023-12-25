@@ -11,6 +11,13 @@ public partial class AskDialogWindow : Window
     {
         InitializeComponent();
     }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        WindowStartupLocation = WindowStartupLocation.CenterScreen;
+        
+    }
     public bool DialogResult { get; set; }
 
     void Accept_Click(object sender, RoutedEventArgs e)

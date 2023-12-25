@@ -69,17 +69,7 @@
 					  SelectedIndex="{Binding ByteOrder}"
 					  Width="200"
 					  HorizontalAlignment="Right"/>
-		</DockPanel>
-		<DockPanel>
-			<TextBlock Text="Минимальное значение"/>
-			<TextBox Width="100"
-					 Text="{Binding MinValueString}"/>
-		</DockPanel>
-		<DockPanel>
-			<TextBlock Text="Максимальное значение"/>
-			<TextBox Width="100"
-					 Text="{Binding MaxValueString}"/>
-		</DockPanel>
+		</DockPanel>		
 		<DockPanel>
 			<TextBlock Text="Задействован"/>
 			<CheckBox HorizontalAlignment="Right"

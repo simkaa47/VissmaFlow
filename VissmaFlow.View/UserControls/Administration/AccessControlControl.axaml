@@ -8,7 +8,7 @@
 			 xmlns:mat="using:Material.Icons.Avalonia"
 			 xmlns:mod="using:VissmaFlow.Core.Models.AccessControl"
              x:Class="VissmaFlow.View.UserControls.Administration.AccessControlControl">
-	<Grid RowDefinitions="Auto,*">
+	<Grid RowDefinitions="60,*">
 		<Grid.Styles>
 			<Style Selector="TextBlock">
 				<Setter Property="Margin" Value="2"/>				
@@ -27,7 +27,7 @@
 		</StackPanel>
 		<DataGrid Items="{Binding Users}"
 				  Grid.Row="1"
-				  VerticalAlignment="Top"
+				  VerticalAlignment="Stretch"
 				  HorizontalAlignment="Left"
 				  IsReadOnly="True"
 				  FontSize="12"

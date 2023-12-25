@@ -43,17 +43,19 @@ namespace VissmaFlow.Core.ViewModels
         [RelayCommand]
         private async Task AddParameter()
         {
-            var par = await _parameterDialogService.ShowDialog();
-            if (par is not null && !par.HasErrors)
+            var basePar = await _parameterDialogService.ShowDialog();
+            if (basePar is not null && !basePar.HasErrors)
             {
-                _logger.LogInformation($"Добавление параметра \"{par.Description}\"");
+                _logger.LogInformation($"Добавление параметра \"{basePar.Description}\"");
                 try
                 {
-                    await _parameterRepository.AddAsync(par);                   
+                    var par = CreateParameter(basePar);
+                    await _parameterRepository.AddAsync(par);
+                    InitParameters();
                 }
                 catch (Exception ex)
                 {
-                    _logger.LogError($"Добавление параметра {par.Description} - {ex.Message}");
+                    _logger.LogError($"Добавление параметра {basePar.Description} - {ex.Message}");
                 }                
             }            
         }
@@ -70,7 +72,8 @@ namespace VissmaFlow.Core.ViewModels
                 if (await _questionDialog.Ask($"Удаление параметра {par.Description}", "Удалить ошибку?"))
                 {
                     _logger.LogInformation($"Выполняется удаление параметра {par.Description}");
-                    await _parameterRepository.AddAsync(par);                    
+                    await _parameterRepository.DeleteAsync(par);
+                    InitParameters();
                 }
             }
             catch (Exception ex)
@@ -92,6 +95,7 @@ namespace VissmaFlow.Core.ViewModels
                 try
                 {
                     await _parameterRepository.UpdateAsync(par);
+                    InitParameters();
                 }
                 catch (Exception ex)
                 {
@@ -116,7 +120,7 @@ namespace VissmaFlow.Core.ViewModels
                         var par = CreateParameter(p);
                         p.ModbusUnitId = rtk.UnitId;
                         return par;
-                    });
+                    }).ToList();
                 }
             }
             catch (Exception ex)
@@ -133,28 +137,28 @@ namespace VissmaFlow.Core.ViewModels
             switch (pBase.Data)
             {
                 case DataType.boolean:
-                    par = new Parameter<bool>() { Data = pBase.Data, MinValue = false, MaxValue = true };
+                    par = new ParameterBool() { Data = pBase.Data, MinValue = false, MaxValue = true };
                     break;
                 case DataType.int16:
-                    par = new Parameter<short>() { Data = pBase.Data, MinValue = short.MinValue, MaxValue = short.MaxValue };
+                    par = new ParameterShort() { Data = pBase.Data, MinValue = short.MinValue, MaxValue = short.MaxValue };
                     break;
                 case DataType.uint16:
-                    par = new Parameter<ushort>() { Data = pBase.Data, MinValue = ushort.MinValue, MaxValue = ushort.MaxValue };
+                    par = new ParameterUshort() { Data = pBase.Data, MinValue = ushort.MinValue, MaxValue = ushort.MaxValue };
                     break;
                 case DataType.int32:
-                    par = new Parameter<int>(){ Data = pBase.Data, MinValue = int.MinValue, MaxValue = int.MaxValue };
+                    par = new ParameterInt{ Data = pBase.Data, MinValue = int.MinValue, MaxValue = int.MaxValue };
                     break;
                 case DataType.uint32:
-                    par = new Parameter<uint>() { Data = pBase.Data, MinValue = uint.MinValue, MaxValue = uint.MaxValue };
+                    par = new ParameterUint() { Data = pBase.Data, MinValue = uint.MinValue, MaxValue = uint.MaxValue };
                     break;
                 case DataType.float32:
-                    par = new Parameter<float>() { Data = pBase.Data, MinValue = float.MinValue, MaxValue = float.MaxValue };
+                    par = new ParameterFloat() { Data = pBase.Data, MinValue = float.MinValue, MaxValue = float.MaxValue };
                     break;
                 case DataType.double64:
-                    par = new Parameter<double>() {Data = pBase.Data, MinValue = double.MinValue, MaxValue = double.MaxValue };
+                    par = new ParameterDouble() {Data = pBase.Data, MinValue = double.MinValue, MaxValue = double.MaxValue };
                     break;
                 case DataType.str:
-                    par = new Parameter<string>() {Data = pBase.Data, MinValue = string.Empty};
+                    par = new ParameterString() {Data = pBase.Data, MinValue = string.Empty};
                     break;
                 default:
                     break;
