@@ -1,0 +1,125 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 xmlns:vm="using:VissmaFlow.Core.ViewModels"
+			 xmlns:mat="using:Material.Icons.Avalonia"
+			 xmlns:e="using:VissmaFlow.Core.Models.Event"
+			 x:DataType="vm:EventViewModel"
+			 xmlns:par="using:VissmaFlow.Core.Models.Parameters"
+             x:Class="VissmaFlow.View.UserControls.Administration.EventsViewControl">
+	<Grid RowDefinitions="70,*">
+		<Grid.Styles>
+			<Style Selector="TextBlock">
+				<Setter Property="TextWrapping" Value="Wrap"/>
+				<Setter Property="FontSize" Value="11"/>
+			</Style>
+			<Style Selector="TextBox">
+				<Setter Property="BorderThickness" Value="0"/>
+				<Setter Property="Margin" Value="2"/>
+				<Setter Property="VerticalAlignment" Value="Center"/>
+				<Setter Property="TextWrapping" Value="Wrap"/>
+				<Setter Property="FontSize" Value="11"/>
+			</Style>
+		</Grid.Styles>
+		<StackPanel Orientation="Horizontal">
+			<Button Margin="5"
+				Content="Добавить"
+				VerticalContentAlignment="Center"
+				HorizontalContentAlignment="Center"
+				Command="{Binding AddEventCommand}"
+				Width="100"
+				VerticalAlignment="Stretch"/>
+			<Button Margin="5"
+					Content="Сохранить"
+					VerticalContentAlignment="Center"
+					HorizontalContentAlignment="Center"
+					Command="{Binding SaveEventCommand}"
+					Width="100"
+					VerticalAlignment="Stretch"/>
+		</StackPanel>
+
+		<DataGrid VerticalAlignment="Stretch"
+				  Grid.Row="1"
+				  Margin="0"
+				  HorizontalAlignment="Left"
+				  Items="{Binding Events}">
+			<DataGrid.Columns>
+				<DataGridTemplateColumn MaxWidth="110">
+					<DataGridTemplateColumn.Header>
+						<TextBlock Text="Активное сообщение"/>
+					</DataGridTemplateColumn.Header>
+					<DataGridTemplateColumn.CellTemplate>
+						<DataTemplate DataType="e:Event">
+							<TextBox Text="{Binding ActiveMessage}"/>
+						</DataTemplate>
+					</DataGridTemplateColumn.CellTemplate>
+				</DataGridTemplateColumn>
+				<DataGridTemplateColumn MaxWidth="70">
+					<DataGridTemplateColumn.Header>
+						<TextBlock Text="Усл."/>
+					</DataGridTemplateColumn.Header>
+					<DataGridTemplateColumn.CellTemplate>
+						<DataTemplate DataType="e:Event">
+							<ComboBox 
+							  Items="{StaticResource Conditions}"
+							  SelectedIndex="{Binding  EventCondition}"
+							  Margin="1"/>
+						</DataTemplate>
+					</DataGridTemplateColumn.CellTemplate>
+				</DataGridTemplateColumn>
+				<DataGridTemplateColumn MaxWidth="100" >
+					<DataGridTemplateColumn.Header>
+						<TextBlock Text="Опорное значение"/>
+					</DataGridTemplateColumn.Header>
+					<DataGridTemplateColumn.CellTemplate>
+						<DataTemplate DataType="e:Event">
+							<TextBox Text="{Binding CompareValue}"
+									 Tag="{x:Static par:DataType.float32}"/>
+						</DataTemplate>
+					</DataGridTemplateColumn.CellTemplate>
+				</DataGridTemplateColumn>
+				<DataGridTemplateColumn MaxWidth="100">
+					<DataGridTemplateColumn.Header>
+						<TextBlock Text="Параметр"/>
+					</DataGridTemplateColumn.Header>
+					<DataGridTemplateColumn.CellTemplate>
+						<DataTemplate DataType="e:Event">
+							<TextBlock>
+								<TextBlock.Text>
+									<MultiBinding StringFormat="{}{0}:{1}">
+										<Binding Path="RtkUnit.Name"/>
+										<Binding Path="Parameter.Description"/>
+									</MultiBinding>
+								</TextBlock.Text>
+							</TextBlock>
+						</DataTemplate>
+					</DataGridTemplateColumn.CellTemplate>
+				</DataGridTemplateColumn>
+				<DataGridTemplateColumn>					
+					<DataGridTemplateColumn.CellTemplate>
+						<DataTemplate>							
+							<StackPanel Orientation="Horizontal">
+								<Button Height="25"
+										Width="25"
+										Margin="2"
+										CommandParameter="{Binding}"
+										Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=DataContext.EditEventCommand}">
+									<mat:MaterialIcon Kind="Edit"/>
+								</Button>
+								<Button Height="25"
+										Width="25"
+										Margin="2"
+										CommandParameter="{Binding}"
+										Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=DataContext.DeleteEventCommand}">
+									<mat:MaterialIcon Kind="Remove"/>
+								</Button>
+							</StackPanel>
+						</DataTemplate>
+					</DataGridTemplateColumn.CellTemplate>
+				</DataGridTemplateColumn>
+			</DataGrid.Columns>
+		</DataGrid>
+	</Grid>
+</UserControl>

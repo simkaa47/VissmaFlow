@@ -14,13 +14,14 @@ namespace VissmaFlow.Core.ViewModels
             MainCommunicationService communicationService,
             CommunicationVm communicationVm,
             AccessViewModel accessViewModel,
-            ErrorsViewModel errorsViewModel)
+            EventViewModel eventsViewModel)
         {
             _logger = logger;
             ParameterVm = parameterVm;
             CommunicationService = communicationService;
             CommunicationVm = communicationVm;
             AccessViewModel = accessViewModel;
+            EventsViewModel = eventsViewModel;
             _timer = new Timer(UpdateTime);
             _timer.Change(0, 1000);
         }
@@ -40,5 +41,6 @@ namespace VissmaFlow.Core.ViewModels
         public MainCommunicationService CommunicationService { get; }
         public CommunicationVm CommunicationVm { get; }
         public AccessViewModel AccessViewModel { get; }
+        public EventViewModel EventsViewModel { get; }
     }
 }

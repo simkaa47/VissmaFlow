@@ -14,6 +14,7 @@
 			<ResourceDictionary.MergedDictionaries>
 				<ResourceInclude Source="/Enums/ParameterEnums.axaml"/>
 				<ResourceInclude Source="/Enums/UserEnums.axaml"/>
+				<ResourceInclude Source="/Enums/EventEnums.axaml"/>
 				<ResourceInclude Source="/Converters/GlobalConverters.axaml"/>
 				
 			</ResourceDictionary.MergedDictionaries>

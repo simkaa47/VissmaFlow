@@ -12,6 +12,7 @@ namespace VissmaFlow.Core.Services.Communication
         private readonly IComminicationService _askService;
         private readonly ILogger<MainCommunicationService> _logger;
 
+
         [ObservableProperty]
         private bool _connected;
 
@@ -26,6 +27,8 @@ namespace VissmaFlow.Core.Services.Communication
             ParameterVm = parameterVm;
             ReadProcessAsync();
         }
+
+        
 
 
         private async void ReadProcessAsync()

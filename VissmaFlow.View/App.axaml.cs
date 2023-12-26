@@ -15,6 +15,8 @@ using VissmaFlow.View.UserControls.Keyboard.Layout;
 using VissmaFlow.View.UserControls.Keyboard;
 using VissmaFlow.View.Dialogs.AccessControl;
 using VissmaFlow.Core.Contracts.AccessControl;
+using VissmaFlow.Core.Contracts.Events;
+using VissmaFlow.View.Dialogs.Events;
 
 namespace VissmaFlow.View
 {
@@ -39,7 +41,8 @@ namespace VissmaFlow.View
                     services.AddTransient<IParameterDialogService, ParameterDialogService>();
                     services.AddTransient<IQuestionDialog, AskDialog>();
                     services.AddTransient<IRtkUnitDialog, AddRtkUnitDialog>();
-                    services.AddTransient<IAccessDialogService, UserDialogService>();                    
+                    services.AddTransient<IAccessDialogService, UserDialogService>();
+                    services.AddTransient<IEventDialog, EventDialog>();
                 }).Build();
         }
 

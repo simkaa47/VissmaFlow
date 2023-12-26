@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
 using VissmaFlow.Core.Infrastructure.DataAccess;
 using VissmaFlow.Core.Models.Communication;
 using VissmaFlow.Core.Models.Parameters;
@@ -14,19 +15,27 @@ namespace VissmaFlow.Core.Models.Event
 
         #region РТК
         private RtkUnit? _rtkUnit;
-        public RtkUnit? RtkUnit
+        public virtual RtkUnit? RtkUnit
         {
             get => _rtkUnit;
-            set=> SetProperty(ref _rtkUnit, value);
+            set 
+            {
+                if(value != null)
+                SetProperty(ref _rtkUnit, value);
+            } 
         }
         #endregion
 
         #region Параметр
         private ParameterBase? _parameter;
-        public ParameterBase? Parameter
+        public virtual ParameterBase? Parameter
         {
-            get=> _parameter;
-            set=> SetProperty(ref _parameter, value);   
+            get=> _parameter;            
+            set
+            {
+                if (value != null)
+                    SetProperty(ref _parameter, value);
+            }
         }
         #endregion
 
@@ -41,6 +50,7 @@ namespace VissmaFlow.Core.Models.Event
         #endregion
 
         #region Активность
+        [NotMapped]
         [ObservableProperty]
         private bool _isActive;
         #endregion
