@@ -12,7 +12,7 @@
 	<DockPanel>
 		<StackPanel Orientation="Horizontal" DockPanel.Dock="Right">
 			<TextBox Width="{Binding RelativeSource={RelativeSource AncestorType=local:ParameterCommon} Path=ParamWidth}"
-					 Text="{Binding WriteValue}" Tag="{Binding Data}">
+					 Text="{Binding WriteValue}" Tag="{Binding Data}" >
 				<TextBox.KeyBindings>
 					<KeyBinding Gesture="Enter"
 								Command="{Binding RelativeSource={RelativeSource AncestorType=local:ParameterCommon}, Path=Command}"
@@ -27,7 +27,7 @@
 		</StackPanel>
 		<TextBlock Text="{Binding Description}"
 				   DockPanel.Dock="Left"
-				   Margin="5"
+				   Margin="5,5,10,5"
 				   VerticalAlignment="Center"
 				   TextWrapping="Wrap"/>
 		

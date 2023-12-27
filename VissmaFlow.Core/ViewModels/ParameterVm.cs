@@ -134,6 +134,7 @@ namespace VissmaFlow.Core.ViewModels
         private  ParameterBase CreateParameter(ParameterBase pBase)
         {
             ParameterBase par = new ParameterBase();
+            var t = pBase.GetType();
             switch (pBase.Data)
             {
                 case DataType.boolean:
@@ -158,12 +159,12 @@ namespace VissmaFlow.Core.ViewModels
                     par = new ParameterDouble() {Data = pBase.Data, MinValue = double.MinValue, MaxValue = double.MaxValue };
                     break;
                 case DataType.str:
-                    par = new ParameterString() {Data = pBase.Data, MinValue = string.Empty};
+                    par = new ParameterString() {Data = pBase.Data, MinValue = string.Empty};                    
                     break;
                 default:
                     break;
             }
-            pBase.Adapt(par);
+            pBase.Adapt(par,t, par.GetType());
             return par;
         }
     }

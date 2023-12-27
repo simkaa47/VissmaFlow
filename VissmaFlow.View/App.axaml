@@ -13,9 +13,10 @@
 	<Application.Resources>
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
+				<ResourceInclude Source="/Enums/EventEnums.axaml"/>
 				<ResourceInclude Source="/Enums/ParameterEnums.axaml"/>
 				<ResourceInclude Source="/Enums/UserEnums.axaml"/>
-				<ResourceInclude Source="/Enums/EventEnums.axaml"/>
+				<ResourceInclude Source="/Enums/CommunicationEnums.axaml"/>
 				<ResourceInclude Source="/Converters/GlobalConverters.axaml"/>
 				<ResourceInclude Source="/Resources/Colors.axaml"/>
 			</ResourceDictionary.MergedDictionaries>

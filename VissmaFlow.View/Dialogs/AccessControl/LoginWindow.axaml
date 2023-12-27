@@ -20,6 +20,7 @@
 		<StackPanel VerticalAlignment="Center">
 			<TextBox Margin="10" Height="40" Width="200" 
 					 Text="{Binding LoginName}" 
+					 TabIndex="0"
 					 Foreground="{Binding FaliledLogin, Converter={StaticResource GetIfTrueConverter}, ConverterParameter={StaticResource TextBoxErrorColors}}"
 					 VerticalContentAlignment="Center"
 					 Watermark="Логин"/>
@@ -27,6 +28,7 @@
 					 VerticalContentAlignment="Center"
 					 Foreground="{Binding FaliledLogin, Converter={StaticResource GetIfTrueConverter}, ConverterParameter={StaticResource TextBoxErrorColors}}"
 					 Text="{Binding Password}" 
+					 TabIndex="1"
 					 Watermark="Пароль"/>
 		</StackPanel>
 		

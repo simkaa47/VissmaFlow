@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using System.Text;
 using VissmaFlow.Core.Contracts.Communication;
+using VissmaFlow.Core.Models.Communication;
 using VissmaFlow.Core.Models.Communication.Modbus;
 using VissmaFlow.Core.Models.Parameters;
 using VissmaFlow.Core.Services.Communication.Modbus;
@@ -9,16 +10,16 @@ using VissmaFlow.Core.ViewModels;
 
 namespace VissmaFlow.Core.Services.Communication
 {
-    public class ModbusRtuService : IComminicationService
+    public class ModbusCommunicationService : IComminicationService
     {
-        private readonly ILogger<ModbusRtuService> _logger;
+        private readonly ILogger<ModbusCommunicationService> _logger;
         private readonly CommunicationVm _communicationVm;
         private ModbusClient _client = new ModbusClient();
         public ModbusReadMemory holdingReadMemory = new ModbusReadMemory();
         public ModbusReadMemory inputReadMemory = new ModbusReadMemory();
         public List<ModbusReadCommand> commands = new List<ModbusReadCommand>();
 
-        public ModbusRtuService(ILogger<ModbusRtuService> logger, CommunicationVm communicationVm)
+        public ModbusCommunicationService(ILogger<ModbusCommunicationService> logger, CommunicationVm communicationVm)
         {
             _logger = logger;
             _communicationVm = communicationVm;
@@ -136,7 +137,7 @@ namespace VissmaFlow.Core.Services.Communication
                     var memory = parInt.ModbusRegType == ModbusRegType.Holding ? holdingReadMemory : inputReadMemory;
                     if (memory is not null && memory.Buffer is not null)
                     {
-                        var bytes = BitConverter.GetBytes(memory.Buffer[parInt.ModbRegNum - memory.Offset]);
+                        var bytes = memory?.Buffer?.Skip(parInt.ModbRegNum - memory.Offset).Take(2).SelectMany(s => BitConverter.GetBytes(s)).ToArray();
                         SetBytesOrder(parInt, bytes);
                         parInt.Value = BitConverter.ToInt32(bytes);
                     }
@@ -147,7 +148,7 @@ namespace VissmaFlow.Core.Services.Communication
                     var memory = parUint.ModbusRegType == ModbusRegType.Holding ? holdingReadMemory : inputReadMemory;
                     if (memory is not null && memory.Buffer is not null)
                     {
-                        var bytes = BitConverter.GetBytes(memory.Buffer[parUint.ModbRegNum - memory.Offset]);
+                        var bytes = memory?.Buffer?.Skip(parUint.ModbRegNum - memory.Offset).Take(2).SelectMany(s => BitConverter.GetBytes(s)).ToArray();
                         SetBytesOrder(parUint, bytes);
                         parUint.Value = BitConverter.ToUInt32(bytes);
                     }
@@ -158,7 +159,7 @@ namespace VissmaFlow.Core.Services.Communication
                     var memory = parFloat.ModbusRegType == ModbusRegType.Holding ? holdingReadMemory : inputReadMemory;
                     var bytes = memory?.Buffer?.Skip(parFloat.ModbRegNum - memory.Offset).Take(2).SelectMany(s => BitConverter.GetBytes(s)).ToArray();
                     SetBytesOrder(parFloat, bytes);
-                    parFloat.Value = BitConverter.ToSingle(bytes);
+                    parFloat.Value = BitConverter.ToSingle(bytes);  
                 }
                 else if (par is Parameter<double> parDouble && parDouble.IsRequired)
                 {
@@ -380,17 +381,32 @@ namespace VissmaFlow.Core.Services.Communication
         {
             var sett = _communicationVm.CommSettings;
             if (sett is null) return;
-            _client.Baudrate = sett.Baudrate;
-            _client.Parity = sett.Parity;
-            _client.StopBits = sett.StopBitsNum;
-            _client.SerialPort = sett.PortName;
-
-            _logger.LogInformation($"Выполняется подключение к порту {sett.PortName}");
+            _client = new ModbusClient();
+            if (sett.Interface == CommInterface.Rs485)
+            {
+                _client.Baudrate = sett.Baudrate;
+                _client.Parity = sett.Parity;
+                _client.StopBits = sett.StopBitsNum;
+                _client.SerialPort = sett.PortName;
+                _logger.LogInformation($"Выполняется подключение к порту {sett.PortName}");
+            }
+            else
+            {
+                _client.IPAddress = sett.Ip;
+                _client.Port = sett.PortNumber;
+                _logger.LogInformation($"Выполняется подключение к {sett.Ip}");
+            }
+           
+           
             _client.Connect();
             Connected = _client.Connected;
             if (Connected)
             {
-                _logger.LogInformation($"Подключение к порту {sett.PortName} выполнено успешно");
+                if(sett.Interface == CommInterface.Rs485)
+                    _logger.LogInformation($"Подключение к порту {sett.PortName} выполнено успешно");
+                else
+                    _logger.LogInformation($"Подключение к {sett.Ip} выполнено успешно");
+
             }
         }
 
@@ -398,9 +414,16 @@ namespace VissmaFlow.Core.Services.Communication
         {
             if (_client != null && _client.Connected)
             {
-                _logger.LogInformation($"Выполняется отключение от {_client.SerialPort}");
+                var sett = _communicationVm.CommSettings;
+                if (sett?.Interface == CommInterface.Rs485)
+                    _logger.LogInformation($"Выполняется отключение от {_client.SerialPort}");
+                else
+                    _logger.LogInformation($"Выполняется отключение от {_client.IPAddress}");                
                 _client.Disconnect();
-                _logger.LogInformation($"Отключение от {_client.SerialPort}  выполнено успешно");
+                if (sett?.Interface == CommInterface.Rs485)
+                    _logger.LogInformation($"Отключение от {_client.SerialPort}  выполнено успешно");
+                else
+                    _logger.LogInformation($"Отключение от {_client.IPAddress}  выполнено успешно");                
                 Connected = _client.Connected;
             }
         }

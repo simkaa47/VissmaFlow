@@ -22,8 +22,13 @@ namespace VissmaFlow.Core.Models.Parameters
         #endregion
 
         #region MaxValue
-        [ObservableProperty]
+        //[ObservableProperty]
         private T? _maxValue;
+        public T? MaxValue
+        {
+            get => _maxValue;
+            set => SetProperty(ref _maxValue, value);
+        }
         #endregion
 
         #region Таймер
@@ -71,12 +76,18 @@ namespace VissmaFlow.Core.Models.Parameters
             {
                 if (value != null)
                 {
-                    ValidateProperty(value, nameof(WriteValue));
+                    ValidateProperty(value, nameof(WriteValue));                   
                     if (value.CompareTo(Value) != 0)
                     {
                         RestartTimer();
                     }
-                    SetProperty(ref _writeValue, value);                    
+                    SetProperty(ref _writeValue, value);
+                    if (MinValue is not null && MaxValue is not null)
+                    {
+                        ValidationOk = value.CompareTo(MinValue) >= 0 && value.CompareTo(MaxValue) <= 0;
+                    }
+                    else
+                        ValidationOk = false;
                 }
             }
         }

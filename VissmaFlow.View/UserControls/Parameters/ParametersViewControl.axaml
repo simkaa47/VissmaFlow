@@ -28,6 +28,7 @@
 					<ListBox.ItemTemplate>
 						<DataTemplate DataType="p:ParameterBase">
 							<par:NumericParameter Margin="5"
+												  ParamWidth="100"
 									Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=DataContext.CommunicationService.WriteParameterCommand}">
 								<par:NumericParameter.IsVisible>
 									<MultiBinding Converter="{StaticResource ParameterVisibilityMultivalueConverter}">

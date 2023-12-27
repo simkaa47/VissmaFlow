@@ -14,6 +14,7 @@
 		<DataGrid.Styles>
 			<Style Selector="DataGridRow" x:DataType="e:Event">
 				<Setter Property="Background" Value="Red"/>
+				<Setter Property="Margin" Value="1"/>
 				<Setter Property="IsVisible" Value="{Binding IsActive}"/>
 			</Style>
 		</DataGrid.Styles>

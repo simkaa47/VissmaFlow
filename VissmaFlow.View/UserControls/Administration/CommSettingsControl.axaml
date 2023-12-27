@@ -5,6 +5,7 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 			 xmlns:vm="using:VissmaFlow.Core.ViewModels"
 			 x:DataType="vm:CommunicationVm"
+			 xmlns:comm="using:VissmaFlow.Core.Models.Communication"
 			 xmlns:par="using:VissmaFlow.Core.Models.Parameters"
 			 xmlns:mat="using:Material.Icons.Avalonia"
              x:Class="VissmaFlow.View.UserControls.Administration.CommSettingsControl">
@@ -41,25 +42,45 @@
 					   HorizontalAlignment="Center"/>
 			<Border Grid.Row="1">
 				<ListBox VirtualizationMode="None">
+					<ListBox.Styles>
+						<Style Selector="ListBoxItem">
+							<Setter Property="Margin" Value="0"/>
+							<Setter Property="Padding" Value="0"/>
+						</Style>
+					</ListBox.Styles>
 					<DockPanel>
+						<ComboBox Items="{StaticResource CommInterfaces}"
+								  DockPanel.Dock="Right"
+								  SelectedIndex="{Binding CommSettings.Interface}"/>
+						<TextBlock Text="Интерфейс"/>
+					</DockPanel>
+					<DockPanel  IsVisible="{Binding CommSettings.Interface, Converter={StaticResource IfEqualConverter}, ConverterParameter={x:Static comm:CommInterface.Ethernet}}">
+						<TextBox Width="120" Text="{Binding CommSettings.Ip}" DockPanel.Dock="Right"/>
+						<TextBlock Text="IP адрес"/>
+					</DockPanel>
+					<DockPanel  IsVisible="{Binding CommSettings.Interface, Converter={StaticResource IfEqualConverter}, ConverterParameter={x:Static comm:CommInterface.Ethernet}}">
+						<TextBox Width="120" Text="{Binding CommSettings.PortNumber}" DockPanel.Dock="Right"/>
+						<TextBlock Text="Номер порта"/>
+					</DockPanel>
+					<DockPanel  IsVisible="{Binding CommSettings.Interface, Converter={StaticResource IfEqualConverter}, ConverterParameter={x:Static comm:CommInterface.Rs485}}">
 						<ComboBox Items="{Binding Ports}"
 								  DockPanel.Dock="Right"
 								  SelectedItem="{Binding CommSettings.PortName}"/>
 						<TextBlock Text="Имя порта"/>
 					</DockPanel>
-					<DockPanel>
+					<DockPanel IsVisible="{Binding CommSettings.Interface, Converter={StaticResource IfEqualConverter}, ConverterParameter={x:Static comm:CommInterface.Rs485}}">
 						<ComboBox Items="{Binding Baudrates}"
 								  DockPanel.Dock="Right"
 								  SelectedItem="{Binding CommSettings.Baudrate}"/>
 						<TextBlock Text="Скорость"/>
 					</DockPanel>
-					<DockPanel>
+					<DockPanel  IsVisible="{Binding CommSettings.Interface, Converter={StaticResource IfEqualConverter}, ConverterParameter={x:Static comm:CommInterface.Rs485}}">
 						<ComboBox Items="{Binding Parities}"
 								  DockPanel.Dock="Right"
 								  SelectedItem="{Binding CommSettings.Parity}"/>
 						<TextBlock Text="Четность"/>
 					</DockPanel>
-					<DockPanel>
+					<DockPanel IsVisible="{Binding CommSettings.Interface, Converter={StaticResource IfEqualConverter}, ConverterParameter={x:Static comm:CommInterface.Rs485}}">
 						<ComboBox Items="{Binding StopBitsList}"
 								  DockPanel.Dock="Right"
 								  SelectedItem="{Binding CommSettings.StopBitsNum}"/>

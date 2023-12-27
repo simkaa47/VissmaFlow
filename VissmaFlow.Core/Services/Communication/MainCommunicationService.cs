@@ -38,9 +38,8 @@ namespace VissmaFlow.Core.Services.Communication
                 while (_askService != null) 
                 {
                     try
-                    {                       
-                        if (!Connected)
-                            Thread.Sleep(2000);
+                    {                      
+                        
                         while (WriteCommands.Count > 0)
                         {
                             var par = WriteCommands.Dequeue();
@@ -65,7 +64,7 @@ namespace VissmaFlow.Core.Services.Communication
                     }
                     catch (Exception ex)
                     {
-                        _logger.LogError(ex.Message);
+                        _logger.LogError(ex.Message);                        
                     }
                 }
             });
@@ -95,7 +94,7 @@ namespace VissmaFlow.Core.Services.Communication
 
         private void SetIsWritingFlag<T>(Parameter<T> parameter) where T : IComparable
         {
-            if (parameter.ValidationOk && Connected)
+            if (parameter.ValidationOk && parameter.Owner is not null && parameter.Owner.Connected)
             {
                 parameter.IsWriting = true;
                 WriteCommands.Enqueue(parameter);
