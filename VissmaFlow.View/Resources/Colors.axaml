@@ -1,0 +1,9 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:scg="clr-namespace:System.Collections.Generic;assembly=netstandard"
+					xmlns:sys="clr-namespace:System;assembly=netstandard">
+	<scg:List x:TypeArguments="sys:Object" x:Key="ErrorColors">
+		<SolidColorBrush Color="Red"/>
+		<SolidColorBrush Color="LightGreen"/>
+	</scg:List>
+</ResourceDictionary>

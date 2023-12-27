@@ -11,6 +11,7 @@
              x:Class="VissmaFlow.View.UserControls.Administration.EventsViewControl">
 	<Grid RowDefinitions="70,*">
 		<Grid.Styles>
+			
 			<Style Selector="TextBlock">
 				<Setter Property="TextWrapping" Value="Wrap"/>
 				<Setter Property="FontSize" Value="11"/>
@@ -42,9 +43,15 @@
 
 		<DataGrid VerticalAlignment="Stretch"
 				  Grid.Row="1"
+				  Name="EventsGrid"
 				  Margin="0"
 				  HorizontalAlignment="Left"
 				  Items="{Binding Events}">
+			<DataGrid.Styles>
+				<Style Selector="DataGridRow" x:DataType="e:Event">
+					<Setter Property="IsVisible" Value="{Binding !UnVisisble}"/>
+				</Style>
+			</DataGrid.Styles>
 			<DataGrid.Columns>
 				<DataGridTemplateColumn MaxWidth="110">
 					<DataGridTemplateColumn.Header>

@@ -7,9 +7,26 @@
 			 xmlns:mat="using:Material.Icons.Avalonia"
 			 x:DataType="vm:MainViewModel"
              x:Class="VissmaFlow.View.UserControls.HighBar.ConnectIndicator">
-	<StackPanel>
-		<mat:MaterialIcon Width="50" Height="50" Kind="Connection" IsVisible="{Binding !CommunicationService.Connected}" Foreground="Red"/>
-		<mat:MaterialIcon Width="50" Height="50" Kind="Connection" IsVisible="{Binding CommunicationService.Connected}" Foreground="GreenYellow"/>
-	</StackPanel>
+	<UserControl.Styles>
+		<Style Selector="ListBoxItem">
+			<Setter Property="Margin" Value="0"/>
+			<Setter Property="Padding" Value="0"/>
+		</Style>
+	</UserControl.Styles>
+	<Viewbox Height="50" Width="50">
+		<ListBox Items="{Binding CommunicationVm.RtkUnits}">
+			<ListBox.ItemTemplate>
+				<DataTemplate>
+					<Border Background="{Binding Connected, Converter={StaticResource GetIfTrueConverter}, ConverterParameter={StaticResource ErrorColors}}">
+						<TextBlock Text="{Binding Name}"
+								   Margin="2"
+								   HorizontalAlignment="Center"
+								   VerticalAlignment="Center"/>
+					</Border>
+				</DataTemplate>
+			</ListBox.ItemTemplate>
+			
+		</ListBox>
+	</Viewbox>
 	
 </UserControl>

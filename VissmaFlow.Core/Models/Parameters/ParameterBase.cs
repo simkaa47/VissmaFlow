@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using VissmaFlow.Core.Infrastructure.DataAccess;
 using VissmaFlow.Core.Models.AccessControl;
+using VissmaFlow.Core.Models.Communication;
 using VissmaFlow.Core.Models.Communication.Modbus;
 
 namespace VissmaFlow.Core.Models.Parameters
@@ -72,7 +73,7 @@ namespace VissmaFlow.Core.Models.Parameters
         #endregion
 
         [NotMapped]
-        public int ModbusUnitId { get; set; }
+        public RtkUnit? Owner { get; set; }
         #region IsOnlyRead
         [ObservableProperty]
         private bool _isOnlyRead;

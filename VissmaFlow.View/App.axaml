@@ -7,6 +7,7 @@
         <FluentTheme Mode="Light"/>
 		<StyleInclude Source="/Styles/Validation/ValidationErrors.xaml"/>
 		<StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml"/>
+		<StyleInclude Source="/Styles/TabItems.axaml"/>
     </Application.Styles>
 
 	<Application.Resources>
@@ -16,7 +17,7 @@
 				<ResourceInclude Source="/Enums/UserEnums.axaml"/>
 				<ResourceInclude Source="/Enums/EventEnums.axaml"/>
 				<ResourceInclude Source="/Converters/GlobalConverters.axaml"/>
-				
+				<ResourceInclude Source="/Resources/Colors.axaml"/>
 			</ResourceDictionary.MergedDictionaries>
 		</ResourceDictionary>
 	</Application.Resources>

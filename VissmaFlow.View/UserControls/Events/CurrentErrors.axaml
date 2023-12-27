@@ -1,0 +1,26 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 xmlns:vm="using:VissmaFlow.Core.ViewModels"
+			 xmlns:e="using:VissmaFlow.Core.Models.Event"
+			 x:DataType="vm:EventViewModel"
+             x:Class="VissmaFlow.View.UserControls.Events.CurrentErrors">
+	<DataGrid HorizontalAlignment="Stretch"
+			  IsReadOnly="True"			  
+			  VerticalAlignment="Stretch"
+			  Items="{Binding Events}">
+		<DataGrid.Styles>
+			<Style Selector="DataGridRow" x:DataType="e:Event">
+				<Setter Property="Background" Value="Red"/>
+				<Setter Property="IsVisible" Value="{Binding IsActive}"/>
+			</Style>
+		</DataGrid.Styles>
+		<DataGrid.Columns>
+			<DataGridTextColumn x:DataType="e:Event" FontSize="12" Header="Время срабатывания" Binding="{Binding LastActiveTime, StringFormat={}}{0:yyyy.MM.dd HH:mm:ss}"/>
+			<DataGridTextColumn x:DataType="e:Event" FontSize="12" Header="Сообщение" Binding="{Binding Converter={StaticResource EventMessageConverter}}"/>
+		</DataGrid.Columns>
+		
+	</DataGrid>
+</UserControl>

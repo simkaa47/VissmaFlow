@@ -24,6 +24,8 @@ namespace VissmaFlow.Core.Services.Communication
             _communicationVm = communicationVm;
         }
 
+        
+
         public bool Connected { set; get; }
 
         public event Action ScanCompletedEvent = delegate { };
@@ -238,7 +240,8 @@ namespace VissmaFlow.Core.Services.Communication
 
         public void WriteParameter(ParameterBase parameter)
         {
-            _client.UnitIdentifier = (byte)parameter.ModbusUnitId;
+            if (parameter.Owner is null) return;
+            _client.UnitIdentifier = (byte)parameter.Owner.UnitId;
             if (parameter is Parameter<short> parShort)
             {
                 var bytes = BitConverter.GetBytes(parShort.WriteValue);
@@ -289,10 +292,10 @@ namespace VissmaFlow.Core.Services.Communication
             else if (parameter is Parameter<string> parString)
             {
 
-                var bytes = Encoding.ASCII.GetBytes(parString.WriteValue).
+                var bytes = parString.WriteValue is not null ? Encoding.ASCII.GetBytes(parString.WriteValue).
                     Take(Math.Min(parString.WriteValue.Length, parString.StrLength))
                     .Append((byte)0)
-                    .ToArray();
+                    .ToArray() : new byte[] {0 };
                 SetBytesOrder(parString, bytes);
                 var regs = new ushort[(bytes.Length + 1) / 2];
                 for (int i = 0; i < bytes.Length; i += 2)

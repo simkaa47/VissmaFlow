@@ -118,7 +118,7 @@ namespace VissmaFlow.Core.ViewModels
                     rtk.Parameters = Parameters.Select(p =>
                     {
                         var par = CreateParameter(p);
-                        p.ModbusUnitId = rtk.UnitId;
+                        par.Owner = rtk;
                         return par;
                     }).ToList();
                 }

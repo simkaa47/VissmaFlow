@@ -2,6 +2,7 @@
 using Mapster;
 using System.ComponentModel;
 using System.Timers;
+using VissmaFlow.Core.Contracts.Parameters;
 using VissmaFlow.Core.Infrastructure.Attributes;
 
 namespace VissmaFlow.Core.Models.Parameters

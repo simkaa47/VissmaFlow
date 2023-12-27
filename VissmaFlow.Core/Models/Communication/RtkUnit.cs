@@ -31,8 +31,18 @@ namespace VissmaFlow.Core.Models.Communication
             get => _parameters; 
             set => SetProperty(ref _parameters, value);
             
-        } 
-        #endregion
+        }
+        #endregion        
+
+        
+        
+        private bool _connected = true;
+        [NotMapped]
+        public bool Connected
+        {
+            get => _connected;
+            set => SetProperty(ref _connected, value);
+        }
 
     }
 }

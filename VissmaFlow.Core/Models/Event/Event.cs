@@ -62,8 +62,28 @@ namespace VissmaFlow.Core.Models.Event
 
         #region Сравниваемое значение
         [ObservableProperty]
-        private float _compareValue = 0; 
+        private float _compareValue = 0;
         #endregion
+
+
+        private bool _unVisisble;
+        [NotMapped]
+        public bool UnVisisble
+        {
+            get => _unVisisble;
+            set { 
+                if (value) SetProperty(ref _unVisisble, value); 
+            }
+        }
+
+        
+        private DateTime _lastActiveTime;
+        [NotMapped]
+        public DateTime LastActiveTime
+        {
+            get=> _lastActiveTime;
+            set => SetProperty(ref _lastActiveTime, value);
+        }
 
     }
 }
