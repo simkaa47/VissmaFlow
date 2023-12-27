@@ -4,22 +4,30 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 			 xmlns:vm="using:VissmaFlow.Core.ViewModels"
+			 xmlns:events="using:VissmaFlow.View.UserControls.Events"
 		     x:DataType="vm:MainViewModel"
 			 xmlns:par="using:VissmaFlow.View.UserControls.Parameters"
 			 xmlns:adm="using:VissmaFlow.View.UserControls.Administration"
              x:Class="VissmaFlow.View.UserControls.MainTabControl">
 	<TabControl TabStripPlacement="Bottom">
-		<TabItem Header="Параметры">
+		<TabItem Header="Параметры" Classes="common" MinHeight="30" MinWidth="70">
 			<par:ParametersViewControl/>
 		</TabItem>
-		<TabItem Header="Администрирование" HorizontalContentAlignment="Stretch" VerticalAlignment="Stretch">
+		<TabItem Header="События" Classes="common" MinHeight="30" MinWidth="70">
+			<events:MainEventsControl/>
+		</TabItem>
+		<TabItem Header="Администрирование" 
+				 Classes="common" 
+				 MinHeight="30" 
+				 MinWidth="110" 
+				 HorizontalContentAlignment="Stretch" 
+				 VerticalAlignment="Stretch">
 			<LayoutTransformControl>
 				<LayoutTransformControl.LayoutTransform>
 					<RotateTransform Angle="0"/>
 				</LayoutTransformControl.LayoutTransform>
 				<adm:AdministrationTabControl/>
 			</LayoutTransformControl>
-
 		</TabItem>
 	</TabControl>
 

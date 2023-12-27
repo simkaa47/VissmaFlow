@@ -10,6 +10,7 @@ namespace VissmaFlow.View
         public MainWindow()
         {           
             InitializeComponent();
+            WindowState = WindowState.FullScreen;
         }
 
         private void InitializeComponent()

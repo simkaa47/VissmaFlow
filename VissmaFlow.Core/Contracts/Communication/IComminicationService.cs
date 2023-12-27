@@ -7,7 +7,6 @@ namespace VissmaFlow.Core.Contracts.Communication
         public void ReadAllData(IEnumerable<ParameterBase>? parameters, int unitId);
         public void WriteParameter(ParameterBase parameter);
 
-        public event Action ScanCompletedEvent;
-        public bool Connected { get; }
+        public event Action ScanCompletedEvent;        
     }
 }

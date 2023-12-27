@@ -12,6 +12,7 @@ namespace VissmaFlow.Core.Services.Communication
         private readonly IComminicationService _askService;
         private readonly ILogger<MainCommunicationService> _logger;
 
+
         [ObservableProperty]
         private bool _connected;
 
@@ -27,6 +28,8 @@ namespace VissmaFlow.Core.Services.Communication
             ReadProcessAsync();
         }
 
+        
+
 
         private async void ReadProcessAsync()
         {
@@ -35,8 +38,7 @@ namespace VissmaFlow.Core.Services.Communication
                 while (_askService != null) 
                 {
                     try
-                    {
-                        Connected = _askService.Connected;
+                    {                       
                         if (!Connected)
                             Thread.Sleep(2000);
                         while (WriteCommands.Count > 0)
@@ -47,7 +49,16 @@ namespace VissmaFlow.Core.Services.Communication
                         if (ParameterVm.CommunicationVm.RtkUnits is null) continue;
                         foreach (var rtk in ParameterVm.CommunicationVm.RtkUnits)
                         {
-                            _askService.ReadAllData(rtk.Parameters, rtk.UnitId);
+                            try
+                            {
+                                _askService.ReadAllData(rtk.Parameters, rtk.UnitId);
+                                rtk.Connected = true;
+                            }
+                            catch (Exception ex)
+                            {
+                                rtk.Connected = false;
+                                _logger.LogError(ex.Message);
+                            }
                         }                        
                         
                         Thread.Sleep(100);

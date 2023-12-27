@@ -1,25 +1,27 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using EasyModbus;
 using Microsoft.Extensions.Logging;
-using System.IO.Ports;
 using VissmaFlow.Core.Services.Communication;
 
 namespace VissmaFlow.Core.ViewModels
 {
-    public partial class MainViewModel:ObservableObject
+    public partial class MainViewModel : ObservableObject
     {
         private readonly ILogger<MainViewModel> _logger;
 
 
         public MainViewModel(ILogger<MainViewModel> logger,
-            ParameterVm parameterVm, MainCommunicationService communicationService,
-            CommunicationVm communicationVm, AccessViewModel accessViewModel)
+            ParameterVm parameterVm,
+            MainCommunicationService communicationService,
+            CommunicationVm communicationVm,
+            AccessViewModel accessViewModel,
+            EventViewModel eventsViewModel)
         {
             _logger = logger;
             ParameterVm = parameterVm;
             CommunicationService = communicationService;
             CommunicationVm = communicationVm;
             AccessViewModel = accessViewModel;
+            EventsViewModel = eventsViewModel;
             _timer = new Timer(UpdateTime);
             _timer.Change(0, 1000);
         }
@@ -32,12 +34,13 @@ namespace VissmaFlow.Core.ViewModels
         }
 
         [ObservableProperty]
-        private DateTime _pcTime; 
+        private DateTime _pcTime;
         #endregion
 
         public ParameterVm ParameterVm { get; }
         public MainCommunicationService CommunicationService { get; }
         public CommunicationVm CommunicationVm { get; }
         public AccessViewModel AccessViewModel { get; }
+        public EventViewModel EventsViewModel { get; }
     }
 }

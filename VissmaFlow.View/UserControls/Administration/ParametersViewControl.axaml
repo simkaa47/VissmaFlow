@@ -53,12 +53,9 @@
 					</DataGridTemplateColumn.Header>
 					<DataGridTemplateColumn.CellTemplate>
 						<DataTemplate>
-							<ComboBox Margin="2"
-									  FontSize="10"
-									  Items="{StaticResource DataTypes}"
-									  SelectedIndex="{Binding Data}"
-									  Width="80"
-									  HorizontalAlignment="Center"/>
+							<TextBlock Text="{Binding Data}"
+									   FontSize="12"
+									   VerticalAlignment="Center"/>
 						</DataTemplate>
 					</DataGridTemplateColumn.CellTemplate>
 				</DataGridTemplateColumn>

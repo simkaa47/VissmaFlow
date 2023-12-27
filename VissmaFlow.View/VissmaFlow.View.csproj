@@ -43,10 +43,4 @@
   <ItemGroup>
     <ProjectReference Include="..\VissmaFlow.Core\VissmaFlow.Core.csproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <None Update="vissma_flow.db">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
 </Project>

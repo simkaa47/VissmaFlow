@@ -2,6 +2,7 @@
 using Mapster;
 using System.ComponentModel;
 using System.Timers;
+using VissmaFlow.Core.Contracts.Parameters;
 using VissmaFlow.Core.Infrastructure.Attributes;
 
 namespace VissmaFlow.Core.Models.Parameters
@@ -12,9 +13,7 @@ namespace VissmaFlow.Core.Models.Parameters
         public Parameter()
         {
             timer = new System.Timers.Timer(5000);
-            timer.Elapsed += OnTimerElapsed;
-            PropertyChanged += OnChanging;
-            
+            timer.Elapsed += OnTimerElapsed;            
         }
 
         #region MinValue
@@ -45,20 +44,7 @@ namespace VissmaFlow.Core.Models.Parameters
 
         #endregion
 
-        #region IsOnlyRead
-        [ObservableProperty]
-        private bool _isOnlyRead;
-        #endregion
-
-        #region ValidationOk
-        [ObservableProperty]
-        private bool _validationOk;
-        #endregion
-
-        #region IsWriting
-        [ObservableProperty]
-        private bool _isWriting;
-        #endregion
+        
 
         #region Value
         private T? _value;
@@ -72,10 +58,7 @@ namespace VissmaFlow.Core.Models.Parameters
                 IsWriting = false;
             }
         }
-        #endregion
-
-        [ObservableProperty]
-        private int _hz;
+        #endregion        
 
         #region WriteValue
         T? _writeValue;
@@ -97,76 +80,7 @@ namespace VissmaFlow.Core.Models.Parameters
                 }
             }
         }
-        #endregion
-
-        private void OnChanging(object? sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == nameof(MinValueString))
-                MinValue = (T?)GetValueFromStr(MinValueString, false);
-            else if (e.PropertyName == nameof(MaxValueString))
-                MaxValue = (T?)GetValueFromStr(MaxValueString, true);
-            else if (e.PropertyName == nameof(MaxValue) && MaxValue != null)
-                MaxValueString = MaxValue.ToString();
-            else if (e.PropertyName == nameof(MinValue) && MinValue != null)
-                MinValueString = MinValue.ToString();
-        }
-
-
-        private object? GetValueFromStr(string input, bool maxValue)
-        {
-            switch (Data)
-            {   
-                case DataType.boolean:
-                    if(bool.TryParse(input, out bool parsedBool))
-                    {
-                        return parsedBool;
-                    }
-                    return maxValue ? true : false;
-                case DataType.int16:
-                    if (short.TryParse(input, out short parsedShort))
-                    {
-                        return parsedShort;
-                    }
-                    return maxValue ? short.MaxValue : short.MinValue;
-                case DataType.uint16:
-                    if (ushort.TryParse(input, out ushort parsedUShort))
-                    {
-                        return parsedUShort;
-                    }
-                    return maxValue ? ushort.MaxValue : ushort.MinValue;
-                case DataType.int32:
-                    if (int.TryParse(input, out int parsedInt))
-                    {
-                        return parsedInt;
-                    }
-                    return maxValue ? int.MaxValue : int.MinValue;
-                case DataType.uint32:
-                    if (uint.TryParse(input, out uint parsedUInt))
-                    {
-                        return parsedUInt;
-                    }
-                    return maxValue ? uint.MaxValue : uint.MinValue;
-                case DataType.float32:
-                    if (float.TryParse(input, out float parsedFloat))
-                    {
-                        return parsedFloat;
-                    }
-                    return maxValue ? float.MaxValue : float.MinValue;
-                case DataType.double64:
-                    if (double.TryParse(input, out double parsedDouble))
-                    {
-                        return parsedDouble;
-                    }
-                    return maxValue ? double.MaxValue : double.MinValue;
-                case DataType.str:
-                    return input;
-                default:
-                    return null;
-            }
-
-        }
-
-
+        #endregion     
         
     }
 }
