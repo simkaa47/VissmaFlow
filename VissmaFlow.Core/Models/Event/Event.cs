@@ -49,10 +49,14 @@ namespace VissmaFlow.Core.Models.Event
         private string? _nonActiveMessage;
         #endregion
 
-        #region Активность
-        [NotMapped]
-        [ObservableProperty]
+        #region Активность        
         private bool _isActive;
+        [NotMapped]
+        public bool IsActive
+        {
+            get => _isActive;
+            set=>SetProperty(ref _isActive, value);
+        }
         #endregion
 
         #region Условие срабатывания

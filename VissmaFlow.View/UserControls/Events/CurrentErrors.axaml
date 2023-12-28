@@ -8,7 +8,8 @@
 			 x:DataType="vm:EventViewModel"
              x:Class="VissmaFlow.View.UserControls.Events.CurrentErrors">
 	<DataGrid HorizontalAlignment="Stretch"
-			  IsReadOnly="True"			  
+			  IsReadOnly="True"	
+			  Name="EventsGrid"
 			  VerticalAlignment="Stretch"
 			  Items="{Binding Events}">
 		<DataGrid.Styles>

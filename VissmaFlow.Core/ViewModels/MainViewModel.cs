@@ -14,7 +14,8 @@ namespace VissmaFlow.Core.ViewModels
             MainCommunicationService communicationService,
             CommunicationVm communicationVm,
             AccessViewModel accessViewModel,
-            EventViewModel eventsViewModel)
+            EventViewModel eventsViewModel, 
+            TrendSettigsViewModel trendSettigsViewModel)
         {
             _logger = logger;
             ParameterVm = parameterVm;
@@ -22,6 +23,7 @@ namespace VissmaFlow.Core.ViewModels
             CommunicationVm = communicationVm;
             AccessViewModel = accessViewModel;
             EventsViewModel = eventsViewModel;
+            TrendSettigsViewModel = trendSettigsViewModel;
             _timer = new Timer(UpdateTime);
             _timer.Change(0, 1000);
         }
@@ -42,5 +44,6 @@ namespace VissmaFlow.Core.ViewModels
         public CommunicationVm CommunicationVm { get; }
         public AccessViewModel AccessViewModel { get; }
         public EventViewModel EventsViewModel { get; }
+        public TrendSettigsViewModel TrendSettigsViewModel { get; }
     }
 }

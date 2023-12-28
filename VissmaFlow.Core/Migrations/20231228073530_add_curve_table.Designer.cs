@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VissmaFlow.Core.Infrastructure.DataAccess;
 
@@ -10,9 +11,11 @@ using VissmaFlow.Core.Infrastructure.DataAccess;
 namespace VissmaFlow.Core.Migrations
 {
     [DbContext(typeof(VissmaDbContext))]
-    partial class VissmaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231228073530_add_curve_table")]
+    partial class addcurvetable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -178,17 +178,17 @@ namespace VissmaFlow.Core.ViewModels
             switch (@event.EventCondition)
             {
                 case EventCondition.Equal:
-                    return @event.CompareValue == comparedValue;
+                    return comparedValue == @event.CompareValue;
                 case EventCondition.NotEqual:
-                    return @event.CompareValue != comparedValue;
+                    return comparedValue != @event.CompareValue;
                 case EventCondition.LessThan:
-                    return @event.CompareValue < comparedValue;
+                    return comparedValue < @event.CompareValue;
                 case EventCondition.LessThanOrEqual:
-                    return @event.CompareValue <= comparedValue;
+                    return comparedValue <= @event.CompareValue;
                 case EventCondition.GreaterThan:
-                    return @event.CompareValue > comparedValue;
+                    return comparedValue > @event.CompareValue;
                 case EventCondition.GreaterThanOrEqual:
-                    return @event.CompareValue >= comparedValue;
+                    return comparedValue >= @event.CompareValue;
                 default:
                     return false; ;
             }

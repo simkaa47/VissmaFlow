@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VissmaFlow.Core.Infrastructure.DataAccess;
 
@@ -10,9 +11,11 @@ using VissmaFlow.Core.Infrastructure.DataAccess;
 namespace VissmaFlow.Core.Migrations
 {
     [DbContext(typeof(VissmaDbContext))]
-    partial class VissmaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231227144222_IsActive_isNotMapped")]
+    partial class IsActiveisNotMapped
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -202,34 +205,6 @@ namespace VissmaFlow.Core.Migrations
                     b.UseTphMappingStrategy();
                 });
 
-            modelBuilder.Entity("VissmaFlow.Core.Models.Trends.Curve", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Color")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("IsVisible")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("ParameterId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("RtkUnitId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ParameterId");
-
-                    b.HasIndex("RtkUnitId");
-
-                    b.ToTable("Curves");
-                });
-
             modelBuilder.Entity("VissmaFlow.Core.Models.Parameters.ParameterBool", b =>
                 {
                     b.HasBaseType("VissmaFlow.Core.Models.Parameters.ParameterBase");
@@ -415,21 +390,6 @@ namespace VissmaFlow.Core.Migrations
                 });
 
             modelBuilder.Entity("VissmaFlow.Core.Models.Event.Event", b =>
-                {
-                    b.HasOne("VissmaFlow.Core.Models.Parameters.ParameterBase", "Parameter")
-                        .WithMany()
-                        .HasForeignKey("ParameterId");
-
-                    b.HasOne("VissmaFlow.Core.Models.Communication.RtkUnit", "RtkUnit")
-                        .WithMany()
-                        .HasForeignKey("RtkUnitId");
-
-                    b.Navigation("Parameter");
-
-                    b.Navigation("RtkUnit");
-                });
-
-            modelBuilder.Entity("VissmaFlow.Core.Models.Trends.Curve", b =>
                 {
                     b.HasOne("VissmaFlow.Core.Models.Parameters.ParameterBase", "Parameter")
                         .WithMany()
