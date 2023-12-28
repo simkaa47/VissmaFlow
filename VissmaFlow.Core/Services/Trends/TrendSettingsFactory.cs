@@ -8,14 +8,14 @@ namespace VissmaFlow.Core.Services.Trends
         {
             return new List<Curve>
             {
-                new Curve{Color="FFFF0000",IsVisible = true },
-                new Curve{Color="FF00FFFF",IsVisible = true },
-                new Curve{Color="FF000000",IsVisible = true },
-                new Curve{Color="FF00FF00",IsVisible = true },
-                new Curve{Color="FFFFFF00",IsVisible = true },
-                new Curve{Color="FFFFA500",IsVisible = true },
-                new Curve{Color="FFFF0000",IsVisible = false },
-                new Curve{Color="FFFF0000",IsVisible = false }
+                new Curve{Color="#FFFF0000",IsVisible = true },
+                new Curve{Color="#FF00FFFF",IsVisible = true },
+                new Curve{Color="#FF000000",IsVisible = true },
+                new Curve{Color="#FF00FF00",IsVisible = true },
+                new Curve{Color="#FFFFFF00",IsVisible = true },
+                new Curve{Color="#FFFFA500",IsVisible = true },
+                new Curve{Color="#FFFF0000",IsVisible = false },
+                new Curve{Color="#FFFF0000",IsVisible = false }
             };
         }
     }

@@ -8,4 +8,5 @@
 	<conv:UserToNameConverter x:Key="UserToNameConverter"/>
 	<conv:GetIfTrueConverter x:Key="GetIfTrueConverter"/>	
 	<conv:EventMessageConverter x:Key="EventMessageConverter"/>
+	<conv:ColorConverter x:Key="ColorConverter"/>
 </ResourceDictionary>

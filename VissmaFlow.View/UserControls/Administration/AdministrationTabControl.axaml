@@ -23,5 +23,8 @@
 		<TabItem Header="События" Classes="common" MinHeight="30" MinWidth="90">
 			<adm:EventsViewControl DataContext="{Binding EventsViewModel}"/>
 		</TabItem>
+		<TabItem Header="Тренды" Classes="common" MinHeight="30" MinWidth="90">
+			<adm:CurveSettingsControl DataContext="{Binding TrendSettigsViewModel}"/>
+		</TabItem>
 	</TabControl>
 </UserControl>

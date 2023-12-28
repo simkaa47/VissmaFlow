@@ -45,4 +45,8 @@
   <ItemGroup>
     <ProjectReference Include="..\VissmaFlow.Core\VissmaFlow.Core.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="UserControls\Administration\CurveSettingsControl.axaml" />
+  </ItemGroup>
 </Project>
