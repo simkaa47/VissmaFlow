@@ -8,14 +8,29 @@
 			 xmlns:mat="using:Material.Icons.Avalonia"
 			 xmlns:mod="using:VissmaFlow.Core.Models.Trends"
              x:Class="VissmaFlow.View.UserControls.Administration.CurveSettingsControl">
-	<Grid RowDefinitions="60,*">
-		<Button Margin="5"
+	<Grid RowDefinitions="160,*" Grid.Row="1">
+		<StackPanel>
+			<Button Margin="5"
 				Width="100"
 				VerticalAlignment="Stretch"
 				Content="Сохранить"
 				VerticalContentAlignment="Center"
 				HorizontalContentAlignment="Center"
 				Command="{Binding SaveSettingsCommand}"/>
+			<DockPanel>
+				<TextBlock Text="Ширина тренда, c" VerticalAlignment="Center"/>
+				<TextBox HorizontalAlignment="Right"
+						 Margin="5"
+						 Width="100" Text="{Binding TrendSettings.MaxTimeSeconds}"/>
+			</DockPanel>
+			<DockPanel>
+				<TextBlock Text="Частота обновления, мс" VerticalAlignment="Center"/>
+				<TextBox HorizontalAlignment="Right"
+						 Margin="5"
+						 Width="100" Text="{Binding TrendSettings.ScanFrequence}"/>
+			</DockPanel>
+		</StackPanel>
+		
 		<DataGrid Grid.Row="1"
 				  VerticalAlignment="Stretch"
 				  Items="{Binding Curves}">
@@ -52,7 +67,7 @@
 												   VerticalAlignment="Center"/>
 									</DataTemplate>
 								</ComboBox.ItemTemplate>
-								
+
 							</ComboBox>
 						</DataTemplate>
 					</DataGridTemplateColumn.CellTemplate>
@@ -81,4 +96,5 @@
 			</DataGrid.Columns>
 		</DataGrid>
 	</Grid>
+	
 </UserControl>

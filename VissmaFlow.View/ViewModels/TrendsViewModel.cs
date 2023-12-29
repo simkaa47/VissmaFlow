@@ -1,27 +1,116 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using Avalonia.Data;
+using Avalonia.Media;
+using Avalonia.Threading;
+using CommunityToolkit.Mvvm.ComponentModel;
 using LiveChartsCore;
+using LiveChartsCore.Defaults;
 using LiveChartsCore.SkiaSharpView;
+using LiveChartsCore.SkiaSharpView.Drawing.Geometries;
+using LiveChartsCore.SkiaSharpView.Painting;
 using Microsoft.Extensions.Logging;
+using SkiaSharp;
+using System;
+using System.Linq;
+using System.Threading;
+using VissmaFlow.Core.Models.Communication;
+using VissmaFlow.Core.Models.Parameters;
+using VissmaFlow.Core.ViewModels;
 
 namespace VissmaFlow.View.ViewModels
 {
     public class TrendsViewModel : ObservableObject
     {
         private readonly ILogger<TrendsViewModel> _logger;
+        private readonly TrendSettigsViewModel _trendSettigsViewModel;
+        Timer? _timer;
 
-        public TrendsViewModel(ILogger<TrendsViewModel> logger)
+        public TrendsViewModel(ILogger<TrendsViewModel> logger, TrendSettigsViewModel trendSettigsViewModel)
         {
             _logger = logger;
+            _trendSettigsViewModel = trendSettigsViewModel;           
+            InitAsync();
         }
 
-        public ISeries[] Series { get; set; }
-        = new ISeries[]
+        private  void InitAsync()
+        {            
+            if (_trendSettigsViewModel.Curves is null) return;
+            Series = _trendSettigsViewModel
+                .Curves
+                .Where(c=>c.Parameter is not null && c.RtkUnit is not null)
+                .Select(c => new LineSeries<DateTimePoint> 
+                { 
+                    Name = $"{c.RtkUnit?.Name} : {c.Parameter?.Description}",
+                    Values = c.Values,
+                    GeometryStroke = null,
+                    GeometrySize = 0,
+                    IsVisible = c.IsVisible,
+                    Fill = null,
+                    Stroke = new SolidColorPaint(GetSKColor(c.Color)){ StrokeThickness = 2 }
+
+                }).ToArray();
+            _timer = new Timer(OnTimer);
+            _timer.Change(0, 1000);
+            
+        }
+
+        public ISeries[]? Series { get; set; }
+
+        public Axis[] XAxes { get; set; } =
         {
-            new LineSeries<double>
-            {
-               Values = new double[] {1,3,2,4,3,6,5,7,8 },
-               Fill = null
-             }
+            new Axis()
         };
+        
+        
+
+
+        private SKColor GetSKColor(string colorString)
+        {
+            var color = Color.Parse(colorString);
+            var skColor = new SKColor(color.R, color.G, color.B, color.A);
+            return skColor;
+        }
+
+
+        private void OnTimer(object? o)
+        {
+            if (_trendSettigsViewModel.Curves is null) return;
+            foreach (var c in _trendSettigsViewModel.Curves)
+            {
+                if(c.RtkUnit is not null && c.Parameter is not null)
+                {
+                    var par = c.RtkUnit.Parameters.Where(p=>p.Id == c.Parameter.Id).FirstOrDefault();   
+                    if(par is not null)
+                    {
+                        Dispatcher.UIThread.InvokeAsync(new Action(() =>
+                        {
+                            c.Values.Add(new DateTimePoint(DateTime.Now, GetValueFromParameter(par)));
+
+                        }));
+                    }
+                }
+            }
+        }     
+        
+        private double GetValueFromParameter(ParameterBase par)
+        {
+            if (par is ParameterFloat parameterFloat)
+                return parameterFloat.Value;
+            if (par is ParameterString parameterString)
+                return 0;
+            else if (par is ParameterDouble parameterDouble)
+                return parameterDouble.Value;
+            else if (par is  ParameterShort parameterShort)
+                return parameterShort.Value;
+            else if (par is ParameterUshort parameterUshort)
+                return parameterUshort.Value;
+            else if (par is ParameterInt parameterInt)
+                return parameterInt.Value;
+            else if (par is ParameterUint parameterUint)
+                return parameterUint.Value;
+            else if (par is ParameterBool parameterBool)
+                return parameterBool.Value ? 1 : 0;
+            return 0;
+        }
+
     }
 }

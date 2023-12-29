@@ -1,5 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-
+using LiveChartsCore.Defaults;
+using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations.Schema;
 using VissmaFlow.Core.Infrastructure.DataAccess;
 using VissmaFlow.Core.Models.Communication;
 using VissmaFlow.Core.Models.Parameters;
@@ -33,8 +35,11 @@ public partial class Curve:EntityCommon
 
     #region Видимость тренда
     [ObservableProperty]
-    private bool _isVisible; 
+    private bool _isVisible;
     #endregion
+
+    [NotMapped]
+    public ObservableCollection<DateTimePoint> Values { get; set; } = new ObservableCollection<DateTimePoint>();
 
 
 }

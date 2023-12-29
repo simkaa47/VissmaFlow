@@ -14,6 +14,7 @@ namespace VissmaFlow.Core.Infrastructure.DataAccess
         public DbSet<CommSettings> CommSettings => Set<CommSettings>();
         public DbSet<User> Users => Set<User>();
         public DbSet<Event> Events => Set<Event>();
+        public DbSet<TrendSettings> TrendSettings => Set<TrendSettings>();
 
         public DbSet<Curve> Curves => Set<Curve>();
 

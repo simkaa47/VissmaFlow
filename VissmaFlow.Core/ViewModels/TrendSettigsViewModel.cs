@@ -11,14 +11,19 @@ namespace VissmaFlow.Core.ViewModels
     {
         private readonly ILogger<TrendSettigsViewModel> _logger;
         private readonly IRepository<Curve> _curveRepository;
+        private readonly IRepository<TrendSettings> _settingsRepository;
+
+        public TrendSettings? TrendSettings { get; set; }
 
         public TrendSettigsViewModel(ILogger<TrendSettigsViewModel> logger, 
             ParameterVm parameterVm,
-            IRepository<Curve> curveRepository)
+            IRepository<Curve> curveRepository, 
+            IRepository<TrendSettings> settingsRepository)
         {
             _logger = logger;
             ParameterVm = parameterVm;
             _curveRepository = curveRepository;
+            _settingsRepository = settingsRepository;
             InitAsync();
         }
         [ObservableProperty]
@@ -29,8 +34,10 @@ namespace VissmaFlow.Core.ViewModels
         {
             try
             {
-                var initSetts = TrendSettingsFactory.GetTrendSettings();
+                var initSetts = TrendSettingsFactory.GetCurves();
                 Curves = (await _curveRepository.InitAsync(initSetts, initSetts.Count)).ToList();
+                TrendSettings = (await _settingsRepository.InitAsync(TrendSettingsFactory.GetTrendSettings(), 1)).FirstOrDefault();
+                
             }
             catch (Exception ex)
             {
@@ -44,15 +51,21 @@ namespace VissmaFlow.Core.ViewModels
         {
             try
             {
-                _logger.LogInformation($"Сохранение настроек кривых");
+                _logger.LogInformation($"Сохранение настроек nhtylf");
                 if (Curves is null) return;
                 await _curveRepository.UpdateAllAsync(Curves);
+                if(TrendSettings is not null)
+                {
+                    await _settingsRepository.UpdateAsync(TrendSettings);
+                }
             }
             catch (Exception ex)
             {
                 _logger.LogError($"Сохранение настроек кривых -  {ex.Message}");
             }
         }
+
+        
 
 
 

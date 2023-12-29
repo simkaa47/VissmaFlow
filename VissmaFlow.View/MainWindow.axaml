@@ -7,19 +7,20 @@
 		xmlns:scg="clr-namespace:System.Collections.Generic;assembly=netstandard"
 		xmlns:sys="clr-namespace:System;assembly=netstandard"
 		xmlns:vm="using:VissmaFlow.Core.ViewModels"
-		x:DataType="vm:MainViewModel"
-		MaxWidth="480"
-		MaxHeight="800"
+		x:DataType="vm:MainViewModel"		
 		xmlns:hb="using:VissmaFlow.View.UserControls.HighBar"	
 		HasSystemDecorations="False"
 		xmlns:uc="using:VissmaFlow.View.UserControls"
         Title="VissmaFlow.View">
-	<Border BorderBrush="Gray"
+	<Viewbox>
+		<Border BorderBrush="Gray" Height="800" Width="480"
 		BorderThickness="2">
-		<Grid RowDefinitions="80,*">
-			<hb:HighBarControl/>
-			<uc:MainTabControl Grid.Row="1"/>
-		</Grid>
-	</Border>
+			<Grid RowDefinitions="80,*">
+				<hb:HighBarControl/>
+				<uc:MainTabControl Grid.Row="1"/>
+			</Grid>
+		</Border>
+	</Viewbox>
+	
 	
 </Window>

@@ -9,7 +9,7 @@
              x:Class="VissmaFlow.View.UserControls.Main.MainTrendsControl">
 	<lvc:CartesianChart
 		 Series="{Binding Series}"
-		 ZoomMode="Both">
-		
+		 ZoomMode="Both"
+		 XAxes="{Binding XAxes}">		
 	</lvc:CartesianChart>
 </UserControl>

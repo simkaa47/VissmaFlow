@@ -13,7 +13,7 @@
 		<StackPanel Orientation="Horizontal">
 			<StackPanel Margin="5">
 				<Image Source="\Resources\Images\Logo_Konvels_blue.png" Height="20" Margin="5" HorizontalAlignment="Center"/>
-				<TextBlock Text="{Binding PcTime}" Width="100" FontSize="10" HorizontalAlignment="Center"/>
+				<TextBlock Text="{Binding PcTime, StringFormat={}{0:yyyy.MM.dd HH:mm:ss}}" Width="100" FontSize="10" HorizontalAlignment="Center"/>
 			</StackPanel>
 			<hb:HighBarAccessControl DataContext="{Binding AccessViewModel}"
 									 Margin="5"/>
