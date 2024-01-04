@@ -33,7 +33,7 @@
 		
 		<DataGrid Grid.Row="1"
 				  VerticalAlignment="Stretch"
-				  Items="{Binding Curves}">
+				 ItemsSource="{Binding Curves}">
 			<DataGrid.Columns>
 				<DataGridTemplateColumn Header="Цвет">
 					<DataGridTemplateColumn.CellTemplate>
@@ -57,7 +57,7 @@
 					<DataGridTemplateColumn.CellTemplate>
 						<DataTemplate x:DataType="mod:Curve">
 							<ComboBox Margin="2"
-									  Items="{Binding RelativeSource={RelativeSource AncestorType=UserControl} Path=DataContext.ParameterVm.CommunicationVm.RtkUnits}"
+									  ItemsSource="{Binding RelativeSource={RelativeSource AncestorType=UserControl} Path=DataContext.ParameterVm.CommunicationVm.RtkUnits}"
 									  SelectedItem="{Binding RtkUnit}">
 								<ComboBox.ItemTemplate>
 									<DataTemplate>
@@ -77,7 +77,7 @@
 						<DataTemplate x:DataType="mod:Curve">
 							<ComboBox Margin="2"
 									  
-									  Items="{Binding RelativeSource={RelativeSource AncestorType=UserControl} Path=DataContext.ParameterVm.Parameters}"
+									  ItemsSource="{Binding RelativeSource={RelativeSource AncestorType=UserControl} Path=DataContext.ParameterVm.Parameters}"
 									  SelectedItem="{Binding Parameter}">
 								<ComboBox.ItemTemplate>
 									<DataTemplate>

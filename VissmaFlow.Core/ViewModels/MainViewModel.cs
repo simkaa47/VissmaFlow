@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.Extensions.Logging;
 using VissmaFlow.Core.Services.Communication;
 
@@ -25,7 +26,7 @@ namespace VissmaFlow.Core.ViewModels
             EventsViewModel = eventsViewModel;
             TrendSettigsViewModel = trendSettigsViewModel;
             _timer = new Timer(UpdateTime);
-            _timer.Change(0, 1000);
+            _timer.Change(0, 1000);            
         }
 
         #region Timer

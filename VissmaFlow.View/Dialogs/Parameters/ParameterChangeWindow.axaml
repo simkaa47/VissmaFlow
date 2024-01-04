@@ -31,7 +31,7 @@
 		<DockPanel>
 			<TextBlock Text="Тип данных"/>
 			<ComboBox Margin="5"
-					  Items="{StaticResource DataTypes}"
+					  ItemsSource="{StaticResource DataTypes}"
 					  SelectedIndex="{Binding Data}"
 					  Width="200"
 					  HorizontalAlignment="Right"/>
@@ -39,7 +39,7 @@
 		<DockPanel>
 			<TextBlock Text="Тип Modbus регистра"/>
 			<ComboBox Margin="5"
-					  Items="{StaticResource ModbusRegisters}"
+					  ItemsSource="{StaticResource ModbusRegisters}"
 					  SelectedIndex="{Binding ModbusRegType}"
 					  Width="200"
 					  HorizontalAlignment="Right"/>
@@ -65,7 +65,7 @@
 		<DockPanel IsVisible="{Binding Data, Converter={StaticResource IfNotEqualConverter}, ConverterParameter={x:Static par:DataType.str}}">
 			<TextBlock Text="Порядок байт"/>
 			<ComboBox Margin="5"
-					  Items="{StaticResource ByteOrders}"
+					  ItemsSource="{StaticResource ByteOrders}"
 					  SelectedIndex="{Binding ByteOrder}"
 					  Width="200"
 					  HorizontalAlignment="Right"/>

@@ -41,7 +41,7 @@
 			<TextBlock Text="Настройки связи с РТК"
 					   HorizontalAlignment="Center"/>
 			<Border Grid.Row="1">
-				<ListBox VirtualizationMode="None">
+				<ListBox>
 					<ListBox.Styles>
 						<Style Selector="ListBoxItem">
 							<Setter Property="Margin" Value="0"/>
@@ -49,7 +49,7 @@
 						</Style>
 					</ListBox.Styles>
 					<DockPanel>
-						<ComboBox Items="{StaticResource CommInterfaces}"
+						<ComboBox ItemsSource="{StaticResource CommInterfaces}"
 								  DockPanel.Dock="Right"
 								  SelectedIndex="{Binding CommSettings.Interface}"/>
 						<TextBlock Text="Интерфейс"/>
@@ -63,25 +63,25 @@
 						<TextBlock Text="Номер порта"/>
 					</DockPanel>
 					<DockPanel  IsVisible="{Binding CommSettings.Interface, Converter={StaticResource IfEqualConverter}, ConverterParameter={x:Static comm:CommInterface.Rs485}}">
-						<ComboBox Items="{Binding Ports}"
+						<ComboBox ItemsSource="{Binding Ports}"
 								  DockPanel.Dock="Right"
 								  SelectedItem="{Binding CommSettings.PortName}"/>
 						<TextBlock Text="Имя порта"/>
 					</DockPanel>
 					<DockPanel IsVisible="{Binding CommSettings.Interface, Converter={StaticResource IfEqualConverter}, ConverterParameter={x:Static comm:CommInterface.Rs485}}">
-						<ComboBox Items="{Binding Baudrates}"
+						<ComboBox ItemsSource="{Binding Baudrates}"
 								  DockPanel.Dock="Right"
 								  SelectedItem="{Binding CommSettings.Baudrate}"/>
 						<TextBlock Text="Скорость"/>
 					</DockPanel>
 					<DockPanel  IsVisible="{Binding CommSettings.Interface, Converter={StaticResource IfEqualConverter}, ConverterParameter={x:Static comm:CommInterface.Rs485}}">
-						<ComboBox Items="{Binding Parities}"
+						<ComboBox ItemsSource="{Binding Parities}"
 								  DockPanel.Dock="Right"
 								  SelectedItem="{Binding CommSettings.Parity}"/>
 						<TextBlock Text="Четность"/>
 					</DockPanel>
 					<DockPanel IsVisible="{Binding CommSettings.Interface, Converter={StaticResource IfEqualConverter}, ConverterParameter={x:Static comm:CommInterface.Rs485}}">
-						<ComboBox Items="{Binding StopBitsList}"
+						<ComboBox ItemsSource="{Binding StopBitsList}"
 								  DockPanel.Dock="Right"
 								  SelectedItem="{Binding CommSettings.StopBitsNum}"/>
 						<TextBlock Text="Стоповые биты"/>
@@ -111,7 +111,7 @@
 					<DataGrid HorizontalAlignment="Stretch"
 							  Grid.Row="1"
 						  VerticalAlignment="Stretch"
-						  Items="{Binding RtkUnits}">
+						  ItemsSource="{Binding RtkUnits}">
 						<DataGrid.Columns>
 							<DataGridTextColumn IsReadOnly="True" Binding="{Binding Id}" Header="№"/>
 							<DataGridTemplateColumn Header="Имя РТК" SortMemberPath="Name">

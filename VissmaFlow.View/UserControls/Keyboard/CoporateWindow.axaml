@@ -6,8 +6,8 @@
         x:Class="VissmaFlow.View.UserControls.Keyboard.CoporateWindow"
         Title="CoporateWindow"
 		CanResize="False"
-		xmlns:mat="using:Material.Icons.Avalonia"
-		HasSystemDecorations="False"
+		
+		SystemDecorations="None"
 		TransparencyLevelHint="AcrylicBlur"
       WindowState="FullScreen"
       Background="Red"		
@@ -33,11 +33,6 @@
 			</Viewbox>
 			
 		</Panel>
-		<Button Height="30" Width="30"
-					VerticalAlignment="Top"
-					Click="CloseWindow"
-					HorizontalAlignment="Right">
-			<mat:MaterialIcon Kind="Close" Height="25" Width="25"/>
-		</Button>
+		
 	</Panel>
 </Window>

@@ -27,7 +27,7 @@
 				<DockPanel >
 					<TextBlock Text="Тип события"/>
 					<ComboBox HorizontalAlignment="Right"
-							  Items="{StaticResource EventTypes}"
+							  ItemsSource="{StaticResource EventTypes}"
 							  SelectedIndex="{Binding  EventType}"
 							  Margin="5,5,5,5"
 							  Width="160"
@@ -37,7 +37,7 @@
 					<TextBlock Text="РТК"/>
 					<ComboBox HorizontalAlignment="Right"
 							  Width="160"
-							  Items="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.CommunicationVm.RtkUnits}"
+							  ItemsSource="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.CommunicationVm.RtkUnits}"
 							  SelectedItem="{Binding RtkUnit, Mode=TwoWay}"
 							  Margin="100,5,5,5">
 						<ComboBox.ItemTemplate>
@@ -53,7 +53,7 @@
 					<TextBlock Text="Параметр"/>
 					<ComboBox HorizontalAlignment="Right"
 							  Width="160"
-							  Items="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ParameterVm.Parameters}"
+							  ItemsSource="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ParameterVm.Parameters}"
 							  SelectedItem="{Binding Parameter, Mode=TwoWay}"
 							  Margin="100,5,5,5">
 						<ComboBox.ItemTemplate>
@@ -79,7 +79,7 @@
 				<DockPanel >
 					<TextBlock Text="Условие срабатывания"/>
 					<ComboBox HorizontalAlignment="Right"
-							  Items="{StaticResource Conditions}"
+							  ItemsSource="{StaticResource Conditions}"
 							  SelectedIndex="{Binding  EventCondition}"
 							  Margin="5,5,5,5"
 							  Width="160"

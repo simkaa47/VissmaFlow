@@ -11,6 +11,7 @@ using Microsoft.Extensions.Logging;
 using SkiaSharp;
 using System;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Threading;
 using VissmaFlow.Core.Models.Communication;
 using VissmaFlow.Core.Models.Parameters;
@@ -57,10 +58,38 @@ namespace VissmaFlow.View.ViewModels
 
         public Axis[] XAxes { get; set; } =
         {
-            new Axis()
+            new DateTimeAxis(TimeSpan.FromSeconds(1), Formatter)
+            {                
+                AnimationsSpeed = TimeSpan.FromMilliseconds(0),
+                SeparatorsPaint = new SolidColorPaint(SKColors.Black.WithAlpha(100))
+            }
         };
-        
-        
+
+        private double[] GetSeparators()
+        {
+            var now = DateTime.Now;
+
+            return new double[]
+            {
+            now.AddSeconds(-25).Ticks,
+            now.AddSeconds(-20).Ticks,
+            now.AddSeconds(-15).Ticks,
+            now.AddSeconds(-10).Ticks,
+            now.AddSeconds(-5).Ticks,
+            now.Ticks
+            };
+        }
+
+        private static string Formatter(DateTime date)
+        {
+            var secsAgo = (DateTime.Now - date).TotalSeconds;
+
+            return secsAgo < 1
+                ? "now"
+                : $"{secsAgo:N0}s ago";
+        }
+
+
 
 
         private SKColor GetSKColor(string colorString)

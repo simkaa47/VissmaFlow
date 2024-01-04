@@ -46,7 +46,7 @@
 				  Name="EventsGrid"
 				  Margin="0"
 				  HorizontalAlignment="Left"
-				  Items="{Binding Events}">
+				ItemsSource="{Binding Events}">
 			<DataGrid.Styles>
 				<Style Selector="DataGridRow" x:DataType="e:Event">
 					<Setter Property="IsVisible" Value="{Binding !UnVisisble}"/>
@@ -69,8 +69,8 @@
 					</DataGridTemplateColumn.Header>
 					<DataGridTemplateColumn.CellTemplate>
 						<DataTemplate DataType="e:Event">
-							<ComboBox 
-							  Items="{StaticResource Conditions}"
+							<ComboBox
+							  ItemsSource="{StaticResource Conditions}"
 							  SelectedIndex="{Binding  EventCondition}"
 							  Margin="1"/>
 						</DataTemplate>

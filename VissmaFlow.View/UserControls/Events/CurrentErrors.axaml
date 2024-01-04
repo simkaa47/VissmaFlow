@@ -11,17 +11,28 @@
 			  IsReadOnly="True"	
 			  Name="EventsGrid"
 			  VerticalAlignment="Stretch"
-			  Items="{Binding Events}">
+			  ItemsSource="{Binding ActiveEvents}">
 		<DataGrid.Styles>
 			<Style Selector="DataGridRow" x:DataType="e:Event">
 				<Setter Property="Background" Value="Red"/>
 				<Setter Property="Margin" Value="1"/>
-				<Setter Property="IsVisible" Value="{Binding IsActive}"/>
+				<Setter Property="IsVisible" Value="{Binding IsActive, Mode=OneWay}"/>
 			</Style>
 		</DataGrid.Styles>
 		<DataGrid.Columns>
 			<DataGridTextColumn x:DataType="e:Event" FontSize="12" Header="Время срабатывания" Binding="{Binding LastActiveTime, StringFormat={}}{0:yyyy.MM.dd HH:mm:ss}"/>
-			<DataGridTextColumn x:DataType="e:Event" FontSize="12" Header="Сообщение" Binding="{Binding Converter={StaticResource EventMessageConverter}}"/>
+			<DataGridTemplateColumn x:DataType="e:Event"   Header="Сообщение">
+				<DataGridTemplateColumn.CellTemplate>
+					<DataTemplate>
+						<TextBlock Text="{Binding Converter={StaticResource EventMessageConverter}}"
+								   TextWrapping="Wrap"
+								   VerticalAlignment="Center"
+								   Margin="5,0,0,0"
+								   FontSize="12"
+								   MaxWidth="270"/>
+					</DataTemplate>
+				</DataGridTemplateColumn.CellTemplate>
+			</DataGridTemplateColumn>
 		</DataGrid.Columns>
 		
 	</DataGrid>

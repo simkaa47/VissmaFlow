@@ -29,7 +29,7 @@
 					HorizontalContentAlignment="Center"
 					Margin="5" Command="{Binding SaveParametersCommand}"/>
 		</StackPanel>
-		<DataGrid Items="{Binding Parameters}"
+		<DataGrid ItemsSource="{Binding Parameters}"
 				  Grid.Row="1"	
 				  Focusable="True"
 				  AutoGenerateColumns="False">
@@ -67,7 +67,7 @@
 						<DataTemplate>
 							<ComboBox Margin="2"
 									  FontSize="10"
-									  Items="{StaticResource ModbusRegisters}"
+									  ItemsSource="{StaticResource ModbusRegisters}"
 									  SelectedIndex="{Binding ModbusRegType}"
 									  Width="80"
 									  HorizontalAlignment="Center"/>
@@ -137,7 +137,7 @@
 						<DataTemplate>
 							<ComboBox Margin="2"
 									  FontSize="12"
-									  Items="{StaticResource ByteOrders}"
+									  ItemsSource="{StaticResource ByteOrders}"
 									  SelectedIndex="{Binding ByteOrder}"
 									  Width="80"
 									  HorizontalAlignment="Center"/>
@@ -155,7 +155,7 @@
 						<DataTemplate>
 							<ComboBox Width="100"
 									  SelectedIndex="{Binding UserAccessLevel}"
-									  Items="{StaticResource AccessLevels}"/>
+									  ItemsSource="{StaticResource AccessLevels}"/>
 						</DataTemplate>
 					</DataGridTemplateColumn.CellTemplate>
 				</DataGridTemplateColumn>

@@ -1,19 +1,15 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
-using Avalonia.Input.TextInput;
 using Avalonia.Interactivity;
-using System.ComponentModel;
-using VissmaFlow.View.UserControls.Keyboard;
 
 namespace VissmaFlow.View.Dialogs
 {
-    public partial class DialogWindow : Window, ITextInputMethodRoot
-    {       
-
+    public partial class DialogWindow : Window
+    {
         protected override void OnInitialized()
         {
             base.OnInitialized();
-            this.HasSystemDecorations = false;
+            this.SystemDecorations = SystemDecorations.None;
             if (App.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
                 this.WindowState = WindowState.FullScreen;
@@ -31,19 +27,10 @@ namespace VissmaFlow.View.Dialogs
             Close();
         }
 
+
         protected void Cancel_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }
-
-        private VirtualKeyboardTextInputMethod virtualKeyboardTextInput = new VirtualKeyboardTextInputMethod();
-        ITextInputMethodImpl ITextInputMethodRoot.InputMethod
-        {
-            get
-            {
-                return virtualKeyboardTextInput;
-            }
-        }
-
     }
 }
