@@ -32,6 +32,7 @@
 		</StackPanel>
 		
 		<DataGrid Grid.Row="1"
+				  x:Name="CurvesTable"
 				  VerticalAlignment="Stretch"
 				 ItemsSource="{Binding Curves}">
 			<DataGrid.Columns>
@@ -56,24 +57,19 @@
 				<DataGridTemplateColumn Header="РТК">
 					<DataGridTemplateColumn.CellTemplate>
 						<DataTemplate x:DataType="mod:Curve">
-							<StackPanel Orientation="Horizontal">
-								<ComboBox Margin="2"
+							<ComboBox Margin="2"
 										  Name="Selector"
-									  ItemsSource="{Binding RelativeSource={RelativeSource AncestorType=UserControl} Path=DataContext.ParameterVm.CommunicationVm.RtkUnits}"
+									  ItemsSource="{Binding ElementName=CurvesTable, Path=DataContext.ParameterVm.CommunicationVm.RtkUnits}"
 									  SelectedItem="{Binding RtkUnit}">
-									<ComboBox.ItemTemplate>
-										<DataTemplate>
-											<TextBlock Text="{Binding Name}"
+								<ComboBox.ItemTemplate>
+									<DataTemplate>
+										<TextBlock Text="{Binding Name}"
 												   
-													   TextWrapping="Wrap"
-													   VerticalAlignment="Center"/>
-										</DataTemplate>
-									</ComboBox.ItemTemplate>
-
-								</ComboBox>
-								<TextBlock Text="{Binding ElementName=Selector, Path=SelectedItem}"/>
-							</StackPanel>
-							
+												   TextWrapping="Wrap"
+												   VerticalAlignment="Center"/>
+									</DataTemplate>
+								</ComboBox.ItemTemplate>
+							</ComboBox>
 						</DataTemplate>
 					</DataGridTemplateColumn.CellTemplate>
 				</DataGridTemplateColumn>
@@ -83,7 +79,7 @@
 						<DataTemplate x:DataType="mod:Curve">
 							<ComboBox Margin="2"
 									  
-									  ItemsSource="{Binding RelativeSource={RelativeSource AncestorType=UserControl} Path=DataContext.ParameterVm.Parameters}"
+									  ItemsSource="{Binding ElementName=CurvesTable, Path=DataContext.ParameterVm.Parameters}"
 									  SelectedItem="{Binding Parameter}">
 								<ComboBox.ItemTemplate>
 									<DataTemplate>

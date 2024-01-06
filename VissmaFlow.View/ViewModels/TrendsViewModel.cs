@@ -44,6 +44,7 @@ namespace VissmaFlow.View.ViewModels
                     Values = c.Values,
                     GeometryStroke = null,
                     GeometrySize = 0,
+                    LineSmoothness=0,
                     IsVisible = c.IsVisible,
                     Fill = null,
                     Stroke = new SolidColorPaint(GetSKColor(c.Color)){ StrokeThickness = 2 }
