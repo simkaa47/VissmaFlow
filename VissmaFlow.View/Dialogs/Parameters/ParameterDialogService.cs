@@ -16,7 +16,7 @@ namespace VissmaFlow.View.Dialogs.Parameters
             }
             var par = new ParameterBase();
             ParameterChangeWindow window  = new ParameterChangeWindow(par);
-            await window.ShowDialog(desktop.MainWindow);
+            await window.ShowDialogAsync();
             if (window.DialogResult) return par;
             return null;
         }

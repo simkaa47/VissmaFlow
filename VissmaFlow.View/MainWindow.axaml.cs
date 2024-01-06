@@ -1,29 +1,60 @@
+using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Input.TextInput;
+using Avalonia.Input;
+using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
+using CommunityToolkit.Mvvm.Messaging;
+using System;
 using VissmaFlow.View.UserControls.Keyboard;
+using VissmaFlow.View.ViewModels;
 
 namespace VissmaFlow.View
 {
-    public partial class MainWindow : Window, ITextInputMethodRoot
-    {
+    public partial class MainWindow : Window
+    {        
         public MainWindow()
-        {           
+        {
             InitializeComponent();
-            WindowState = WindowState.FullScreen;
+            WindowState = WindowState.FullScreen;           
+            this.AddHandler<GotFocusEventArgs>(Control.GotFocusEvent, openVirtualKeyboard);
+           
+
         }
+
+        StyledElement keyboard;
+
+        private void OnKeyboardInitialized(object? sender, RoutedEventArgs e)
+        {            
+            if(sender is not null && sender is StyledElement control)
+            {
+                keyboard = control;
+                control.DataContext = new KeyBoardViewModel();
+            }
+        }
+
+        
+
 
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
         }
 
-        private VirtualKeyboardTextInputMethod virtualKeyboardTextInput = new VirtualKeyboardTextInputMethod();
-        ITextInputMethodImpl ITextInputMethodRoot.InputMethod
+        private void openVirtualKeyboard(object? sender, GotFocusEventArgs e)
         {
-            get
+            if (e.Source!.GetType() == typeof(TextBox) && keyboard is not  null && keyboard.DataContext is KeyBoardViewModel vm)
             {
-                return virtualKeyboardTextInput;
+
+                if (!vm.IsOskVisible) 
+                {                    
+                    WeakReferenceMessenger.Default.Send(new PassObjectMsg(e.Source));
+                    WeakReferenceMessenger.Default.Send(new OskControlMsg(true));
+                    e.Handled = true;                   
+                }
+                else
+                {
+                    e.Handled = false;
+                }
             }
         }
     }

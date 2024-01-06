@@ -3,6 +3,7 @@ using VissmaFlow.Core.Models.AccessControl;
 using VissmaFlow.Core.Models.Communication;
 using VissmaFlow.Core.Models.Event;
 using VissmaFlow.Core.Models.Parameters;
+using VissmaFlow.Core.Models.Trends;
 
 namespace VissmaFlow.Core.Infrastructure.DataAccess
 {
@@ -13,6 +14,9 @@ namespace VissmaFlow.Core.Infrastructure.DataAccess
         public DbSet<CommSettings> CommSettings => Set<CommSettings>();
         public DbSet<User> Users => Set<User>();
         public DbSet<Event> Events => Set<Event>();
+        public DbSet<TrendSettings> TrendSettings => Set<TrendSettings>();
+
+        public DbSet<Curve> Curves => Set<Curve>();
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

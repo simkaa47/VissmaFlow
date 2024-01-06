@@ -20,8 +20,8 @@ namespace VissmaFlow.Core.ViewModels
         private readonly IQuestionDialog _questionDialog;
 
         public CommunicationVm(ILogger<CommunicationVm> logger,
-            IRepository<CommSettings> commSettRepository, 
-            IRepository<RtkUnit> _rtkUnitRepository, 
+            IRepository<CommSettings> commSettRepository,
+            IRepository<RtkUnit> _rtkUnitRepository,
             IRtkUnitDialog rtkUnitDialog, IQuestionDialog questionDialog)
         {
             _logger = logger;
@@ -52,7 +52,7 @@ namespace VissmaFlow.Core.ViewModels
         private async Task AddRtkUnitAsync()
         {
             var rtk = await _rtkUnitDialog.ShowDialog();
-            if(rtk is not null && !rtk.HasErrors)
+            if (rtk is not null && !rtk.HasErrors)
             {
                 _logger.LogInformation($"Добавление РТК \"{rtk.Name}\"");
                 try
@@ -71,7 +71,7 @@ namespace VissmaFlow.Core.ViewModels
         private async Task DeleteRtkAsync(object o)
         {
             if (!(o is RtkUnit rtk)) return;
-            if(await _questionDialog.Ask("Удаление РТК", $"Удалить {rtk.Name}?"))
+            if (await _questionDialog.Ask("Удаление РТК", $"Удалить {rtk.Name}?"))
             {
                 try
                 {
@@ -90,7 +90,7 @@ namespace VissmaFlow.Core.ViewModels
         [RelayCommand]
         private async Task SaveAllAsync()
         {
-            if (RtkUnits is null) return;            
+            if (RtkUnits is null) return;
             foreach (var rtk in RtkUnits)
             {
                 try

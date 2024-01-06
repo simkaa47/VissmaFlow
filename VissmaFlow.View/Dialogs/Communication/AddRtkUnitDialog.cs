@@ -15,7 +15,7 @@ namespace VissmaFlow.View.Dialogs.Communication
             }
             var unit = new RtkUnit();
             RtkDialogWindow window = new RtkDialogWindow(unit);
-            await window.ShowDialog(desktop.MainWindow);
+            await window.ShowDialogAsync();
             if (window.DialogResult) return unit;
             return null;
         }

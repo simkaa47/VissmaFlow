@@ -25,7 +25,7 @@
 					Margin="5"
 					Command="{Binding AddUserCommand}"/>			
 		</StackPanel>
-		<DataGrid Items="{Binding Users}"
+		<DataGrid ItemsSource="{Binding Users}"
 				  Grid.Row="1"
 				  VerticalAlignment="Stretch"
 				  HorizontalAlignment="Left"

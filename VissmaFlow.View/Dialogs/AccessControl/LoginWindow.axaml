@@ -1,4 +1,4 @@
-<Window xmlns="https://github.com/avaloniaui"
+<UserControl xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -8,14 +8,13 @@
 		x:DataType="mod:Login"
 		xmlns:scg="clr-namespace:System.Collections.Generic;assembly=netstandard"
 		xmlns:sys="clr-namespace:System;assembly=netstandard"
-        x:Class="VissmaFlow.View.Dialogs.AccessControl.LoginWindow"
-        Title="Авторизация">
-	<Window.Resources>
+        x:Class="VissmaFlow.View.Dialogs.AccessControl.LoginWindow">
+	<UserControl.Resources>
 		<scg:List x:TypeArguments="sys:Object" x:Key="TextBoxErrorColors">
 			<SolidColorBrush Color="Black"/>
 			<SolidColorBrush Color="Red"/>
 		</scg:List>
-	</Window.Resources>
+	</UserControl.Resources>
 	<Grid RowDefinitions="*,Auto" Margin="5" Background="WhiteSmoke">
 		<StackPanel VerticalAlignment="Center">
 			<TextBox Margin="10" Height="40" Width="200" 
@@ -38,4 +37,4 @@
 			<Button Margin="5" Width="100" Content="Ок" IsEnabled="{Binding !HasErrors}" HorizontalContentAlignment="Center"  Click="Login_Click"/>
 		</StackPanel>
 	</Grid>
-</Window>
+</UserControl>

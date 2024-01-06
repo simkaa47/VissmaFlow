@@ -13,7 +13,7 @@ namespace VissmaFlow.View.Dialogs.AccessControl
             if (App.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
                 UserDialogWindow userWindow = new UserDialogWindow(user);
-                await userWindow.ShowDialog(desktop.MainWindow);
+                await userWindow.ShowDialogAsync();
                 return userWindow.DialogResult;
             }
             return false;

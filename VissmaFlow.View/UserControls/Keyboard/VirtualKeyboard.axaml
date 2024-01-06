@@ -4,15 +4,31 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:controls="using:Avalonia.Controls"
 			 xmlns:reactiveUi="http://reactiveui.net"
+			 xmlns:materialIcons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"		 
              xmlns:layout="using:VissmaFlow.View.UserControls.Keyboard.Layout"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="VissmaFlow.View.UserControls.Keyboard.VirtualKeyboard">
-	<DockPanel Margin="5">
-		<TextBox Name="TextBox" FontSize="20" DockPanel.Dock="Top"></TextBox>
-		<Grid DockPanel.Dock="Bottom">
-			<!-- QuickAndDirty resize bugfix -->
-			<layout:VirtualKeyboardLayoutRU Opacity="0" IsHitTestVisible="False"/>
-			<controls:TransitioningContentControl Name="TransitioningContentControl" VerticalAlignment="Center"/>
-		</Grid>
-	</DockPanel>
+	
+	<Grid>
+		<Button Height="30" Width="30"
+					VerticalAlignment="Top"
+					Name="AcceptButton"
+				    Margin="5"
+				    Content="{materialIcons:MaterialIconExt Kind=Close, Size=20}"
+					HorizontalAlignment="Right">
+			
+		</Button>
+		<DockPanel Margin="5">
+			<TextBox Name="TextBox" FontSize="20"
+					 Margin="0,0,40,0"
+					 DockPanel.Dock="Top"></TextBox>
+
+			<Grid DockPanel.Dock="Bottom">
+				<!-- QuickAndDirty resize bugfix -->
+				<layout:VirtualKeyboardLayoutRU Opacity="0" IsHitTestVisible="False"/>
+				<controls:TransitioningContentControl Name="TransitioningContentControl" VerticalAlignment="Center"/>
+			</Grid>
+		</DockPanel>
+	</Grid>
+	
 </UserControl>

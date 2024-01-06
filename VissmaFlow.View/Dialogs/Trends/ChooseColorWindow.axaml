@@ -1,0 +1,15 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+		xmlns:cp="clr-namespace:ThemeEditor.Controls.ColorPicker;assembly=ThemeEditor.Controls.ColorPicker"
+        x:Class="VissmaFlow.View.Dialogs.Trends.ChooseColorWindow">
+	<Grid RowDefinitions="*,Auto">
+		<cp:ColorPicker x:Name="hhh" Color="{Binding Color,  Mode=TwoWay}"/>
+		<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="1">
+			<Button Margin="5" Width="100" Content="Отмена" Click="Cancel_Click" HorizontalContentAlignment="Center"/>
+			<Button Margin="5" Width="100" Content="Ок"  HorizontalContentAlignment="Center"  Click="Accept_Click"/>
+		</StackPanel>
+	</Grid>
+</UserControl>

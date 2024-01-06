@@ -9,7 +9,7 @@
 			 x:DataType="vm:MainViewModel"
 			 xmlns:par="using:VissmaFlow.View.UserControls.Parameters"
              x:Class="VissmaFlow.View.UserControls.Parameters.ParametersViewControl">
-	<TabControl Items="{Binding CommunicationVm.RtkUnits}" TabStripPlacement="Top">
+	<TabControl ItemsSource="{Binding CommunicationVm.RtkUnits}" TabStripPlacement="Top">
 		<TabControl.Styles>
 			<Style Selector="ListBoxItem">
 				<Setter Property="Margin" Value="0"/>
@@ -23,7 +23,7 @@
 		</TabControl.ItemTemplate>
 		<TabControl.ContentTemplate>
 			<DataTemplate DataType="rtk:RtkUnit">
-				<ListBox Items="{Binding Parameters}"
+				<ListBox ItemsSource="{Binding Parameters}"
 						 >
 					<ListBox.ItemTemplate>
 						<DataTemplate DataType="p:ParameterBase">

@@ -27,8 +27,8 @@ public partial class LoginWindow : DialogWindow
                 {
                     await vm.LoginAsync(Login);
                     if (vm.CurrentUser != null)
-                    {                        
-                        this.Close();
+                    {
+                        needToCloseDialog = true;
                     }
                 }
             }

@@ -1,4 +1,4 @@
-<Window xmlns="https://github.com/avaloniaui"
+<UserControl xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -8,8 +8,7 @@
 		x:DataType="par:ParameterBase"
 		Background="Gray"
 		xmlns:adm="using:VissmaFlow.View.UserControls.Administration"
-        x:Class="VissmaFlow.View.Dialogs.Parameters.ParameterChangeWindow"
-        Title="Окно параметра">
+        x:Class="VissmaFlow.View.Dialogs.Parameters.ParameterChangeWindow">
 	<StackPanel Margin="5" Background="White">
 		<StackPanel.Styles>
 			<Style Selector="TextBlock">
@@ -31,7 +30,7 @@
 		<DockPanel>
 			<TextBlock Text="Тип данных"/>
 			<ComboBox Margin="5"
-					  Items="{StaticResource DataTypes}"
+					  ItemsSource="{StaticResource DataTypes}"
 					  SelectedIndex="{Binding Data}"
 					  Width="200"
 					  HorizontalAlignment="Right"/>
@@ -39,7 +38,7 @@
 		<DockPanel>
 			<TextBlock Text="Тип Modbus регистра"/>
 			<ComboBox Margin="5"
-					  Items="{StaticResource ModbusRegisters}"
+					  ItemsSource="{StaticResource ModbusRegisters}"
 					  SelectedIndex="{Binding ModbusRegType}"
 					  Width="200"
 					  HorizontalAlignment="Right"/>
@@ -65,7 +64,7 @@
 		<DockPanel IsVisible="{Binding Data, Converter={StaticResource IfNotEqualConverter}, ConverterParameter={x:Static par:DataType.str}}">
 			<TextBlock Text="Порядок байт"/>
 			<ComboBox Margin="5"
-					  Items="{StaticResource ByteOrders}"
+					  ItemsSource="{StaticResource ByteOrders}"
 					  SelectedIndex="{Binding ByteOrder}"
 					  Width="200"
 					  HorizontalAlignment="Right"/>
@@ -81,4 +80,4 @@
 			<Button Margin="5" Width="100" Content="Ок" IsEnabled="{Binding !HasErrors}" HorizontalContentAlignment="Center"  Click="Accept_Click"/>
 		</StackPanel>
 	</StackPanel>
-</Window>
+</UserControl>

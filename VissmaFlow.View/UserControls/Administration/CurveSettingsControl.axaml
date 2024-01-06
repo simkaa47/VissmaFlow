@@ -1,0 +1,106 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 xmlns:vm="using:VissmaFlow.Core.ViewModels"
+			 x:DataType="vm:TrendSettigsViewModel"
+			 xmlns:mat="using:Material.Icons.Avalonia"
+			 xmlns:mod="using:VissmaFlow.Core.Models.Trends"
+             x:Class="VissmaFlow.View.UserControls.Administration.CurveSettingsControl">
+	<Grid RowDefinitions="160,*" Grid.Row="1">
+		<StackPanel>
+			<Button Margin="5"
+				Width="100"
+				VerticalAlignment="Stretch"
+				Content="Сохранить"
+				VerticalContentAlignment="Center"
+				HorizontalContentAlignment="Center"
+				Command="{Binding SaveSettingsCommand}"/>
+			<DockPanel>
+				<TextBlock Text="Ширина тренда, c" VerticalAlignment="Center"/>
+				<TextBox HorizontalAlignment="Right"
+						 Margin="5"
+						 Width="100" Text="{Binding TrendSettings.MaxTimeSeconds}"/>
+			</DockPanel>
+			<DockPanel>
+				<TextBlock Text="Частота обновления, мс" VerticalAlignment="Center"/>
+				<TextBox HorizontalAlignment="Right"
+						 Margin="5"
+						 Width="100" Text="{Binding TrendSettings.ScanFrequence}"/>
+			</DockPanel>
+		</StackPanel>
+		
+		<DataGrid Grid.Row="1"
+				  VerticalAlignment="Stretch"
+				 ItemsSource="{Binding Curves}">
+			<DataGrid.Columns>
+				<DataGridTemplateColumn Header="Цвет">
+					<DataGridTemplateColumn.CellTemplate>
+						<DataTemplate x:DataType="mod:Curve">
+							<StackPanel Orientation="Horizontal">
+								<Rectangle Height="20" Width="50" Name="Rectangle">
+									<Rectangle.Fill>
+										<SolidColorBrush Color="{Binding Color, Converter={StaticResource ColorConverter}, Mode=TwoWay}"/>
+									</Rectangle.Fill>
+								</Rectangle>
+								<Button Height="20" Width="20"
+										Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=ChooseColorCommand}"
+										CommandParameter="{Binding ElementName=Rectangle, Path=Fill}">
+									<mat:MaterialIcon Kind="Edit"/>
+								</Button>
+							</StackPanel>
+						</DataTemplate>
+					</DataGridTemplateColumn.CellTemplate>
+				</DataGridTemplateColumn>
+				<DataGridTemplateColumn Header="РТК">
+					<DataGridTemplateColumn.CellTemplate>
+						<DataTemplate x:DataType="mod:Curve">
+							<StackPanel Orientation="Horizontal">
+								<ComboBox Margin="2"
+										  Name="Selector"
+									  ItemsSource="{Binding RelativeSource={RelativeSource AncestorType=UserControl} Path=DataContext.ParameterVm.CommunicationVm.RtkUnits}"
+									  SelectedItem="{Binding RtkUnit}">
+									<ComboBox.ItemTemplate>
+										<DataTemplate>
+											<TextBlock Text="{Binding Name}"
+												   
+													   TextWrapping="Wrap"
+													   VerticalAlignment="Center"/>
+										</DataTemplate>
+									</ComboBox.ItemTemplate>
+
+								</ComboBox>
+								<TextBlock Text="{Binding ElementName=Selector, Path=SelectedItem}"/>
+							</StackPanel>
+							
+						</DataTemplate>
+					</DataGridTemplateColumn.CellTemplate>
+				</DataGridTemplateColumn>
+				
+				<DataGridTemplateColumn Header="Параметр">
+					<DataGridTemplateColumn.CellTemplate>
+						<DataTemplate x:DataType="mod:Curve">
+							<ComboBox Margin="2"
+									  
+									  ItemsSource="{Binding RelativeSource={RelativeSource AncestorType=UserControl} Path=DataContext.ParameterVm.Parameters}"
+									  SelectedItem="{Binding Parameter}">
+								<ComboBox.ItemTemplate>
+									<DataTemplate>
+										<TextBlock Text="{Binding Description}"
+												   MaxWidth="160"
+												   TextWrapping="Wrap"
+												   VerticalAlignment="Center"/>
+									</DataTemplate>
+								</ComboBox.ItemTemplate>
+
+							</ComboBox>
+						</DataTemplate>
+					</DataGridTemplateColumn.CellTemplate>
+				</DataGridTemplateColumn>
+				<DataGridCheckBoxColumn x:DataType="mod:Curve" Binding="{Binding IsVisible}" Header="Видимость"/>
+			</DataGrid.Columns>
+		</DataGrid>
+	</Grid>
+	
+</UserControl>

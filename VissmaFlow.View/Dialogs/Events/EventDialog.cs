@@ -14,8 +14,8 @@ namespace VissmaFlow.View.Dialogs.Events
                 return null;
             }            
             AddEventWindow window = new AddEventWindow(ev);
-            await window.ShowDialog(desktop.MainWindow);
-            if (window.DialogResult) return ev;
+            await window.ShowDialogAsync();
+            if (window.DialogResult) return await Task.FromResult(ev);
             return null;
         }
     }

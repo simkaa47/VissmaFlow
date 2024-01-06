@@ -17,6 +17,7 @@ using VissmaFlow.View.Dialogs.AccessControl;
 using VissmaFlow.Core.Contracts.AccessControl;
 using VissmaFlow.Core.Contracts.Events;
 using VissmaFlow.View.Dialogs.Events;
+using VissmaFlow.View.ViewModels;
 
 namespace VissmaFlow.View
 {
@@ -38,6 +39,7 @@ namespace VissmaFlow.View
                 ConfigureServices(services => 
                 {
                     services.AddApplicationServices();
+                    services.AddSingleton<TrendsViewModel>();
                     services.AddTransient<IParameterDialogService, ParameterDialogService>();
                     services.AddTransient<IQuestionDialog, AskDialog>();
                     services.AddTransient<IRtkUnitDialog, AddRtkUnitDialog>();

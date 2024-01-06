@@ -14,7 +14,7 @@
 		</Style>
 	</UserControl.Styles>
 	<Viewbox Height="50" Width="50">
-		<ListBox Items="{Binding CommunicationVm.RtkUnits}">
+		<ListBox ItemsSource="{Binding CommunicationVm.RtkUnits}">
 			<ListBox.ItemTemplate>
 				<DataTemplate>
 					<Border Background="{Binding Connected, Converter={StaticResource GetIfTrueConverter}, ConverterParameter={StaticResource ErrorColors}}">

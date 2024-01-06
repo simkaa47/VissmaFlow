@@ -18,7 +18,7 @@ namespace VissmaFlow.Core.ViewModels
         private readonly ParameterVm _parameterVm;
         private readonly IEventDialog _eventDialog;
         [ObservableProperty]
-        private IEnumerable<Event>? _events;
+        private List<Event>? _events;
         private IEnumerable<Event>? _connectEvents;
 
         public Dictionary<Event, ParameterBase?> _eventsDictionary = new Dictionary<Event, ParameterBase?>();
@@ -154,6 +154,10 @@ namespace VissmaFlow.Core.ViewModels
         #endregion
 
 
+        [ObservableProperty]
+        private List<Event>? _activeEvents;
+
+
         public void OnScanRtk()
         {
             foreach (var e in _eventsDictionary)
@@ -178,17 +182,17 @@ namespace VissmaFlow.Core.ViewModels
             switch (@event.EventCondition)
             {
                 case EventCondition.Equal:
-                    return @event.CompareValue == comparedValue;
+                    return comparedValue == @event.CompareValue;
                 case EventCondition.NotEqual:
-                    return @event.CompareValue != comparedValue;
+                    return comparedValue != @event.CompareValue;
                 case EventCondition.LessThan:
-                    return @event.CompareValue < comparedValue;
+                    return comparedValue < @event.CompareValue;
                 case EventCondition.LessThanOrEqual:
-                    return @event.CompareValue <= comparedValue;
+                    return comparedValue <= @event.CompareValue;
                 case EventCondition.GreaterThan:
-                    return @event.CompareValue > comparedValue;
+                    return comparedValue > @event.CompareValue;
                 case EventCondition.GreaterThanOrEqual:
-                    return @event.CompareValue >= comparedValue;
+                    return comparedValue >= @event.CompareValue;
                 default:
                     return false; ;
             }
@@ -243,17 +247,19 @@ namespace VissmaFlow.Core.ViewModels
                     Events = Events.Except(_connectEvents).ToList();
                 }
             }
-            Events = Events?.Union(events).ToList();
+            Events?.AddRange(events);            
             _connectEvents = events;
-            if(Events is not null)
+            if (Events is not null)
             {
                 foreach (var e in Events)
                 {
                     e.PropertyChanged += (o, a) => 
                     { 
-                        if(a.PropertyName == nameof(e.IsActive) && e.IsActive)
+                        if(a.PropertyName == nameof(e.IsActive))
                         {
-                            e.LastActiveTime = DateTime.Now;
+                            ActiveEvents = Events.Where(e => e.IsActive).ToList(); 
+                            if(e.IsActive)
+                                e.LastActiveTime = DateTime.Now;
                         }
                     };
                 }

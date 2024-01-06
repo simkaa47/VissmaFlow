@@ -1,4 +1,4 @@
-<Window xmlns="https://github.com/avaloniaui"
+<UserControl xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -7,9 +7,8 @@
 		xmlns:vm="using:VissmaFlow.Core.ViewModels"
 		xmlns:par="using:VissmaFlow.Core.Models.Parameters"
 		x:DataType="vm:MainViewModel"		
-        x:Class="VissmaFlow.View.Dialogs.Events.AddEventWindow"
-        Title="AddEventWindow">	
-	<Window.Styles>
+        x:Class="VissmaFlow.View.Dialogs.Events.AddEventWindow">
+	<UserControl.Styles>
 		<Style Selector="TextBlock">
 			<Setter Property="TextWrapping" Value="Wrap"/>
 			<Setter Property="Margin" Value="5,5,55,5"/>
@@ -20,14 +19,14 @@
 			<Setter Property="VerticalAlignment" Value="Center"/>
 			<Setter Property="HorizontalAlignment" Value="Right"/>
 		</Style>
-	</Window.Styles>
+	</UserControl.Styles>
 	<Grid Background="White" Margin="5" RowDefinitions="*,Auto">
 		<ScrollViewer VerticalScrollBarVisibility="Auto">
 			<StackPanel DataContext="{StaticResource Event}" x:DataType="e:Event">
 				<DockPanel >
 					<TextBlock Text="Тип события"/>
 					<ComboBox HorizontalAlignment="Right"
-							  Items="{StaticResource EventTypes}"
+							  ItemsSource="{StaticResource EventTypes}"
 							  SelectedIndex="{Binding  EventType}"
 							  Margin="5,5,5,5"
 							  Width="160"
@@ -37,7 +36,7 @@
 					<TextBlock Text="РТК"/>
 					<ComboBox HorizontalAlignment="Right"
 							  Width="160"
-							  Items="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.CommunicationVm.RtkUnits}"
+							  ItemsSource="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.CommunicationVm.RtkUnits}"
 							  SelectedItem="{Binding RtkUnit, Mode=TwoWay}"
 							  Margin="100,5,5,5">
 						<ComboBox.ItemTemplate>
@@ -53,7 +52,7 @@
 					<TextBlock Text="Параметр"/>
 					<ComboBox HorizontalAlignment="Right"
 							  Width="160"
-							  Items="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ParameterVm.Parameters}"
+							  ItemsSource="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ParameterVm.Parameters}"
 							  SelectedItem="{Binding Parameter, Mode=TwoWay}"
 							  Margin="100,5,5,5">
 						<ComboBox.ItemTemplate>
@@ -79,7 +78,7 @@
 				<DockPanel >
 					<TextBlock Text="Условие срабатывания"/>
 					<ComboBox HorizontalAlignment="Right"
-							  Items="{StaticResource Conditions}"
+							  ItemsSource="{StaticResource Conditions}"
 							  SelectedIndex="{Binding  EventCondition}"
 							  Margin="5,5,5,5"
 							  Width="160"
@@ -99,4 +98,4 @@
 			<Button Margin="5" Width="100" Content="Ок" IsEnabled="{Binding !HasErrors}" HorizontalContentAlignment="Center"  Click="Accept_Click"/>
 		</StackPanel>
 	</Grid>
-</Window>
+</UserControl>

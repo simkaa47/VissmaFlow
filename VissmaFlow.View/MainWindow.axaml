@@ -4,22 +4,42 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="1920" d:DesignHeight="1080"
         x:Class="VissmaFlow.View.MainWindow"
+		MaxWidth="480" MaxHeight="800"
 		xmlns:scg="clr-namespace:System.Collections.Generic;assembly=netstandard"
 		xmlns:sys="clr-namespace:System;assembly=netstandard"
 		xmlns:vm="using:VissmaFlow.Core.ViewModels"
 		x:DataType="vm:MainViewModel"
-		MaxWidth="480"
-		MaxHeight="800"
+		xmlns:kb="using:VissmaFlow.View.UserControls.Keyboard"
 		xmlns:hb="using:VissmaFlow.View.UserControls.HighBar"	
-		HasSystemDecorations="False"
+		SystemDecorations="None"
 		xmlns:uc="using:VissmaFlow.View.UserControls"
         Title="VissmaFlow.View">
-	<Border BorderBrush="Gray"
-		BorderThickness="2">
-		<Grid RowDefinitions="80,*">
-			<hb:HighBarControl/>
-			<uc:MainTabControl Grid.Row="1"/>
-		</Grid>
-	</Border>
+	<Grid RowDefinitions="*, Auto">
+		<Viewbox>
+			<Border BorderBrush="Gray"
+					Name="MainContentBorder"
+					IsEnabled="{Binding ElementName=KbBorder, Path=!IsVisible}"
+					Height="800" Width="480"
+			BorderThickness="2">
+				<Grid RowDefinitions="80,*">
+					<hb:HighBarControl/>
+					<uc:MainTabControl Grid.Row="1"/>
+					<CheckBox IsChecked="{Binding ElementName=keyboard, Path=IsVisible}"/>
+				</Grid>
+			</Border>
+		</Viewbox>
+		<Border Background="LightGray"
+				Name="KbBorder"
+				Loaded="OnKeyboardInitialized"				
+				IsVisible="{Binding IsOskVisible}"
+				Grid.Row="1"   
+				Width="480" Height="266">
+			<Viewbox>
+				<kb:VirtualKeyboard/>
+			</Viewbox>			
+		</Border>
+	</Grid>
+	
+	
 	
 </Window>
