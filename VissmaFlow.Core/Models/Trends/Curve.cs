@@ -20,7 +20,10 @@ public partial class Curve:EntityCommon
     public virtual RtkUnit? RtkUnit
     {
         get => _rtkUnit;
-        set => SetProperty(ref _rtkUnit, value);
+        set 
+        {             
+                SetProperty(ref _rtkUnit, value); 
+        } 
     }
     #endregion
 

@@ -1,21 +1,15 @@
-using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Input;
-using Avalonia.Input.TextInput;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using Avalonia.Threading;
-using Avalonia.VisualTree;
 using CommunityToolkit.Mvvm.Messaging;
-using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Subjects;
-using System.Runtime.InteropServices;
 using System.Threading.Tasks;
-using Tmds.DBus.Protocol;
+using VissmaFlow.Core.Models.Parameters;
 using VissmaFlow.View.UserControls.Keyboard.Layout;
 using VissmaFlow.View.ViewModels;
 
@@ -31,25 +25,23 @@ public enum VirtualKeyboardState
 public partial class VirtualKeyboard : UserControl
 {
     private static List<Type> Layouts { get; } = new List<Type>();
-    private static Func<Type> DefaultLayout { get; set; }
+    private static Func<Type>? DefaultLayout { get; set; }
 
     public static void AddLayout<TLayout>() where TLayout : KeyboardLayout => Layouts.Add(typeof(TLayout));
 
-    public static void SetDefaultLayout(Func<Type> getDefaultLayout) => DefaultLayout = getDefaultLayout;  
-
-    
+    public static void SetDefaultLayout(Func<Type> getDefaultLayout) => DefaultLayout = getDefaultLayout;
 
     public TextBox TextBox_ { get; }
     public Button AcceptButton_ { get; }
     public string targetLayout { get; set; }
 
-    private TextBox sourceObject;
+    private TextBox? sourceObject;
     public TransitioningContentControl TransitioningContentControl_ { get; }
 
     public IObservable<VirtualKeyboardState> KeyboardStateStream => _keyboardStateStream;
     private readonly BehaviorSubject<VirtualKeyboardState> _keyboardStateStream;
 
-    
+
 
     public VirtualKeyboard()
     {
@@ -63,6 +55,14 @@ public partial class VirtualKeyboard : UserControl
         {
             if (m.Value is TextBox textBox)
             {
+                if (textBox.Tag is DataType.float32 || textBox.Tag is DataType.double64)
+                    TransitioningContentControl_.Content = new FloatKeyboard();
+                else if (textBox.Tag is DataType.int16 || textBox.Tag is DataType.uint16
+                    || textBox.Tag is DataType.uint32 || textBox.Tag is DataType.int32)
+                    TransitioningContentControl_.Content = new NumericKeyboard();
+                else TransitioningContentControl_.Content = Activator.CreateInstance(DefaultLayout!.Invoke());
+
+
                 TextBox_.Text = textBox.Text;
                 sourceObject = textBox;
                 await Task.Delay(TimeSpan.FromMilliseconds(100));
@@ -80,7 +80,7 @@ public partial class VirtualKeyboard : UserControl
 
             if (targetLayout == null)
             {
-                TransitioningContentControl_.Content = Activator.CreateInstance(DefaultLayout.Invoke());
+                TransitioningContentControl_.Content = Activator.CreateInstance(DefaultLayout!.Invoke());
             }
             else
             {
@@ -91,10 +91,10 @@ public partial class VirtualKeyboard : UserControl
                 }
                 else
                 {
-                    TransitioningContentControl_.Content = Activator.CreateInstance(DefaultLayout.Invoke());
+                    TransitioningContentControl_.Content = Activator.CreateInstance(DefaultLayout!.Invoke());
                 }
             }
-            
+
             await Task.Delay(TimeSpan.FromMilliseconds(100));
             Dispatcher.UIThread.Post(() =>
             {
@@ -114,6 +114,7 @@ public partial class VirtualKeyboard : UserControl
             else if (args.Key == Key.Enter)
             {
                 sourceObject!.Text = TextBox_.Text;
+                ExecCmd(sourceObject);
                 WeakReferenceMessenger.Default.Send(new OskControlMsg(false));
             }
         };
@@ -128,11 +129,12 @@ public partial class VirtualKeyboard : UserControl
 
     private void SetCaretIndex(TextBox textBox, bool decrement)
     {
-        if(!decrement && textBox.CaretIndex < textBox.Text!.Length)
+        if (TextBox_.Text is null) return;
+        if (!decrement && textBox.CaretIndex < textBox.Text!.Length)
         {
             textBox.CaretIndex++;
         }
-        else if(decrement && textBox.CaretIndex > 0)
+        else if (decrement && textBox.CaretIndex > 0)
         {
             textBox.CaretIndex--;
         }
@@ -142,7 +144,10 @@ public partial class VirtualKeyboard : UserControl
     public void ProcessText(string text)
     {
         TextBox_.Focus();
-        TextBox_.Text = TextBox_.Text!.Insert(TextBox_.CaretIndex, text);
+        if (TextBox_.Text is null)
+            TextBox_.Text = text;
+        else
+            TextBox_.Text = TextBox_.Text!.Insert(TextBox_.CaretIndex, text);
         SetCaretIndex(TextBox_, false);
         if (_keyboardStateStream.Value == VirtualKeyboardState.Shift)
         {
@@ -202,6 +207,7 @@ public partial class VirtualKeyboard : UserControl
             else if (key == Key.Enter || key == Key.ImeAccept)
             {
                 sourceObject!.Text = TextBox_.Text;
+                ExecCmd(sourceObject);
                 WeakReferenceMessenger.Default.Send(new OskControlMsg(false));
             }
             else if (key == Key.Help)
@@ -235,6 +241,20 @@ public partial class VirtualKeyboard : UserControl
 
                 //InputManager.Instance.ProcessInput(new RawKeyEventArgs(KeyboardDevice.Instance, (ulong)DateTime.Now.Ticks, (Window)TextBox.GetVisualRoot(), RawKeyEventType.KeyDown, key, RawInputModifiers.None));
                 //InputManager.Instance.ProcessInput(new RawKeyEventArgs(KeyboardDevice.Instance, (ulong)DateTime.Now.Ticks, (Window)TextBox.GetVisualRoot(), RawKeyEventType.KeyUp, key, RawInputModifiers.None));
+            }
+        }
+    }
+
+    private void ExecCmd(TextBox? tb)
+    {
+        if (tb is null) return;
+        var binding = tb.KeyBindings.FirstOrDefault();
+        if (binding is not null)
+        {
+            var cmd = binding.Command;
+            if (cmd is not null)
+            {
+                cmd.Execute(binding.CommandParameter);
             }
         }
     }

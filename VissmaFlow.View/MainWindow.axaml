@@ -17,6 +17,7 @@
 	<Grid RowDefinitions="*, Auto">
 		<Viewbox>
 			<Border BorderBrush="Gray"
+					Name="MainContentBorder"
 					IsEnabled="{Binding ElementName=KbBorder, Path=!IsVisible}"
 					Height="800" Width="480"
 			BorderThickness="2">

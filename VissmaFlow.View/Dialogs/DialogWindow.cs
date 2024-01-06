@@ -1,36 +1,49 @@
-﻿using Avalonia.Controls;
+﻿using Avalonia;
+using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Interactivity;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace VissmaFlow.View.Dialogs
 {
-    public partial class DialogWindow : Window
+    public partial class DialogWindow : UserControl
     {
         protected override void OnInitialized()
         {
             base.OnInitialized();
-            this.SystemDecorations = SystemDecorations.None;
-            if (App.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
-            {
-                this.WindowState = WindowState.FullScreen;
-                this.Position = desktop.MainWindow.Position;
-                this.Width = desktop.MainWindow.Width;
-                this.Height = desktop.MainWindow.Height;
-            }
         }
+
+        protected bool needToCloseDialog;
 
 
         public bool DialogResult { get; set; }
         protected void Accept_Click(object sender, RoutedEventArgs e)
         {
             DialogResult = true;
-            Close();
+            needToCloseDialog = true;
+        }
+
+        private Control? TmpContent;
+
+        public async Task ShowDialogAsync()
+        {
+            if (!(App.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)) return;
+            var border = desktop.MainWindow!.Get<Border>("MainContentBorder");
+            if (border is null) return;
+            TmpContent = border.Child;
+            border.Child = this;
+            await Task.Run(() =>
+            {
+                while (!needToCloseDialog){ Thread.Sleep(100); }
+            });
+            border.Child = TmpContent;
         }
 
 
         protected void Cancel_Click(object sender, RoutedEventArgs e)
         {
-            Close();
+            needToCloseDialog = true;
         }
     }
 }

@@ -9,5 +9,6 @@ public partial class MainTabControl : UserControl
     public MainTabControl()
     {
         InitializeComponent();
+        
     }
 }

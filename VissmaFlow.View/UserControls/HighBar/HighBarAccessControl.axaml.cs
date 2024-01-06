@@ -20,7 +20,7 @@ public partial class HighBarAccessControl : UserControl
         if(App.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             var logWindow = new LoginWindow();
-            await logWindow.ShowDialog(desktop.MainWindow);
+            await logWindow.ShowDialogAsync();
         }
     }
 }

@@ -56,22 +56,28 @@
 				<DataGridTemplateColumn Header="РТК">
 					<DataGridTemplateColumn.CellTemplate>
 						<DataTemplate x:DataType="mod:Curve">
-							<ComboBox Margin="2"
+							<StackPanel Orientation="Horizontal">
+								<ComboBox Margin="2"
+										  Name="Selector"
 									  ItemsSource="{Binding RelativeSource={RelativeSource AncestorType=UserControl} Path=DataContext.ParameterVm.CommunicationVm.RtkUnits}"
 									  SelectedItem="{Binding RtkUnit}">
-								<ComboBox.ItemTemplate>
-									<DataTemplate>
-										<TextBlock Text="{Binding Name}"
-												   MaxWidth="160"
-												   TextWrapping="Wrap"
-												   VerticalAlignment="Center"/>
-									</DataTemplate>
-								</ComboBox.ItemTemplate>
+									<ComboBox.ItemTemplate>
+										<DataTemplate>
+											<TextBlock Text="{Binding Name}"
+												   
+													   TextWrapping="Wrap"
+													   VerticalAlignment="Center"/>
+										</DataTemplate>
+									</ComboBox.ItemTemplate>
 
-							</ComboBox>
+								</ComboBox>
+								<TextBlock Text="{Binding ElementName=Selector, Path=SelectedItem}"/>
+							</StackPanel>
+							
 						</DataTemplate>
 					</DataGridTemplateColumn.CellTemplate>
 				</DataGridTemplateColumn>
+				
 				<DataGridTemplateColumn Header="Параметр">
 					<DataGridTemplateColumn.CellTemplate>
 						<DataTemplate x:DataType="mod:Curve">

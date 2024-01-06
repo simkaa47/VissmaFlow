@@ -27,7 +27,7 @@ public partial class CurveSettingsControl : UserControl
         {
             var dialogBrush = new SolidColorBrush(brush.Color);
             var dialog = new ChooseColorWindow(dialogBrush);
-            await dialog.ShowDialog(desktop.MainWindow);
+            await dialog.ShowDialogAsync();
             if(dialog.DialogResult)
                 brush.Color = dialogBrush.Color;
 
