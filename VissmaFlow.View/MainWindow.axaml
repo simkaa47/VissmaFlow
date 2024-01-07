@@ -4,7 +4,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="1920" d:DesignHeight="1080"
         x:Class="VissmaFlow.View.MainWindow"
-		MaxWidth="480" MaxHeight="800"
+		
 		xmlns:scg="clr-namespace:System.Collections.Generic;assembly=netstandard"
 		xmlns:sys="clr-namespace:System;assembly=netstandard"
 		xmlns:vm="using:VissmaFlow.Core.ViewModels"

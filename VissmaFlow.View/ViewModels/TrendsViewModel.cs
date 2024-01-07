@@ -96,7 +96,7 @@ namespace VissmaFlow.View.ViewModels
                     if(ticks>0)
                     {
                         var dt = new DateTime(ticks);
-                        return dt.ToString("T");
+                        return dt.ToString("HH:mm:ss");
                     }
                     return d.ToString(); 
                 },

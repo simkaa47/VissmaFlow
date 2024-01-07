@@ -94,7 +94,9 @@
 						</DataTemplate>
 					</DataGridTemplateColumn.CellTemplate>
 				</DataGridTemplateColumn>
-				<DataGridCheckBoxColumn x:DataType="mod:Curve" Binding="{Binding IsVisible}" Header="Видимость"/>
+				<DataGridCheckBoxColumn x:DataType="mod:Curve" 
+										IsReadOnly="False"
+										Binding="{Binding IsVisible}" Header="Видимость"/>
 			</DataGrid.Columns>
 		</DataGrid>
 	</Grid>

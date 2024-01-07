@@ -20,7 +20,7 @@
 			</Style>
 		</DataGrid.Styles>
 		<DataGrid.Columns>
-			<DataGridTextColumn x:DataType="e:Event" FontSize="12" Header="Время срабатывания" Binding="{Binding LastActiveTime, StringFormat={}}{0:yyyy.MM.dd HH:mm:ss}"/>
+			<DataGridTextColumn x:DataType="e:Event" FontSize="12" Header="Время срабатывания" Binding="{Binding LastActiveTime, StringFormat={}{0:yyyy.MM.dd HH:mm:ss}}"/>
 			<DataGridTemplateColumn x:DataType="e:Event"   Header="Сообщение">
 				<DataGridTemplateColumn.CellTemplate>
 					<DataTemplate>
