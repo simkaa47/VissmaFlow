@@ -22,7 +22,7 @@ public partial class Curve:EntityCommon
         get => _rtkUnit;
         set 
         {             
-                SetProperty(ref _rtkUnit, value); 
+                if(value is not null)SetProperty(ref _rtkUnit, value); 
         } 
     }
     #endregion
@@ -32,7 +32,7 @@ public partial class Curve:EntityCommon
     public virtual ParameterBase? Parameter
     {
         get => _parameter;
-        set => SetProperty(ref _parameter, value);
+        set { if (value is not null) SetProperty(ref _parameter, value); }
     }
     #endregion
 
