@@ -11,7 +11,10 @@
 	<Grid>
 		<lvc:CartesianChart
 		 Series="{Binding Series}"
-		 ZoomMode="Both"		  
+		 ZoomMode="Both"	
+		 LegendPosition="Top"
+		 LegendTextSize="12"
+		 
 		 YAxes="{Binding YAxes}"
 		 SyncContext="{Binding Sync}"
 		 XAxes="{Binding XAxes}">
