@@ -4,7 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 			 xmlns:vm="using:VissmaFlow.Core.ViewModels"
+			 x:DataType="vm:MainViewModel"
 			 xmlns:local="using:VissmaFlow.View.UserControls.Main"
              x:Class="VissmaFlow.View.UserControls.Main.MainPageControl">
-  <local:MainTrendsControl/>
+	<Grid RowDefinitions="*,Auto">
+		<local:MainTrendsControl/>
+		<local:IndicatorsMainControl Grid.Row="1"
+			DataContext="{Binding IndicationVm}"/>
+	</Grid>
+  
 </UserControl>

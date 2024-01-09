@@ -1,0 +1,27 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 xmlns:vm="using:VissmaFlow.Core.ViewModels"
+			 xmlns:local="using:VissmaFlow.View.UserControls.Main"
+			 xmlns:ind="using:VissmaFlow.Core.Models.Indication"
+			 x:DataType="vm:IndicationVm"
+             x:Class="VissmaFlow.View.UserControls.Main.IndicatorsMainControl">
+	<UserControl.Styles>
+		<Style Selector="ListBoxItem">
+			<Setter Property="Margin" Value="0"/>
+			<Setter Property="Padding" Value="0"/>
+			<Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+		</Style>
+	</UserControl.Styles>
+	<ListBox ItemsSource="{Binding IndicationCells}"
+			 VerticalAlignment="Top">
+		<ListBox.ItemTemplate>
+			<DataTemplate x:DataType="ind:IndicationCell">
+				<local:IndicatorCellCotrol IsVisible="{Binding IsRequired}"/>
+			</DataTemplate>
+		</ListBox.ItemTemplate>
+	</ListBox>
+	
+</UserControl>

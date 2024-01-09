@@ -26,5 +26,8 @@
 		<TabItem Header="Тренды" Classes="common" MinHeight="30" MinWidth="90">
 			<adm:CurveSettingsControl DataContext="{Binding TrendSettigsViewModel}"/>
 		</TabItem>
+		<TabItem Header="Индикация" Classes="common" MinHeight="30" MinWidth="90">
+			<adm:IndicationUserControl DataContext="{Binding IndicationVm}"/>
+		</TabItem>
 	</TabControl>
 </UserControl>

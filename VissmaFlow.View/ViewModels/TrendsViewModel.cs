@@ -46,6 +46,7 @@ namespace VissmaFlow.View.ViewModels
                 {
                     Name = $"{c.RtkUnit?.Name} : {c.Parameter?.Description}",
                     Values = c.Values,
+                    IsVisibleAtLegend = c.IsVisible,                    
                     GeometryStroke = null,
                     GeometrySize = 0,
                     LineSmoothness = 0,

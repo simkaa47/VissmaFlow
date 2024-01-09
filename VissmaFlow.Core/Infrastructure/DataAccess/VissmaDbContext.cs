@@ -2,6 +2,7 @@
 using VissmaFlow.Core.Models.AccessControl;
 using VissmaFlow.Core.Models.Communication;
 using VissmaFlow.Core.Models.Event;
+using VissmaFlow.Core.Models.Indication;
 using VissmaFlow.Core.Models.Parameters;
 using VissmaFlow.Core.Models.Trends;
 
@@ -15,6 +16,8 @@ namespace VissmaFlow.Core.Infrastructure.DataAccess
         public DbSet<User> Users => Set<User>();
         public DbSet<Event> Events => Set<Event>();
         public DbSet<TrendSettings> TrendSettings => Set<TrendSettings>();
+
+        public DbSet<IndicationCell> IndicationCells => Set<IndicationCell>();
 
         public DbSet<Curve> Curves => Set<Curve>();
 

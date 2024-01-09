@@ -1,0 +1,64 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 xmlns:vm="using:VissmaFlow.Core.ViewModels"
+			 x:DataType="vm:IndicationVm"
+             x:Class="VissmaFlow.View.UserControls.Administration.IndicationUserControl">
+	<Grid RowDefinitions="50,*">
+		<Button Width="100"
+				VerticalAlignment="Stretch"
+				Content="Сохранить"
+				HorizontalAlignment="Left"
+				Margin="2"
+				VerticalContentAlignment="Center"
+				Command="{Binding SaveAllCommand}"/>
+		<DataGrid ItemsSource="{Binding IndicationCells}"
+				  Grid.Row="1"
+				  x:Name="root"
+				  IsReadOnly="False">
+			<DataGrid.Columns>
+				<DataGridTextColumn Header="№" Binding="{Binding Id}"/>
+				<DataGridTemplateColumn Header="РТК">
+					<DataGridTemplateColumn.CellTemplate>
+						<DataTemplate>
+							<ComboBox ItemsSource="{Binding ElementName=root, Path=DataContext.CommunicationVm.RtkUnits}"
+									  SelectedItem="{Binding RtkUnit}"
+									  Margin="2">
+								<ComboBox.ItemTemplate>
+									<DataTemplate>
+										<TextBlock Text="{Binding Name}"
+												   
+												   TextWrapping="Wrap"
+												   VerticalAlignment="Center"/>
+									</DataTemplate>
+								</ComboBox.ItemTemplate>
+							</ComboBox>
+						</DataTemplate>
+					</DataGridTemplateColumn.CellTemplate>
+				</DataGridTemplateColumn>
+				<DataGridTemplateColumn Header="Параметр">
+					<DataGridTemplateColumn.CellTemplate>
+						<DataTemplate>
+							<ComboBox ItemsSource="{Binding ElementName=root, Path=DataContext.ParameterVm.Parameters}"
+									  SelectedItem="{Binding Parameter}"
+									  Margin="2">
+								<ComboBox.ItemTemplate>
+									<DataTemplate>
+										<TextBlock Text="{Binding Description}"
+												   MaxWidth="160"
+												   TextWrapping="Wrap"
+												   VerticalAlignment="Center"/>
+									</DataTemplate>
+								</ComboBox.ItemTemplate>
+							</ComboBox>
+						</DataTemplate>
+					</DataGridTemplateColumn.CellTemplate>
+				</DataGridTemplateColumn>
+				<DataGridCheckBoxColumn IsReadOnly="False"
+										Binding="{Binding IsRequired}" Header="Видимость"/>
+			</DataGrid.Columns>
+		</DataGrid>
+	</Grid>
+</UserControl>
