@@ -18,6 +18,10 @@ using VissmaFlow.Core.Contracts.AccessControl;
 using VissmaFlow.Core.Contracts.Events;
 using VissmaFlow.View.Dialogs.Events;
 using VissmaFlow.View.ViewModels;
+using System;
+using VissmaFlow.Core.Infrastructure.DataAccess;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace VissmaFlow.View
 {
@@ -46,6 +50,21 @@ namespace VissmaFlow.View
                     services.AddTransient<IAccessDialogService, UserDialogService>();
                     services.AddTransient<IEventDialog, EventDialog>();
                 }).Build();
+            using (var scope = _host.Services.CreateScope())
+            {
+                var loggerFactory = scope.ServiceProvider.GetRequiredService<ILoggerFactory>();
+                try
+                {
+                    var context = scope.ServiceProvider.GetRequiredService<VissmaDbContext>();
+                    context.Database.Migrate();
+
+                }
+                catch (Exception ex)
+                {
+                    var logger = loggerFactory.CreateLogger<Program>();
+                    logger.LogError(ex, "An error occured diring migration");
+                }
+            }
         }
 
         public override void Initialize()

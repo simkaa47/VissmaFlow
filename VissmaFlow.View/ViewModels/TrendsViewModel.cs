@@ -1,23 +1,15 @@
-﻿using Avalonia.Data;
-using Avalonia.Media;
-using Avalonia.Threading;
+﻿using Avalonia.Media;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using DynamicData;
 using LiveChartsCore;
 using LiveChartsCore.Defaults;
 using LiveChartsCore.SkiaSharpView;
-using LiveChartsCore.SkiaSharpView.Drawing.Geometries;
 using LiveChartsCore.SkiaSharpView.Painting;
 using Microsoft.Extensions.Logging;
 using SkiaSharp;
 using System;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Runtime.Serialization;
 using System.Threading;
-using System.Threading.Tasks;
-using VissmaFlow.Core.Models.Communication;
 using VissmaFlow.Core.Models.Parameters;
 using VissmaFlow.Core.ViewModels;
 
@@ -46,7 +38,7 @@ namespace VissmaFlow.View.ViewModels
                 {
                     Name = $"{c.RtkUnit?.Name} : {c.Parameter?.Description}",
                     Values = c.Values,
-                    IsVisibleAtLegend = c.IsVisible,                    
+                    IsVisibleAtLegend = c.IsVisible,
                     GeometryStroke = null,
                     GeometrySize = 0,
                     LineSmoothness = 0,
@@ -80,7 +72,7 @@ namespace VissmaFlow.View.ViewModels
             new Axis()
             {
                 AnimationsSpeed = TimeSpan.FromMilliseconds(0),
-                ShowSeparatorLines = true,                
+                ShowSeparatorLines = true,
                 SeparatorsPaint = new SolidColorPaint(SKColors.Black.WithAlpha(100))
             }
         };
@@ -90,8 +82,8 @@ namespace VissmaFlow.View.ViewModels
             new DateTimeAxis(TimeSpan.FromSeconds(1), Formatter)
             {
                 AnimationsSpeed = TimeSpan.FromMilliseconds(0),
-                ShowSeparatorLines = true,                
-                LabelsRotation = 90,               
+                ShowSeparatorLines = true,
+                LabelsRotation = 90,
                 Labeler = (d)=>{
                     var ticks = (long)d;
                     if(ticks>0)
@@ -99,7 +91,7 @@ namespace VissmaFlow.View.ViewModels
                         var dt = new DateTime(ticks);
                         return dt.ToString("HH:mm:ss");
                     }
-                    return d.ToString(); 
+                    return d.ToString();
                 },
                 SeparatorsPaint = new SolidColorPaint(SKColors.Black.WithAlpha(100))
             }
@@ -137,8 +129,8 @@ namespace VissmaFlow.View.ViewModels
 
         [RelayCommand]
         private void EnableRealTime()
-        { 
-            if(XAxes is not null && XAxes.Length>0)
+        {
+            if (XAxes is not null && XAxes.Length > 0)
             {
                 XAxes[0].MaxLimit = null;
                 XAxes[0].MinLimit = null;
@@ -153,10 +145,10 @@ namespace VissmaFlow.View.ViewModels
             if (_trendSettigsViewModel.Curves is null) return;
             foreach (var c in _trendSettigsViewModel.Curves)
             {
-                if(c.RtkUnit is not null && c.Parameter is not null && c.RtkUnit.Connected)
+                if (c.RtkUnit is not null && c.Parameter is not null && c.RtkUnit.Connected)
                 {
-                    var par = c.RtkUnit.Parameters.Where(p=>p.Id == c.Parameter.Id).FirstOrDefault();   
-                    if(par is not null)
+                    var par = c.RtkUnit.Parameters.Where(p => p.Id == c.Parameter.Id).FirstOrDefault();
+                    if (par is not null)
                     {
                         lock (Sync)
                         {
@@ -174,8 +166,8 @@ namespace VissmaFlow.View.ViewModels
                     }
                 }
             }
-        }     
-        
+        }
+
         private double GetValueFromParameter(ParameterBase par)
         {
             if (par is ParameterFloat parameterFloat)
@@ -184,7 +176,7 @@ namespace VissmaFlow.View.ViewModels
                 return 0;
             else if (par is ParameterDouble parameterDouble)
                 return parameterDouble.Value;
-            else if (par is  ParameterShort parameterShort)
+            else if (par is ParameterShort parameterShort)
                 return parameterShort.Value;
             else if (par is ParameterUshort parameterUshort)
                 return parameterUshort.Value;
@@ -201,8 +193,8 @@ namespace VissmaFlow.View.ViewModels
         private void SetTimer()
         {
             var sett = _trendSettigsViewModel.TrendSettings;
-            var interval = (sett is not null && sett.ScanFrequence>=100) ? sett.ScanFrequence : 1000;
-            if(_timer is null)
+            var interval = (sett is not null && sett.ScanFrequence >= 100) ? sett.ScanFrequence : 1000;
+            if (_timer is null)
                 _timer = new Timer(OnTimer);
             _timer.Change(0, interval);
         }
