@@ -1,0 +1,86 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:vm="using:VissmaFlow.Core.ViewModels"
+			 xmlns:mat="using:Material.Icons.Avalonia"
+			 xmlns:s="using:VissmaFlow.Core.Models.SingleMeasures"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 x:DataType="vm:SingleMeasuresViewModel"
+			 x:Name="root"
+             x:Class="VissmaFlow.View.UserControls.Administration.SingleMeasSettingsControl">
+	<Grid RowDefinitions="Auto,*,50">
+		<ListBox>
+			<DockPanel HorizontalAlignment="Stretch">
+				<TextBlock Text="Источник данных" 
+						   DockPanel.Dock="Left"
+						   VerticalAlignment="Center"
+						   TextWrapping="Wrap"/>
+				<ComboBox Width="200"
+						  ItemsSource="{Binding ParameterVm.Parameters}"
+						  SelectedItem="{Binding Settings.Source}"
+						  VerticalAlignment="Center"
+						  DisplayMemberBinding="{Binding Description}"
+						  HorizontalAlignment="Right"
+						  DockPanel.Dock="Right">					
+				</ComboBox>
+			</DockPanel>
+			<DockPanel HorizontalAlignment="Stretch">
+				<TextBlock Text="Время ед. измерения, с"
+						   DockPanel.Dock="Left"
+						   VerticalAlignment="Center"
+						   TextWrapping="Wrap"/>
+				<TextBox HorizontalAlignment="Right"
+						 Width="100"
+						 Text="{Binding Settings.Duration}"
+						 VerticalAlignment="Center"
+						 DockPanel.Dock="Right"/>
+			</DockPanel>
+			
+		</ListBox>
+		<Grid Grid.Row="1" RowDefinitions="50,*">
+			<Button Margin="5"
+					Command="{Binding AddSingleMeasPointCommand}">
+				<mat:MaterialIcon Kind="PlusCircle"
+								  Margin="5"/>
+			</Button>
+			<DataGrid ItemsSource="{Binding Settings.Points}"
+					  VerticalAlignment="Stretch"
+					  Grid.Row="1">
+				<DataGrid.Columns>
+					<DataGridTextColumn Header="№" x:DataType="s:SingleMeasurePoint" Binding="{Binding Id}"/>
+					<DataGridTemplateColumn Header="Уср. значение" x:DataType="s:SingleMeasurePoint">
+						<DataGridTemplateColumn.CellTemplate>
+							<DataTemplate>
+								<ComboBox Width="150"
+										  ItemsSource="{Binding ElementName=root, Path=DataContext.ParameterVm.Parameters}"
+										  SelectedItem="{Binding AvgValue}"
+										  VerticalAlignment="Center"
+										  DisplayMemberBinding="{Binding Description}"
+										  HorizontalAlignment="Center"/>
+							</DataTemplate>
+						</DataGridTemplateColumn.CellTemplate>
+					</DataGridTemplateColumn>
+				<DataGridTemplateColumn Header="Значение измерения" x:DataType="s:SingleMeasurePoint">
+						<DataGridTemplateColumn.CellTemplate>
+							<DataTemplate>
+								<ComboBox Width="150"
+										  ItemsSource="{Binding ElementName=root, Path=DataContext.ParameterVm.Parameters}"
+										  SelectedItem="{Binding Destination}"
+										  VerticalAlignment="Center"
+										  DisplayMemberBinding="{Binding Description}"
+										  HorizontalAlignment="Center"/>
+							</DataTemplate>
+						</DataGridTemplateColumn.CellTemplate>
+					</DataGridTemplateColumn>
+				</DataGrid.Columns>
+			</DataGrid>
+		</Grid>
+		<Button Grid.Row="2"
+				Margin="5"
+				Command="{Binding SaveSettingsCommand}">
+			<TextBlock Text="Сохранить настроки"
+					   Margin="5"/>
+		</Button>
+	</Grid>
+</UserControl>

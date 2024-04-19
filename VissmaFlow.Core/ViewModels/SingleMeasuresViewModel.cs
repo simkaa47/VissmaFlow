@@ -15,12 +15,15 @@ namespace VissmaFlow.Core.ViewModels
         private SingleMeasureSettings? _settings;
 
         public SingleMeasuresViewModel(IRepository<SingleMeasureSettings> singleMeasRepository, 
-            ILogger<SingleMeasuresViewModel> logger)
+            ILogger<SingleMeasuresViewModel> logger, ParameterVm parameterVm)
         {
             _singleMeasRepository = singleMeasRepository;
             _logger = logger;
+            ParameterVm = parameterVm;
             InitAsync();
         }
+
+        public ParameterVm ParameterVm { get; }
 
         private async void InitAsync()
         {
@@ -32,6 +35,17 @@ namespace VissmaFlow.Core.ViewModels
             {
                 _logger.LogError($"Инициализация параметров единичных измерений - {ex.Message}");
             }            
+        }
+
+
+        [RelayCommand]
+        private async Task AddSingleMeasPointAsync()
+        {
+            if (Settings is null) return;
+            if (Settings.Points is null) Settings.Points = new List<SingleMeasurePoint>();
+            Settings.Points.Add(new SingleMeasurePoint { });
+            await SaveSettingsAsync();
+            Settings.Points = new List<SingleMeasurePoint>(Settings.Points);
         }
 
 

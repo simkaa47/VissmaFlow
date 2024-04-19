@@ -11,14 +11,22 @@ namespace VissmaFlow.Core.Models.SingleMeasures
         public virtual ParameterBase? AvgValue
         {
             get => _avgValue;
-            set=> SetProperty(ref _avgValue, value);
+            set
+            {
+                if (value is not null)
+                    SetProperty(ref _avgValue, value);
+            }
         }
 
         private ParameterBase? _destination;
         public virtual ParameterBase? Destination
         {
             get => _destination;
-            set => SetProperty(ref _destination, value);
+            set
+            {
+                if(value is not null)
+                    SetProperty(ref _destination, value);
+            }
         }       
 
     }
