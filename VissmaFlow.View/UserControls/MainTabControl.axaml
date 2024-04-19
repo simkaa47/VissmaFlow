@@ -6,6 +6,7 @@
 			 xmlns:vm="using:VissmaFlow.Core.ViewModels"
 			 xmlns:events="using:VissmaFlow.View.UserControls.Events"
 		     x:DataType="vm:MainViewModel"
+			 xmlns:single="using:VissmaFlow.View.UserControls.SingleMeasures"
 			 xmlns:main="using:VissmaFlow.View.UserControls.Main"
 			 xmlns:par="using:VissmaFlow.View.UserControls.Parameters"
 			 xmlns:adm="using:VissmaFlow.View.UserControls.Administration"
@@ -16,6 +17,9 @@
 		</TabItem>
 		<TabItem Header="Параметры" Classes="common" MinHeight="30" MinWidth="70">
 			<par:ParametersViewControl/>
+		</TabItem>
+		<TabItem Header="Ед. измерения" Classes="common" MinHeight="30" MinWidth="70">
+			<single:SingleMeasuresTab/>
 		</TabItem>
 		<TabItem Header="События" Classes="common" MinHeight="30" MinWidth="70">
 			<events:MainEventsControl/>
