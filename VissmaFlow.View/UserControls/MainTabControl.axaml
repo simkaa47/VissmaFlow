@@ -19,7 +19,7 @@
 			<par:ParametersViewControl/>
 		</TabItem>
 		<TabItem Header="Ед. измерения" Classes="common" MinHeight="30" MinWidth="70">
-			<single:SingleMeasuresTab/>
+			<single:SingleMeasuresTab DataContext="{Binding SingleMeasuresViewModel}"/>
 		</TabItem>
 		<TabItem Header="События" Classes="common" MinHeight="30" MinWidth="70">
 			<events:MainEventsControl/>

@@ -232,7 +232,7 @@ public partial class VirtualKeyboard : UserControl
                 if (TextBox_.Text != null && TextBox_.Text.Length > 0 && TextBox_.CaretIndex>0)
                 {
                     TextBox_.Text = TextBox_.Text.Remove(TextBox_.CaretIndex-1, 1);
-                    TextBox_.CaretIndex--;
+                    //TextBox_.CaretIndex--;
                 }
 
             }

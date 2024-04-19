@@ -23,8 +23,7 @@
 		</TabControl.ItemTemplate>
 		<TabControl.ContentTemplate>
 			<DataTemplate DataType="rtk:RtkUnit">
-				<ListBox ItemsSource="{Binding Parameters}"
-						 >
+				<ListBox ItemsSource="{Binding Parameters}">
 					<ListBox.ItemTemplate>
 						<DataTemplate DataType="p:ParameterBase">
 							<par:NumericParameter Margin="5"

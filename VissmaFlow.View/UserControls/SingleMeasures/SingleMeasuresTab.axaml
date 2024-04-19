@@ -1,8 +1,91 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:vm="using:VissmaFlow.Core.ViewModels"
+			 xmlns:s="using:VissmaFlow.Core.Models.SingleMeasures"
+			 xmlns:mi="using:Material.Icons.Avalonia"
+			 xmlns:ma="using:Material.Avalonia"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 xmlns:par="using:VissmaFlow.View.UserControls.Parameters"
+			 x:DataType="vm:SingleMeasuresViewModel"
+			 Name="root"
              x:Class="VissmaFlow.View.UserControls.SingleMeasures.SingleMeasuresTab">
-  Единичные измерения
+	<TabControl ItemsSource="{Binding Devices}" SelectedItem="{Binding SelectedDevice}">
+		<TabControl.ItemTemplate>
+			<DataTemplate DataType="s:SingleMeasuresInstance">
+				<TextBlock Text="{Binding RtkUnit.Name}"/>
+			</DataTemplate>
+		</TabControl.ItemTemplate>
+		<TabControl.ContentTemplate>
+			<DataTemplate DataType="s:SingleMeasuresInstance">
+				<Grid RowDefinitions="Auto,*"
+					  Grid.Row="1">
+					<ListBox>
+						<DockPanel>
+							<TextBlock Text="Время ед. измерения, с"
+							   DockPanel.Dock="Left"
+							   VerticalAlignment="Center"
+							   TextWrapping="Wrap"/>
+							<TextBox HorizontalAlignment="Right"
+									 Width="100"									 
+									 Text="{Binding MeasureSettings.Duration}"
+									 VerticalAlignment="Center"
+									 DockPanel.Dock="Right"/>
+						</DockPanel>
+					</ListBox>
+					<DataGrid ItemsSource="{Binding MeasureSettings.Points}"
+							  GridLinesVisibility="All"
+							  Grid.Row="1" >
+						<DataGrid.Columns>
+							<DataGridTextColumn x:DataType="s:SingleMeasurePoint" Header="№" Binding="{Binding Id}"/>
+							<DataGridTemplateColumn x:DataType="s:SingleMeasurePoint" Width="120">
+								<DataGridTemplateColumn.Header>
+									<TextBlock Text="Усредняемая величина"
+											   TextWrapping="Wrap"/>
+								</DataGridTemplateColumn.Header>
+								<DataGridTemplateColumn.CellTemplate>
+									<DataTemplate>
+										<par:NumericParameter DescriptionInvisible="True"
+															  HorizontalAlignment="Center"
+															  Margin="2"
+															  DataContext="{Binding AvgValue}"/>
+									</DataTemplate>
+								</DataGridTemplateColumn.CellTemplate>
+							</DataGridTemplateColumn>
+							<DataGridTemplateColumn x:DataType="s:SingleMeasurePoint" Header="Результат" Width="120">								
+								<DataGridTemplateColumn.CellTemplate>
+									<DataTemplate>
+										<par:NumericParameter DescriptionInvisible="True"
+															  HorizontalAlignment="Center"
+															  Margin="2"
+															  DataContext="{Binding Destination}"/>
+									</DataTemplate>
+								</DataGridTemplateColumn.CellTemplate>
+							</DataGridTemplateColumn>
+							<DataGridTemplateColumn x:DataType="s:SingleMeasurePoint">
+								<DataGridTemplateColumn.CellTemplate>
+									<DataTemplate>
+										<StackPanel Orientation="Horizontal">
+											<Button Margin="2"
+													IsVisible="{Binding !SingleMeasFlag}"
+													CommandParameter="{Binding}"
+													Command="{Binding ElementName=root, Path=DataContext.SingleMeasureCommand}">
+												<mi:MaterialIcon Margin="2" Kind="Ruler"/>
+												
+											</Button>
+											<TextBlock VerticalAlignment="Center"
+													   Margin="2"
+													   IsVisible="{Binding SingleMeasFlag}"
+													   Text="{Binding CurTime, StringFormat={}{0} sec}}"/>
+										</StackPanel>
+									</DataTemplate>
+								</DataGridTemplateColumn.CellTemplate>
+							</DataGridTemplateColumn>
+						</DataGrid.Columns>
+					</DataGrid>
+				</Grid>
+			</DataTemplate>
+		</TabControl.ContentTemplate>
+	</TabControl>
 </UserControl>
