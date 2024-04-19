@@ -4,7 +4,7 @@ namespace VissmaFlow.Core.Services.SingleMeasures
 {
     internal static  class SingleMeasuresFactory
     {
-        public static List<SingleMeasureSettings> SeedAsync()
+        public static List<SingleMeasureSettings> Seed()
         {
             return new List<SingleMeasureSettings>()
             {
