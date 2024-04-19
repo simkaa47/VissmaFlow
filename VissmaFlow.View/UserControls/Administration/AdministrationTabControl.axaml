@@ -29,5 +29,8 @@
 		<TabItem Header="Индикация" Classes="common" MinHeight="30" MinWidth="90">
 			<adm:IndicationUserControl DataContext="{Binding IndicationVm}"/>
 		</TabItem>
+		<TabItem Header="Ед. измерения" Classes="common" MinHeight="30" MinWidth="90">
+			<adm:SingleMeasSettingsControl DataContext="{Binding SingleMeasuresViewModel}"/>
+		</TabItem>
 	</TabControl>
 </UserControl>

@@ -229,9 +229,10 @@ public partial class VirtualKeyboard : UserControl
             else if (key == Key.Back)
             {
 
-                if (TextBox_.Text != null && TextBox_.Text.Length > 0)
+                if (TextBox_.Text != null && TextBox_.Text.Length > 0 && TextBox_.CaretIndex>0)
                 {
-                    TextBox_.Text = TextBox_.Text.Remove(TextBox_.Text.Length - 1, 1);
+                    TextBox_.Text = TextBox_.Text.Remove(TextBox_.CaretIndex-1, 1);
+                    //TextBox_.CaretIndex--;
                 }
 
             }

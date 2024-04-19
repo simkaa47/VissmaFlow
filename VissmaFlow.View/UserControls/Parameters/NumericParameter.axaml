@@ -28,6 +28,7 @@
 		<TextBlock Text="{Binding Description}"
 				   DockPanel.Dock="Left"
 				   Margin="5,5,10,5"
+				   IsVisible="{Binding RelativeSource={RelativeSource AncestorType=local:ParameterCommon}, Path=!DescriptionInvisible}"
 				   VerticalAlignment="Center"
 				   TextWrapping="Wrap"/>
 		
