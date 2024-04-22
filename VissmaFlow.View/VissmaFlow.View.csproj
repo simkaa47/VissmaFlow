@@ -56,8 +56,4 @@
   <ItemGroup>
     <UpToDateCheckInput Remove="UserControls\Administration\CurveSettingsControl.axaml" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="UserControls\Logging\" />
-  </ItemGroup>
 </Project>

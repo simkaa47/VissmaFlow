@@ -8,6 +8,7 @@
 		     x:DataType="vm:MainViewModel"
 			 xmlns:single="using:VissmaFlow.View.UserControls.SingleMeasures"
 			 xmlns:main="using:VissmaFlow.View.UserControls.Main"
+			 xmlns:log="using:VissmaFlow.View.UserControls.Logging"
 			 xmlns:par="using:VissmaFlow.View.UserControls.Parameters"
 			 xmlns:adm="using:VissmaFlow.View.UserControls.Administration"
              x:Class="VissmaFlow.View.UserControls.MainTabControl">
@@ -20,6 +21,9 @@
 		</TabItem>
 		<TabItem Header="Ед. измерения" Classes="common" MinHeight="30" MinWidth="70">
 			<single:SingleMeasuresTab DataContext="{Binding SingleMeasuresViewModel}"/>
+		</TabItem>
+		<TabItem Header="Логирование" Classes="common" MinHeight="30" MinWidth="70">
+			<log:LoggingTab DataContext="{Binding LoggingViewModel}"/>
 		</TabItem>
 		<TabItem Header="События" Classes="common" MinHeight="30" MinWidth="70">
 			<events:MainEventsControl/>
