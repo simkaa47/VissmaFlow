@@ -48,6 +48,7 @@
 									<DataTemplate>
 										<par:NumericParameter DescriptionInvisible="True"
 															  HorizontalAlignment="Center"
+															  Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=DataContext.ComminicationService.WriteParameterCommand}"
 															  Margin="2"
 															  DataContext="{Binding AvgValue}"/>
 									</DataTemplate>
@@ -59,6 +60,7 @@
 										<par:NumericParameter DescriptionInvisible="True"
 															  HorizontalAlignment="Center"
 															  Margin="2"
+															  Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=DataContext.ComminicationService.WriteParameterCommand}"
 															  DataContext="{Binding Destination}"/>
 									</DataTemplate>
 								</DataGridTemplateColumn.CellTemplate>

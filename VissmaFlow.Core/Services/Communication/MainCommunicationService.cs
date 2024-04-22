@@ -71,7 +71,7 @@ namespace VissmaFlow.Core.Services.Communication
         }
 
         [RelayCommand]
-        private void WriteParameter(object o)
+        public void WriteParameter(object o)
         {
             if (o is null) return;
             if (o is Parameter<ushort> parUshort)

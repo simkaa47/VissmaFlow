@@ -1,9 +1,11 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.Logging;
+using VissmaFlow.Core.Contracts.Communication;
 using VissmaFlow.Core.Contracts.DataAccess;
 using VissmaFlow.Core.Models.Parameters;
 using VissmaFlow.Core.Models.SingleMeasures;
+using VissmaFlow.Core.Services.Communication;
 using VissmaFlow.Core.Services.SingleMeasures;
 
 namespace VissmaFlow.Core.ViewModels
@@ -23,7 +25,7 @@ namespace VissmaFlow.Core.ViewModels
             get => _selectedDevice;
             set
             {
-                if(value is not null)
+                if (value is not null)
                     SetProperty(ref _selectedDevice, value);
             }
         }
@@ -33,16 +35,19 @@ namespace VissmaFlow.Core.ViewModels
         public SingleMeasuresViewModel(IRepository<SingleMeasureSettings> singleMeasRepository,
             ILogger<SingleMeasuresViewModel> logger,
             ParameterVm parameterVm,
+            MainCommunicationService comminicationService,
             CommunicationVm communicationVm)
         {
             _singleMeasRepository = singleMeasRepository;
             _logger = logger;
             ParameterVm = parameterVm;
+            ComminicationService = comminicationService;
             CommunicationVm = communicationVm;
             InitAsync();
         }
 
         public ParameterVm ParameterVm { get; }
+        public MainCommunicationService ComminicationService { get; }
         public CommunicationVm CommunicationVm { get; }
 
         private async void InitAsync()
@@ -91,16 +96,24 @@ namespace VissmaFlow.Core.ViewModels
         private void SingleMeasure(object par)
         {
             if (par is null || par is not SingleMeasurePoint point) return;
-            if(SelectedDevice is not null && SelectedDevice.MeasureSettings?.Source is not null)
+            if (SelectedDevice is not null && SelectedDevice.MeasureSettings?.Source is not null)
             {
+                if (!point.SingleMeasFlag)
+                    point.MeasureCompletedEvent += WriteParameter;
                 point.SingleMeasExecute(SelectedDevice.MeasureSettings.Duration, SelectedDevice.MeasureSettings?.Source);
+                
             }
-
 
         }
 
+        private void WriteParameter(SingleMeasurePoint point,ParameterBase par)
+        {
+            point.MeasureCompletedEvent -= WriteParameter;
+            ComminicationService.WriteParameter(par);
+        }
 
-        private void GetDevices() 
+
+        private void GetDevices()
         {
             if (CommunicationVm.RtkUnits is null) return;
             if (Settings is null) return;
@@ -108,14 +121,14 @@ namespace VissmaFlow.Core.ViewModels
             var devices = new List<SingleMeasuresInstance>();
             foreach (var rtk in CommunicationVm.RtkUnits)
             {
-                if(rtk is not null)
+                if (rtk is not null)
                 {
                     devices.Add(new SingleMeasuresInstance
                     {
                         RtkUnit = rtk,
                         MeasureSettings = new SingleMeasureSettings
-                        { 
-                            
+                        {
+
                             Source = rtk.Parameters.Where(p => p.Id == Settings?.Source?.Id).FirstOrDefault(),
                             Duration = Settings.Duration,
                             Points = Settings.Points?.Select(p => new SingleMeasurePoint

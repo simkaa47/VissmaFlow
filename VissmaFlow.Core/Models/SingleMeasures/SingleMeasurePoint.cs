@@ -1,12 +1,15 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using VissmaFlow.Core.Infrastructure.DataAccess;
 using VissmaFlow.Core.Models.Parameters;
+using VissmaFlow.Core.ViewModels;
 
 namespace VissmaFlow.Core.Models.SingleMeasures
 {
     public partial class SingleMeasurePoint : EntityCommon
     {
         Timer? _timer;
+
+        public event Action<SingleMeasurePoint, ParameterBase>? MeasureCompletedEvent;
 
         private ParameterBase? _avgValue;
         public virtual ParameterBase? AvgValue
@@ -103,6 +106,7 @@ namespace VissmaFlow.Core.Models.SingleMeasures
                         avgValueInt.WriteValue = (int)result;
                     else if (AvgValue is ParameterFloat avgValueFloat)
                         avgValueFloat.WriteValue = result;
+                    MeasureCompletedEvent?.Invoke(this, AvgValue);                    
                 }                 
 
             }
