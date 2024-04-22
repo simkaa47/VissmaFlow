@@ -14,6 +14,7 @@ namespace VissmaFlow.Core.ViewModels
             ParameterVm parameterVm,
             MainCommunicationService communicationService,
             CommunicationVm communicationVm,
+            LoggingViewModel loggingViewModel,
             IndicationVm indicationVm,
             SingleMeasuresViewModel singleMeasuresViewModel,
             AccessViewModel accessViewModel,
@@ -24,6 +25,7 @@ namespace VissmaFlow.Core.ViewModels
             ParameterVm = parameterVm;
             CommunicationService = communicationService;
             CommunicationVm = communicationVm;
+            LoggingViewModel = loggingViewModel;
             IndicationVm = indicationVm;
             SingleMeasuresViewModel = singleMeasuresViewModel;
             AccessViewModel = accessViewModel;
@@ -47,6 +49,7 @@ namespace VissmaFlow.Core.ViewModels
         public ParameterVm ParameterVm { get; }
         public MainCommunicationService CommunicationService { get; }
         public CommunicationVm CommunicationVm { get; }
+        public LoggingViewModel LoggingViewModel { get; }
         public IndicationVm IndicationVm { get; }
         public SingleMeasuresViewModel SingleMeasuresViewModel { get; }
         public AccessViewModel AccessViewModel { get; }

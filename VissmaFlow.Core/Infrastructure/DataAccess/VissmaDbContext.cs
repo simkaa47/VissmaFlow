@@ -3,6 +3,7 @@ using VissmaFlow.Core.Models.AccessControl;
 using VissmaFlow.Core.Models.Communication;
 using VissmaFlow.Core.Models.Event;
 using VissmaFlow.Core.Models.Indication;
+using VissmaFlow.Core.Models.Logging;
 using VissmaFlow.Core.Models.Parameters;
 using VissmaFlow.Core.Models.SingleMeasures;
 using VissmaFlow.Core.Models.Trends;
@@ -15,6 +16,8 @@ namespace VissmaFlow.Core.Infrastructure.DataAccess
         public DbSet<ParameterBase> ParameterBases  => Set<ParameterBase>();
         public DbSet<CommSettings> CommSettings => Set<CommSettings>();
         public DbSet<User> Users => Set<User>();
+
+        public DbSet<LogSettings> LogSettingses => Set<LogSettings>();
         public DbSet<Event> Events => Set<Event>();
         public DbSet<SingleMeasureSettings> SingleMeasureSettingses => Set<SingleMeasureSettings>();
         public DbSet<TrendSettings> TrendSettings => Set<TrendSettings>();
