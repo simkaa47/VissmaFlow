@@ -22,6 +22,8 @@ using System;
 using VissmaFlow.Core.Infrastructure.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using VissmaFlow.Core.Contracts.FileDialog;
+using VissmaFlow.View.Dialogs.FileDialogs;
 
 namespace VissmaFlow.View
 {
@@ -44,6 +46,7 @@ namespace VissmaFlow.View
                 {
                     services.AddApplicationServices();
                     services.AddSingleton<TrendsViewModel>();
+                    services.AddTransient<IFileDialog, AvaloniaFileDialog>();
                     services.AddTransient<IParameterDialogService, ParameterDialogService>();
                     services.AddTransient<IQuestionDialog, AskDialog>();
                     services.AddTransient<IRtkUnitDialog, AddRtkUnitDialog>();

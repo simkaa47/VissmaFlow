@@ -6,5 +6,10 @@
 			 xmlns:vm="using:VissmaFlow.Core.ViewModels"
 			 x:DataType="vm:LoggingViewModel"
              x:Class="VissmaFlow.View.UserControls.Logging.LoggingTab">
-  Логирование
+	<Grid>
+		<Button Height="40" Width="100"
+				Command="{Binding GetPathCommand}">
+			
+		</Button>
+	</Grid>
 </UserControl>
