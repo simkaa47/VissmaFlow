@@ -48,7 +48,7 @@ namespace VissmaFlow.Core.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("VissmaFlow.Core.Models.Communication.CommSettings", b =>
@@ -82,7 +82,7 @@ namespace VissmaFlow.Core.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CommSettings");
+                    b.ToTable("CommSettings", (string)null);
                 });
 
             modelBuilder.Entity("VissmaFlow.Core.Models.Communication.RtkUnit", b =>
@@ -100,7 +100,7 @@ namespace VissmaFlow.Core.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("RtkUnits");
+                    b.ToTable("RtkUnits", (string)null);
                 });
 
             modelBuilder.Entity("VissmaFlow.Core.Models.Event.Event", b =>
@@ -136,7 +136,7 @@ namespace VissmaFlow.Core.Migrations
 
                     b.HasIndex("RtkUnitId");
 
-                    b.ToTable("Events");
+                    b.ToTable("Events", (string)null);
                 });
 
             modelBuilder.Entity("VissmaFlow.Core.Models.Indication.IndicationCell", b =>
@@ -163,7 +163,7 @@ namespace VissmaFlow.Core.Migrations
 
                     b.HasIndex("RtkUnitId");
 
-                    b.ToTable("IndicationCells");
+                    b.ToTable("IndicationCells", (string)null);
                 });
 
             modelBuilder.Entity("VissmaFlow.Core.Models.Logging.LogSettings", b =>
@@ -180,7 +180,7 @@ namespace VissmaFlow.Core.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("LogSettingses");
+                    b.ToTable("LogSettingses", (string)null);
                 });
 
             modelBuilder.Entity("VissmaFlow.Core.Models.Parameters.ParameterBase", b =>
@@ -244,7 +244,7 @@ namespace VissmaFlow.Core.Migrations
 
                     b.HasIndex("LogSettingsId");
 
-                    b.ToTable("ParameterBases");
+                    b.ToTable("ParameterBases", (string)null);
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("ParameterBase");
 
@@ -274,7 +274,7 @@ namespace VissmaFlow.Core.Migrations
 
                     b.HasIndex("SingleMeasureSettingsId");
 
-                    b.ToTable("SingleMeasurePoint");
+                    b.ToTable("SingleMeasurePoint", (string)null);
                 });
 
             modelBuilder.Entity("VissmaFlow.Core.Models.SingleMeasures.SingleMeasureSettings", b =>
@@ -293,7 +293,7 @@ namespace VissmaFlow.Core.Migrations
 
                     b.HasIndex("SourceId");
 
-                    b.ToTable("SingleMeasureSettingses");
+                    b.ToTable("SingleMeasureSettingses", (string)null);
                 });
 
             modelBuilder.Entity("VissmaFlow.Core.Models.Trends.Curve", b =>
@@ -321,7 +321,7 @@ namespace VissmaFlow.Core.Migrations
 
                     b.HasIndex("RtkUnitId");
 
-                    b.ToTable("Curves");
+                    b.ToTable("Curves", (string)null);
                 });
 
             modelBuilder.Entity("VissmaFlow.Core.Models.Trends.TrendSettings", b =>
@@ -338,7 +338,7 @@ namespace VissmaFlow.Core.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TrendSettings");
+                    b.ToTable("TrendSettings", (string)null);
                 });
 
             modelBuilder.Entity("VissmaFlow.Core.Models.Parameters.ParameterBool", b =>

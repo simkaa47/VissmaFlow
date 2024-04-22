@@ -6,10 +6,28 @@
 			 xmlns:vm="using:VissmaFlow.Core.ViewModels"
 			 x:DataType="vm:LoggingViewModel"
              x:Class="VissmaFlow.View.UserControls.Logging.LoggingTab">
-	<Grid>
-		<Button Height="40" Width="100"
-				Command="{Binding GetPathCommand}">
-			
-		</Button>
+	<Grid RowDefinitions="*, Auto">
+		<ListBox HorizontalAlignment="Stretch">
+			<DockPanel>
+				<TextBlock Text="Сохранить в: "
+						   VerticalAlignment="Center"
+						   DockPanel.Dock="Left"/>
+				<TextBlock Text="{Binding Settings.Path}"
+						   VerticalAlignment="Center"
+						   TextWrapping="Wrap"/>
+				<Button DockPanel.Dock="Right"
+						HorizontalAlignment="Right"
+						Height="40"
+						VerticalContentAlignment="Center"
+						HorizontalContentAlignment="Center"
+						Width="80"
+						Content="Browse"
+						Command="{Binding GetPathCommand}"/>
+			</DockPanel>
+			<DockPanel>
+				<TextBox Text="{Binding Settings."/>
+			</DockPanel>
+		</ListBox>		
+		
 	</Grid>
 </UserControl>
