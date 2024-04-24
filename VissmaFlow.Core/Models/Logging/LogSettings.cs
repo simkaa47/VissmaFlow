@@ -17,12 +17,16 @@ namespace VissmaFlow.Core.Models.Logging
         [Range(1000,100000)]
         private int _minPeriod;
 
-        private List<ParameterBase?>? _parameters;
-        public virtual List<ParameterBase?>? Parameters
+        private List<LogCell>? _cells;
+
+        public virtual List<LogCell>? Cells
         {
-            get => _parameters;
-            set => SetProperty(ref _parameters, value);
+            get => _cells;
+            set=> SetProperty(ref _cells, value);
         }
+
+
+
 
     }
 }

@@ -1,28 +1,56 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.Logging;
+using System.Text;
 using VissmaFlow.Core.Contracts.DataAccess;
 using VissmaFlow.Core.Contracts.FileDialog;
 using VissmaFlow.Core.Models.Logging;
-using VissmaFlow.Core.Models.Parameters;
 
 namespace VissmaFlow.Core.ViewModels
 {
     public partial class LoggingViewModel : ObservableObject
     {
+        private Timer _timer;
+
+        private bool _isWriting;
+
+
         private readonly ILogger<LoggingViewModel> _logger;
         private readonly IFileDialog _fileDialog;
         private readonly IRepository<LogSettings> _logRepository;
         [ObservableProperty]
         private LogSettings? _settings;
 
-        public LoggingViewModel(ILogger<LoggingViewModel> logger, 
-            IFileDialog fileDialog, IRepository<LogSettings> logRepository)
+        public CommunicationVm CommunicationVm { get; }
+        public ParameterVm ParameterVm { get; }
+
+        public LoggingViewModel(ILogger<LoggingViewModel> logger,
+            IFileDialog fileDialog, IRepository<LogSettings> logRepository,
+            CommunicationVm communicationVm, ParameterVm parameterVm)
         {
             _logger = logger;
             _fileDialog = fileDialog;
+            _timer = new Timer(OnTimer);
+            _timer.Change(Timeout.Infinite,
+                       Timeout.Infinite);
             _logRepository = logRepository;
+            CommunicationVm = communicationVm;
+            ParameterVm = parameterVm;
             InitAsync();
+        }
+
+
+        [ObservableProperty]
+        private bool _isLogging;
+        [ObservableProperty]
+        private string? _errStatus;
+        [ObservableProperty]
+        private string _fileName = string.Empty;
+
+
+        private void OnTimer(object? o)
+        {
+
         }
 
         private async void InitAsync()
@@ -39,7 +67,7 @@ namespace VissmaFlow.Core.ViewModels
             {
                 _logger.LogError($"Инициализация конфигурации логирования - {ex.Message}");
             }
-            
+
         }
 
 
@@ -69,13 +97,92 @@ namespace VissmaFlow.Core.ViewModels
 
 
         [RelayCommand]
+        private async Task DeleteCellAsync(object o)
+        {
+            if (Settings is null) return;
+            if (o is not LogCell cell) return;
+            if (Settings.Cells is null) return;
+            Settings.Cells.Remove(cell);
+            await SaveConfigAsync();
+            Settings.Cells = new List<LogCell>(Settings.Cells);
+        }
+
+
+        [RelayCommand]
         private async Task AddParameterAsync()
         {
             if (Settings is null) return;
-            if (Settings.Parameters is null) Settings.Parameters = new List<ParameterBase?>();
-            Settings.Parameters.Add(null);
+            if (Settings.Cells is null) Settings.Cells = new List<LogCell>();
+            Settings.Cells.Add(new LogCell());
             await SaveConfigAsync();
-            Settings.Parameters = new List<ParameterBase?>(Settings.Parameters);
+            Settings.Cells = new List<LogCell>(Settings.Cells);
+        }
+
+        [RelayCommand]
+        private void SwitchTimer()
+        {
+            if (IsLogging)
+                SwitchTimerOff();
+            else
+                SwitchTimerOn();
+        }
+
+
+        private void SwitchTimerOn()
+        {
+            if (Settings is not null && Settings.Cells is not null)
+            {
+                if (Settings.MinPeriod < 1000)
+                    Settings.MinPeriod = 1000;
+                _timer.Change(100,
+                       Settings.MinPeriod);
+                IsLogging = true;
+                var dt = DateTime.Now;
+                FileName = $"log_{dt.ToString("ddMMyyyy")}__{dt.ToString("HHmmss")}";
+                StringBuilder builder = new StringBuilder();
+                foreach (var cell in Settings.Cells)
+                {
+                    if (cell.RtkUnit is not null && cell.Parameter is not null)
+                    {
+                        builder.Append($"{cell.RtkUnit.Name} : {cell.Parameter.Description}");
+                        builder.Append("\t");
+                    }
+                }
+                var header = builder.ToString();
+                WriteString(header);
+
+            }
+        }
+
+        private void SwitchTimerOff()
+        {
+            _timer.Change(Timeout.Infinite,
+                       Timeout.Infinite);
+            IsLogging = false;
+        }
+
+        private void WriteString(string str)
+        {
+            try
+            {
+                if (!Directory.Exists(Settings.Path))
+                    throw new Exception("Проверьте директорию сохранения файла!");
+                if (!_isWriting)
+                {
+                    using (StreamWriter writer = new StreamWriter($"{Settings.Path}/{FileName}.txt", true))
+                    {
+                        writer.WriteLine(str); ;
+                    }
+                    _isWriting = false;
+                    ErrStatus = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrStatus = ex.Message;
+                _isWriting = false;
+                SwitchTimerOff();
+            }
         }
 
 

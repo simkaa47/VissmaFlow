@@ -6,4 +6,9 @@
 		<SolidColorBrush Color="Red"/>
 		<SolidColorBrush Color="LightGreen"/>
 	</scg:List>
+
+	<scg:List x:TypeArguments="sys:Object" x:Key="LogColors">
+		<SolidColorBrush Color="LightGray"/>
+		<SolidColorBrush Color="LightGreen"/>
+	</scg:List>
 </ResourceDictionary>

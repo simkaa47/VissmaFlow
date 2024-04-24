@@ -3,20 +3,20 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="1920" d:DesignHeight="1080"
-        x:Class="VissmaFlow.View.MainWindow"
-		
+        x:Class="VissmaFlow.View.MainWindow"		
 		xmlns:scg="clr-namespace:System.Collections.Generic;assembly=netstandard"
 		xmlns:sys="clr-namespace:System;assembly=netstandard"
 		xmlns:vm="using:VissmaFlow.Core.ViewModels"
-		x:DataType="vm:MainViewModel"
+		x:DataType="vm:MainViewModel"		
 		xmlns:kb="using:VissmaFlow.View.UserControls.Keyboard"
 		xmlns:hb="using:VissmaFlow.View.UserControls.HighBar"	
 		SystemDecorations="None"
 		xmlns:uc="using:VissmaFlow.View.UserControls"
+		x:Name="root"
         Title="VissmaFlow.View">
 	<Grid RowDefinitions="*, Auto">
 		<Viewbox>
-			<Border BorderBrush="Gray"
+			<Border BorderBrush="Gray"					
 					Name="MainContentBorder"
 					IsEnabled="{Binding ElementName=KbBorder, Path=!IsVisible}"
 					Height="800" Width="480"
@@ -32,7 +32,14 @@
 				Loaded="OnKeyboardInitialized"				
 				IsVisible="{Binding IsOskVisible}"
 				Grid.Row="1"   
-				Width="480" Height="266">
+				Width="{Binding ElementName=root, Path=Width}" >
+			<Border.Height>
+				<Binding ElementName="root" Path="Height" Converter="{StaticResource DivideConverter}">
+					<Binding.ConverterParameter>
+						<sys:Single>3</sys:Single>
+					</Binding.ConverterParameter>
+				</Binding>
+			</Border.Height>
 			<Viewbox>
 				<kb:VirtualKeyboard/>
 			</Viewbox>			

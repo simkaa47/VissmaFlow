@@ -15,9 +15,7 @@ namespace VissmaFlow.Core.Infrastructure.DataAccess
         public DbSet<RtkUnit> RtkUnits => Set<RtkUnit>();
         public DbSet<ParameterBase> ParameterBases  => Set<ParameterBase>();
         public DbSet<CommSettings> CommSettings => Set<CommSettings>();
-        public DbSet<User> Users => Set<User>();
-
-        public DbSet<LogSettings> LogSettingses => Set<LogSettings>();
+        public DbSet<User> Users => Set<User>();        
         public DbSet<Event> Events => Set<Event>();
         public DbSet<SingleMeasureSettings> SingleMeasureSettingses => Set<SingleMeasureSettings>();
         public DbSet<TrendSettings> TrendSettings => Set<TrendSettings>();
@@ -25,6 +23,7 @@ namespace VissmaFlow.Core.Infrastructure.DataAccess
         public DbSet<IndicationCell> IndicationCells => Set<IndicationCell>();
 
         public DbSet<Curve> Curves => Set<Curve>();
+        public DbSet<LogSettings> LogSettingses => Set<LogSettings>();
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -119,6 +118,19 @@ namespace VissmaFlow.Core.Infrastructure.DataAccess
             modelBuilder.Entity<ParameterString>().Property(entity => entity.MaxValue)
         .HasColumnName("MaxValueAsString");
             #endregion
+
+            modelBuilder.Entity<SingleMeasureSettings>().HasOne(s => s.Source).WithMany().OnDelete(DeleteBehavior.SetNull);
+            modelBuilder.Entity<SingleMeasurePoint>().HasOne(s=>s.AvgValue).WithMany().OnDelete(DeleteBehavior.SetNull);
+            modelBuilder.Entity<SingleMeasurePoint>().HasOne(s => s.Destination).WithMany().OnDelete(DeleteBehavior.SetNull);
+
+            modelBuilder.Entity<Event>().HasOne(e => e.RtkUnit).WithMany().OnDelete(DeleteBehavior.SetNull);
+            modelBuilder.Entity<Event>().HasOne(e => e.Parameter).WithMany().OnDelete(DeleteBehavior.SetNull);
+
+            modelBuilder.Entity<IndicationCell>().HasOne(c => c.RtkUnit).WithMany().OnDelete(DeleteBehavior.SetNull);
+            modelBuilder.Entity<IndicationCell>().HasOne(c => c.Parameter).WithMany().OnDelete(DeleteBehavior.SetNull);
+
+            modelBuilder.Entity<LogCell>().HasOne(l => l.RtkUnit).WithMany().OnDelete(DeleteBehavior.SetNull);
+            modelBuilder.Entity<LogCell>().HasOne(l => l.Parameter).WithMany().OnDelete(DeleteBehavior.SetNull);
 
         }
 

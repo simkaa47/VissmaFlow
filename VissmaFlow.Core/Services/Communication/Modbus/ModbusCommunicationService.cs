@@ -384,10 +384,10 @@ namespace VissmaFlow.Core.Services.Communication
             _client = new ModbusClient();
             if (sett.Interface == CommInterface.Rs485)
             {
-                _client.Baudrate = sett.Baudrate;
-                _client.Parity = sett.Parity;
-                _client.StopBits = sett.StopBitsNum;
                 _client.SerialPort = sett.PortName;
+                _client.Baudrate = sett.Baudrate;
+                _client.StopBits = sett.StopBitsNum;
+                _client.Parity = sett.Parity;
                 _logger.LogInformation($"Выполняется подключение к порту {sett.PortName}");
             }
             else
