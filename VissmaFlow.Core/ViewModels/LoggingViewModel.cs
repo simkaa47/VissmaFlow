@@ -151,12 +151,7 @@ namespace VissmaFlow.Core.ViewModels
         private void SwitchTimerOn()
         {
             if (Settings is not null && Settings.Cells is not null)
-            {
-                if (Settings.MinPeriod < 1000)
-                    Settings.MinPeriod = 1000;
-                _timer.Change(100,
-                       Settings.MinPeriod);
-                IsLogging = true;
+            {                
                 var dt = DateTime.Now;
                 FileName = $"log_{dt.ToString("ddMMyyyy")}__{dt.ToString("HHmmss")}";
                 StringBuilder builder = new StringBuilder();
@@ -169,11 +164,18 @@ namespace VissmaFlow.Core.ViewModels
                         builder.Append("\t");
                     }
                 }
-                if(builder.Length>0)
-                {                    
-                    builder.Insert(0,dtHeader);
+                if (builder.Length > 0)
+                {
+                    if (Settings.MinPeriod < 1000)
+                        Settings.MinPeriod = 1000;
+                    _timer.Change(100,
+                           Settings.MinPeriod);
+                    IsLogging = true;
+                    builder.Insert(0, dtHeader);
                     WriteString(builder.ToString());
-                }  
+                }
+                else
+                    ErrStatus = "Нет подходящих данных для логирования";
             }
         }
 
