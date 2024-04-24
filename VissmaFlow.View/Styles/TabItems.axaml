@@ -15,8 +15,8 @@
 						<DockPanel Background="Transparent" VerticalAlignment="Stretch" HorizontalAlignment="Center" >
 							<TextBlock Name="L2"
 								   Foreground="Black"
-								   FontSize="16"
-									Margin="5"  
+								   FontSize="20"
+									Margin="10"  
 								   Text="{TemplateBinding Header}"
 								   HorizontalAlignment="Left"
 								   VerticalAlignment="Center"></TextBlock>
