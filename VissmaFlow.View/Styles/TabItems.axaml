@@ -10,12 +10,13 @@
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="{x:Type TabItem}">
-					<Border Name="PART_LayoutRoot"  Width="{TemplateBinding MinWidth}" Height="{TemplateBinding MinHeight}"  Margin="5,5,0,5"
+					<Border Name="PART_LayoutRoot"  Margin="5,5,0,5"
 							BorderBrush="#8028BCBA"   BorderThickness="1" CornerRadius="4">
-						<DockPanel VerticalAlignment="Stretch" HorizontalAlignment="Center" >
+						<DockPanel Background="Transparent" VerticalAlignment="Stretch" HorizontalAlignment="Center" >
 							<TextBlock Name="L2"
 								   Foreground="Black"
-								   FontSize="10"
+								   FontSize="16"
+									Margin="5"  
 								   Text="{TemplateBinding Header}"
 								   HorizontalAlignment="Left"
 								   VerticalAlignment="Center"></TextBlock>
