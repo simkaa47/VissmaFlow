@@ -5,6 +5,7 @@ using System.Text;
 using VissmaFlow.Core.Contracts.DataAccess;
 using VissmaFlow.Core.Contracts.FileDialog;
 using VissmaFlow.Core.Models.Logging;
+using VissmaFlow.Core.Models.Parameters;
 
 namespace VissmaFlow.Core.ViewModels
 {
@@ -50,7 +51,26 @@ namespace VissmaFlow.Core.ViewModels
 
         private void OnTimer(object? o)
         {
-
+            if (Settings?.Cells is null) return;
+            StringBuilder builder = new StringBuilder();
+            foreach (var cell in Settings.Cells)
+            {
+                if(cell.RtkUnit is not null && cell.Parameter is not null)
+                {
+                    var par = cell.RtkUnit.Parameters.Where(p => p.Id == cell.Parameter.Id).FirstOrDefault();
+                    var value = GetValueFromParameter(par);
+                    if(value is not null)
+                    {
+                        builder.Append($"{value.ToString()}\t");
+                        
+                    }
+                }
+            }
+            if(builder.Length>0)
+            {
+                builder.Insert(0, $"{DateTime.Now.ToString("dd.MM.yyyy HH.mm.ss.f")}\t");
+                WriteString(builder.ToString());
+            }            
         }
 
         private async void InitAsync()
@@ -140,6 +160,7 @@ namespace VissmaFlow.Core.ViewModels
                 var dt = DateTime.Now;
                 FileName = $"log_{dt.ToString("ddMMyyyy")}__{dt.ToString("HHmmss")}";
                 StringBuilder builder = new StringBuilder();
+                var dtHeader = $"Дата/время\t";
                 foreach (var cell in Settings.Cells)
                 {
                     if (cell.RtkUnit is not null && cell.Parameter is not null)
@@ -148,9 +169,11 @@ namespace VissmaFlow.Core.ViewModels
                         builder.Append("\t");
                     }
                 }
-                var header = builder.ToString();
-                WriteString(header);
-
+                if(builder.Length>0)
+                {                    
+                    builder.Insert(0,dtHeader);
+                    WriteString(builder.ToString());
+                }  
             }
         }
 
@@ -165,7 +188,7 @@ namespace VissmaFlow.Core.ViewModels
         {
             try
             {
-                if (!Directory.Exists(Settings.Path))
+                if (!Directory.Exists(Settings!.Path))
                     throw new Exception("Проверьте директорию сохранения файла!");
                 if (!_isWriting)
                 {
@@ -183,6 +206,29 @@ namespace VissmaFlow.Core.ViewModels
                 _isWriting = false;
                 SwitchTimerOff();
             }
+        }
+
+
+        private object? GetValueFromParameter(ParameterBase? par)
+        {
+            if (par is null) return null;
+            if (par is ParameterShort parameterShort)
+                return parameterShort.Value;
+            else if (par is ParameterUshort parameterUshort)
+                return parameterUshort.Value;
+            else if (par is ParameterInt parameterInt)
+                return parameterInt.Value;
+            else if (par is ParameterUint parameterUint)
+                return parameterUint.Value;
+            else if (par is ParameterFloat parameterFloat)
+                return parameterFloat.Value;
+            else if (par is ParameterDouble parameterDouble)
+                return parameterDouble.Value;
+            else if (par is ParameterString parameterString)
+                return parameterString.Value;
+            else if (par is ParameterBool parameterBool)
+                return parameterBool.Value;
+            return 0;
         }
 
 
