@@ -1,6 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Messaging;
+using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.Logging;
+using System.Runtime.InteropServices;
+using VissmaFlow.Core.Infrastructure.Helpers;
 using VissmaFlow.Core.Services.Communication;
 
 namespace VissmaFlow.Core.ViewModels
@@ -18,7 +20,7 @@ namespace VissmaFlow.Core.ViewModels
             IndicationVm indicationVm,
             SingleMeasuresViewModel singleMeasuresViewModel,
             AccessViewModel accessViewModel,
-            EventViewModel eventsViewModel, 
+            EventViewModel eventsViewModel,
             TrendSettigsViewModel trendSettigsViewModel)
         {
             _logger = logger;
@@ -32,7 +34,7 @@ namespace VissmaFlow.Core.ViewModels
             EventsViewModel = eventsViewModel;
             TrendSettigsViewModel = trendSettigsViewModel;
             _timer = new Timer(UpdateTime);
-            _timer.Change(0, 1000);            
+            _timer.Change(0, 1000);
         }
 
         #region Timer
@@ -55,5 +57,58 @@ namespace VissmaFlow.Core.ViewModels
         public AccessViewModel AccessViewModel { get; }
         public EventViewModel EventsViewModel { get; }
         public TrendSettigsViewModel TrendSettigsViewModel { get; }
+
+
+        [ObservableProperty]
+        private DateTime _setDateTime = DateTime.Now;
+
+
+        [RelayCommand]
+        private void SetTime()
+        {
+            if (SetDateTime > DateTime.MinValue)
+            {
+                if (OperatingSystem.IsLinux())
+                {
+                    string cmd = $"hwclock --set --date=\"{SetDateTime.ToString("yyyy-MM-dd HH:mm:ss")}\" --localtime";
+                    ShellHelper.BashCommand(cmd);
+                }
+                else if(OperatingSystem.IsWindows())
+                {
+                    SYSTEMTIME st = new SYSTEMTIME();
+                    st.wYear = (short)SetDateTime.Year; // must be short
+                    st.wMonth = (short)SetDateTime.Month;
+                    st.wDay = (short)SetDateTime.Day;
+                    st.wHour = (short)SetDateTime.Hour;
+                    st.wMinute = (short)SetDateTime.Minute;
+                    st.wSecond = (short)SetDateTime.Second;
+                    var res = SetSystemTime(ref st);
+                }
+            }
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct SYSTEMTIME
+        {
+            public short wYear;
+            public short wMonth;
+            public short wDayOfWeek;
+            public short wDay;
+            public short wHour;
+            public short wMinute;
+            public short wSecond;
+            public short wMilliseconds;
+        }
+
+        [DllImport("kernel32.dll", SetLastError = true)]
+        public static extern bool SetSystemTime(ref SYSTEMTIME st);
+
+
+
+
     }
+
+
+
+
 }

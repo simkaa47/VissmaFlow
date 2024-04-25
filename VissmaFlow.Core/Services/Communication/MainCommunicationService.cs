@@ -60,7 +60,7 @@ namespace VissmaFlow.Core.Services.Communication
                             }
                         }                        
                         
-                        Thread.Sleep(100);
+                        Thread.Sleep(400);
                     }
                     catch (Exception ex)
                     {
