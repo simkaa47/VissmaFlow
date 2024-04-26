@@ -62,6 +62,9 @@ namespace VissmaFlow.Core.ViewModels
         [ObservableProperty]
         private DateTime _setDateTime = DateTime.Now;
 
+        [ObservableProperty]
+        private string _userPassword = "linaro";
+
 
         [RelayCommand]
         private void SetTime()
@@ -70,7 +73,7 @@ namespace VissmaFlow.Core.ViewModels
             {
                 if (OperatingSystem.IsLinux())
                 {
-                    string cmd = $"hwclock --set --date=\"{SetDateTime.ToString("yyyy-MM-dd HH:mm:ss")}\" --localtime";
+                    string cmd = $"echo {UserPassword} | sudo -S date --set=\"{SetDateTime.ToString("yyyy-MM-dd HH:mm:ss.fff")}\"";
                     ShellHelper.BashCommand(cmd);
                 }
                 else if(OperatingSystem.IsWindows())

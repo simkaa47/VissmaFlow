@@ -5,15 +5,67 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"			 
 			 xmlns:vm="using:VissmaFlow.View.ViewModels"
 			 x:DataType="vm:TrendsViewModel"
+			 xmlns:meas="using:LiveChartsCore.Measure"
 			 xmlns:mat="using:Material.Icons.Avalonia"
+			 xmlns:scg="clr-namespace:System.Collections.Generic;assembly=netstandard"
+			 xmlns:sys="clr-namespace:System;assembly=netstandard"
 			 xmlns:lvc="using:LiveChartsCore.SkiaSharpView.Avalonia"
              x:Class="VissmaFlow.View.UserControls.Main.MainTrendsControl">
 	<Grid>
+		<Grid.Resources>
+			<scg:List x:TypeArguments="sys:UInt32" x:Key="PortSpeeds">
+				<sys:UInt32>2400</sys:UInt32>
+				<sys:UInt32>4800</sys:UInt32>
+				<sys:UInt32>9600</sys:UInt32>
+				<sys:UInt32>19200</sys:UInt32>
+				<sys:UInt32>38400</sys:UInt32>
+				<sys:UInt32>115200</sys:UInt32>
+			</scg:List>
+			<scg:List x:TypeArguments="sys:Object" x:Key="ZoomModes">
+				<UserControl>
+					<StackPanel Orientation="Horizontal">
+						<mat:MaterialIcon Kind="Prohibited"/>
+					</StackPanel>
+				</UserControl>
+				<UserControl>
+					<StackPanel Orientation="Horizontal">
+						<mat:MaterialIcon Kind="Pan"/>
+						<TextBlock Text=" X"/>
+					</StackPanel>
+				</UserControl>
+				<UserControl>
+					<StackPanel Orientation="Horizontal">
+						<mat:MaterialIcon Kind="Pan"/>
+						<TextBlock Text=" Y"/>
+					</StackPanel>
+				</UserControl>
+				<UserControl>
+					<StackPanel Orientation="Horizontal">
+						<mat:MaterialIcon Kind="ZoomIn"/>
+						<TextBlock Text=" X"/>
+					</StackPanel>
+				</UserControl>
+				<UserControl>
+					<StackPanel Orientation="Horizontal">
+						<mat:MaterialIcon Kind="ZoomIn"/>
+						<TextBlock Text=" Y"/>
+					</StackPanel>
+				</UserControl>
+				<UserControl>
+					<StackPanel Orientation="Horizontal">
+						<mat:MaterialIcon Kind="Pan"/>
+						<mat:MaterialIcon Kind="ZoomIn"/>
+						<TextBlock Text=" XY"/>
+					</StackPanel>
+				</UserControl>
+				
+			</scg:List>
+		</Grid.Resources>
 		<lvc:CartesianChart
 		 Series="{Binding Series}"
-		 ZoomMode="Both"	
+		 ZoomMode="{Binding SelectedZoomMode}"	
 		 ZoomingSpeed="0.01"
-		 LegendPosition="Top"
+		 LegendPosition="Top"		
 		 LegendTextSize="12"
 		 TooltipPosition="Hidden"
 		 YAxes="{Binding YAxes}"
@@ -23,10 +75,51 @@
 		<Button Command="{Binding EnableRealTimeCommand}"
 				HorizontalAlignment="Left"
 				VerticalAlignment="Bottom"
-				Height="40"
-				Width="40">
-			<mat:MaterialIcon Kind="ZoomOut"/>
+				Margin="2"
+				Height="50"
+				Width="50">
+			<mat:MaterialIcon Kind="ZoomOut" HorizontalAlignment="Stretch"
+							  VerticalAlignment="Stretch"/>
 		</Button>
+		<ComboBox Margin="2"
+				  SelectedIndex="{Binding SelectedZoomIndex}">
+			<ComboBoxItem>
+				<StackPanel Orientation="Horizontal">
+					<mat:MaterialIcon Kind="Prohibited"/>
+				</StackPanel>
+			</ComboBoxItem>
+			<ComboBoxItem>
+				<StackPanel Orientation="Horizontal">
+					<mat:MaterialIcon Kind="Pan"/>
+					<TextBlock Text=" X"/>
+				</StackPanel>
+			</ComboBoxItem>
+			<ComboBoxItem>
+				<StackPanel Orientation="Horizontal">
+					<mat:MaterialIcon Kind="Pan"/>
+					<TextBlock Text=" Y"/>
+				</StackPanel>
+			</ComboBoxItem>
+			<ComboBoxItem>
+				<StackPanel Orientation="Horizontal">
+					<mat:MaterialIcon Kind="ZoomIn"/>
+					<TextBlock Text=" X"/>
+				</StackPanel>
+			</ComboBoxItem>
+			<ComboBoxItem>
+				<StackPanel Orientation="Horizontal">
+					<mat:MaterialIcon Kind="ZoomIn"/>
+					<TextBlock Text=" Y"/>
+				</StackPanel>
+			</ComboBoxItem>
+			<ComboBoxItem>
+				<StackPanel Orientation="Horizontal">
+					<mat:MaterialIcon Kind="Pan"/>
+					<mat:MaterialIcon Kind="ZoomIn"/>
+					<TextBlock Text=" XY"/>
+				</StackPanel>
+			</ComboBoxItem>
+		</ComboBox>
 	</Grid>
 	
 </UserControl>
