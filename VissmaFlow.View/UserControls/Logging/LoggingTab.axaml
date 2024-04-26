@@ -1,0 +1,119 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 xmlns:vm="using:VissmaFlow.Core.ViewModels"
+			 xmlns:log="using:VissmaFlow.Core.Models.Logging"
+			 xmlns:ma="using:Material.Icons.Avalonia"
+			 x:DataType="vm:LoggingViewModel"
+			 x:Name="root"
+             x:Class="VissmaFlow.View.UserControls.Logging.LoggingTab">
+	<Grid RowDefinitions="Auto, *">
+		<ListBox HorizontalAlignment="Stretch">
+			<DockPanel>
+				<TextBlock Text="Сохранить в: "
+						   VerticalAlignment="Center"
+						   DockPanel.Dock="Left"/>
+				<TextBlock Text="{Binding Settings.Path}"
+						   VerticalAlignment="Center"
+						   TextWrapping="Wrap"/>
+				<Button DockPanel.Dock="Right"
+						HorizontalAlignment="Right"
+						Height="40"
+						IsEnabled="{Binding !IsLogging}"
+						VerticalContentAlignment="Center"
+						HorizontalContentAlignment="Center"
+						Width="80"
+						Content="Browse"
+						Command="{Binding GetPathCommand}"/>
+			</DockPanel>
+			<DockPanel>
+				<TextBox Text="{Binding Settings.MinPeriod}"
+						 HorizontalAlignment="Right"
+						 Width="80"
+						 DockPanel.Dock="Right"/>
+				<TextBlock Text="Период логирования, мс"						 
+						 TextWrapping="Wrap"
+						  
+						   VerticalAlignment="Center"
+						 DockPanel.Dock="Right"/>
+			</DockPanel>
+			<Button HorizontalAlignment="Stretch"
+					HorizontalContentAlignment="Center"
+					Background="{Binding IsLogging, Converter={StaticResource GetIfTrueConverter}, ConverterParameter={StaticResource LogColors}}"
+					Command="{Binding SwitchTimerCommand}">
+				<StackPanel Orientation="Horizontal">
+					<TextBlock Text="Логирование"/>
+					<TextBlock Text="{Binding FileName, StringFormat={} ({0})}"
+							   IsVisible="{Binding IsLogging}"/>
+				</StackPanel>
+				
+			</Button>
+			<TextBlock IsVisible="{Binding RelativeSource={RelativeSource Self}, Path=Text, Converter={x:Static ObjectConverters.IsNotNull}}"
+					   Foreground="Red"
+					   Text="{Binding ErrStatus}"
+					   TextWrapping="Wrap"/>
+		</ListBox>
+		<Grid RowDefinitions="40,*" Grid.Row="1">
+			<StackPanel Orientation="Horizontal">
+				<Button Command="{Binding AddParameterCommand}"
+						IsEnabled="{Binding !IsLogging}"
+					Margin="2">
+					<ma:MaterialIcon Kind="PlusCircle"/>
+				</Button>
+				<Button Command="{Binding SaveConfigCommand}"
+					Margin="2"
+						IsEnabled="{Binding !IsLogging}">
+					<ma:MaterialIcon Kind="Storage"/>
+				</Button>
+			</StackPanel>
+			
+			<DataGrid ItemsSource="{Binding Settings.Cells}"
+					  Grid.Row="1">
+				<DataGrid.Columns>
+					<DataGridTextColumn Header="№" x:DataType="log:LogCell" Binding="{Binding Id}"/>
+					<DataGridTemplateColumn Header="РТК" x:DataType="log:LogCell">
+						<DataGridTemplateColumn.CellTemplate>
+							<DataTemplate>
+								<ComboBox ItemsSource="{Binding ElementName=root, Path=DataContext.CommunicationVm.RtkUnits}"
+										  DisplayMemberBinding="{Binding Name}"
+										  Margin="1"
+										  IsEnabled="{Binding ElementName=root, Path=!DataContext.IsLogging}"
+										  Width="100"
+										  SelectedItem="{Binding RtkUnit}">
+									
+								</ComboBox>
+							</DataTemplate>
+						</DataGridTemplateColumn.CellTemplate>
+					</DataGridTemplateColumn>
+					<DataGridTemplateColumn Header="Логируемый параметр" x:DataType="log:LogCell">
+						<DataGridTemplateColumn.CellTemplate>
+							<DataTemplate>
+								<ComboBox ItemsSource="{Binding ElementName=root, Path=DataContext.ParameterVm.Parameters}"
+										  DisplayMemberBinding="{Binding Description}"
+										  Margin="1"
+										  IsEnabled="{Binding ElementName=root, Path=!DataContext.IsLogging}"
+										  Width="200"
+										  SelectedItem="{Binding Parameter}">
+								</ComboBox>
+							</DataTemplate>
+						</DataGridTemplateColumn.CellTemplate>
+					</DataGridTemplateColumn>
+					<DataGridTemplateColumn>
+						<DataGridTemplateColumn.CellTemplate>
+							<DataTemplate>
+								<Button Command="{Binding ElementName=root, Path=DataContext.DeleteCellCommand}"
+									CommandParameter="{Binding}"
+										IsEnabled="{Binding ElementName=root, Path=!DataContext.IsLogging}">
+									<ma:MaterialIcon Kind="RemoveBox"/>
+								</Button>
+							</DataTemplate>							
+						</DataGridTemplateColumn.CellTemplate>
+					</DataGridTemplateColumn>
+				</DataGrid.Columns>
+			</DataGrid>
+		</Grid>
+		
+	</Grid>
+</UserControl>

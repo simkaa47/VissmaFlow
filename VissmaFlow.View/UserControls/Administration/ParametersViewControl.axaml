@@ -30,8 +30,7 @@
 					Margin="5" Command="{Binding SaveParametersCommand}"/>
 		</StackPanel>
 		<DataGrid ItemsSource="{Binding Parameters}"
-				  Grid.Row="1"	
-				  Focusable="True"
+				  Grid.Row="1"
 				  AutoGenerateColumns="False">
 			<DataGrid.Columns>
 				<DataGridTextColumn Header="Id" Binding="{Binding Id}" FontSize="10" IsReadOnly="True"/>
@@ -144,8 +143,8 @@
 						</DataTemplate>
 					</DataGridTemplateColumn.CellTemplate>
 				</DataGridTemplateColumn>
-				<DataGridCheckBoxColumn Header="Нужность" Binding="{Binding IsRequired}"/>
-				<DataGridCheckBoxColumn Binding="{Binding IsReadOnly}">
+				<DataGridCheckBoxColumn Header="Нужность" Binding="{Binding IsRequired}" IsReadOnly="False"/>
+				<DataGridCheckBoxColumn Binding="{Binding IsReadOnly}" IsReadOnly="False">
 					<DataGridCheckBoxColumn.Header>
 						<TextBlock Text="Только чтение" Width="60" TextWrapping="Wrap"/>
 					</DataGridCheckBoxColumn.Header>

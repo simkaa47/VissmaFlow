@@ -3,7 +3,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:local="using:VissmaFlow.View.UserControls.Parameters"
-		     xmlns:mat="using:Material.Icons.Avalonia"
+		     xmlns:mat="using:Material.Icons.Avalonia"	
+			 xmlns:m="using:VissmaFlow.Core.Models.Parameters"
+			 x:Name="root"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="VissmaFlow.View.UserControls.Parameters.NumericParameter">
 	<local:ParameterCommon.Resources>
@@ -11,11 +13,11 @@
 	</local:ParameterCommon.Resources>
 	<DockPanel>
 		<StackPanel Orientation="Horizontal" DockPanel.Dock="Right">
-			<TextBox Width="{Binding RelativeSource={RelativeSource AncestorType=local:ParameterCommon} Path=ParamWidth}"
+			<TextBox Width="{Binding ElementName=root, Path=ParamWidth}"
 					 Text="{Binding WriteValue}" Tag="{Binding Data}" >
 				<TextBox.KeyBindings>
 					<KeyBinding Gesture="Enter"
-								Command="{Binding RelativeSource={RelativeSource AncestorType=local:ParameterCommon}, Path=Command}"
+								Command="{Binding ElementName=root, Path=Command}"
 								CommandParameter="{Binding}">
 
 					</KeyBinding>
@@ -28,7 +30,7 @@
 		<TextBlock Text="{Binding Description}"
 				   DockPanel.Dock="Left"
 				   Margin="5,5,10,5"
-				   IsVisible="{Binding RelativeSource={RelativeSource AncestorType=local:ParameterCommon}, Path=!DescriptionInvisible}"
+				   IsVisible="{Binding ElementName=root, Path=!DescriptionInvisible}"
 				   VerticalAlignment="Center"
 				   TextWrapping="Wrap"/>
 		

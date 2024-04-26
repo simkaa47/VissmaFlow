@@ -4,10 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 			 xmlns:vm="using:VissmaFlow.Core.ViewModels"
+			 xmlns:acc="using:VissmaFlow.Core.Models.AccessControl"
 			 xmlns:events="using:VissmaFlow.View.UserControls.Events"
 		     x:DataType="vm:MainViewModel"
 			 xmlns:single="using:VissmaFlow.View.UserControls.SingleMeasures"
 			 xmlns:main="using:VissmaFlow.View.UserControls.Main"
+			 xmlns:log="using:VissmaFlow.View.UserControls.Logging"
 			 xmlns:par="using:VissmaFlow.View.UserControls.Parameters"
 			 xmlns:adm="using:VissmaFlow.View.UserControls.Administration"
              x:Class="VissmaFlow.View.UserControls.MainTabControl">
@@ -15,16 +17,22 @@
 		<TabItem Header="Главная" Classes="common" MinHeight="30" MinWidth="70">
 			<main:MainPageControl/>
 		</TabItem>
-		<TabItem Header="Параметры" Classes="common" MinHeight="30" MinWidth="70">
+		<TabItem Header="Параметры" Classes="common" MinHeight="30" MinWidth="70"
+				 IsVisible="{Binding AccessViewModel.CurrentUser, Converter={x:Static ObjectConverters.IsNotNull}}">
 			<par:ParametersViewControl/>
 		</TabItem>
-		<TabItem Header="Ед. измерения" Classes="common" MinHeight="30" MinWidth="70">
+		<TabItem Header="Ед. измерения" Classes="common" MinHeight="30" MinWidth="70"
+				 IsVisible="{Binding AccessViewModel.CurrentUser, Converter={StaticResource UserVisibilityConverter}, ConverterParameter={x:Static acc:UserAccessLevel.Service}}">
 			<single:SingleMeasuresTab DataContext="{Binding SingleMeasuresViewModel}"/>
+		</TabItem>
+		<TabItem Header="Логирование" Classes="common" MinHeight="30" MinWidth="70">
+			<log:LoggingTab DataContext="{Binding LoggingViewModel}"/>
 		</TabItem>
 		<TabItem Header="События" Classes="common" MinHeight="30" MinWidth="70">
 			<events:MainEventsControl/>
 		</TabItem>
-		<TabItem Header="Администрирование" 
+		<TabItem Header="Администрирование"
+				 IsVisible="{Binding AccessViewModel.CurrentUser, Converter={StaticResource UserVisibilityConverter}, ConverterParameter={x:Static acc:UserAccessLevel.Admin}}"
 				 Classes="common" 
 				 MinHeight="30" 
 				 MinWidth="110" 

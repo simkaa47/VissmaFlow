@@ -6,7 +6,8 @@
 		xmlns:e="using:VissmaFlow.Core.Models.Event"
 		xmlns:vm="using:VissmaFlow.Core.ViewModels"
 		xmlns:par="using:VissmaFlow.Core.Models.Parameters"
-		x:DataType="vm:MainViewModel"		
+		x:DataType="vm:MainViewModel"	
+		x:Name="root"
         x:Class="VissmaFlow.View.Dialogs.Events.AddEventWindow">
 	<UserControl.Styles>
 		<Style Selector="TextBlock">
@@ -36,7 +37,8 @@
 					<TextBlock Text="РТК"/>
 					<ComboBox HorizontalAlignment="Right"
 							  Width="160"
-							  ItemsSource="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.CommunicationVm.RtkUnits}"
+							  x:CompileBindings ="False"
+							  ItemsSource="{Binding ElementName=root, Path=DataContext.CommunicationVm.RtkUnits}"
 							  SelectedItem="{Binding RtkUnit, Mode=TwoWay}"
 							  Margin="100,5,5,5">
 						<ComboBox.ItemTemplate>

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VissmaFlow.Core.Infrastructure.DataAccess;
 
@@ -10,9 +11,11 @@ using VissmaFlow.Core.Infrastructure.DataAccess;
 namespace VissmaFlow.Core.Migrations
 {
     [DbContext(typeof(VissmaDbContext))]
-    partial class VissmaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240422100031_add_log_settings")]
+    partial class addlogsettings
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -166,32 +169,6 @@ namespace VissmaFlow.Core.Migrations
                     b.ToTable("IndicationCells");
                 });
 
-            modelBuilder.Entity("VissmaFlow.Core.Models.Logging.LogCell", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("LogSettingsId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("ParameterId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("RtkUnitId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("LogSettingsId");
-
-                    b.HasIndex("ParameterId");
-
-                    b.HasIndex("RtkUnitId");
-
-                    b.ToTable("LogCell");
-                });
-
             modelBuilder.Entity("VissmaFlow.Core.Models.Logging.LogSettings", b =>
                 {
                     b.Property<int>("Id")
@@ -244,6 +221,9 @@ namespace VissmaFlow.Core.Migrations
                     b.Property<bool>("IsWriting")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int?>("LogSettingsId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("ModbRegNum")
                         .HasColumnType("INTEGER");
 
@@ -264,6 +244,8 @@ namespace VissmaFlow.Core.Migrations
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("LogSettingsId");
 
                     b.ToTable("ParameterBases");
 
@@ -550,13 +532,11 @@ namespace VissmaFlow.Core.Migrations
                 {
                     b.HasOne("VissmaFlow.Core.Models.Parameters.ParameterBase", "Parameter")
                         .WithMany()
-                        .HasForeignKey("ParameterId")
-                        .OnDelete(DeleteBehavior.SetNull);
+                        .HasForeignKey("ParameterId");
 
                     b.HasOne("VissmaFlow.Core.Models.Communication.RtkUnit", "RtkUnit")
                         .WithMany()
-                        .HasForeignKey("RtkUnitId")
-                        .OnDelete(DeleteBehavior.SetNull);
+                        .HasForeignKey("RtkUnitId");
 
                     b.Navigation("Parameter");
 
@@ -567,51 +547,33 @@ namespace VissmaFlow.Core.Migrations
                 {
                     b.HasOne("VissmaFlow.Core.Models.Parameters.ParameterBase", "Parameter")
                         .WithMany()
-                        .HasForeignKey("ParameterId")
-                        .OnDelete(DeleteBehavior.SetNull);
+                        .HasForeignKey("ParameterId");
 
                     b.HasOne("VissmaFlow.Core.Models.Communication.RtkUnit", "RtkUnit")
                         .WithMany()
-                        .HasForeignKey("RtkUnitId")
-                        .OnDelete(DeleteBehavior.SetNull);
+                        .HasForeignKey("RtkUnitId");
 
                     b.Navigation("Parameter");
 
                     b.Navigation("RtkUnit");
                 });
 
-            modelBuilder.Entity("VissmaFlow.Core.Models.Logging.LogCell", b =>
+            modelBuilder.Entity("VissmaFlow.Core.Models.Parameters.ParameterBase", b =>
                 {
                     b.HasOne("VissmaFlow.Core.Models.Logging.LogSettings", null)
-                        .WithMany("Cells")
+                        .WithMany("Parameters")
                         .HasForeignKey("LogSettingsId");
-
-                    b.HasOne("VissmaFlow.Core.Models.Parameters.ParameterBase", "Parameter")
-                        .WithMany()
-                        .HasForeignKey("ParameterId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
-                    b.HasOne("VissmaFlow.Core.Models.Communication.RtkUnit", "RtkUnit")
-                        .WithMany()
-                        .HasForeignKey("RtkUnitId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
-                    b.Navigation("Parameter");
-
-                    b.Navigation("RtkUnit");
                 });
 
             modelBuilder.Entity("VissmaFlow.Core.Models.SingleMeasures.SingleMeasurePoint", b =>
                 {
                     b.HasOne("VissmaFlow.Core.Models.Parameters.ParameterBase", "AvgValue")
                         .WithMany()
-                        .HasForeignKey("AvgValueId")
-                        .OnDelete(DeleteBehavior.SetNull);
+                        .HasForeignKey("AvgValueId");
 
                     b.HasOne("VissmaFlow.Core.Models.Parameters.ParameterBase", "Destination")
                         .WithMany()
-                        .HasForeignKey("DestinationId")
-                        .OnDelete(DeleteBehavior.SetNull);
+                        .HasForeignKey("DestinationId");
 
                     b.HasOne("VissmaFlow.Core.Models.SingleMeasures.SingleMeasureSettings", null)
                         .WithMany("Points")
@@ -626,8 +588,7 @@ namespace VissmaFlow.Core.Migrations
                 {
                     b.HasOne("VissmaFlow.Core.Models.Parameters.ParameterBase", "Source")
                         .WithMany()
-                        .HasForeignKey("SourceId")
-                        .OnDelete(DeleteBehavior.SetNull);
+                        .HasForeignKey("SourceId");
 
                     b.Navigation("Source");
                 });
@@ -649,7 +610,7 @@ namespace VissmaFlow.Core.Migrations
 
             modelBuilder.Entity("VissmaFlow.Core.Models.Logging.LogSettings", b =>
                 {
-                    b.Navigation("Cells");
+                    b.Navigation("Parameters");
                 });
 
             modelBuilder.Entity("VissmaFlow.Core.Models.SingleMeasures.SingleMeasureSettings", b =>

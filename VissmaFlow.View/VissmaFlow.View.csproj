@@ -3,7 +3,7 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
-    <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+    <BuiltInComInteropSupport>true</BuiltInComInteropSupport>	
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
@@ -26,8 +26,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <TrimmerRootAssembly Include="Avalonia.Themes.Fluent" />
+    <TrimmerRootAssembly Include="Avalonia.Themes.Fluent" />	 
   </ItemGroup>
+
+ 
 
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="11.0.6" />

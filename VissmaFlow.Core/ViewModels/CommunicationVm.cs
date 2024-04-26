@@ -1,13 +1,11 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System.IO.Ports;
 using VissmaFlow.Core.Contracts.Common;
 using VissmaFlow.Core.Contracts.Communication;
 using VissmaFlow.Core.Contracts.DataAccess;
 using VissmaFlow.Core.Models.Communication;
-using VissmaFlow.Core.Models.Parameters;
 
 namespace VissmaFlow.Core.ViewModels
 {

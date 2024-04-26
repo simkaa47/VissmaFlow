@@ -1,0 +1,49 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 x:Name="root"
+			 xmlns:ia="using:Avalonia.Xaml.Interactions.Core"
+			 xmlns:i="using:Avalonia.Xaml.Interactivity"
+			 xmlns:mat="using:Material.Icons.Avalonia"
+			 xmlns:dt="using:VissmaFlow.View.UserControls.DateAndTime"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="VissmaFlow.View.UserControls.DateAndTime.DateTimePicker">
+	<Border Background="#16FFFFFF" CornerRadius="4,4,0,0" BorderThickness="0,0,0,2"  x:Name="Border">
+		<Border.Styles>
+			<Style Selector="Border">
+				<Setter Property="BorderBrush" Value="Gray"/>
+			</Style>
+			<Style Selector="Border:pointerover">
+				<Setter Property="BorderBrush" Value="{DynamicResource AquaColor}"/>
+			</Style>
+		</Border.Styles>
+		<StackPanel VerticalAlignment="Center">
+			<TextBlock Text="{Binding ElementName=root, Path=Description}"
+					   FontSize="12"
+					   IsVisible="{Binding RelativeSource={RelativeSource Self}, Path=Text, Converter={x:Static ObjectConverters.IsNotNull}}"
+					   Margin="14,5,0,0"
+					   TextWrapping="Wrap"
+					   Foreground="#B1FFFFFF"/>
+			<DockPanel>
+				<TextBlock Text="{Binding ElementName=root, Path=DateTime, StringFormat=dd.MM.yy HH:mm:ss}"
+						   VerticalAlignment="Center"
+						   Margin="10,5,0,5"/>
+				<Button Name="sabri"
+						Margin="10,0,5,0">
+					<mat:MaterialIcon Kind="TriangleDown"
+									  Height="10"
+									  Width="10"/>
+				</Button>
+			</DockPanel>
+			<Popup Name="Popup"
+		   WindowManagerAddShadowHint="False"
+		   x:CompileBindings="False"
+				   
+		   PlacementMode="Bottom"
+		   PlacementTarget="{Binding ElementName=sabri}">
+				<dt:FBCDateTimePickerPresenter Name="PopPresenter"/>
+			</Popup>
+		</StackPanel>
+	</Border>
+</UserControl>

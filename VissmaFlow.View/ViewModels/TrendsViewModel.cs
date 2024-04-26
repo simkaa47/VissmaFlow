@@ -3,11 +3,13 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using LiveChartsCore;
 using LiveChartsCore.Defaults;
+using LiveChartsCore.Measure;
 using LiveChartsCore.SkiaSharpView;
 using LiveChartsCore.SkiaSharpView.Painting;
 using Microsoft.Extensions.Logging;
 using SkiaSharp;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using VissmaFlow.Core.Models.Parameters;
@@ -26,6 +28,33 @@ namespace VissmaFlow.View.ViewModels
             _logger = logger;
             _trendSettigsViewModel = trendSettigsViewModel;
             InitAsync();
+        }
+
+        public List<ZoomAndPanMode> ZoomModes { get; set; } = new List<ZoomAndPanMode>
+        {
+            ZoomAndPanMode.None,
+            ZoomAndPanMode.PanX,
+            ZoomAndPanMode.PanY,
+            ZoomAndPanMode.ZoomX,
+            ZoomAndPanMode.ZoomY,
+            ZoomAndPanMode.Both
+        };
+        [ObservableProperty]
+        private ZoomAndPanMode _selectedZoomMode;
+
+        private int _selectedZoomIndex = 0;
+        public int SelectedZoomIndex
+        {
+            get => _selectedZoomIndex;
+            set
+            {
+                SetProperty(ref _selectedZoomIndex, value);
+                if (value< ZoomModes.Count)
+                {
+                    
+                    SelectedZoomMode = ZoomModes[value];
+                }
+            }
         }
 
         private void InitAsync()
