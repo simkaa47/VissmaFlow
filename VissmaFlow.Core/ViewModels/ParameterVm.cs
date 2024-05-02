@@ -195,7 +195,7 @@ namespace VissmaFlow.Core.ViewModels
                     par = new ParameterDouble() {Data = pBase.Data, MinValue = double.MinValue, MaxValue = double.MaxValue };
                     break;
                 case DataType.str:
-                    par = new ParameterString() {Data = pBase.Data, MinValue = string.Empty};                    
+                    par = new ParameterString() {Data = pBase.Data, MinValue = string.Empty, MaxValue = "zzzzzzzzzzzzzz"};                    
                     break;
                 default:
                     break;
@@ -206,15 +206,17 @@ namespace VissmaFlow.Core.ViewModels
 
         private ParameterBase MapFromParameterBaseDro(ParameterBaseDto dto)
         {
-            return new ParameterBase
+            var parBase = new ParameterBase
             {
                 ByteOrder = dto.Order,
                 Data = ConvertDataTypeFromDto(dto.Type),
                 Description = dto.Description + (string.IsNullOrEmpty(dto.Notification) ? "" : $", {dto.Notification}"),
                 StrLength = dto.Length,
+                IsRequired = true,                
                 ModbusRegType = dto.RegType,
                 ModbRegNum = dto.RegNum
             };
+            return CreateParameter(parBase);
         }
 
         private DataType ConvertDataTypeFromDto(DataTypeDto typeDto)
