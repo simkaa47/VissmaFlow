@@ -37,6 +37,10 @@ namespace VissmaFlow.View
         public static AppBuilder BuildAvaloniaApp()
             => AppBuilder.Configure<App>()
                 .UsePlatformDetect()
+                .With(new X11PlatformOptions
+                {
+                    EnableMultiTouch = true
+                })
                 .LogToTrace();
     }
 }

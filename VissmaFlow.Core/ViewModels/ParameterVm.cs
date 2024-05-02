@@ -3,8 +3,10 @@ using CommunityToolkit.Mvvm.Input;
 using Mapster;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using System.Text.Json;
 using VissmaFlow.Core.Contracts.Common;
 using VissmaFlow.Core.Contracts.DataAccess;
+using VissmaFlow.Core.Contracts.FileDialog;
 using VissmaFlow.Core.Contracts.Parameters;
 using VissmaFlow.Core.Infrastructure.DataAccess;
 using VissmaFlow.Core.Models.Parameters;
@@ -15,18 +17,21 @@ namespace VissmaFlow.Core.ViewModels
     public partial class ParameterVm : ObservableObject
     {
         private readonly ILogger<ParameterVm> _logger;
+        private readonly IFileDialog _fileDialog;
         private readonly IQuestionDialog _questionDialog;
         private readonly IRepository<ParameterBase> _parameterRepository;        
         private readonly IParameterDialogService _parameterDialogService;
 
         public ParameterVm(ILogger<ParameterVm> logger, 
             CommunicationVm communicationVm,
+            IFileDialog fileDialog,
             IQuestionDialog questionDialog,
             IRepository<ParameterBase> parameterRepository,
             IParameterDialogService parameterDialogService)
         {
             _logger = logger;
             CommunicationVm = communicationVm;
+            _fileDialog = fileDialog;
             _questionDialog = questionDialog;
             _parameterRepository = parameterRepository;            
             _parameterDialogService = parameterDialogService;
@@ -106,22 +111,53 @@ namespace VissmaFlow.Core.ViewModels
         }
         #endregion
 
+        #region Экспорт параметра
+        [RelayCommand]
+        private async Task ExportFromJsonAsync()
+        {
+            try
+            {
+                var path = await _fileDialog.GetFile();
+                if(path is not null)
+                {
+                    var parData = File.ReadAllText(path);
+                    var pars = JsonSerializer.Deserialize<List<ParameterBaseDto>>(parData);
+                    if(pars != null)
+                    {
+                        await _parameterRepository.ClearAsync();
+                        Parameters = await _parameterRepository.InitAsync(ParametersDataFactory.GetDefaultParameters(), 1);
+                        UpdateRtks();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Экспорт конфигурации параметров - {ex.Message}");
+            }
+        }
+        #endregion
+
+        private void UpdateRtks()
+        {
+            if (CommunicationVm.RtkUnits is null || Parameters is null) return;
+            foreach (var rtk in CommunicationVm.RtkUnits)
+            {
+                rtk.Parameters = Parameters.Select(p =>
+                {
+                    var par = CreateParameter(p);
+                    par.Owner = rtk;
+                    return par;
+                }).ToList();
+            }
+        }
+
 
         private async void InitParameters()
         {
             try
             {
-                Parameters = await _parameterRepository.InitAsync(ParametersDataFactory.GetDefaultParameters(),1);                
-                if (CommunicationVm.RtkUnits is null) return;
-                foreach (var rtk in CommunicationVm.RtkUnits)
-                {
-                    rtk.Parameters = Parameters.Select(p =>
-                    {
-                        var par = CreateParameter(p);
-                        par.Owner = rtk;
-                        return par;
-                    }).ToList();
-                }
+                Parameters = await _parameterRepository.InitAsync(ParametersDataFactory.GetDefaultParameters(),1);
+                UpdateRtks();
             }
             catch (Exception ex)
             {
@@ -166,6 +202,40 @@ namespace VissmaFlow.Core.ViewModels
             }
             pBase.Adapt(par,t, par.GetType());
             return par;
+        }
+
+        private ParameterBase MapFromParameterBaseDro(ParameterBaseDto dto)
+        {
+            return new ParameterBase
+            {
+                ByteOrder = dto.Order,
+                Data = ConvertDataTypeFromDto(dto.Type),
+                Description = dto.Description + (string.IsNullOrEmpty(dto.Notification) ? "" : $", {dto.Notification}"),
+                StrLength = dto.Length,
+                ModbusRegType = dto.RegType,
+                ModbRegNum = dto.RegNum
+            };
+        }
+
+        private DataType ConvertDataTypeFromDto(DataTypeDto typeDto)
+        {
+            switch (typeDto)
+            {
+                case DataTypeDto.String:
+                    return DataType.str;
+                case DataTypeDto.Float32:
+                    return DataType.float32;
+                case DataTypeDto.Int32:
+                    return DataType.int32;
+                case DataTypeDto.Uint32:
+                    return DataType.uint32;
+                case DataTypeDto.Int16:
+                    return DataType.int16;
+                case DataTypeDto.Uint16:
+                    return DataType.uint16;
+                default:
+                    return DataType.float32;
+            }
         }
     }
 }

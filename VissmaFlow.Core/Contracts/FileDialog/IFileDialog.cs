@@ -2,6 +2,8 @@
 {
     public interface IFileDialog
     {
-        Task<string> GetPath();
+        Task<string> GetDirectory();
+
+        Task<string> GetFile();
     }
 }

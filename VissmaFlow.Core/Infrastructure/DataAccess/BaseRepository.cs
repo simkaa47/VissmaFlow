@@ -86,5 +86,12 @@ namespace VissmaFlow.Core.Infrastructure.DataAccess
             }
             await _dbContext.SaveChangesAsync();
         }
+
+        public async Task ClearAsync()
+        {
+            var entities = _dbContext.Set<T>().ToArray();
+            _dbContext.Set<T>().RemoveRange(entities);
+            await _dbContext.SaveChangesAsync();
+        }
     }
 }

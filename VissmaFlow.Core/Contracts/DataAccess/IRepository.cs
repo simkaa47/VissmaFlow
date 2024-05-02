@@ -5,6 +5,7 @@ namespace VissmaFlow.Core.Contracts.DataAccess
 {
     public interface IRepository<T> where T : EntityCommon
     {
+        Task ClearAsync();
         Task<T?> GetByIdAsync(long id);
         Task<List<T>> ListAllAsync();
         Task<T> AddAsync(T entity);

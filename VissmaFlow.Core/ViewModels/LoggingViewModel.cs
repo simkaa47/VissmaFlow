@@ -95,7 +95,7 @@ namespace VissmaFlow.Core.ViewModels
         private async Task GetPath()
         {
             if (Settings is null) return;
-            Settings.Path = await _fileDialog.GetPath();
+            Settings.Path = await _fileDialog.GetDirectory();
         }
 
 

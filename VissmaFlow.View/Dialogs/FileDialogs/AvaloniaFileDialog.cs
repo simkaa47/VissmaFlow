@@ -8,7 +8,27 @@ namespace VissmaFlow.View.Dialogs.FileDialogs
 {
     public class AvaloniaFileDialog : IFileDialog
     {
-        public async Task<string> GetPath()
+        public async Task<string> GetFile()
+        {
+            if (!(App.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop))
+            {
+                return string.Empty;
+            }
+            var topLevel = TopLevel.GetTopLevel(desktop.MainWindow);
+            if (topLevel == null) return string.Empty;
+            var files = await topLevel.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
+            {
+                AllowMultiple = false
+            });
+
+            if (files is not null && files.Count > 0)
+            {
+                return files[0].Path.LocalPath;
+            }
+            return string.Empty;
+        }
+
+        public async Task<string> GetDirectory()
         {
             if (!(App.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop))
             {

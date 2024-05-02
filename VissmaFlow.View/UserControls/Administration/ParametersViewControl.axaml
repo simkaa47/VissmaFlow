@@ -28,6 +28,11 @@
 					VerticalContentAlignment="Center"
 					HorizontalContentAlignment="Center"
 					Margin="5" Command="{Binding SaveParametersCommand}"/>
+			<Button Height="50" Width="100"
+					Content="Экспорт"
+					VerticalContentAlignment="Center"
+					HorizontalContentAlignment="Center"
+					Margin="5" Command="{Binding ExportFromJsonCommand}"/>
 		</StackPanel>
 		<DataGrid ItemsSource="{Binding Parameters}"
 				  Grid.Row="1"
