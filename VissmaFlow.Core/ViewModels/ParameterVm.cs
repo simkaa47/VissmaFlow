@@ -125,7 +125,7 @@ namespace VissmaFlow.Core.ViewModels
                     if(pars != null)
                     {
                         await _parameterRepository.ClearAsync();
-                        Parameters = await _parameterRepository.InitAsync(ParametersDataFactory.GetDefaultParameters(), 1);
+                        Parameters = await _parameterRepository.InitAsync(pars.Select(p=>MapFromParameterBaseDro(p)).ToList(),1);
                         UpdateRtks();
                     }
                 }
