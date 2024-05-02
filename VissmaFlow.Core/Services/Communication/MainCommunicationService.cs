@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.Logging;
+using System.Reflection.Metadata;
 using VissmaFlow.Core.Contracts.Communication;
 using VissmaFlow.Core.Models.Parameters;
 using VissmaFlow.Core.ViewModels;
@@ -90,6 +91,20 @@ namespace VissmaFlow.Core.Services.Communication
                 SetIsWritingFlag(parFloat);
             else if (o is Parameter<string> parstring)
                 SetIsWritingFlag(parstring);
+        }
+
+        [RelayCommand]
+        private void WriteToEeprom()
+        {
+            var par = new ParameterUshort { WriteValue = 200, ModbRegNum = 99 };
+            WriteCommands.Enqueue(par);
+        }
+
+        [RelayCommand]
+        private void ReadFromEeprom()
+        {
+            var par = new ParameterUshort { WriteValue = 100, ModbRegNum = 99 };
+            WriteCommands.Enqueue(par);
         }
 
         private void SetIsWritingFlag<T>(Parameter<T> parameter) where T : IComparable

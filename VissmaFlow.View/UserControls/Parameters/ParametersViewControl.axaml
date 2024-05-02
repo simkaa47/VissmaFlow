@@ -6,6 +6,7 @@
 			 xmlns:vm="using:VissmaFlow.Core.ViewModels"
 			 xmlns:rtk="using:VissmaFlow.Core.Models.Communication"
 			 xmlns:p="using:VissmaFlow.Core.Models.Parameters"
+			 xmlns:mat="using:Material.Icons.Avalonia"
 			 x:DataType="vm:MainViewModel"
 			 xmlns:par="using:VissmaFlow.View.UserControls.Parameters"
              x:Class="VissmaFlow.View.UserControls.Parameters.ParametersViewControl">
@@ -23,22 +24,43 @@
 		</TabControl.ItemTemplate>
 		<TabControl.ContentTemplate>
 			<DataTemplate DataType="rtk:RtkUnit">
-				<ListBox ItemsSource="{Binding Parameters}">
-					<ListBox.ItemTemplate>
-						<DataTemplate DataType="p:ParameterBase">
-							<par:NumericParameter Margin="5"
-												  ParamWidth="100"
-									Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=DataContext.CommunicationService.WriteParameterCommand}">
-								<par:NumericParameter.IsVisible>
-									<MultiBinding Converter="{StaticResource ParameterVisibilityMultivalueConverter}">
-										<Binding/>
-										<Binding RelativeSource="{RelativeSource AncestorType=Window}" Path="DataContext.AccessViewModel.CurrentUser"/>
-									</MultiBinding>
-								</par:NumericParameter.IsVisible>
-							</par:NumericParameter>
-						</DataTemplate>
-					</ListBox.ItemTemplate>
-				</ListBox>
+				<Grid RowDefinitions="50,*">
+					<StackPanel Orientation="Horizontal">
+						<Button VerticalAlignment="Stretch" VerticalContentAlignment="Stretch"
+								HorizontalContentAlignment="Stretch" Width="50"
+								Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=DataContext.CommunicationService.ReadFromEepromCommand}"
+								Margin="2">
+							<mat:MaterialIcon Kind="Export"
+											  VerticalAlignment="Center"
+											  HorizontalAlignment="Center"/>
+						</Button>
+						<Button VerticalAlignment="Stretch" VerticalContentAlignment="Stretch"
+								HorizontalContentAlignment="Stretch" Width="50"
+								Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=DataContext.CommunicationService.WriteToEepromCommand}"
+								Margin="2">
+							<mat:MaterialIcon Kind="Import"
+											  VerticalAlignment="Center"
+											  HorizontalAlignment="Center"/>
+						</Button>
+					</StackPanel>
+					<ListBox Grid.Row="1" ItemsSource="{Binding Parameters}">
+						<ListBox.ItemTemplate>
+							<DataTemplate DataType="p:ParameterBase">
+								<par:NumericParameter Margin="5"
+													  ParamWidth="100"
+										Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=DataContext.CommunicationService.WriteParameterCommand}">
+									<par:NumericParameter.IsVisible>
+										<MultiBinding Converter="{StaticResource ParameterVisibilityMultivalueConverter}">
+											<Binding/>
+											<Binding RelativeSource="{RelativeSource AncestorType=Window}" Path="DataContext.AccessViewModel.CurrentUser"/>
+										</MultiBinding>
+									</par:NumericParameter.IsVisible>
+								</par:NumericParameter>
+							</DataTemplate>
+						</ListBox.ItemTemplate>
+					</ListBox>
+				</Grid>
+
 			</DataTemplate>
 		</TabControl.ContentTemplate>
 	</TabControl>
