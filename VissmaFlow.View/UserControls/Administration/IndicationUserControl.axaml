@@ -15,7 +15,7 @@
 				VerticalContentAlignment="Center"
 				Command="{Binding SaveAllCommand}"/>
 		<DataGrid ItemsSource="{Binding IndicationCells}"
-				  Grid.Row="1"
+				  Grid.Row="1"				  
 				  x:Name="root"
 				  IsReadOnly="False">
 			<DataGrid.Columns>
@@ -57,7 +57,8 @@
 					</DataGridTemplateColumn.CellTemplate>
 				</DataGridTemplateColumn>
 				<DataGridCheckBoxColumn IsReadOnly="False"
-										Binding="{Binding IsRequired}" Header="Видимость"/>
+										
+										Binding="{Binding IsRequired, Mode=TwoWay}" Header="Видимость"/>
 			</DataGrid.Columns>
 		</DataGrid>
 	</Grid>

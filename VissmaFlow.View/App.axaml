@@ -10,6 +10,7 @@
 		<StyleInclude Source="/Styles/Validation/ValidationErrors.xaml"/>
 		<StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml"/>
 		<StyleInclude Source="/Styles/TabItems.axaml"/>
+		<StyleInclude Source="avares://Avalonia.Controls.TreeDataGrid/Themes/Fluent.axaml"/>
 		<StyleInclude Source="/UserControls/DateAndTime/DateTimePickerStyle.axaml"/>
 		<StyleInclude Source="avares://ThemeEditor.Controls.ColorPicker/ColorPicker.axaml" />
     </Application.Styles>

@@ -37,8 +37,13 @@ public partial class Curve:EntityCommon
     #endregion
 
     #region Видимость тренда
-    [ObservableProperty]
+    //[ObservableProperty]
     private bool _isVisible;
+    public bool IsVisible
+    {
+        get => _isVisible;
+        set=> SetProperty(ref _isVisible, value);
+    }
     #endregion
 
     [NotMapped]

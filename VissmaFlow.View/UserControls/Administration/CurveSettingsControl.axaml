@@ -33,8 +33,8 @@
 		
 		<DataGrid Grid.Row="1"
 				  x:Name="CurvesTable"
-				  VerticalAlignment="Stretch"
-				 ItemsSource="{Binding Curves}">
+				  ItemsSource="{Binding Curves}"
+				  IsReadOnly="False">
 			<DataGrid.Columns>
 				<DataGridTemplateColumn Header="Цвет">
 					<DataGridTemplateColumn.CellTemplate>
@@ -94,9 +94,15 @@
 						</DataTemplate>
 					</DataGridTemplateColumn.CellTemplate>
 				</DataGridTemplateColumn>
-				<DataGridCheckBoxColumn x:DataType="mod:Curve" 
-										IsReadOnly="False"
-										Binding="{Binding IsVisible}" Header="Видимость"/>
+				<DataGridTemplateColumn Header="Видимость">
+					<DataGridTemplateColumn.CellTemplate>
+						<DataTemplate DataType="mod:Curve">
+							<CheckBox IsChecked="{Binding IsVisible}"
+									  VerticalAlignment="Center"
+									  HorizontalAlignment="Center"/>
+						</DataTemplate>
+					</DataGridTemplateColumn.CellTemplate>
+				</DataGridTemplateColumn>				
 			</DataGrid.Columns>
 		</DataGrid>
 	</Grid>
