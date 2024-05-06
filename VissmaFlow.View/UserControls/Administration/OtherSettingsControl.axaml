@@ -4,8 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 			 xmlns:vm="using:VissmaFlow.Core.ViewModels"
+			 xmlns:mat="using:Material.Icons.Avalonia"
 			 xmlns:dt="using:VissmaFlow.View.UserControls.DateAndTime"
-			 x:DataType="vm:MainViewModel"
+			 x:DataType="vm:PcSettingsViewModel"
              x:Class="VissmaFlow.View.UserControls.Administration.OtherSettingsControl">
 	<Grid>
 		<StackPanel>
@@ -28,11 +29,15 @@
 						<TextBox Width="200"
 								 Name="adminPassw"
 								  RevealPassword="{Binding ElementName=showPassw, Path=IsChecked}"
-								   Text="{Binding UserPassword}"
+								   Text="{Binding PcSettings.Password}"
 								   VerticalContentAlignment="Center"
 								 PasswordChar="*"/>
 						<CheckBox Name="showPassw"
 								  Margin="5"/>
+						<Button VerticalAlignment="Stretch" Width="50"
+								Command="{Binding SaveSettingsCommand}">
+							<mat:MaterialIcon Kind="Storage"/>
+						</Button>
 					</StackPanel>
 				</StackPanel>
 			</Border>

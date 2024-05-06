@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using VissmaFlow.Core.Models.AccessControl;
+using VissmaFlow.Core.Models.Administration;
 using VissmaFlow.Core.Models.Communication;
 using VissmaFlow.Core.Models.Event;
 using VissmaFlow.Core.Models.Indication;
@@ -13,6 +14,7 @@ namespace VissmaFlow.Core.Infrastructure.DataAccess
     public class VissmaDbContext:DbContext
     {
         public DbSet<RtkUnit> RtkUnits => Set<RtkUnit>();
+        public DbSet<PcSettings> PcSettings => Set<PcSettings>();
         public DbSet<ParameterBase> ParameterBases  => Set<ParameterBase>();
         public DbSet<CommSettings> CommSettings => Set<CommSettings>();
         public DbSet<User> Users => Set<User>();        

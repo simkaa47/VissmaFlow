@@ -1,8 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.Logging;
-using System.Runtime.InteropServices;
-using VissmaFlow.Core.Infrastructure.Helpers;
 using VissmaFlow.Core.Services.Communication;
 
 namespace VissmaFlow.Core.ViewModels
@@ -14,6 +11,7 @@ namespace VissmaFlow.Core.ViewModels
 
         public MainViewModel(ILogger<MainViewModel> logger,
             ParameterVm parameterVm,
+            PcSettingsViewModel pdcSettingsViewModel,
             MainCommunicationService communicationService,
             CommunicationVm communicationVm,
             LoggingViewModel loggingViewModel,
@@ -25,6 +23,7 @@ namespace VissmaFlow.Core.ViewModels
         {
             _logger = logger;
             ParameterVm = parameterVm;
+            PdcSettingsViewModel = pdcSettingsViewModel;
             CommunicationService = communicationService;
             CommunicationVm = communicationVm;
             LoggingViewModel = loggingViewModel;
@@ -49,6 +48,7 @@ namespace VissmaFlow.Core.ViewModels
         #endregion
 
         public ParameterVm ParameterVm { get; }
+        public PcSettingsViewModel PdcSettingsViewModel { get; }
         public MainCommunicationService CommunicationService { get; }
         public CommunicationVm CommunicationVm { get; }
         public LoggingViewModel LoggingViewModel { get; }
@@ -58,60 +58,6 @@ namespace VissmaFlow.Core.ViewModels
         public EventViewModel EventsViewModel { get; }
         public TrendSettigsViewModel TrendSettigsViewModel { get; }
 
-
-        [ObservableProperty]
-        private DateTime _setDateTime = DateTime.Now;
-
-        [ObservableProperty]
-        private string _userPassword = "linaro";
-
-
-        [RelayCommand]
-        private void SetTime()
-        {
-            if (SetDateTime > DateTime.MinValue)
-            {
-                if (OperatingSystem.IsLinux())
-                {
-                    string cmd = $"echo {UserPassword} | sudo -S date --set=\"{SetDateTime.ToString("yyyy-MM-dd HH:mm:ss.fff")}\"";
-                    ShellHelper.BashCommand(cmd);
-                }
-                else if(OperatingSystem.IsWindows())
-                {
-                    SYSTEMTIME st = new SYSTEMTIME();
-                    st.wYear = (short)SetDateTime.Year; // must be short
-                    st.wMonth = (short)SetDateTime.Month;
-                    st.wDay = (short)SetDateTime.Day;
-                    st.wHour = (short)SetDateTime.Hour;
-                    st.wMinute = (short)SetDateTime.Minute;
-                    st.wSecond = (short)SetDateTime.Second;
-                    var res = SetSystemTime(ref st);
-                }
-            }
-        }
-
-        [StructLayout(LayoutKind.Sequential)]
-        public struct SYSTEMTIME
-        {
-            public short wYear;
-            public short wMonth;
-            public short wDayOfWeek;
-            public short wDay;
-            public short wHour;
-            public short wMinute;
-            public short wSecond;
-            public short wMilliseconds;
-        }
-
-        [DllImport("kernel32.dll", SetLastError = true)]
-        public static extern bool SetSystemTime(ref SYSTEMTIME st);
-
-
-
-
     }
-
-
-
 
 }

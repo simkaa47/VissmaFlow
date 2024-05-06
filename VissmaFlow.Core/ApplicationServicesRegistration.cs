@@ -23,9 +23,10 @@ namespace VissmaFlow.Core
             services.AddSingleton<EventViewModel>();
             services.AddSingleton<IComminicationService, ModbusCommunicationService>();
             services.AddSingleton<CommunicationVm>();
+            services.AddSingleton<PcSettingsViewModel>();
             services.AddDbContext<VissmaDbContext>();
             services.AddTransient(typeof(IRepository<>), typeof(BaseRepository<>));
-
+            
             return services;
         }
     }

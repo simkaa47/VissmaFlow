@@ -28,6 +28,7 @@
 					<StackPanel Orientation="Horizontal">
 						<Button VerticalAlignment="Stretch" VerticalContentAlignment="Stretch"
 								HorizontalContentAlignment="Stretch" Width="50"
+								CommandParameter="{Binding}"
 								Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=DataContext.CommunicationService.ReadFromEepromCommand}"
 								Margin="2">
 							<mat:MaterialIcon Kind="Export"
@@ -36,6 +37,7 @@
 						</Button>
 						<Button VerticalAlignment="Stretch" VerticalContentAlignment="Stretch"
 								HorizontalContentAlignment="Stretch" Width="50"
+								CommandParameter="{Binding}"
 								Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=DataContext.CommunicationService.WriteToEepromCommand}"
 								Margin="2">
 							<mat:MaterialIcon Kind="Import"

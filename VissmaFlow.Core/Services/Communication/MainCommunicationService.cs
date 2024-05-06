@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.Logging;
 using System.Reflection.Metadata;
 using VissmaFlow.Core.Contracts.Communication;
+using VissmaFlow.Core.Models.Communication;
 using VissmaFlow.Core.Models.Parameters;
 using VissmaFlow.Core.ViewModels;
 
@@ -94,16 +95,18 @@ namespace VissmaFlow.Core.Services.Communication
         }
 
         [RelayCommand]
-        private void WriteToEeprom()
+        private void WriteToEeprom(object o)
         {
-            var par = new ParameterUshort { WriteValue = 200, ModbRegNum = 99 };
+            if (!(o is not null && o is RtkUnit rtk)) return;
+            var par = new ParameterUshort { WriteValue = 200, ModbRegNum = 99,Owner = rtk };
             WriteCommands.Enqueue(par);
         }
 
         [RelayCommand]
-        private void ReadFromEeprom()
+        private void ReadFromEeprom(object o)
         {
-            var par = new ParameterUshort { WriteValue = 100, ModbRegNum = 99 };
+            if (!(o is not null && o is RtkUnit rtk)) return;
+            var par = new ParameterUshort { WriteValue = 100, ModbRegNum = 99, Owner = rtk };
             WriteCommands.Enqueue(par);
         }
 

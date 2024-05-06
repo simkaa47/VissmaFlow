@@ -33,7 +33,7 @@
 			<adm:SingleMeasSettingsControl DataContext="{Binding SingleMeasuresViewModel}"/>
 		</TabItem>
 		<TabItem Header="Другое" Classes="common">
-			<adm:OtherSettingsControl/>
+			<adm:OtherSettingsControl DataContext="{Binding PdcSettingsViewModel}"/>
 		</TabItem>
 	</TabControl>
 </UserControl>

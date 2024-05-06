@@ -22,7 +22,9 @@
 			<Button Height="50" Width="50"
 					Click="CloseApp"
 					Margin="5">
-				<mat:MaterialIcon Kind="CloseBoxOutline"/>
+				<mat:MaterialIcon Kind="Power"
+								  Height="30"
+								  Width="30"/>
 			</Button>
 		</StackPanel>
 	</Viewbox>
