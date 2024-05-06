@@ -9,6 +9,7 @@
 	<conv:GetIfTrueConverter x:Key="GetIfTrueConverter"/>	
 	<conv:EventMessageConverter x:Key="EventMessageConverter"/>
 	<conv:ColorConverter x:Key="ColorConverter"/>
+	<conv:IsLinuxPlatformConverter x:Key="IsLinuxPlatformConverter"/>	
 	<conv:DivideConverter x:Key="DivideConverter"/>
 	<conv:GetByIndexFromParameterConverter x:Key="GetByIndexFromParameterConverter"/>	
 </ResourceDictionary>

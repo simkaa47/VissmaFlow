@@ -1,0 +1,29 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.PreviewWith>
+        <Border Padding="20">
+            <!-- Add Controls for Previewer Here -->
+        </Border>
+    </Design.PreviewWith>
+
+	<Style Selector="ComboBox.without /template/PathIcon#DropDownGlyph">
+		<Setter Property="Foreground" Value="Red"/>
+		<Setter Property="IsVisible" Value="False"/>
+		
+	</Style>
+	<Style Selector="ComboBox.without /template/ ContentControl#ContentPresenter">
+		<Setter Property="Grid.ColumnSpan" Value="2" />		
+	</Style>
+
+	<Style Selector="ComboBox.without /template/ Border#Background">
+		<Setter Property="MinWidth" Value="0" />
+	</Style>
+	<Style Selector="ComboBox.without /template/ ItemsPresenter#PART_ItemsPresenter">
+		<Setter Property="Margin" Value="0" />
+	</Style>
+	<Style Selector="ComboBox.without /template/ Popup#PART_Popup">
+		<Setter Property="MinWidth" Value="0" />
+	</Style>
+
+	
+</Styles>

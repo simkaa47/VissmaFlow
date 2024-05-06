@@ -18,18 +18,10 @@ public partial class HighBarControl : UserControl
     public HighBarControl()
     {
         InitializeComponent();
-    }
+    } 
+    
 
-    private async void CloseApp(object? sender, RoutedEventArgs args)
-    {
-        if (OperatingSystem.IsLinux())
-            await ShutdownPc();
-        else await CloseAppAsync();
-    }
-
-
-
-    private async Task CloseAppAsync()
+    private async void CloseAppAsync(object? sender, RoutedEventArgs args)
     {
         if (App.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
@@ -45,26 +37,38 @@ public partial class HighBarControl : UserControl
         }
     }
 
-    private async Task ShutdownPc()
-    {        
+    private async Task ExecuteLinuxCmd(string cmd, string description)
+    {
+        if (!RuntimeInformation.IsOSPlatform(OSPlatform.Linux)) return;
+
         if (App.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             var app = App.Current as App;
             var settService = app?.GetService<PcSettingsViewModel>();
-            if(settService is not null && desktop.MainWindow is not null && app is not null)
+            if (settService is not null && desktop.MainWindow is not null && app is not null)
             {
-                    if (settService.PcSettings?.Password is not null)
+                if (settService.PcSettings?.Password is not null)
+                {
+                    var questuinService = app.GetService<IQuestionDialog>();
+                    if (await questuinService.Ask(description, description))
                     {
-                        var questuinService = app.GetService<IQuestionDialog>();
-                        if (await questuinService.Ask("Выключить прибор?", "Выключить прибор?"))
-                        {
-                            desktop.MainWindow.Close();
-                        }
-                        string cmd = $"echo {settService.PcSettings.Password} | sudo shutdown now";
-                            ShellHelper.BashCommand(cmd);
-                    }
+                        desktop.MainWindow.Close();
+                    }                   
+                    ShellHelper.BashCommand($"echo {settService.PcSettings.Password} | sudo {cmd}");
+                }
             }
         }
+    }
+
+
+    private async void ShutdownPcAsync(object? sender, RoutedEventArgs args)
+    {
+        await ExecuteLinuxCmd("shutdown now", "Выключить прибор?");
+    }
+
+    private async void RebootPcAsync(object? sender, RoutedEventArgs args)
+    {
+        await ExecuteLinuxCmd("reboot", "Перезагрузить прибор?");
     }
 
 }
