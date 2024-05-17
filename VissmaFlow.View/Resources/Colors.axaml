@@ -6,6 +6,11 @@
 		<SolidColorBrush Color="Red"/>
 		<SolidColorBrush Color="LightGreen"/>
 	</scg:List>
+	
+	<SolidColorBrush Color="#1C1C1E" x:Key="CommonColor"/>
+	<SolidColorBrush Color="#5B5B5B" x:Key="CommonBorderBrush"/>
+	<SolidColorBrush Color="#5B5B5B" x:Key="ParameterSelected"/>
+	<SolidColorBrush Color="#2C2C2E" x:Key="ParameterBackgroundCommonColor"/>
 
 	<scg:List x:TypeArguments="sys:Object" x:Key="LogColors">
 		<SolidColorBrush Color="LightGray"/>

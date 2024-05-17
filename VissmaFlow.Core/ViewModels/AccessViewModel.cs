@@ -33,6 +33,10 @@ namespace VissmaFlow.Core.ViewModels
         }
 
 
+        [ObservableProperty]
+        private bool _isAuthorized;
+
+
         private async void InitAsync()
         {
             try
@@ -128,6 +132,7 @@ namespace VissmaFlow.Core.ViewModels
                 else
                 {
                     CurrentUser = user;
+                    IsAuthorized = true;
                     _logger.LogInformation($"Пользователь c логином {login.LoginName}");
                 }
             }
@@ -141,6 +146,7 @@ namespace VissmaFlow.Core.ViewModels
         public void Logout()
         {
             CurrentUser = null;
+            IsAuthorized = false;
         } 
         #endregion
     }

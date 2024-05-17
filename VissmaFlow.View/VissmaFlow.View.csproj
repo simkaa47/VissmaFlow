@@ -13,11 +13,61 @@
     <None Remove="obj\**" />
   </ItemGroup>
   <ItemGroup>
+    
+    <None Remove="Resources\Fonts\Roboto-Black.ttf" />
+    
+    <None Remove="Resources\Fonts\Roboto-BlackItalic.ttf" />
+    
+    <None Remove="Resources\Fonts\Roboto-Bold.ttf" />
+    
+    <None Remove="Resources\Fonts\Roboto-BoldItalic.ttf" />
+    
+    <None Remove="Resources\Fonts\Roboto-Italic.ttf" />
+    
+    <None Remove="Resources\Fonts\Roboto-Light.ttf" />
+    
+    <None Remove="Resources\Fonts\Roboto-LightItalic.ttf" />
+    
+    <None Remove="Resources\Fonts\Roboto-Medium.ttf" />
+    
+    <None Remove="Resources\Fonts\Roboto-MediumItalic.ttf" />
+    
+    <None Remove="Resources\Fonts\Roboto-Regular.ttf" />
+    
+    <None Remove="Resources\Fonts\Roboto-Thin.ttf" />
+    
+    <None Remove="Resources\Fonts\Roboto-ThinItalic.ttf" />
+    
+    <None Remove="Resources\Images\AccountCircleAuthorized.png" />
+    
+    <None Remove="Resources\Images\AccountCircleNonAuthorized.png" />
+    <None Remove="Resources\Images\Close.png" />
+    <None Remove="Resources\Images\Logout.png" />
     <None Remove="Resources\Images\Logo_Konvels_blue.png" />
+    <None Remove="Resources\Images\PowerSettingsOff.png" />
+    <None Remove="Resources\Images\Replay.png" />
     <None Remove="Styles\Validation\ValidationErrors.xaml" />
   </ItemGroup>
   <ItemGroup>
+    <AvaloniaResource Include="Resources\Fonts\Roboto-Black.ttf" />
+    <AvaloniaResource Include="Resources\Fonts\Roboto-BlackItalic.ttf" />
+    <AvaloniaResource Include="Resources\Fonts\Roboto-Bold.ttf" />
+    <AvaloniaResource Include="Resources\Fonts\Roboto-BoldItalic.ttf" />
+    <AvaloniaResource Include="Resources\Fonts\Roboto-Italic.ttf" />
+    <AvaloniaResource Include="Resources\Fonts\Roboto-Light.ttf" />
+    <AvaloniaResource Include="Resources\Fonts\Roboto-LightItalic.ttf" />
+    <AvaloniaResource Include="Resources\Fonts\Roboto-Medium.ttf" />
+    <AvaloniaResource Include="Resources\Fonts\Roboto-MediumItalic.ttf" />
+    <AvaloniaResource Include="Resources\Fonts\Roboto-Regular.ttf" />
+    <AvaloniaResource Include="Resources\Fonts\Roboto-Thin.ttf" />
+    <AvaloniaResource Include="Resources\Fonts\Roboto-ThinItalic.ttf" />
+    <AvaloniaResource Include="Resources\Images\Close.png" />
+	<AvaloniaResource Include="Resources\Images\AccountCircleAuthorized.png" />
+	<AvaloniaResource Include="Resources\Images\AccountCircleNonAuthorized.png" />
+    <AvaloniaResource Include="Resources\Images\Logout.png" />
     <AvaloniaResource Include="Resources\Images\Logo_Konvels_blue.png" />
+	<AvaloniaResource Include="Resources\Images\PowerSettingsOff.png" />
+    <AvaloniaResource Include="Resources\Images\Replay.png" />
   </ItemGroup>
   <ItemGroup>
     <AvaloniaXaml Include="Styles\Validation\ValidationErrors.xaml">
@@ -27,9 +77,7 @@
 
   <ItemGroup>
     <TrimmerRootAssembly Include="Avalonia.Themes.Fluent" />	 
-  </ItemGroup>
-
- 
+  </ItemGroup> 
 
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="11.0.6" />
@@ -59,4 +107,5 @@
   <ItemGroup>
     <UpToDateCheckInput Remove="UserControls\Administration\CurveSettingsControl.axaml" />
   </ItemGroup>
+ 
 </Project>
