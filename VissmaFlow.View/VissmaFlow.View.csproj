@@ -42,6 +42,8 @@
     
     <None Remove="Resources\Images\AccountCircleNonAuthorized.png" />
     <None Remove="Resources\Images\Close.png" />
+    <None Remove="Resources\Images\Layer_1.png" />
+    <None Remove="Resources\Images\Layer_2.png" />
     <None Remove="Resources\Images\Logout.png" />
     <None Remove="Resources\Images\Logo_Konvels_blue.png" />
     <None Remove="Resources\Images\PowerSettingsOff.png" />
@@ -64,6 +66,10 @@
     <AvaloniaResource Include="Resources\Images\Close.png" />
 	<AvaloniaResource Include="Resources\Images\AccountCircleAuthorized.png" />
 	<AvaloniaResource Include="Resources\Images\AccountCircleNonAuthorized.png" />
+	<AvaloniaResource Include="Resources\Images\Layer_1.png">
+	  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	</AvaloniaResource>
+	<AvaloniaResource Include="Resources\Images\Layer_2.png" />
     <AvaloniaResource Include="Resources\Images\Logout.png" />
     <AvaloniaResource Include="Resources\Images\Logo_Konvels_blue.png" />
 	<AvaloniaResource Include="Resources\Images\PowerSettingsOff.png" />
