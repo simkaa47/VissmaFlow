@@ -5,10 +5,37 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 			 x:Name="root"
              x:Class="VissmaFlow.View.UserControls.HighBar.HighBarControl">
-	<StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-		<TextBlock Text="{Binding ElementName=root, Path=SelectedItem.Tag}"/>
-		<Button Height="50" Width="50"
-				Click="OpenSelectorAsync"/>
+	<Grid Height="80" ColumnDefinitions="162,*,80">
+		<!--Logo-->
+		<Border BorderThickness="0,0,1,1"  BorderBrush="{StaticResource CommonBorderBrush}">
+			<Image Source="\Resources\Images\Logo_Konvels_blue.png"
+					   VerticalAlignment="Center" HorizontalAlignment="Center"
+					   Width="110" Height="28"/>
+		</Border>
+		<!--Page tag-->
+		<Border BorderThickness="1,0,1,1" Grid.Column="1"  BorderBrush="{StaticResource CommonBorderBrush}">
+			<TextBlock Text="{Binding ElementName=root, Path=SelectedItem.Tag}"
+					   TextTrimming="CharacterEllipsis"
+					   FontFamily="{StaticResource RobotoFont}"
+					   FontWeight="Medium"
+					   FontSize="25"
+					   VerticalAlignment="Center"
+					   Margin="32,0,0,0"/>
+		</Border>
+		<!--Go to the page selector-->
+		<Border BorderThickness="0,0,0,1" Grid.Column="2"  BorderBrush="{StaticResource CommonBorderBrush}">
+			<Button VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+					BorderThickness="0"
+					Background="Transparent"
+				Click="OpenSelectorAsync">
+				<Image Source="\Resources\Images\Dehaze.png"
+					   VerticalAlignment="Center" HorizontalAlignment="Center"
+					   Width="40" Height="40"/>
+			</Button>
 
-	</StackPanel>
+		</Border>
+		
+		
+	</Grid>	
+	
 </UserControl>
