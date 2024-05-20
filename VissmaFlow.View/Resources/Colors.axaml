@@ -12,6 +12,7 @@
 	<SolidColorBrush Color="#5B5B5B" x:Key="ParameterSelected"/>
 	<SolidColorBrush Color="#28BCBA" x:Key="AquaColor"/>
 	<SolidColorBrush Color="#2C2C2E" x:Key="ParameterBackgroundCommonColor"/>
+	<SolidColorBrush Color="#CCFFFFFF" x:Key="AlmostWhite"/>
 
 	<scg:List x:TypeArguments="sys:Object" x:Key="LogColors">
 		<SolidColorBrush Color="LightGray"/>

@@ -7,16 +7,33 @@
 			 x:DataType="ind:IndicationCell"
              x:Class="VissmaFlow.View.UserControls.Main.IndicatorCellCotrol">
 	<DockPanel>		
-		<StackPanel Orientation="Horizontal" DockPanel.Dock="Left" Margin="5">
+		<StackPanel Orientation="Horizontal" DockPanel.Dock="Left"
+					VerticalAlignment="Center">
+			<StackPanel.Styles>
+				<Style Selector="TextBlock">
+					<Setter Property="Foreground" Value="{StaticResource AlmostWhite}"/>
+					<Setter Property="FontSize" Value="16"/>
+					<Setter Property="FontFamily" Value="{StaticResource RobotoFont}"/>
+					<Setter Property="FontWeight" Value="Regular"/>
+				</Style>
+			</StackPanel.Styles>
 			<TextBlock Text="{Binding RtkUnit.Name}" IsVisible="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.CommunicationVm.RtkUnits.Count, Converter={StaticResource IfNotEqualConverter}, ConverterParameter=1}"/>
 			<TextBlock Text=" : " IsVisible="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.CommunicationVm.RtkUnits.Count, Converter={StaticResource IfNotEqualConverter}, ConverterParameter=1}"/>
 			<TextBlock Text="{Binding RealParameter.Description}" TextWrapping="Wrap"/>
 		</StackPanel>
 		<StackPanel DockPanel.Dock="Right" HorizontalAlignment="Right">
-			<Border BorderThickness="1" BorderBrush="Gray" Width="100" Margin="2" CornerRadius="4">
-				<TextBlock Text="{Binding RealParameter.Value}"
-						   VerticalAlignment="Center" Margin="5"
-						   HorizontalAlignment="Center"/>
+			<Border BorderThickness="1" BorderBrush="{StaticResource CommonBorderBrush}" 
+					Width="86" 
+					Height="44"
+					Background="Black"
+					Margin="4,4,0,4" 
+					CornerRadius="4">
+				<TextBlock Text="{Binding RealParameter.Value, StringFormat={}{0:0.000}}"
+						   VerticalAlignment="Center" Margin="12,0,0,0"
+						   HorizontalAlignment="Left"
+						   FontFamily="{StaticResource RobotoFont}"
+						   FontSize="20"
+						   FontWeight="Medium"/>
 			</Border>
 		</StackPanel>
 	</DockPanel>

@@ -14,7 +14,8 @@
 	<DockPanel>
 		<StackPanel Orientation="Horizontal" DockPanel.Dock="Right">
 			<TextBox Width="{Binding ElementName=root, Path=ParamWidth}"
-					 Text="{Binding WriteValue}" Tag="{Binding Data}" >
+					 Text="{Binding WriteValue}" Tag="{Binding Data}"
+					 Margin="0,4,0,4">
 				<TextBox.KeyBindings>
 					<KeyBinding Gesture="Enter"
 								Command="{Binding ElementName=root, Path=Command}"
@@ -29,9 +30,13 @@
 		</StackPanel>
 		<TextBlock Text="{Binding Description}"
 				   DockPanel.Dock="Left"
-				   Margin="5,5,10,5"
+				   Foreground="{StaticResource AlmostWhite}"
+				   Margin="79,0,10,0"
 				   IsVisible="{Binding ElementName=root, Path=!DescriptionInvisible}"
 				   VerticalAlignment="Center"
+				   FontWeight="Regular"
+				   FontSize="16"
+				   FontFamily="{StaticResource RobotoFont}"
 				   TextWrapping="Wrap"/>
 		
 	</DockPanel>
