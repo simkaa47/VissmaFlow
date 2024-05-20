@@ -10,6 +10,7 @@
 	<SolidColorBrush Color="#1C1C1E" x:Key="CommonColor"/>
 	<SolidColorBrush Color="#5B5B5B" x:Key="CommonBorderBrush"/>
 	<SolidColorBrush Color="#5B5B5B" x:Key="ParameterSelected"/>
+	<SolidColorBrush Color="#3F3F42" x:Key="ComboboxPopupBackground"/>
 	<SolidColorBrush Color="#28BCBA" x:Key="AquaColor"/>
 	<SolidColorBrush Color="#2C2C2E" x:Key="ParameterBackgroundCommonColor"/>
 	<SolidColorBrush Color="#CCFFFFFF" x:Key="AlmostWhite"/>
@@ -17,5 +18,10 @@
 	<scg:List x:TypeArguments="sys:Object" x:Key="LogColors">
 		<SolidColorBrush Color="LightGray"/>
 		<SolidColorBrush Color="LightGreen"/>
+	</scg:List>
+
+	<scg:List x:TypeArguments="sys:Object" x:Key="ComboBoxColors">
+		<SolidColorBrush Color="#616161"/>
+		<SolidColorBrush Color="#28BCBA"/>
 	</scg:List>
 </ResourceDictionary>

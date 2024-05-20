@@ -42,13 +42,17 @@
     
     <None Remove="Resources\Images\AccountCircleNonAuthorized.png" />
     <None Remove="Resources\Images\Close.png" />
+    <None Remove="Resources\Images\ControlCamera.png" />
     <None Remove="Resources\Images\Dehaze.png" />
     <None Remove="Resources\Images\Layer_1.png" />
     <None Remove="Resources\Images\Layer_2.png" />
     <None Remove="Resources\Images\Logout.png" />
     <None Remove="Resources\Images\Logo_Konvels_blue.png" />
+    <None Remove="Resources\Images\NotInterested.png" />
     <None Remove="Resources\Images\PowerSettingsOff.png" />
     <None Remove="Resources\Images\Replay.png" />
+    <None Remove="Resources\Images\ZoomIn.png" />
+    <None Remove="Resources\Images\ZoomOut.png" />
     <None Remove="Styles\Validation\ValidationErrors.xaml" />
   </ItemGroup>
   <ItemGroup>
@@ -67,6 +71,7 @@
     <AvaloniaResource Include="Resources\Images\Close.png" />
 	<AvaloniaResource Include="Resources\Images\AccountCircleAuthorized.png" />
 	<AvaloniaResource Include="Resources\Images\AccountCircleNonAuthorized.png" />
+	<AvaloniaResource Include="Resources\Images\ControlCamera.png" />
 	<AvaloniaResource Include="Resources\Images\Dehaze.png" />
 	<AvaloniaResource Include="Resources\Images\Layer_1.png">
 	  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
@@ -74,8 +79,11 @@
 	<AvaloniaResource Include="Resources\Images\Layer_2.png" />
     <AvaloniaResource Include="Resources\Images\Logout.png" />
     <AvaloniaResource Include="Resources\Images\Logo_Konvels_blue.png" />
+    <AvaloniaResource Include="Resources\Images\NotInterested.png" />
 	<AvaloniaResource Include="Resources\Images\PowerSettingsOff.png" />
     <AvaloniaResource Include="Resources\Images\Replay.png" />
+    <AvaloniaResource Include="Resources\Images\ZoomIn.png" />
+    <AvaloniaResource Include="Resources\Images\ZoomOut.png" />
   </ItemGroup>
   <ItemGroup>
     <AvaloniaXaml Include="Styles\Validation\ValidationErrors.xaml">

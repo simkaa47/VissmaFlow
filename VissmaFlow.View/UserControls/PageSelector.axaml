@@ -85,6 +85,7 @@
 				Margin="82,0,0,37" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="208" Height="38">
 			<TextBlock Text="{Binding PcTime, StringFormat={}{0:HH:mm:ss    dd.MM.yyyy}}" 
 					   FontSize="15"
+					   
 					   FontWeight="Medium"
 					   HorizontalAlignment="Center"
 					   Foreground="#B4FFFFFF"
