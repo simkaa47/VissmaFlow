@@ -24,6 +24,8 @@
 
 	<Style Selector="ComboBox.ComboBoxCommonStyle /template/ Border#PopupBorder">
 		<Setter Property="Background" Value="{DynamicResource ComboboxPopupBackground}"/>
+		<Setter Property="BorderBrush" Value="{DynamicResource CommonBorderBrush}"/>
+		<Setter Property="BorderThickness" Value="1"/>
 	</Style>
 	
 
