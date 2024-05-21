@@ -74,6 +74,7 @@
 					DockPanel.Dock="Left">
 				<Image Height="32" Width="32"
 					   PointerReleased="LoginClick"
+					   
 					   Source="{Binding AccessViewModel.IsAuthorized, Converter={StaticResource GetIfTrueConverter}, ConverterParameter={StaticResource UserIcons}}"/>
 			</Button>
 		</DockPanel>

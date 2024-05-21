@@ -1,0 +1,121 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <Design.PreviewWith>
+    <Border Padding="20">
+      <!-- Add Controls for Previewer Here -->
+    </Border>
+  </Design.PreviewWith>
+
+	<Style Selector="ScrollBar">
+		<Style Selector="^:vertical">
+			<Setter Property="Template">
+				<ControlTemplate>
+					<Grid x:Name="Root">
+						<Border x:Name="Red"
+								Width="31"
+								Padding="0"
+								Background=""
+								BorderBrush="{TemplateBinding BorderBrush}">
+							<Grid RowDefinitions="Auto,*,Auto">
+								<Rectangle x:Name="TrackRect"
+										   Fill="Black"
+										   Stroke="{DynamicResource ScrollBarTrackStroke}"
+										   StrokeThickness="{DynamicResource ScrollBarTrackBorderThemeThickness}"
+										   Opacity="0"
+										   Width="31"
+										   Grid.RowSpan="3">
+									<Rectangle.Transitions>
+										<Transitions>
+											<DoubleTransition Property="Opacity" Duration="0:0:0.1" />
+										</Transitions>
+									</Rectangle.Transitions>
+								</Rectangle>
+
+								<RepeatButton Name="PART_LineUpButton"
+											  HorizontalAlignment="Center"
+											  Theme="{StaticResource FluentScrollBarLineButton}"
+											  Grid.Row="0"
+											  Focusable="False"
+											  MinWidth="{DynamicResource ScrollBarSize}"
+											  Height="{DynamicResource ScrollBarSize}">
+									<PathIcon Data="M 19.091797 14.970703 L 10 5.888672 L 0.908203 14.970703 L 0.029297 14.091797 L 10 4.111328 L 19.970703 14.091797 Z"
+											  Width="{DynamicResource ScrollBarButtonArrowIconFontSize}"
+											  Height="{DynamicResource ScrollBarButtonArrowIconFontSize}"/>
+								</RepeatButton>
+
+								<Track Grid.Row="1"
+									   Minimum="{TemplateBinding Minimum}"
+									   Maximum="{TemplateBinding Maximum}"
+									   Value="{TemplateBinding Value, Mode=TwoWay}"
+									   DeferThumbDrag="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
+									   ViewportSize="{TemplateBinding ViewportSize}"
+									   Orientation="{TemplateBinding Orientation}"
+									   IsDirectionReversed="True">
+									<Track.DecreaseButton>
+										<RepeatButton Name="PART_PageUpButton"
+													  Classes="largeIncrease"
+													  Theme="{StaticResource FluentScrollBarPageButton}"
+													  Focusable="False" />
+									</Track.DecreaseButton>
+									<Track.IncreaseButton>
+										<RepeatButton Name="PART_PageDownButton"
+													  Classes="largeIncrease"
+													  Theme="{StaticResource FluentScrollBarPageButton}"
+													  Focusable="False" />
+									</Track.IncreaseButton>
+									<Thumb Width="11"
+										   HorizontalAlignment="Center"
+										   MinHeight="100"
+										   />
+								</Track>
+
+								<RepeatButton Name="PART_LineDownButton"
+											  HorizontalAlignment="Center"
+											  Theme="{StaticResource FluentScrollBarLineButton}"
+											  Grid.Row="2"
+											  Focusable="False"
+											  MinWidth="{DynamicResource ScrollBarSize}"
+											  Height="{DynamicResource ScrollBarSize}">
+									<PathIcon Data="M 18.935547 4.560547 L 19.814453 5.439453 L 10 15.253906 L 0.185547 5.439453 L 1.064453 4.560547 L 10 13.496094 Z"
+											  Width="{DynamicResource ScrollBarButtonArrowIconFontSize}"
+											  Height="{DynamicResource ScrollBarButtonArrowIconFontSize}"/>
+								</RepeatButton>
+							</Grid>
+						</Border>
+					</Grid>
+				</ControlTemplate>
+			</Setter>
+		</Style>
+
+	</Style>
+
+	<Style Selector="Thumb">
+		<Setter Property="Background" Value="{DynamicResource Scroll}"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate>
+					<Border Background="{TemplateBinding Background}"							
+							Width="11"
+							CornerRadius="4"/>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+		<Setter Property="Transitions">
+			<Transitions>
+				<CornerRadiusTransition Property="CornerRadius" Duration="0:0:0.1" />
+				<TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.1" />
+			</Transitions>
+		</Setter>
+
+		<Style Selector="^:pointerover /template/ Border">
+			<Setter Property="Background" Value="{DynamicResource Scroll}" />
+			<Setter Property="Width" Value="11"/>
+		</Style>
+		<Style Selector="^:pressed  /template/ Border">
+			<Setter Property="Background" Value="{DynamicResource Scroll}" />
+		</Style>
+		<Style Selector="^:disabled  /template/ Border">
+			<Setter Property="Background" Value="{DynamicResource Scroll}" />
+		</Style>
+	</Style>
+</Styles>

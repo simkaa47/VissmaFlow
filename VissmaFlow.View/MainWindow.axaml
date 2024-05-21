@@ -24,8 +24,8 @@
 		
 		<scg:List x:TypeArguments="UserControl" x:Key="Pages">
 			<main:MainPageControl Tag="Главная"/>
-			<par:ParameterCommon Tag="Параметры" 
-								 IsVisible="{Binding AccessViewModel.CurrentUser, Converter={x:Static ObjectConverters.IsNotNull}}"/>
+			<par:ParametersViewControl Tag="Параметры" 
+								 />
 		</scg:List>
 	</Window.Resources>
 	<Grid RowDefinitions="*, Auto">

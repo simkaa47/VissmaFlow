@@ -10,7 +10,8 @@
 		<mat:MaterialIconStyles />		
 		<StyleInclude Source="/Styles/Validation/ValidationErrors.xaml"/>
 		<StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml"/>
-		<StyleInclude Source="/Styles/TabItems.axaml"/>		
+		<StyleInclude Source="/Styles/TabItems.axaml"/>
+		<StyleInclude Source="/Styles/ScrollBars.axaml"/>
 		<StyleInclude Source="/Styles/ComboBoxes.axaml"/>
 		<StyleInclude Source="avares://Avalonia.Controls.TreeDataGrid/Themes/Fluent.axaml"/>
 		<StyleInclude Source="/UserControls/DateAndTime/DateTimePickerStyle.axaml"/>
@@ -24,6 +25,7 @@
 				<ResourceInclude Source="/Enums/ParameterEnums.axaml"/>
 				<ResourceInclude Source="/Enums/UserEnums.axaml"/>
 				<ResourceInclude Source="/Themes/ListBoxItems.axaml"/>
+				<ResourceInclude Source="/Themes/TabItems.axaml"/>
 				<ResourceInclude Source="/Themes/TextBoxes.axaml"/>
 				<ResourceInclude Source="/Enums/CommunicationEnums.axaml"/>
 				<ResourceInclude Source="/Converters/GlobalConverters.axaml"/>

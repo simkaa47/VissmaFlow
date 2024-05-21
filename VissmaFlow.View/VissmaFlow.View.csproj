@@ -123,5 +123,9 @@
   <ItemGroup>
     <UpToDateCheckInput Remove="UserControls\Administration\CurveSettingsControl.axaml" />
   </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Themes\TabItems.axaml" />
+  </ItemGroup>
  
 </Project>
