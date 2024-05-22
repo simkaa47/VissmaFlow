@@ -8,6 +8,7 @@
 		xmlns:sys="clr-namespace:System;assembly=netstandard"
 		xmlns:vm="using:VissmaFlow.Core.ViewModels"
 		x:DataType="vm:MainViewModel"
+		xmlns:sm="using:VissmaFlow.View.UserControls.SingleMeasures"
 		Width="480"
 		Height="800"
 		MaxHeight="800"
@@ -18,6 +19,7 @@
 		xmlns:kb="using:VissmaFlow.View.UserControls.Keyboard"
 		xmlns:hb="using:VissmaFlow.View.UserControls.HighBar"	
 		SystemDecorations="None"
+		xmlns:acc="using:VissmaFlow.Core.Models.AccessControl"
 		xmlns:uc="using:VissmaFlow.View.UserControls"
 		x:Name="root"
         Title="VissmaFlow.View">
@@ -27,6 +29,9 @@
 			<main:MainPageControl Tag="Главная"/>
 			<par:ParametersViewControl Tag="Параметры" IsVisible="{Binding AccessViewModel.CurrentUser, Converter={x:Static ObjectConverters.IsNotNull}}"/>
 			<log:LoggingTab Tag="Логирование" DataContext="{Binding LoggingViewModel}"/>
+			<sm:SingleMeasuresTab Tag="Калибровка" 
+								  DataContext="{Binding SingleMeasuresViewModel}"
+								  IsVisible="{Binding AccessViewModel.CurrentUser, Converter={StaticResource UserVisibilityConverter}, ConverterParameter={x:Static acc:UserAccessLevel.Service}}"/>
 		</scg:List>
 	</Window.Resources>
 	<Grid RowDefinitions="*, Auto">

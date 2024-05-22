@@ -52,6 +52,7 @@
     <None Remove="Resources\Images\NotInterested.png" />
     <None Remove="Resources\Images\PowerSettingsOff.png" />
     <None Remove="Resources\Images\Replay.png" />
+    <None Remove="Resources\Images\Timeline.png" />
     <None Remove="Resources\Images\ZoomIn.png" />
     <None Remove="Resources\Images\ZoomOut.png" />
     <None Remove="Styles\Validation\ValidationErrors.xaml" />
@@ -84,6 +85,7 @@
     <AvaloniaResource Include="Resources\Images\NotInterested.png" />
 	<AvaloniaResource Include="Resources\Images\PowerSettingsOff.png" />
     <AvaloniaResource Include="Resources\Images\Replay.png" />
+    <AvaloniaResource Include="Resources\Images\Timeline.png" />
     <AvaloniaResource Include="Resources\Images\ZoomIn.png" />
     <AvaloniaResource Include="Resources\Images\ZoomOut.png" />
   </ItemGroup>

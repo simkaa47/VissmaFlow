@@ -9,6 +9,7 @@
 	<Style Selector="DataGridColumnHeader">
 		<Setter Property="Padding" Value="16,10,5,8"/>
 		<Setter Property="FontSize" Value="11"/>
+		<Setter Property="VerticalContentAlignment" Value="Top"/>
 		<Setter Property="FontFamily" Value="{DynamicResource RobotoFont}"/>
 		<Setter Property="FontWeight" Value="Medium"/>
 		<Setter Property="BorderBrush" Value="{DynamicResource CommonBorderBrush}"/>
@@ -16,7 +17,7 @@
 		<Setter Property="Template">
 			<ControlTemplate>
 				<Border x:Name="HeaderBorder"
-						Background="{TemplateBinding Background}"
+						Background="Transparent"
 						BorderBrush="{TemplateBinding BorderBrush}"
 						BorderThickness="{TemplateBinding BorderThickness}"
 						CornerRadius="{TemplateBinding CornerRadius}">
@@ -29,6 +30,7 @@
 
 								<TextBlock Text="{TemplateBinding Content}"
 										   TextWrapping="Wrap"
+										   VerticalAlignment="Top"
 										   Foreground="{DynamicResource TexBoxCommon}"/>
 							</Grid>
 						</Panel>

@@ -6,10 +6,10 @@
     </Border>
   </Design.PreviewWith>
 
-	<Style Selector="DataGridCell">
-		<Setter Property="Padding" Value="20,5,10,5"/>
+	<Style Selector="DataGridCell">		
 		<Setter Property="VerticalContentAlignment" Value="Center"/>
-		<Setter Property="BorderThickness" Value="1,0,1,0"/>
-		<Setter Property="BorderBrush" Value="{DynamicResource BorderNonActiveColor}"/>
+		<Setter Property="HorizontalContentAlignment" Value="Center"/>
+		<Setter Property="BorderThickness" Value="0,0,0,0"/>
+		<Setter Property="BorderBrush" Value="{DynamicResource CommonBorderBrush}"/>
 	</Style>
 </Styles>

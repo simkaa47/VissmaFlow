@@ -35,18 +35,21 @@ namespace VissmaFlow.Core.ViewModels
         public SingleMeasuresViewModel(IRepository<SingleMeasureSettings> singleMeasRepository,
             ILogger<SingleMeasuresViewModel> logger,
             ParameterVm parameterVm,
+            AccessViewModel accessViewModel,
             MainCommunicationService comminicationService,
             CommunicationVm communicationVm)
         {
             _singleMeasRepository = singleMeasRepository;
             _logger = logger;
             ParameterVm = parameterVm;
+            AccessViewModel = accessViewModel;
             ComminicationService = comminicationService;
             CommunicationVm = communicationVm;
             InitAsync();
         }
 
         public ParameterVm ParameterVm { get; }
+        public AccessViewModel AccessViewModel { get; }
         public MainCommunicationService ComminicationService { get; }
         public CommunicationVm CommunicationVm { get; }
 
