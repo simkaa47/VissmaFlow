@@ -44,6 +44,7 @@
     <None Remove="Resources\Images\Close.png" />
     <None Remove="Resources\Images\ControlCamera.png" />
     <None Remove="Resources\Images\Dehaze.png" />
+    <None Remove="Resources\Images\Group 2865.png" />
     <None Remove="Resources\Images\Layer_1.png" />
     <None Remove="Resources\Images\Layer_2.png" />
     <None Remove="Resources\Images\Logout.png" />
@@ -73,6 +74,7 @@
 	<AvaloniaResource Include="Resources\Images\AccountCircleNonAuthorized.png" />
 	<AvaloniaResource Include="Resources\Images\ControlCamera.png" />
 	<AvaloniaResource Include="Resources\Images\Dehaze.png" />
+	<AvaloniaResource Include="Resources\Images\Group 2865.png" />
 	<AvaloniaResource Include="Resources\Images\Layer_1.png">
 	  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 	</AvaloniaResource>

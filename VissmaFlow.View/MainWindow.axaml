@@ -14,6 +14,7 @@
 		MaxWidth="480"
 		xmlns:main="using:VissmaFlow.View.UserControls.Main"
 		xmlns:par="using:VissmaFlow.View.UserControls.Parameters"
+		xmlns:log="using:VissmaFlow.View.UserControls.Logging"
 		xmlns:kb="using:VissmaFlow.View.UserControls.Keyboard"
 		xmlns:hb="using:VissmaFlow.View.UserControls.HighBar"	
 		SystemDecorations="None"
@@ -24,8 +25,8 @@
 		
 		<scg:List x:TypeArguments="UserControl" x:Key="Pages">
 			<main:MainPageControl Tag="Главная"/>
-			<par:ParametersViewControl Tag="Параметры" 
-								 />
+			<par:ParametersViewControl Tag="Параметры" IsVisible="{Binding AccessViewModel.CurrentUser, Converter={x:Static ObjectConverters.IsNotNull}}"/>
+			<log:LoggingTab Tag="Логирование" DataContext="{Binding LoggingViewModel}"/>
 		</scg:List>
 	</Window.Resources>
 	<Grid RowDefinitions="*, Auto">

@@ -20,10 +20,11 @@
 	<SolidColorBrush Color="#3F3F42" x:Key="ButtonDeny"/>
 	<SolidColorBrush Color="#6B6B6B" x:Key="Scroll"/>
 	<SolidColorBrush Color="Black" x:Key="TextBoxBackground"/>
+	<SolidColorBrush Color="#616161" x:Key="TextBoxBorderBrush"/>
 
 	<scg:List x:TypeArguments="sys:Object" x:Key="LogColors">
-		<SolidColorBrush Color="LightGray"/>
-		<SolidColorBrush Color="LightGreen"/>
+		<SolidColorBrush Color="Transparent"/>
+		<SolidColorBrush Color="Red"/>
 	</scg:List>
 
 	<scg:List x:TypeArguments="sys:Object" x:Key="ComboBoxColors">

@@ -22,11 +22,11 @@ namespace VissmaFlow.Core.Models.Logging
         public virtual List<LogCell>? Cells
         {
             get => _cells;
-            set=> SetProperty(ref _cells, value);
+            set  
+            {
+                SetProperty(ref _cells, value);
+            }
         }
-
-
-
 
     }
 }

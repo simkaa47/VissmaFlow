@@ -12,6 +12,9 @@
 		<StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml"/>
 		<StyleInclude Source="/Styles/TabItems.axaml"/>
 		<StyleInclude Source="/Styles/ScrollBars.axaml"/>
+		<StyleInclude Source="/Styles/DataGrid/DataGridHeaders.axaml"/>
+		<StyleInclude Source="/Styles/DataGrid/DataGridRows.axaml"/>
+		<StyleInclude Source="/Styles/DataGrid/DataGridColumnCells.axaml"/>
 		<StyleInclude Source="/Styles/ComboBoxes.axaml"/>
 		<StyleInclude Source="avares://Avalonia.Controls.TreeDataGrid/Themes/Fluent.axaml"/>
 		<StyleInclude Source="/UserControls/DateAndTime/DateTimePickerStyle.axaml"/>
