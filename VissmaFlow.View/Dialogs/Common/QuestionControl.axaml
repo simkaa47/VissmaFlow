@@ -6,19 +6,27 @@
 			 Width="480" Height="800"
              x:Class="VissmaFlow.View.Dialogs.Common.QuestionControl">
 	<Grid>
+		<Grid.Styles>
+			<Style Selector="TextBlock">
+				<Setter Property="VerticalAlignment" Value="Center"/>
+				<Setter Property="HorizontalAlignment" Value="Center"/>
+				<Setter Property="Margin" Value="15"/>
+				<Setter Property="FontSize" Value="24"/>
+				<Setter Property="FontFamily" Value="{StaticResource RobotoFont}"/>
+				<Setter Property="FontWeight" Value="Medium"/>
+				<Setter Property="Foreground" Value="{DynamicResource TexBoxCommon}"/>
+			</Style>
+		</Grid.Styles>
 		<TextBlock  Name="Content"
-					VerticalAlignment="Center"
-					HorizontalAlignment="Center"
-					FontSize="20"
-					TextWrapping="Wrap" Margin="20"/>
-		<WrapPanel VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,15,0,20">
-			<Button IsDefault="True" Click="Accept_Click" MinWidth="200" Margin="0,0,10,0">
-				<TextBlock Text="ОК" Margin="15" HorizontalAlignment="Center" />
+					TextWrapping="Wrap" />
+		<WrapPanel VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,15,0,40">
+			<Button Background="{StaticResource ButtonAccept}" IsDefault="True" Click="Accept_Click" MinWidth="200" Margin="0,0,10,0">
+				<TextBlock Text="ОК"/>
 			</Button>
 			<Button Click="Cancel_Click"
-					VerticalAlignment=""
+					Background="{StaticResource ButtonDeny}"
 					MinWidth="200">
-				<TextBlock Text="Отмена" Margin="15" HorizontalAlignment="Center" />
+				<TextBlock Text="Отмена"/>
 			</Button>
 		</WrapPanel>
 	</Grid>
