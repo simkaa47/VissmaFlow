@@ -1,0 +1,145 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 x:Name="root"
+			 xmlns:scg="clr-namespace:System.Collections.Generic;assembly=netstandard"
+			 xmlns:sys="clr-namespace:System;assembly=netstandard"
+			 xmlns:vm="using:VissmaFlow.Core.ViewModels"
+			 x:DataType="vm:MainViewModel"
+             x:Class="VissmaFlow.View.UserControls.PageSelector">
+	<UserControl.Resources>
+		<scg:List x:TypeArguments="sys:Object" x:Key="UserIcons">
+			<Bitmap>\Resources\Images\AccountCircleNonAuthorized.png</Bitmap>
+			<Bitmap>\Resources\Images\AccountCircleAuthorized.png</Bitmap>
+		</scg:List>
+	</UserControl.Resources>
+	<UserControl.Styles>
+		<Style Selector="TextBlock">
+			<Setter Property="FontFamily" Value="{StaticResource RobotoFont}"/>
+		</Style> 
+		<Style Selector="Border">
+			<Setter Property="BorderBrush" Value="{StaticResource CommonBorderBrush}"/>
+		</Style>
+		<Style Selector="Button">
+			<Setter Property="BorderBrush" Value="{StaticResource CommonBorderBrush}"/>
+			<Setter Property="CornerRadius" Value="0"/>
+			<Setter Property="Background" Value="Transparent"/>
+			<Setter Property="VerticalAlignment" Value="Stretch"/>
+			<Setter Property="HorizontalAlignment" Value="Stretch"/>
+		</Style>
+	</UserControl.Styles>
+	<Grid RowDefinitions="80,*,110">
+		<Grid ColumnDefinitions="*,80">
+			<Border BorderThickness="0,0,0,1">
+				<Image Source="\Resources\Images\Logo_Konvels_blue.png"
+					   VerticalAlignment="Top" HorizontalAlignment="Left"
+					   Width="110" Height="28" Margin="43,26,0,0"/>
+			</Border>
+			<Button Grid.Column="1" Click="CloseAppAsync" Background="Black"
+					BorderThickness="1,0,0,1">
+				<Image Source="\Resources\Images\Close.png" Height="40" Width="40"/>
+			</Button>			
+		</Grid>
+		
+		<ListBox ItemsSource="{Binding ElementName=root, Path=ItemsSource}"
+				 PointerReleased="OnSelectionChanged"
+				 Margin="40"
+				 MaxHeight="375"
+				 VerticalAlignment="Top"
+				 ItemContainerTheme="{StaticResource SelectorListBoxItem}"
+				 Grid.Row="1"
+				 SelectedIndex="0"
+				 SelectedItem="{Binding ElementName=root, Path=SelectedItem, Mode=TwoWay}">
+		</ListBox>
+
+
+		<!--Авторизация-->
+		<DockPanel Grid.Row="1"
+				   HorizontalAlignment="Left"
+				   VerticalAlignment="Top"
+				   MaxHeight="400"
+				   Margin="40,455,0,0">
+			
+			<TextBlock Text="{Binding AccessViewModel.CurrentUser, Converter={StaticResource UserToNameConverter}}"
+					   DockPanel.Dock="Right"
+					   FontSize="24"
+					   Margin="0,5,0,0"
+					   Foreground="#CCFFFFFF"
+					   TextWrapping="Wrap"/>
+			
+			<Button BorderThickness="0"
+					Padding="5"
+					DockPanel.Dock="Left">
+				<Image Height="32" Width="32"
+					   PointerReleased="LoginClick"
+					   
+					   Source="{Binding AccessViewModel.IsAuthorized, Converter={StaticResource GetIfTrueConverter}, ConverterParameter={StaticResource UserIcons}}"/>
+			</Button>
+		</DockPanel>
+
+
+
+		<!--Дата и время-->
+		<Border BorderThickness="0" Grid.Row="1" Background="{StaticResource ParameterBackgroundCommonColor}"
+				Margin="82,0,0,37" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="208" Height="38">
+			<TextBlock Text="{Binding PcTime, StringFormat={}{0:HH:mm:ss    dd.MM.yyyy}}" 
+					   FontSize="15"
+					   
+					   FontWeight="Medium"
+					   HorizontalAlignment="Center"
+					   Foreground="#B4FFFFFF"
+					   VerticalAlignment="Center"/>
+		</Border>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+
+
+		<!--Кнопки управления приложением и прибором-->
+		<Grid Grid.Row="2" ColumnDefinitions="*,*,*">
+			<!--Выключить-->
+			<Button BorderThickness="0,1,1,0" Grid.Column="0"
+					Click="ShutdownPcAsync">
+				<StackPanel VerticalAlignment="Center">
+					<Image Source="\Resources\Images\PowerSettingsOff.png"
+						   Width="32" Height="32" HorizontalAlignment="Center"/>
+					<TextBlock Text="ВЫКЛЮЧИТЬ" HorizontalAlignment="Center"
+							   Margin="0,9,0,0"/>
+				</StackPanel>
+			</Button>
+			<!--Перезагрузка-->
+			<Button BorderThickness="0,1,1,0" Grid.Column="1"
+					Click="RebootPcAsync">
+				<StackPanel VerticalAlignment="Center">
+					<Image Source="\Resources\Images\Replay.png"
+						   Width="32" Height="32" HorizontalAlignment="Center"/>
+					<TextBlock Text="ПЕРЕЗАГРУЗКА" HorizontalAlignment="Center"
+							   Margin="0,9,0,0"/>
+				</StackPanel>
+			</Button>
+			<!--Выход-->
+			<Button BorderThickness="0,1,0,0" Grid.Column="2"
+					Command="{Binding AccessViewModel.LogoutCommand}">
+				<StackPanel VerticalAlignment="Center">
+					<Image Source="\Resources\Images\Logout.png"
+						   Width="32" Height="32" HorizontalAlignment="Center"/>
+					<TextBlock Text="ВЫХОД" HorizontalAlignment="Center"
+							   Margin="0,9,0,0"/>
+				</StackPanel>
+			</Button>
+		</Grid>
+		
+		
+	</Grid>
+	
+	
+
+</UserControl>

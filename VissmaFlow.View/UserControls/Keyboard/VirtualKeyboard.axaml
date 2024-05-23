@@ -9,18 +9,19 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="VissmaFlow.View.UserControls.Keyboard.VirtualKeyboard">
 	
-	<Grid>
-		<Button Height="30" Width="30"
+	<Grid Background="{StaticResource ParameterBackgroundCommonColor}">
+		<Button Height="40" Width="40"
 					VerticalAlignment="Top"
 					Name="AcceptButton"
-				    Margin="5"
+				    Margin="5"	
+					Background="Transparent"
 				    Content="{materialIcons:MaterialIconExt Kind=Close, Size=20}"
 					HorizontalAlignment="Right">
 			
 		</Button>
 		<DockPanel Margin="5">
 			<TextBox Name="TextBox" FontSize="20"
-					 Margin="0,0,40,0"
+					 Margin="0,0,45,0"
 					 DockPanel.Dock="Top"></TextBox>
 
 			<Grid DockPanel.Dock="Bottom">

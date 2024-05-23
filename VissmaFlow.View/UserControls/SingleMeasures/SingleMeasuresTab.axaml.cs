@@ -4,7 +4,7 @@ using Avalonia.Markup.Xaml;
 
 namespace VissmaFlow.View.UserControls.SingleMeasures;
 
-public partial class SingleMeasuresTab : UserControl
+public partial class SingleMeasuresTab : UserAccessControl
 {
     public SingleMeasuresTab()
     {

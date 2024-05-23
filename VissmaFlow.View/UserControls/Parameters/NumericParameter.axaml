@@ -12,9 +12,21 @@
 		
 	</local:ParameterCommon.Resources>
 	<DockPanel>
-		<StackPanel Orientation="Horizontal" DockPanel.Dock="Right">
+		<StackPanel Orientation="Horizontal" DockPanel.Dock="Right" Margin="0,0,0,0">
 			<TextBox Width="{Binding ElementName=root, Path=ParamWidth}"
-					 Text="{Binding WriteValue}" Tag="{Binding Data}" >
+					 Text="{Binding WriteValue}" Tag="{Binding Data}"
+					 Height="44"
+					 FontSize="20"
+					 CornerRadius="4"
+					 FontFamily="{StaticResource RobotoFont}"
+					 FontWeight="Medium"
+					 BorderBrush="{StaticResource CommonBorderBrush}"
+					 Foreground="{DynamicResource TexBoxCommon}"
+					 VerticalContentAlignment="Center"
+					 HorizontalContentAlignment="Left"
+					 Padding="12,0,0,0"
+					 Background="{DynamicResource TextBoxBackground}"
+					 Margin="0,3,0,3">
 				<TextBox.KeyBindings>
 					<KeyBinding Gesture="Enter"
 								Command="{Binding ElementName=root, Path=Command}"
@@ -29,9 +41,13 @@
 		</StackPanel>
 		<TextBlock Text="{Binding Description}"
 				   DockPanel.Dock="Left"
-				   Margin="5,5,10,5"
+				   Foreground="{StaticResource TexBoxCommon80}"
+				   Margin="24,0,10,0"
 				   IsVisible="{Binding ElementName=root, Path=!DescriptionInvisible}"
 				   VerticalAlignment="Center"
+				   FontWeight="Regular"
+				   FontSize="16"
+				   FontFamily="{StaticResource RobotoFont}"
 				   TextWrapping="Wrap"/>
 		
 	</DockPanel>

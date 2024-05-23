@@ -4,122 +4,156 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"			 
 			 xmlns:vm="using:VissmaFlow.View.ViewModels"
+			 xmlns:sett="using:VissmaFlow.Core.Models.Trends"
 			 x:DataType="vm:TrendsViewModel"
 			 xmlns:meas="using:LiveChartsCore.Measure"
 			 xmlns:mat="using:Material.Icons.Avalonia"
 			 xmlns:scg="clr-namespace:System.Collections.Generic;assembly=netstandard"
 			 xmlns:sys="clr-namespace:System;assembly=netstandard"
 			 xmlns:lvc="using:LiveChartsCore.SkiaSharpView.Avalonia"
+			 xmlns:paint="using:LiveChartsCore.SkiaSharpView.Painting"
+			 xmlns:ss="using:SkiaSharp"
              x:Class="VissmaFlow.View.UserControls.Main.MainTrendsControl">
-	<Grid>
-		<Grid.Resources>
-			<scg:List x:TypeArguments="sys:UInt32" x:Key="PortSpeeds">
-				<sys:UInt32>2400</sys:UInt32>
-				<sys:UInt32>4800</sys:UInt32>
-				<sys:UInt32>9600</sys:UInt32>
-				<sys:UInt32>19200</sys:UInt32>
-				<sys:UInt32>38400</sys:UInt32>
-				<sys:UInt32>115200</sys:UInt32>
-			</scg:List>
-			<scg:List x:TypeArguments="sys:Object" x:Key="ZoomModes">
-				<UserControl>
-					<StackPanel Orientation="Horizontal">
-						<mat:MaterialIcon Kind="Prohibited"/>
+	<Grid RowDefinitions="Auto,*">
+		<!--Zoom mode and legends-->
+		<Grid>
+			<!--Zoom mode-->
+			<ComboBox SelectedIndex="{Binding SelectedZoomIndex}"
+					  Margin="40,40,0,0"
+					  Width="146"
+					  Classes="ComboBoxCommonStyle"	
+					  BorderBrush="{Binding RelativeSource={RelativeSource Self}, Path=IsDropDownOpen, Converter={StaticResource GetIfTrueConverter}, ConverterParameter={StaticResource ComboBoxColors}}"
+					  Height="44"
+					  VerticalContentAlignment="Center"
+					  HorizontalContentAlignment="Center">
+				<ComboBox.Styles>
+					<Style Selector="TextBlock">
+						<Setter Property="FontSize" Value="16"/>
+						<Setter Property="FontFamily" Value="{StaticResource RobotoFont}"/>
+						<Setter Property="FontWeight" Value="Regular"/>
+					</Style>
+				</ComboBox.Styles>
+				<ComboBoxItem>
+					<StackPanel>
+						<Image Source="/Resources/Images/NotInterested.png"
+							   Height="24" Width="24" Margin="7,7,16,7"/>
 					</StackPanel>
-				</UserControl>
-				<UserControl>
+				</ComboBoxItem>
+				<ComboBoxItem>
 					<StackPanel Orientation="Horizontal">
-						<mat:MaterialIcon Kind="Pan"/>
-						<TextBlock Text=" X"/>
+						<Image Source="/Resources/Images/ControlCamera.png"
+							   Height="24" Width="24" Margin="7,7,16,7"/>
+						<TextBlock Text="X"
+								   VerticalAlignment="Center"/>
 					</StackPanel>
-				</UserControl>
-				<UserControl>
+				</ComboBoxItem>
+				<ComboBoxItem>
 					<StackPanel Orientation="Horizontal">
-						<mat:MaterialIcon Kind="Pan"/>
-						<TextBlock Text=" Y"/>
+						<Image Source="/Resources/Images/ControlCamera.png"
+							   Height="24" Width="24" Margin="7,7,16,7"/>
+						<TextBlock Text="Y"
+								   VerticalAlignment="Center"/>
 					</StackPanel>
-				</UserControl>
-				<UserControl>
+				</ComboBoxItem>
+				<ComboBoxItem>
 					<StackPanel Orientation="Horizontal">
-						<mat:MaterialIcon Kind="ZoomIn"/>
-						<TextBlock Text=" X"/>
+						<Image Source="/Resources/Images/ZoomIn.png"
+							   Height="24" Width="24" Margin="7,7,16,7"/>
+						<TextBlock Text="X"
+								   VerticalAlignment="Center"/>
 					</StackPanel>
-				</UserControl>
-				<UserControl>
+				</ComboBoxItem>
+				<ComboBoxItem>
 					<StackPanel Orientation="Horizontal">
-						<mat:MaterialIcon Kind="ZoomIn"/>
-						<TextBlock Text=" Y"/>
+						<Image Source="/Resources/Images/ZoomIn.png"
+							   Height="24" Width="24" Margin="7,7,16,7"/>
+						<TextBlock Text="Y"
+								   VerticalAlignment="Center"/>
 					</StackPanel>
-				</UserControl>
-				<UserControl>
+				</ComboBoxItem>
+				<ComboBoxItem>
 					<StackPanel Orientation="Horizontal">
-						<mat:MaterialIcon Kind="Pan"/>
-						<mat:MaterialIcon Kind="ZoomIn"/>
-						<TextBlock Text=" XY"/>
+						<Image Source="/Resources/Images/ControlCamera.png"
+							   Height="24" Width="24" Margin="7,7,8,7"/>
+						<Image Source="/Resources/Images/ZoomIn.png"
+							   Height="24" Width="24" Margin="0,7,8,7"/>
+						<TextBlock Text="XY"
+								   VerticalAlignment="Center"/>
 					</StackPanel>
-				</UserControl>
-				
-			</scg:List>
-		</Grid.Resources>
-		<lvc:CartesianChart
+				</ComboBoxItem>
+			</ComboBox>
+			
+			<!--legends-->
+			<ItemsControl Margin="218,35,0,0" ItemsSource="{Binding TrendSettigsViewModel.Curves}">
+				<ItemsControl.ItemTemplate>
+					<DataTemplate DataType="sett:Curve">
+						<DockPanel Margin="0,0,0,1" Height="24">
+							<DockPanel.IsVisible>
+								<MultiBinding Converter="{x:Static BoolConverters.And}">
+									<Binding Path="RtkUnit" Converter="{x:Static ObjectConverters.IsNotNull}"/>
+									<Binding Path="Parameter" Converter="{x:Static ObjectConverters.IsNotNull}"/>
+									<Binding Path="IsVisible"/>
+								</MultiBinding>
+							</DockPanel.IsVisible>
+							<Rectangle Height="4" Width="16"
+									   Margin="0,0,13,0"
+									   DockPanel.Dock="Left"
+									   HorizontalAlignment="Left"
+									   VerticalAlignment="Center"
+									   Fill="{Binding Color}"/>
+							<TextBlock FontFamily="{StaticResource RobotoFont}"
+									   FontSize="16"
+									   IsVisible="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.CommunicationVm.RtkUnits.Count, Converter={StaticResource IfNotEqualConverter}, ConverterParameter=1}"
+									   HorizontalAlignment="Left"
+									   VerticalAlignment="Center"
+									   Text="{Binding RtkUnit.Name, StringFormat={}{0}:}"
+									   Foreground="{StaticResource AlmostWhite}"
+									   FontWeight="Regular"/>
+							<TextBlock FontFamily="{StaticResource RobotoFont}"
+									   FontSize="16"
+									   DockPanel.Dock="Right"
+									    VerticalAlignment="Center"
+									   HorizontalAlignment="Left"
+									   Text="{Binding Parameter.Description}"
+									   Foreground="{StaticResource AlmostWhite}"
+									   TextWrapping="Wrap"
+									   FontWeight="Regular"/>
+						</DockPanel>
+					</DataTemplate>
+				</ItemsControl.ItemTemplate>
+			</ItemsControl>
+		</Grid>
+
+
+		<!--Trend-->
+		<Grid Grid.Row="1">
+			<lvc:CartesianChart
 		 Series="{Binding Series}"
-		 ZoomMode="{Binding SelectedZoomMode}"	
+		 ZoomMode="{Binding SelectedZoomMode}"
 		 ZoomingSpeed="0.01"
-		 LegendPosition="Top"		
+		 FontSize="16"
+		 DrawMarginFrame="{Binding DrawMarginFrame}"
+		 LegendPosition="Hidden"
 		 LegendTextSize="12"
-		 TooltipPosition="Hidden"
+		 TooltipPosition="Hidden"		 
 		 YAxes="{Binding YAxes}"
 		 SyncContext="{Binding Sync}"
 		 XAxes="{Binding XAxes}">
-		</lvc:CartesianChart>
-		<Button Command="{Binding EnableRealTimeCommand}"
-				HorizontalAlignment="Left"
-				VerticalAlignment="Bottom"
-				Margin="2"
-				Height="50"
-				Width="50">
-			<mat:MaterialIcon Kind="ZoomOut" HorizontalAlignment="Stretch"
-							  VerticalAlignment="Stretch"/>
-		</Button>
-		<ComboBox Margin="2"
-				  SelectedIndex="{Binding SelectedZoomIndex}">
-			<ComboBoxItem>
-				<StackPanel Orientation="Horizontal">
-					<mat:MaterialIcon Kind="Prohibited"/>
-				</StackPanel>
-			</ComboBoxItem>
-			<ComboBoxItem>
-				<StackPanel Orientation="Horizontal">
-					<mat:MaterialIcon Kind="Pan"/>
-					<TextBlock Text=" X"/>
-				</StackPanel>
-			</ComboBoxItem>
-			<ComboBoxItem>
-				<StackPanel Orientation="Horizontal">
-					<mat:MaterialIcon Kind="Pan"/>
-					<TextBlock Text=" Y"/>
-				</StackPanel>
-			</ComboBoxItem>
-			<ComboBoxItem>
-				<StackPanel Orientation="Horizontal">
-					<mat:MaterialIcon Kind="ZoomIn"/>
-					<TextBlock Text=" X"/>
-				</StackPanel>
-			</ComboBoxItem>
-			<ComboBoxItem>
-				<StackPanel Orientation="Horizontal">
-					<mat:MaterialIcon Kind="ZoomIn"/>
-					<TextBlock Text=" Y"/>
-				</StackPanel>
-			</ComboBoxItem>
-			<ComboBoxItem>
-				<StackPanel Orientation="Horizontal">
-					<mat:MaterialIcon Kind="Pan"/>
-					<mat:MaterialIcon Kind="ZoomIn"/>
-					<TextBlock Text=" XY"/>
-				</StackPanel>
-			</ComboBoxItem>
-		</ComboBox>
+			</lvc:CartesianChart>
+			<Button Command="{Binding EnableRealTimeCommand}"
+					HorizontalAlignment="Left"
+					VerticalAlignment="Bottom"
+					Margin="40,0,0,10"
+					CornerRadius="33"					
+					Height="66"					
+					Background="Black"
+					Width="66">
+				<Image Source="\Resources\Images\ZoomOut.png"
+					   VerticalAlignment="Center" HorizontalAlignment="Center"
+					   Width="46" Height="46"/>
+			</Button>
+			
+		</Grid>
 	</Grid>
 	
 </UserControl>

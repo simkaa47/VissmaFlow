@@ -12,11 +12,10 @@ namespace VissmaFlow.View.Dialogs.Common
             {
                 return false;
             }
-            AskDialogWindow window = new AskDialogWindow();
-            window.Title = title;
-            window.Content.Text = message;
-            await window.ShowDialog(desktop.MainWindow);
-            return window.DialogResult;
+            QuestionControl questionControl = new QuestionControl();
+            questionControl.Content.Text = message;
+            await questionControl.ShowDialogAsync();
+            return questionControl.DialogResult;
 
         }
     }

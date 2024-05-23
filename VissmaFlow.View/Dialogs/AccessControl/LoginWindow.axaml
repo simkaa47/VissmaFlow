@@ -2,8 +2,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-		Background="Gray"
+        mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="800"
 		xmlns:mod="using:VissmaFlow.Core.Models.AccessControl"
 		x:DataType="mod:Login"
 		xmlns:scg="clr-namespace:System.Collections.Generic;assembly=netstandard"
@@ -11,30 +10,112 @@
         x:Class="VissmaFlow.View.Dialogs.AccessControl.LoginWindow">
 	<UserControl.Resources>
 		<scg:List x:TypeArguments="sys:Object" x:Key="TextBoxErrorColors">
-			<SolidColorBrush Color="Black"/>
+			<SolidColorBrush Color="White"/>
 			<SolidColorBrush Color="Red"/>
 		</scg:List>
 	</UserControl.Resources>
-	<Grid RowDefinitions="*,Auto" Margin="5" Background="WhiteSmoke">
-		<StackPanel VerticalAlignment="Center">
-			<TextBox Margin="10" Height="40" Width="200" 
-					 Text="{Binding LoginName}" 
-					 TabIndex="0"
-					 Foreground="{Binding FaliledLogin, Converter={StaticResource GetIfTrueConverter}, ConverterParameter={StaticResource TextBoxErrorColors}}"
-					 VerticalContentAlignment="Center"
-					 Watermark="Логин"/>
-			<TextBox Margin="10" Height="40" Width="200"
-					 VerticalContentAlignment="Center"
-					 Foreground="{Binding FaliledLogin, Converter={StaticResource GetIfTrueConverter}, ConverterParameter={StaticResource TextBoxErrorColors}}"
-					 Text="{Binding Password}" 
-					 TabIndex="1"
+	<UserControl.Styles>
+		<Style Selector="TextBlock">
+			<Setter Property="FontFamily" Value="{StaticResource RobotoFont}"/>
+		</Style>		
+	</UserControl.Styles>
+	<Canvas>
+		<!--Icon-->
+		<Image Source="\Resources\Images\Logo_Konvels_blue.png"
+			   Canvas.Top="54" Canvas.Left="40"
+					   Width="174" Height="45"/>
+
+		
+		<StackPanel Canvas.Top="155" Canvas.Left="40">
+			<!--Login-->
+			<TextBox Theme="{StaticResource login}"
+					Name="LoginField"
+					Text="{Binding LoginName}"
+					BorderBrush="{Binding FaliledLogin, Converter={StaticResource GetIfTrueConverter}, ConverterParameter={StaticResource TextBoxErrorColors}}"
+					Watermark="Логин"/>
+
+			<TextBlock Text="Неправильный логин или пароль"
+				   FontSize="12"
+				   Margin="14,2"
+				   IsVisible="{Binding FaliledLogin}"
+				   Canvas.Bottom="560"
+				   Canvas.Left="54"
+				   Foreground="{StaticResource ErrorMainColor}"
+				   FontWeight="Regular"/>
+
+			<!--Password-->
+
+			<TextBox Margin="0,40,0,0"
+					 Theme="{StaticResource login}"
+					 Name="PasswordField"
+					 BorderBrush="{Binding FaliledLogin, Converter={StaticResource GetIfTrueConverter}, ConverterParameter={StaticResource TextBoxErrorColors}}"
+					 Text="{Binding Password}"
+					 PasswordChar="*"
 					 Watermark="Пароль"/>
-		</StackPanel>
+			<TextBlock Text="Неправильный логин или пароль"
+				   FontSize="12"
+				   Margin="14,2"
+				   IsVisible="{Binding FaliledLogin}"
+				   Canvas.Bottom="560"
+				   Canvas.Left="54"
+				   Foreground="{StaticResource ErrorMainColor}"
+				   FontWeight="Regular"/>
+
+			<!--Cancel button-->
+			<Border BorderThickness="0"
+					Margin="0,40,0,0"
+					Width="400"				
+					Background="#3F3F42"
+					CornerRadius="4"
+					Height="62">
+				<Button Content="Отменить"
+						Click="Cancel_Click"
+						FontSize="24"
+						FontFamily="{StaticResource RobotoFont}"
+						FontWeight="Regular"
+						Background="Transparent"
+						VerticalAlignment="Stretch"
+						HorizontalAlignment="Stretch"
+						VerticalContentAlignment="Center"
+						HorizontalContentAlignment="Center"/>
+			</Border>
+			
+
+			<!--Enter button-->
+			<Border BorderThickness="0"
+					Margin="0,40,0,0"
+					Width="400"
+					Background="{StaticResource AquaColor}"
+					CornerRadius="4"
+					Height="62">
+				<Button Content="Вход"
+						Click="Login_Click"
+						FontSize="24"
+						FontFamily="{StaticResource RobotoFont}"
+						FontWeight="Regular"
+						Background="Transparent"
+						IsEnabled="{Binding !HasErrors}"
+						VerticalAlignment="Stretch"
+						HorizontalAlignment="Stretch"
+						VerticalContentAlignment="Center"
+						HorizontalContentAlignment="Center"/>
+			</Border>			
+		</StackPanel>	
+
+		<!--Flow logo-->
+		<Image Source="\Resources\Images\Layer_2.png"
+			   Canvas.Top="614" Canvas.Left="40"
+			   Width="55" Height="32"/>
+
+		<!--RTK-->
+		<Image Source="\Resources\Images\Layer_1.png"
+			   Canvas.Top="671" Canvas.Left="43"
+			   Width="119" Height="42"/>
+
+		<!--Model name-->
+		<TextBlock Canvas.Top="693" Canvas.Left="195"
+				   FontSize="19" FontWeight="Regular"
+				   Text="МОДЕЛЬ: РТК-С1"/>
 		
-		
-		<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="1">
-			<Button Margin="5" Width="100" Content="Отмена" Click="Cancel_Click" HorizontalContentAlignment="Center"/>
-			<Button Margin="5" Width="100" Content="Ок" IsEnabled="{Binding !HasErrors}" HorizontalContentAlignment="Center"  Click="Login_Click"/>
-		</StackPanel>
-	</Grid>
+	</Canvas>
 </UserControl>

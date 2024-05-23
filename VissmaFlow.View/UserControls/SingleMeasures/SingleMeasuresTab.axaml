@@ -11,7 +11,10 @@
 			 x:DataType="vm:SingleMeasuresViewModel"
 			 Name="root"
              x:Class="VissmaFlow.View.UserControls.SingleMeasures.SingleMeasuresTab">
-	<TabControl ItemsSource="{Binding Devices}" SelectedItem="{Binding SelectedDevice}">
+	<TabControl ItemsSource="{Binding Devices}"
+				Padding="0"
+				ItemContainerTheme="{StaticResource TabItemCommonTheme}"
+				SelectedItem="{Binding SelectedDevice}">
 		<TabControl.ItemTemplate>
 			<DataTemplate DataType="s:SingleMeasuresInstance">
 				<TextBlock Text="{Binding RtkUnit.Name}"/>
@@ -19,74 +22,114 @@
 		</TabControl.ItemTemplate>
 		<TabControl.ContentTemplate>
 			<DataTemplate DataType="s:SingleMeasuresInstance">
-				<Grid RowDefinitions="Auto,*"
+				<ScrollViewer Margin="40,20,9,36"
+							  Background="{StaticResource CommonColor}">
+					<Border HorizontalAlignment="Stretch"
+							VerticalAlignment="Stretch"
+							BorderBrush="{StaticResource CommonBorderBrush}"
+							Background="{StaticResource ParameterBackgroundCommonColor}"
+							BorderThickness="0,0,1,0"
+							Margin="0,0,31,0">
+						<Grid RowDefinitions="Auto,*"
 					  Grid.Row="1">
-					<ListBox>
-						<DockPanel>
-							<TextBlock Text="Время ед. измерения, с"
-							   DockPanel.Dock="Left"
-							   VerticalAlignment="Center"
-							   TextWrapping="Wrap"/>
-							<TextBox HorizontalAlignment="Right"
-									 Width="100"									 
-									 Text="{Binding MeasureSettings.Duration}"
-									 VerticalAlignment="Center"
-									 DockPanel.Dock="Right"/>
-						</DockPanel>
-					</ListBox>
-					<DataGrid ItemsSource="{Binding MeasureSettings.Points}"
-							  GridLinesVisibility="All"
-							  Grid.Row="1" >
-						<DataGrid.Columns>
-							<DataGridTextColumn x:DataType="s:SingleMeasurePoint" Header="№" Binding="{Binding Id}"/>
-							<DataGridTemplateColumn x:DataType="s:SingleMeasurePoint" Width="120">
-								<DataGridTemplateColumn.Header>
-									<TextBlock Text="Усредняемая величина"
-											   TextWrapping="Wrap"/>
-								</DataGridTemplateColumn.Header>
-								<DataGridTemplateColumn.CellTemplate>
-									<DataTemplate>
-										<par:NumericParameter DescriptionInvisible="True"
-															  HorizontalAlignment="Center"
-															  Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=DataContext.ComminicationService.WriteParameterCommand}"
-															  Margin="2"
-															  DataContext="{Binding AvgValue}"/>
-									</DataTemplate>
-								</DataGridTemplateColumn.CellTemplate>
-							</DataGridTemplateColumn>
-							<DataGridTemplateColumn x:DataType="s:SingleMeasurePoint" Header="Результат" Width="120">								
-								<DataGridTemplateColumn.CellTemplate>
-									<DataTemplate>
-										<par:NumericParameter DescriptionInvisible="True"
-															  HorizontalAlignment="Center"
-															  Margin="2"
-															  Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=DataContext.ComminicationService.WriteParameterCommand}"
-															  DataContext="{Binding Destination}"/>
-									</DataTemplate>
-								</DataGridTemplateColumn.CellTemplate>
-							</DataGridTemplateColumn>
-							<DataGridTemplateColumn x:DataType="s:SingleMeasurePoint">
-								<DataGridTemplateColumn.CellTemplate>
-									<DataTemplate>
-										<StackPanel Orientation="Horizontal">
-											<Button Margin="2"
-													IsVisible="{Binding !SingleMeasFlag}"
-													CommandParameter="{Binding}"
-													Command="{Binding ElementName=root, Path=DataContext.SingleMeasureCommand}">
-												<mi:MaterialIcon Margin="2" Kind="Ruler"/>
-												
-											</Button>
-											<TextBlock VerticalAlignment="Center"
-													   Margin="2"
-													   IsVisible="{Binding SingleMeasFlag}"
-													   Text="{Binding CurTime, StringFormat={}{0} sec}}"/>
-										</StackPanel>
-									</DataTemplate>
-								</DataGridTemplateColumn.CellTemplate>
-							</DataGridTemplateColumn>
-						</DataGrid.Columns>
-					</DataGrid>
-				</Grid>
+							<DockPanel Margin="20,14,35,18">
+								<TextBlock Text="Время ед. измерения, с"
+								   DockPanel.Dock="Left"
+										   FontSize="20"
+										   Foreground="{StaticResource TexBoxCommon}"
+										   FontFamily="{StaticResource RobotoFont}"
+										   FontWeight="Medium"
+								   VerticalAlignment="Center"
+								   TextWrapping="Wrap"/>
+								<TextBox HorizontalAlignment="Right"
+										 Width="86"
+										 VerticalContentAlignment="Center"
+										 Height="44"
+										 CornerRadius="4"
+										 BorderBrush="{StaticResource TextBoxBorderBrush}"
+										 FontSize="20"
+										   Foreground="{StaticResource TexBoxCommon}"
+										   FontFamily="{StaticResource RobotoFont}"
+										   FontWeight="Medium"
+										 Text="{Binding MeasureSettings.Duration}"
+										 VerticalAlignment="Center"
+										 DockPanel.Dock="Right"/>
+							</DockPanel>
+							<DataGrid ItemsSource="{Binding MeasureSettings.Points}"
+									  GridLinesVisibility="Vertical"
+									  VerticalGridLinesBrush="{StaticResource CommonBorderBrush}"
+									  HorizontalAlignment="Left"
+									  VerticalScrollBarVisibility="Disabled"
+									  Grid.Row="1" >
+								<DataGrid.Columns>
+									<DataGridTextColumn x:DataType="s:SingleMeasurePoint" Header="№"
+														Binding="{Binding Id}" 
+														Width="44"
+														FontSize="16"
+														Foreground="{StaticResource TexBoxCommon80}"
+														FontFamily="{StaticResource RobotoFont}"
+														FontWeight="Regular"/>
+									<DataGridTemplateColumn x:DataType="s:SingleMeasurePoint" Width="118"
+															Header="УСРЕДНЯЕМАЯ ВЕЛИЧИНА">										
+										<DataGridTemplateColumn.CellTemplate>
+											<DataTemplate>
+												<par:NumericParameter DescriptionInvisible="True"
+																	  HorizontalAlignment="Center"
+																	  ParamWidth="86"
+																	  Margin="0,8,0,8"
+																	  Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=DataContext.ComminicationService.WriteParameterCommand}"
+																	  DataContext="{Binding AvgValue}"/>
+											</DataTemplate>
+										</DataGridTemplateColumn.CellTemplate>
+									</DataGridTemplateColumn>
+									<DataGridTemplateColumn x:DataType="s:SingleMeasurePoint" Header="РЕЗУЛЬТАТ" Width="118">
+										<DataGridTemplateColumn.CellTemplate>
+											<DataTemplate>
+												<par:NumericParameter DescriptionInvisible="True"
+																	  HorizontalAlignment="Center"	
+																	  ParamWidth="86"
+																	  Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=DataContext.ComminicationService.WriteParameterCommand}"
+																	  DataContext="{Binding Destination}"/>
+											</DataTemplate>
+										</DataGridTemplateColumn.CellTemplate>
+									</DataGridTemplateColumn>
+									<DataGridTemplateColumn x:DataType="s:SingleMeasurePoint"
+															Header="ИЗМЕРИТЬ" Width="120">
+										<DataGridTemplateColumn.CellTemplate>
+											<DataTemplate>
+												<StackPanel Orientation="Horizontal">
+													<Button Width="86"
+															Height="44"
+															Background="{StaticResource TextBoxBackground}"
+															CornerRadius="4"
+															VerticalContentAlignment="Center"
+															HorizontalContentAlignment="Stretch"
+															BorderBrush="{StaticResource TextBoxBorderBrush}"
+															IsVisible="{Binding !SingleMeasFlag}"
+															CommandParameter="{Binding}"
+															Command="{Binding ElementName=root, Path=DataContext.SingleMeasureCommand}">
+														<Image Source="\Resources\Images\Timeline.png" Height="32" Width="32"/>
+
+													</Button>
+													<TextBlock VerticalAlignment="Center"
+															   Margin="2"
+															   FontSize="20"
+															   Foreground="{StaticResource TexBoxCommon}"
+															   FontFamily="{StaticResource RobotoFont}"
+															   FontWeight="Medium"
+															   IsVisible="{Binding SingleMeasFlag}"
+															   Text="{Binding CurTime, StringFormat={}{0} sec}}"/>
+												</StackPanel>
+											</DataTemplate>
+										</DataGridTemplateColumn.CellTemplate>
+									</DataGridTemplateColumn>
+								</DataGrid.Columns>
+							</DataGrid>
+						</Grid>
+					</Border>
+
+				</ScrollViewer>
+
 			</DataTemplate>
 		</TabControl.ContentTemplate>
 	</TabControl>

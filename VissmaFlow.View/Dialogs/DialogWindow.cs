@@ -37,6 +37,7 @@ namespace VissmaFlow.View.Dialogs
             {
                 while (!needToCloseDialog){ Thread.Sleep(100); }
             });
+            needToCloseDialog = false;
             border.Child = TmpContent;
         }
 

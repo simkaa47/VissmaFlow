@@ -33,12 +33,17 @@ namespace VissmaFlow.Core.ViewModels
         }
 
 
+        [ObservableProperty]
+        private bool _isAuthorized;
+
+
         private async void InitAsync()
         {
             try
             {
                 _logger.LogInformation($"Инициализация данных пользователей");
                 Users = await _userRepository.InitAsync(UserDataFactory.GetUsers(), 3);
+                //CurrentUser = Users.Where(u => u.AccessLevel == UserAccessLevel.Admin).FirstOrDefault();
             }
             catch (Exception ex)
             {
@@ -128,6 +133,7 @@ namespace VissmaFlow.Core.ViewModels
                 else
                 {
                     CurrentUser = user;
+                    IsAuthorized = true;
                     _logger.LogInformation($"Пользователь c логином {login.LoginName}");
                 }
             }
@@ -141,6 +147,7 @@ namespace VissmaFlow.Core.ViewModels
         public void Logout()
         {
             CurrentUser = null;
+            IsAuthorized = false;
         } 
         #endregion
     }

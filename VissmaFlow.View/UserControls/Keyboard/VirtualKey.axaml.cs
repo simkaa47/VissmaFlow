@@ -132,6 +132,8 @@ public class VirtualKey : TemplatedControl
                 _toggleButton = new ToggleButton
                 {
                     BorderThickness = new Thickness(1),
+                    Background = GetByResource("ParameterBackgroundCommonColor"),
+                    FontSize = 20,
                     BorderBrush = new SolidColorBrush(Color.Parse("Black")),
                     [!ToggleButton.WidthProperty] = new Binding("Width"),
                     [!ToggleButton.HeightProperty] = new Binding("Height"),
@@ -173,9 +175,11 @@ public class VirtualKey : TemplatedControl
             {
                 Template = new FuncControlTemplate((control, scope) =>
                 {
-                    return new Button
-                    {
-                        BorderThickness = new Thickness(1),
+                return new Button
+                {
+                    BorderThickness = new Thickness(1),
+                    Background = GetByResource("ParameterBackgroundCommonColor"),
+                    FontSize = 20,
                         BorderBrush = new SolidColorBrush(Color.Parse("Black")),
                         [!Button.WidthProperty] = new Binding("Width"),
                         [!Button.HeightProperty] = new Binding("Height"),
@@ -223,5 +227,18 @@ public class VirtualKey : TemplatedControl
                 Caption = NormalKey;
             }
         };
+    }
+
+
+    private SolidColorBrush GetByResource(string resourseName)
+    {
+        if (App.Current is App app)
+        {
+            var res = app.FindResource(resourseName);
+            if (res is not null && res is SolidColorBrush brush)
+                return brush;
+        }
+        return new SolidColorBrush(Colors.Transparent);
+
     }
 }

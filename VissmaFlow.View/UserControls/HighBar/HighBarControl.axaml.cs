@@ -2,13 +2,11 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Interactivity;
-using System;
-using System.Data.SqlTypes;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using VissmaFlow.Core.Contracts.Common;
 using VissmaFlow.Core.Infrastructure.Helpers;
-using VissmaFlow.Core.Models.Administration;
 using VissmaFlow.Core.ViewModels;
 
 namespace VissmaFlow.View.UserControls.HighBar;
@@ -18,57 +16,56 @@ public partial class HighBarControl : UserControl
     public HighBarControl()
     {
         InitializeComponent();
-    } 
-    
+        AffectsMeasure<HighBarControl>(ItemsSourceProperty);
+        AffectsMeasure<HighBarControl>(SelectedItemProperty);
+        
+    }
 
-    private async void CloseAppAsync(object? sender, RoutedEventArgs args)
+    PageSelector _pageSelector = new PageSelector();
+
+    private async void OpenSelectorAsync(object? sender, RoutedEventArgs args)
     {
-        if (App.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
-        {
-            var app = App.Current as App;
-            if (app != null && desktop.MainWindow is not null)
+        _pageSelector.Tabs = ItemsSource;
+        _pageSelector.Tab = SelectedItem;
+        await _pageSelector.ShowDialogAsync();
+        if (_pageSelector.Tab is not null)
+            SelectedItem = _pageSelector.Tab;
+       
+    }    
+
+    #region Источник данных
+    public object ItemsSource
+    {
+        get { return (object)GetValue(ItemsSourceProperty); }
+        set 
+        { 
+            if(value is List<UserAccessControl> controls && controls.Count>0)
             {
-                var questuinService = app.GetService<IQuestionDialog>();
-                if (await questuinService.Ask("Закрыть приложение?", "Закрыть приложение?"))
-                {
-                    desktop.MainWindow.Close();
-                }
+                SelectedItem = controls[0];
             }
+            SetValue(ItemsSourceProperty, value); 
         }
     }
 
-    private async Task ExecuteLinuxCmd(string cmd, string description)
-    {
-        if (!RuntimeInformation.IsOSPlatform(OSPlatform.Linux)) return;
+    // Using a DependencyProperty as the backing store for State.  This enables animation, styling, binding, etc...
+    public static readonly StyledProperty<object> ItemsSourceProperty =
+        AvaloniaProperty.Register<HighBarControl, object>(nameof(ItemsSource), new List<string> { });
+    #endregion
 
-        if (App.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+    #region Выбранное значение
+    public object SelectedItem
+    {
+        get { return (object)GetValue(SelectedItemProperty); }
+        set
         {
-            var app = App.Current as App;
-            var settService = app?.GetService<PcSettingsViewModel>();
-            if (settService is not null && desktop.MainWindow is not null && app is not null)
-            {
-                if (settService.PcSettings?.Password is not null)
-                {
-                    var questuinService = app.GetService<IQuestionDialog>();
-                    if (await questuinService.Ask(description, description))
-                    {
-                        desktop.MainWindow.Close();
-                    }                   
-                    ShellHelper.BashCommand($"echo {settService.PcSettings.Password} | sudo {cmd}");
-                }
-            }
+            if (value is not null)
+                SetValue(SelectedItemProperty, value);
         }
     }
 
-
-    private async void ShutdownPcAsync(object? sender, RoutedEventArgs args)
-    {
-        await ExecuteLinuxCmd("shutdown now", "Выключить прибор?");
-    }
-
-    private async void RebootPcAsync(object? sender, RoutedEventArgs args)
-    {
-        await ExecuteLinuxCmd("reboot", "Перезагрузить прибор?");
-    }
+    // Using a DependencyProperty as the backing store for State.  This enables animation, styling, binding, etc...
+    public static readonly StyledProperty<object> SelectedItemProperty =
+        AvaloniaProperty.Register<HighBarControl, object>(nameof(SelectedItem));
+    #endregion
 
 }

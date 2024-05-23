@@ -15,13 +15,13 @@
 			<Setter Property="HorizontalContentAlignment" Value="Stretch"/>
 		</Style>
 	</UserControl.Styles>
-	<ListBox ItemsSource="{Binding IndicationCells}"
+	<ItemsControl Margin="79,0,96,40" ItemsSource="{Binding IndicationCells}"
 			 VerticalAlignment="Top">
-		<ListBox.ItemTemplate>
+		<ItemsControl.ItemTemplate>
 			<DataTemplate x:DataType="ind:IndicationCell">
 				<local:IndicatorCellCotrol IsVisible="{Binding IsRequired}"/>
 			</DataTemplate>
-		</ListBox.ItemTemplate>
-	</ListBox>
+		</ItemsControl.ItemTemplate>
+	</ItemsControl>
 	
 </UserControl>

@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using LiveChartsCore;
 using LiveChartsCore.Defaults;
+using LiveChartsCore.Drawing;
 using LiveChartsCore.Measure;
 using LiveChartsCore.SkiaSharpView;
 using LiveChartsCore.SkiaSharpView.Painting;
@@ -20,13 +21,13 @@ namespace VissmaFlow.View.ViewModels
     public partial class TrendsViewModel : ObservableObject
     {
         private readonly ILogger<TrendsViewModel> _logger;
-        private readonly TrendSettigsViewModel _trendSettigsViewModel;
+        public TrendSettigsViewModel TrendSettigsViewModel { get; set; }
         Timer? _timer;
 
         public TrendsViewModel(ILogger<TrendsViewModel> logger, TrendSettigsViewModel trendSettigsViewModel)
         {
             _logger = logger;
-            _trendSettigsViewModel = trendSettigsViewModel;
+            TrendSettigsViewModel = trendSettigsViewModel;
             InitAsync();
         }
 
@@ -59,14 +60,14 @@ namespace VissmaFlow.View.ViewModels
 
         private void InitAsync()
         {
-            if (_trendSettigsViewModel.Curves is null) return;
-            Series = _trendSettigsViewModel
+            if (TrendSettigsViewModel.Curves is null) return;
+            Series = TrendSettigsViewModel
                 .Curves
                 .Where(c => c.Parameter is not null && c.RtkUnit is not null)
                 .Select(c => new LineSeries<DateTimePoint>
                 {
                     Name = $"{c.RtkUnit?.Name} : {c.Parameter?.Description}",
-                    Values = c.Values,
+                    Values = c.Values,                    
                     IsVisibleAtLegend = c.IsVisible,
                     GeometryStroke = null,
                     GeometrySize = 0,
@@ -77,20 +78,26 @@ namespace VissmaFlow.View.ViewModels
 
                 }).ToArray();
             SetTimer();
-            if (_trendSettigsViewModel.TrendSettings is not null)
+            if (TrendSettigsViewModel.TrendSettings is not null)
             {
-                _trendSettigsViewModel.TrendSettings.PropertyChanged += (o, args) =>
+                TrendSettigsViewModel.TrendSettings.PropertyChanged += (o, args) =>
                 {
-                    if (args.PropertyName == nameof(_trendSettigsViewModel.TrendSettings.ScanFrequence))
+                    if (args.PropertyName == nameof(TrendSettigsViewModel.TrendSettings.ScanFrequence))
                     {
                         SetTimer();
                     }
                 };
             }
-
-
-
         }
+
+
+        public DrawMarginFrame DrawMarginFrame => new DrawMarginFrame
+        {
+            Fill = new SolidColorPaint(GetSKColor("#2C2C2E")),
+            Stroke = new SolidColorPaint(SKColors.White.WithAlpha(128))
+        };
+
+
 
         public object Sync { get; } = new object();
 
@@ -102,9 +109,13 @@ namespace VissmaFlow.View.ViewModels
             {
                 AnimationsSpeed = TimeSpan.FromMilliseconds(0),
                 ShowSeparatorLines = true,
-                SeparatorsPaint = new SolidColorPaint(SKColors.Black.WithAlpha(100))
+                Padding = new Padding(32, 5, 16, 5),
+                LabelsPaint = new SolidColorPaint(SKColors.White.WithAlpha(204)),
+                SeparatorsPaint = new SolidColorPaint(SKColors.White.WithAlpha(128))
             }
         };
+
+        public LiveChartsCore.Measure.Margin Margin { get; set; } = new LiveChartsCore.Measure.Margin(16);
 
         public Axis[] XAxes { get; set; } =
         {
@@ -112,7 +123,9 @@ namespace VissmaFlow.View.ViewModels
             {
                 AnimationsSpeed = TimeSpan.FromMilliseconds(0),
                 ShowSeparatorLines = true,
-                LabelsRotation = 90,
+                Padding = new Padding(16, 32, 16, 32),
+                LabelsPaint = new SolidColorPaint(SKColors.White.WithAlpha(204)),
+                LabelsRotation = 90,                
                 Labeler = (d)=>{
                     var ticks = (long)d;
                     if(ticks>0)
@@ -122,7 +135,7 @@ namespace VissmaFlow.View.ViewModels
                     }
                     return d.ToString();
                 },
-                SeparatorsPaint = new SolidColorPaint(SKColors.Black.WithAlpha(100))
+                SeparatorsPaint = new SolidColorPaint(SKColors.White.WithAlpha(128))
             }
         };
 
@@ -171,8 +184,8 @@ namespace VissmaFlow.View.ViewModels
 
         private void OnTimer(object? o)
         {
-            if (_trendSettigsViewModel.Curves is null) return;
-            foreach (var c in _trendSettigsViewModel.Curves)
+            if (TrendSettigsViewModel.Curves is null) return;
+            foreach (var c in TrendSettigsViewModel.Curves)
             {
                 if (c.RtkUnit is not null && c.Parameter is not null && c.RtkUnit.Connected)
                 {
@@ -182,7 +195,7 @@ namespace VissmaFlow.View.ViewModels
                         lock (Sync)
                         {
                             c.Values.Add(new DateTimePoint(DateTime.Now, GetValueFromParameter(par)));
-                            var sett = _trendSettigsViewModel.TrendSettings;
+                            var sett = TrendSettigsViewModel.TrendSettings;
                             if (sett is not null)
                             {
                                 while (c.Values.Count > 0 && c.Values[0].DateTime < DateTime.Now.AddSeconds(sett.MaxTimeSeconds * (-1)))
@@ -221,7 +234,7 @@ namespace VissmaFlow.View.ViewModels
 
         private void SetTimer()
         {
-            var sett = _trendSettigsViewModel.TrendSettings;
+            var sett = TrendSettigsViewModel.TrendSettings;
             var interval = (sett is not null && sett.ScanFrequence >= 100) ? sett.ScanFrequence : 1000;
             if (_timer is null)
                 _timer = new Timer(OnTimer);

@@ -5,14 +5,14 @@ namespace VissmaFlow.Core.Models.AccessControl
 {
     public partial class Login : ObservableValidator
     {
-        [ObservableProperty]
-        [Required]
-        [MinLength(3, ErrorMessage = "Login must contain at least 3 symbols")]
+        [ObservableProperty]        
+        [Required(ErrorMessage ="Поле для логина не должно быть пустым")]
+        [MinLength(3, ErrorMessage = "Логин должен содержать как минимум 3 символа")]
         private string? _loginName;
 
-        [ObservableProperty]
-        [Required]
-        [MinLength(3, ErrorMessage = "Password name must contain at least 3 symbols")]
+        [ObservableProperty]        
+        [Required(ErrorMessage = "Поле для пароля не должно быть пустым")]
+        [MinLength(3, ErrorMessage = "Пароль должен содержать как минимум 3 символа")]
         private string? _password;
 
         [ObservableProperty]

@@ -1,0 +1,33 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 Width="480" Height="800"
+             x:Class="VissmaFlow.View.Dialogs.Common.QuestionControl">
+	<Grid>
+		<Grid.Styles>
+			<Style Selector="TextBlock">
+				<Setter Property="VerticalAlignment" Value="Center"/>
+				<Setter Property="HorizontalAlignment" Value="Center"/>
+				<Setter Property="Margin" Value="15"/>
+				<Setter Property="FontSize" Value="24"/>
+				<Setter Property="FontFamily" Value="{StaticResource RobotoFont}"/>
+				<Setter Property="FontWeight" Value="Medium"/>
+				<Setter Property="Foreground" Value="{DynamicResource TexBoxCommon}"/>
+			</Style>
+		</Grid.Styles>
+		<TextBlock  Name="Content"
+					TextWrapping="Wrap" />
+		<WrapPanel VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,15,0,40">
+			<Button Background="{StaticResource ButtonAccept}" IsDefault="True" Click="Accept_Click" MinWidth="200" Margin="0,0,10,0">
+				<TextBlock Text="ОК"/>
+			</Button>
+			<Button Click="Cancel_Click"
+					Background="{StaticResource ButtonDeny}"
+					MinWidth="200">
+				<TextBlock Text="Отмена"/>
+			</Button>
+		</WrapPanel>
+	</Grid>
+</UserControl>
