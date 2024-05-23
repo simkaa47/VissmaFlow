@@ -9,6 +9,7 @@ using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using VissmaFlow.Core.Contracts.Common;
 using VissmaFlow.Core.Infrastructure.Helpers;
+using VissmaFlow.Core.Models.AccessControl;
 using VissmaFlow.Core.ViewModels;
 using VissmaFlow.View.Dialogs;
 using VissmaFlow.View.Dialogs.AccessControl;
@@ -22,6 +23,24 @@ public partial class PageSelector : DialogWindow
         InitializeComponent();
         AffectsMeasure<PageSelector>(ItemsSourceProperty);
         AffectsMeasure<PageSelector>(SelectedItemProperty);
+        if (App.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+        {
+            var app = App.Current as App;
+            if (app != null)
+            {
+                AccessViewModel = app.GetService<AccessViewModel>();
+                if(AccessViewModel is not null)
+                {
+                    AccessViewModel.PropertyChanged += (o, args) => 
+                    { 
+                        if(args.PropertyName == nameof(AccessViewModel.CurrentUser))
+                        {
+                            GetActualTabs();
+                        }
+                    };
+                }
+            }
+        }
     }
 
     protected override void OnLoaded(RoutedEventArgs e)
@@ -33,14 +52,20 @@ public partial class PageSelector : DialogWindow
 
     private void GetActualTabs()
     {
-        if (Tabs is null || !(Tabs is List<UserControl> controls)) return;
-        ItemsSource = controls.Select(c=>c.Tag).ToList();
+        if (AccessViewModel is null) return;
+        UserAccessLevel level = AccessViewModel.CurrentUser is null ? UserAccessLevel.None : AccessViewModel.CurrentUser.AccessLevel;
+        if (Tabs is null || !(Tabs is List<UserAccessControl> controls)) return;
+        ItemsSource = controls.Where(c=>level>=c.UserLevel).
+            Select(c=>c.Tag).ToList();
         if(SelectedItem is null && Tab is not null && Tab is UserControl control)
         {
             if (ItemsSource is List<object> list)
                 SelectedItem = list.Where(i => i == control.Tag).FirstOrDefault();
         }
     }
+
+
+
 
     private async void CloseAppAsync(object? sender, RoutedEventArgs args)
     {
@@ -87,6 +112,7 @@ public partial class PageSelector : DialogWindow
         {
             var logWindow = new LoginWindow();
             await logWindow.ShowDialogAsync();
+            GetActualTabs();
         }
     }
 
@@ -100,6 +126,8 @@ public partial class PageSelector : DialogWindow
     {
         await ExecuteLinuxCmd("reboot", "Перезагрузить прибор?");
     }
+
+    private AccessViewModel? AccessViewModel { get; set; }
 
 
 
@@ -139,7 +167,7 @@ public partial class PageSelector : DialogWindow
     {
         if(SelectedItem is not null && SelectedItem is string str)
         {
-            if (Tabs is not null && Tabs is List<UserControl> controls)
+            if (Tabs is not null && Tabs is List<UserAccessControl> controls)
             {
                 Tab = controls.Where(c => c.Tag is string tag && tag == str).FirstOrDefault();
                 needToCloseDialog = true;

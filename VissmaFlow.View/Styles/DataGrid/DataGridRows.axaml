@@ -9,7 +9,7 @@
 	<Style Selector="DataGridRow">
 		<Setter Property="Background" Value="{DynamicResource CommonColor}"/>
 		<Style Selector="^:nth-child(even)">
-			<Setter Property="Background" Value="#902c2c2e"/>
+			<Setter Property="Background" Value="#802c2c2e"/>
 		</Style>
 	</Style>
 </Styles>

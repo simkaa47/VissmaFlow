@@ -11,7 +11,8 @@
 			 x:DataType="vm:SingleMeasuresViewModel"
 			 Name="root"
              x:Class="VissmaFlow.View.UserControls.SingleMeasures.SingleMeasuresTab">
-	<TabControl ItemsSource="{Binding Devices}" 
+	<TabControl ItemsSource="{Binding Devices}"
+				Padding="0"
 				ItemContainerTheme="{StaticResource TabItemCommonTheme}"
 				SelectedItem="{Binding SelectedDevice}">
 		<TabControl.ItemTemplate>
@@ -21,12 +22,12 @@
 		</TabControl.ItemTemplate>
 		<TabControl.ContentTemplate>
 			<DataTemplate DataType="s:SingleMeasuresInstance">
-				<ScrollViewer Margin="20,40,9,36"
+				<ScrollViewer Margin="40,20,9,36"
 							  Background="{StaticResource CommonColor}">
 					<Border HorizontalAlignment="Stretch"
 							VerticalAlignment="Stretch"
 							BorderBrush="{StaticResource CommonBorderBrush}"
-							Background="{Binding ParameterBackgroundCommonColor}"
+							Background="{StaticResource ParameterBackgroundCommonColor}"
 							BorderThickness="0,0,1,0"
 							Margin="0,0,31,0">
 						<Grid RowDefinitions="Auto,*"

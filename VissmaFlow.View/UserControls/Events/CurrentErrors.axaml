@@ -7,33 +7,97 @@
 			 xmlns:e="using:VissmaFlow.Core.Models.Event"
 			 x:DataType="vm:EventViewModel"
              x:Class="VissmaFlow.View.UserControls.Events.CurrentErrors">
-	<DataGrid HorizontalAlignment="Stretch"
-			  IsReadOnly="True"	
-			  Name="EventsGrid"
-			  VerticalAlignment="Stretch"
-			  ItemsSource="{Binding ActiveEvents}">
-		<DataGrid.Styles>
-			<Style Selector="DataGridRow" x:DataType="e:Event">
-				<Setter Property="Background" Value="Red"/>
-				<Setter Property="Margin" Value="1"/>
-				<Setter Property="IsVisible" Value="{Binding IsActive, Mode=OneWay}"/>
-			</Style>
-		</DataGrid.Styles>
-		<DataGrid.Columns>
-			<DataGridTextColumn x:DataType="e:Event" FontSize="12" Header="Время срабатывания" Binding="{Binding LastActiveTime, StringFormat={}{0:yyyy.MM.dd HH:mm:ss}}"/>
-			<DataGridTemplateColumn x:DataType="e:Event"   Header="Сообщение">
-				<DataGridTemplateColumn.CellTemplate>
-					<DataTemplate>
-						<TextBlock Text="{Binding Converter={StaticResource EventMessageConverter}}"
-								   TextWrapping="Wrap"
-								   VerticalAlignment="Center"
-								   Margin="5,0,0,0"
-								   FontSize="12"
-								   MaxWidth="270"/>
-					</DataTemplate>
-				</DataGridTemplateColumn.CellTemplate>
-			</DataGridTemplateColumn>
-		</DataGrid.Columns>
+	<ScrollViewer Margin="40,20,9,40">
+		<Border VerticalAlignment="Stretch"
+				HorizontalAlignment="Stretch"
+				Margin="0,0,31,0"
+				Background="{StaticResource ParameterBackgroundCommonColor}">
+			<DataGrid HorizontalAlignment="Stretch"
+				  IsReadOnly="True"
+			      Name="EventsGrid"
+				  
+			      HorizontalGridLinesBrush="Transparent"
+				  HorizontalScrollBarVisibility="Disabled"
+			      VerticalAlignment="Stretch"
+			      ItemsSource="{Binding ActiveEvents}">
+				<DataGrid.Styles>
+					<Style Selector="DataGridColumnHeader">
+						<Setter Property="Padding" Value="20"/>
+						<Setter Property="FontSize" Value="11"/>
+						<Setter Property="VerticalContentAlignment" Value="Center"/>
+						<Setter Property="FontFamily" Value="{DynamicResource RobotoFont}"/>
+						<Setter Property="FontWeight" Value="Medium"/>						
+						<Setter Property="BorderThickness" Value="0,0,0,0"/>
+						<Setter Property="Template">
+							<ControlTemplate>
+								<Border x:Name="HeaderBorder"
+										Background="Transparent"
+										BorderBrush="{TemplateBinding BorderBrush}"
+										BorderThickness="{TemplateBinding BorderThickness}"
+										CornerRadius="{TemplateBinding CornerRadius}">
+									<Grid Name="PART_ColumnHeaderRoot" ColumnDefinitions="*,Auto">
+
+										<Panel Margin="{TemplateBinding Padding}"
+											  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+											  VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+											<Grid>
+
+												<TextBlock Text="{TemplateBinding Content}"
+														   TextWrapping="Wrap"
+														   VerticalAlignment="Top"
+														   Foreground="{DynamicResource TexBoxCommon}"/>
+											</Grid>
+										</Panel>
+									</Grid>
+								</Border>
+							</ControlTemplate>
+						</Setter>
+					</Style>
+					<Style Selector="DataGridRow" x:DataType="e:Event">
+						<Setter Property="MinHeight" Value="32"/>
+						<Setter Property="Background" Value="{DynamicResource ErrorColor}"/>
+						<Setter Property="Margin" Value="0,0,0,4"/>
+						<Setter Property="IsVisible" Value="{Binding IsActive, Mode=OneWay}"/>
+						<Style Selector="^:nth-child(even)">
+							<Setter Property="Background" Value="{DynamicResource ErrorColor}"/>
+						</Style>
+					</Style>
+					<Style Selector="DataGridCell">
+						<Setter Property="VerticalContentAlignment" Value="Center"/>
+						<Setter Property="HorizontalContentAlignment" Value="Left"/>
+						<Setter Property="BorderThickness" Value="0,0,0,0"/>
+						<Setter Property="Padding" Value="19,10,19,10"/>
+						<Setter Property="FontSize" Value="14"/>
+						<Setter Property="FontFamily" Value="{StaticResource RobotoFont}"/>
+						<Setter Property="FontWeight" Value="Regular"/>
+						<Setter Property="Foreground" Value="{DynamicResource TexBoxCommon}"/>
+						<Setter Property="BorderBrush" Value="{DynamicResource CommonBorderBrush}"/>
+					</Style>
+				</DataGrid.Styles>
+				<DataGrid.Columns>					
+					<DataGridTemplateColumn x:DataType="e:Event" Width="197"  Header="ВРЕМЯ СРАБАТЫВАНИЯ">
+						<DataGridTemplateColumn.CellTemplate>
+							<DataTemplate>
+								<TextBlock Text="{Binding LastActiveTime, StringFormat={}{0:HH:mm:ss  dd.MM.yyyy}}"
+										   TextWrapping="Wrap"
+										   VerticalAlignment="Center"/>
+							</DataTemplate>
+						</DataGridTemplateColumn.CellTemplate>
+					</DataGridTemplateColumn>
+					<DataGridTemplateColumn x:DataType="e:Event" Width="203"  Header="СООБЩЕНИЕ">
+						<DataGridTemplateColumn.CellTemplate>
+							<DataTemplate>
+								<TextBlock Text="{Binding Converter={StaticResource EventMessageConverter}}"
+										   TextWrapping="Wrap"										   
+										   VerticalAlignment="Center"/>
+							</DataTemplate>
+						</DataGridTemplateColumn.CellTemplate>
+					</DataGridTemplateColumn>
+				</DataGrid.Columns>
+
+			</DataGrid>
+		</Border>
 		
-	</DataGrid>
+	</ScrollViewer>
+	
 </UserControl>

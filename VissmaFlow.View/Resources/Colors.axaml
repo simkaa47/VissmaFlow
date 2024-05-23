@@ -21,6 +21,7 @@
 	<SolidColorBrush Color="#6B6B6B" x:Key="Scroll"/>
 	<SolidColorBrush Color="Black" x:Key="TextBoxBackground"/>
 	<SolidColorBrush Color="#616161" x:Key="TextBoxBorderBrush"/>
+	<SolidColorBrush Color="#80FF3B30" x:Key="ErrorColor"/>
 
 	<scg:List x:TypeArguments="sys:Object" x:Key="LogColors">
 		<SolidColorBrush Color="Transparent"/>

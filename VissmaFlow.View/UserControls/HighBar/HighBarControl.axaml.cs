@@ -39,7 +39,7 @@ public partial class HighBarControl : UserControl
         get { return (object)GetValue(ItemsSourceProperty); }
         set 
         { 
-            if(value is List<UserControl> controls && controls.Count>0)
+            if(value is List<UserAccessControl> controls && controls.Count>0)
             {
                 SelectedItem = controls[0];
             }

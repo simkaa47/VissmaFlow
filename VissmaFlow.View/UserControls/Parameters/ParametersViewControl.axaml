@@ -11,7 +11,8 @@
 			 xmlns:par="using:VissmaFlow.View.UserControls.Parameters"
              x:Class="VissmaFlow.View.UserControls.Parameters.ParametersViewControl">
 	<TabControl ItemsSource="{Binding CommunicationVm.RtkUnits}" TabStripPlacement="Top"
-				ItemContainerTheme="{StaticResource TabItemCommonTheme}">
+				ItemContainerTheme="{StaticResource TabItemCommonTheme}"
+				Padding="0">
 		<TabControl.Styles>
 			<Style Selector="ListBoxItem">
 				<Setter Property="Margin" Value="0"/>
@@ -25,20 +26,22 @@
 		</TabControl.ItemTemplate>
 		<TabControl.ContentTemplate>
 			<DataTemplate DataType="rtk:RtkUnit">
-				<Grid RowDefinitions="50,*">
-					<Grid Margin="40,0,40,0" ColumnDefinitions="*,*">
+				<Grid RowDefinitions="Auto,*">
+					<Grid Margin="40,20,40,20" ColumnDefinitions="*,*">
 						<Button VerticalAlignment="Stretch" 
+								Height="40"
 								HorizontalAlignment="Stretch"
 								VerticalContentAlignment="Center"
 								Background="{StaticResource ButtonAccept}"
 								HorizontalContentAlignment="Center"
 								CommandParameter="{Binding}"
 								Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=DataContext.CommunicationService.ReadFromEepromCommand}"
-								Margin="0,5,1,5">
+								Margin="0,0,1,0">
 							<TextBlock Text="Чтение из EEMPROM" Foreground="{StaticResource TexBoxCommon}"
 									   FontSize="16" FontFamily="{StaticResource RobotoFont}"/>
 						</Button>
 						<Button Grid.Column="1"
+								Height="40"
 								VerticalAlignment="Stretch"
 								Background="{StaticResource ButtonAccept}"
 								HorizontalAlignment="Stretch"
@@ -46,12 +49,12 @@
 								HorizontalContentAlignment="Center"
 								CommandParameter="{Binding}"
 								Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=DataContext.CommunicationService.WriteToEepromCommand}"
-								Margin="0,5,1,5">
+								Margin="0,0,1,0">
 							<TextBlock Text="Запись в EEMPROM" Foreground="{StaticResource TexBoxCommon}"
 									   FontSize="16" FontFamily="{StaticResource RobotoFont}" FontWeight="Regular"/>
 						</Button>
 					</Grid>
-					<ScrollViewer Grid.Row="1" Margin="0,20,0,30">
+					<ScrollViewer Grid.Row="1" Margin="0,0,9,30">
 						<ListBox ScrollViewer.VerticalScrollBarVisibility="Disabled"
 							 ItemsSource="{Binding Parameters}"
 								 BorderBrush="{StaticResource CommonBorderBrush}"

@@ -14,10 +14,12 @@
 		MaxHeight="800"
 		MaxWidth="480"
 		xmlns:main="using:VissmaFlow.View.UserControls.Main"
+		xmlns:e="using:VissmaFlow.View.UserControls.Events"
 		xmlns:par="using:VissmaFlow.View.UserControls.Parameters"
 		xmlns:log="using:VissmaFlow.View.UserControls.Logging"
 		xmlns:kb="using:VissmaFlow.View.UserControls.Keyboard"
 		xmlns:hb="using:VissmaFlow.View.UserControls.HighBar"	
+		xmlns:adm="using:VissmaFlow.View.UserControls.Administration"
 		SystemDecorations="None"
 		xmlns:acc="using:VissmaFlow.Core.Models.AccessControl"
 		xmlns:uc="using:VissmaFlow.View.UserControls"
@@ -25,13 +27,16 @@
         Title="VissmaFlow.View">
 	<Window.Resources>
 		
-		<scg:List x:TypeArguments="UserControl" x:Key="Pages">
+		<scg:List x:TypeArguments="uc:UserAccessControl" x:Key="Pages">
 			<main:MainPageControl Tag="Главная"/>
-			<par:ParametersViewControl Tag="Параметры" IsVisible="{Binding AccessViewModel.CurrentUser, Converter={x:Static ObjectConverters.IsNotNull}}"/>
+			<par:ParametersViewControl Tag="Параметры" UserLevel="Service"/>
 			<log:LoggingTab Tag="Логирование" DataContext="{Binding LoggingViewModel}"/>
 			<sm:SingleMeasuresTab Tag="Калибровка" 
 								  DataContext="{Binding SingleMeasuresViewModel}"
-								  IsVisible="{Binding AccessViewModel.CurrentUser, Converter={StaticResource UserVisibilityConverter}, ConverterParameter={x:Static acc:UserAccessLevel.Service}}"/>
+							      UserLevel="Service"/>
+			<e:MainEventsControl Tag="События"/>
+			<adm:AdministrationTabControl Tag="Администрирование"
+										  UserLevel="Admin"/>
 		</scg:List>
 	</Window.Resources>
 	<Grid RowDefinitions="*, Auto">

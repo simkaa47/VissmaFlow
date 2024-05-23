@@ -4,7 +4,7 @@ using Avalonia.Markup.Xaml;
 
 namespace VissmaFlow.View.UserControls.Parameters;
 
-public partial class ParametersViewControl : UserControl
+public partial class ParametersViewControl : UserAccessControl
 {
     public ParametersViewControl()
     {

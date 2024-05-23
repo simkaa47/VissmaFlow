@@ -14,7 +14,7 @@
 							BorderBrush="#8028BCBA"   BorderThickness="1" CornerRadius="4">
 						<DockPanel Background="Transparent" VerticalAlignment="Stretch" HorizontalAlignment="Center" >
 							<TextBlock Name="L2"
-								   Foreground="Black"
+								   Foreground="{DynamicResource TexBoxCommon}"
 								   FontSize="20"
 									Margin="10"  
 								   Text="{TemplateBinding Header}"
