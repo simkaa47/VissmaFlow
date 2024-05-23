@@ -3,6 +3,7 @@ using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Input;
 using Avalonia.Interactivity;
+using Avalonia.Styling;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -39,8 +40,25 @@ public partial class PageSelector : DialogWindow
                         }
                     };
                 }
+
+                var themes = this.Find<ComboBox>("Themes");
+                themes!.SelectionChanged += (sender, e) =>
+                {
+                    switch (themes.SelectedIndex)
+                    {
+                        case 0:
+                            app.RequestedThemeVariant = ThemeVariant.Light;
+                            break;
+                        case 1:
+                            app.RequestedThemeVariant = ThemeVariant.Dark;
+                            break;
+                    }
+                };
             }
         }
+
+        
+
     }
 
     protected override void OnLoaded(RoutedEventArgs e)
