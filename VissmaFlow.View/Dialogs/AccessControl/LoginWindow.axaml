@@ -9,10 +9,7 @@
 		xmlns:sys="clr-namespace:System;assembly=netstandard"
         x:Class="VissmaFlow.View.Dialogs.AccessControl.LoginWindow">
 	<UserControl.Resources>
-		<scg:List x:TypeArguments="sys:Object" x:Key="TextBoxErrorColors">
-			<SolidColorBrush Color="White"/>
-			<SolidColorBrush Color="Red"/>
-		</scg:List>
+		
 	</UserControl.Resources>
 	<UserControl.Styles>
 		<Style Selector="TextBlock">
@@ -40,7 +37,7 @@
 				   IsVisible="{Binding FaliledLogin}"
 				   Canvas.Bottom="560"
 				   Canvas.Left="54"
-				   Foreground="{StaticResource ErrorMainColor}"
+				   Foreground="{DynamicResource ErrorMainColor}"
 				   FontWeight="Regular"/>
 
 			<!--Password-->
@@ -58,14 +55,14 @@
 				   IsVisible="{Binding FaliledLogin}"
 				   Canvas.Bottom="560"
 				   Canvas.Left="54"
-				   Foreground="{StaticResource ErrorMainColor}"
+				   Foreground="{DynamicResource ErrorMainColor}"
 				   FontWeight="Regular"/>
 
 			<!--Cancel button-->
 			<Border BorderThickness="0"
 					Margin="0,40,0,0"
 					Width="400"				
-					Background="#3F3F42"
+					Background="{DynamicResource ButtonDeny}"
 					CornerRadius="4"
 					Height="62">
 				<Button Content="Отменить"
@@ -74,6 +71,7 @@
 						FontFamily="{StaticResource RobotoFont}"
 						FontWeight="Regular"
 						Background="Transparent"
+						Foreground="White"
 						VerticalAlignment="Stretch"
 						HorizontalAlignment="Stretch"
 						VerticalContentAlignment="Center"
@@ -85,7 +83,7 @@
 			<Border BorderThickness="0"
 					Margin="0,40,0,0"
 					Width="400"
-					Background="{StaticResource AquaColor}"
+					Background="{DynamicResource  ButtonAccept}"
 					CornerRadius="4"
 					Height="62">
 				<Button Content="Вход"
@@ -93,6 +91,7 @@
 						FontSize="24"
 						FontFamily="{StaticResource RobotoFont}"
 						FontWeight="Regular"
+						Foreground="White"
 						Background="Transparent"
 						IsEnabled="{Binding !HasErrors}"
 						VerticalAlignment="Stretch"
@@ -108,7 +107,7 @@
 			   Width="55" Height="32"/>
 
 		<!--RTK-->
-		<Image Source="\Resources\Images\Layer_1.png"
+		<Image Source="{DynamicResource Rtk_logo}"
 			   Canvas.Top="671" Canvas.Left="43"
 			   Width="119" Height="42"/>
 

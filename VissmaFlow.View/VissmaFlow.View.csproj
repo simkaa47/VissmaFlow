@@ -49,6 +49,7 @@
     <None Remove="Resources\Images\Group 2865.png" />
     <None Remove="Resources\Images\konvels_logo_white.png" />
     <None Remove="Resources\Images\Layer_1.png" />
+    <None Remove="Resources\Images\Layer_1_Black.png" />
     <None Remove="Resources\Images\Layer_2.png" />
     <None Remove="Resources\Images\Logout.png" />
     <None Remove="Resources\Images\Logo_Konvels_blue.png" />
@@ -86,6 +87,7 @@
 	<AvaloniaResource Include="Resources\Images\Layer_1.png">
 	  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 	</AvaloniaResource>
+	<AvaloniaResource Include="Resources\Images\Layer_1_Black.png" />
 	<AvaloniaResource Include="Resources\Images\Layer_2.png" />
     <AvaloniaResource Include="Resources\Images\Logout.png" />
     <AvaloniaResource Include="Resources\Images\Logo_Konvels_blue.png" />
