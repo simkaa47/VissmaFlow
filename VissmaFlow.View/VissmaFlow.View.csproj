@@ -45,6 +45,7 @@
     <None Remove="Resources\Images\AccountCircle_Gray.png" />
     <None Remove="Resources\Images\Close.png" />
     <None Remove="Resources\Images\ControlCamera.png" />
+    <None Remove="Resources\Images\ControlCamera_Dark.png" />
     <None Remove="Resources\Images\Dehaze.png" />
     <None Remove="Resources\Images\Group 2865.png" />
     <None Remove="Resources\Images\konvels_logo_white.png" />
@@ -55,12 +56,15 @@
     <None Remove="Resources\Images\Logo_Konvels_blue.png" />
     <None Remove="Resources\Images\Moon.png" />
     <None Remove="Resources\Images\NotInterested.png" />
+    <None Remove="Resources\Images\NotInterested_Dark.png" />
     <None Remove="Resources\Images\PowerSettingsOff.png" />
     <None Remove="Resources\Images\Replay.png" />
     <None Remove="Resources\Images\Sun.png" />
     <None Remove="Resources\Images\Timeline.png" />
     <None Remove="Resources\Images\ZoomIn.png" />
+    <None Remove="Resources\Images\ZoomIn_Dark.png" />
     <None Remove="Resources\Images\ZoomOut.png" />
+    <None Remove="Resources\Images\ZoomOut_Dark.png" />
     <None Remove="Styles\Validation\ValidationErrors.xaml" />
   </ItemGroup>
   <ItemGroup>
@@ -81,6 +85,7 @@
 	<AvaloniaResource Include="Resources\Images\AccountCircleAuthorized.png" />
 	<AvaloniaResource Include="Resources\Images\AccountCircleNonAuthorized.png" />
 	<AvaloniaResource Include="Resources\Images\ControlCamera.png" />
+	<AvaloniaResource Include="Resources\Images\ControlCamera_Dark.png" />
 	<AvaloniaResource Include="Resources\Images\Dehaze.png" />
 	<AvaloniaResource Include="Resources\Images\Group 2865.png" />
 	<AvaloniaResource Include="Resources\Images\konvels_logo_white.png" />
@@ -93,12 +98,15 @@
     <AvaloniaResource Include="Resources\Images\Logo_Konvels_blue.png" />
     <AvaloniaResource Include="Resources\Images\Moon.png" />
     <AvaloniaResource Include="Resources\Images\NotInterested.png" />
+    <AvaloniaResource Include="Resources\Images\NotInterested_Dark.png" />
 	<AvaloniaResource Include="Resources\Images\PowerSettingsOff.png" />
     <AvaloniaResource Include="Resources\Images\Replay.png" />
     <AvaloniaResource Include="Resources\Images\Sun.png" />
     <AvaloniaResource Include="Resources\Images\Timeline.png" />
     <AvaloniaResource Include="Resources\Images\ZoomIn.png" />
+    <AvaloniaResource Include="Resources\Images\ZoomIn_Dark.png" />
     <AvaloniaResource Include="Resources\Images\ZoomOut.png" />
+    <AvaloniaResource Include="Resources\Images\ZoomOut_Dark.png" />
   </ItemGroup>
   <ItemGroup>
     <AvaloniaXaml Include="Styles\Validation\ValidationErrors.xaml">

@@ -10,6 +10,10 @@
 			<Bitmap x:Key="Authorized_Image">\Resources\Images\AccountCircle_Gray.png</Bitmap>
 			<Bitmap x:Key="Theme_logo">\Resources\Images\Moon.png</Bitmap>
 			<Bitmap x:Key="Rtk_logo">\Resources\Images\Layer_1_Black.png</Bitmap>
+			<Bitmap x:Key="Zoom_Panning_Disable">\Resources\Images\NotInterested_Dark.png</Bitmap>
+			<Bitmap x:Key="Panning_Enable">\Resources\Images\ControlCamera_Dark.png</Bitmap>
+			<Bitmap x:Key="Zoom_Enable">\Resources\Images\ZoomIn_Dark.png</Bitmap>
+			<Bitmap x:Key="ZoomOut">\Resources\Images\ZoomOut_Dark.png</Bitmap>
 		</ResourceDictionary>
 		<ResourceDictionary x:Key='Dark'>
 			<Bitmap x:Key="Konvels_logo">\Resources\Images\Logo_Konvels_blue.png</Bitmap>
@@ -17,6 +21,10 @@
 			<Bitmap x:Key="Non_Authorized_Image">\Resources\Images\AccountCircleNonAuthorized.png</Bitmap>
 			<Bitmap x:Key="Authorized_Image">\Resources\Images\AccountCircleAuthorized.png</Bitmap>
 			<Bitmap x:Key="Rtk_logo">\Resources\Images\Layer_1.png</Bitmap>
+			<Bitmap x:Key="Zoom_Panning_Disable">\Resources\Images\NotInterested.png</Bitmap>
+			<Bitmap x:Key="Panning_Enable">\Resources\Images\ControlCamera.png</Bitmap>
+			<Bitmap x:Key="Zoom_Enable">\Resources\Images\ZoomIn.png</Bitmap>
+			<Bitmap x:Key="ZoomOut">\Resources\Images\ZoomOut.png</Bitmap>
 		</ResourceDictionary>
 	</ResourceDictionary.ThemeDictionaries>
 </ResourceDictionary>

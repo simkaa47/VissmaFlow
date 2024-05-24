@@ -6,6 +6,10 @@
 		<SolidColorBrush Color="{DynamicResource TextBoxErrorColorOk}"/>
 		<SolidColorBrush Color="{DynamicResource TextBoxErrorColorNotOk}"/>
 	</scg:List>
+	<scg:List x:TypeArguments="sys:Object" x:Key="ComboBoxColors">
+		<SolidColorBrush Color="{DynamicResource ComboBoxClosed}"/>
+		<SolidColorBrush Color="{DynamicResource ComboBoxOpened}"/>
+	</scg:List>
 	<ResourceDictionary.ThemeDictionaries>
 		<ResourceDictionary x:Key='Light'>
 			<scg:List x:TypeArguments="sys:Object" x:Key="ErrorColors">
@@ -14,6 +18,11 @@
 			</scg:List>
 			<Color x:Key="TextBoxErrorColorOk">#99000000</Color>
 			<Color x:Key="TextBoxErrorColorNotOk">Red</Color>
+			<Color x:Key="ComboBoxClosed">#61000000</Color>
+			<Color x:Key="ComboBoxOpened">#28BCBA</Color>
+			<SolidColorBrush Color="#DBF1F0" x:Key="ItemMouseOverBackground"/>
+			<SolidColorBrush Color="White" x:Key="TextBoxParameterBackground"/>
+			<SolidColorBrush Color="#61000000" x:Key="TextBoxParameterBorderBrush"/>
 			<SolidColorBrush Color="#E0E0E0" x:Key="ListBoxBorderBrush"/>
 			<SolidColorBrush Color="#E0E0E0" x:Key="ListBoxItemBorderBrush"/>			
 			<SolidColorBrush Color="#E0E0E0" x:Key="DateTimeBackground"/>
@@ -23,10 +32,9 @@
 			<SolidColorBrush Color="White" x:Key="CommonColor"/>
 			<SolidColorBrush Color="White" x:Key="CommonBorderBrush"/>
 			<SolidColorBrush Color="#DBF1F0" x:Key="ParameterSelected"/>
-			<SolidColorBrush Color="#3F3F42" x:Key="ComboboxPopupBackground"/>
+			<SolidColorBrush Color="White" x:Key="ComboboxPopupBackground"/>
 			<SolidColorBrush Color="#28BCBA" x:Key="AquaColor"/>
-			<SolidColorBrush Color="White" x:Key="ParameterBackgroundCommonColor"/>
-			<SolidColorBrush Color="#CCFFFFFF" x:Key="AlmostWhite"/>
+			<SolidColorBrush Color="White" x:Key="ParameterBackgroundCommonColor"/>			
 			<SolidColorBrush Color="Black" x:Key="TexBoxCommon"/>
 			<SolidColorBrush Color="#CC000000" x:Key="TexBoxCommon80"/>
 			<SolidColorBrush Color="#28BCBA" x:Key="ButtonAccept"/>
@@ -41,10 +49,7 @@
 				<SolidColorBrush Color="Red"/>
 			</scg:List>
 
-			<scg:List x:TypeArguments="sys:Object" x:Key="ComboBoxColors">
-				<SolidColorBrush Color="#616161"/>
-				<SolidColorBrush Color="#28BCBA"/>
-			</scg:List>
+			
 		</ResourceDictionary>
 		<ResourceDictionary x:Key='Dark'>
 			<scg:List x:TypeArguments="sys:Object" x:Key="ErrorColors">
@@ -53,6 +58,11 @@
 			</scg:List>
 			<Color x:Key="TextBoxErrorColorOk">White</Color>
 			<Color x:Key="TextBoxErrorColorNotOk">Red</Color>
+			<Color x:Key="ComboBoxClosed">#616161</Color>
+			<Color x:Key="ComboBoxOpened">#28BCBA</Color>
+			<SolidColorBrush Color="#5B5B5B" x:Key="ItemMouseOverBackground"/>
+			<SolidColorBrush Color="Black" x:Key="TextBoxParameterBackground"/>
+			<SolidColorBrush Color="#616161" x:Key="TextBoxParameterBorderBrush"/>
 			<SolidColorBrush Color="Transparent" x:Key="ListBoxBorderBrush"/>
 			<SolidColorBrush Color="#5B5B5B" x:Key="ListBoxItemBorderBrush"/>		
 			<SolidColorBrush Color="#2C2C2E" x:Key="DateTimeBackground"/>
@@ -64,8 +74,7 @@
 			<SolidColorBrush Color="#5B5B5B" x:Key="ParameterSelected"/>
 			<SolidColorBrush Color="#3F3F42" x:Key="ComboboxPopupBackground"/>
 			<SolidColorBrush Color="#28BCBA" x:Key="AquaColor"/>
-			<SolidColorBrush Color="#2C2C2E" x:Key="ParameterBackgroundCommonColor"/>
-			<SolidColorBrush Color="#CCFFFFFF" x:Key="AlmostWhite"/>
+			<SolidColorBrush Color="#2C2C2E" x:Key="ParameterBackgroundCommonColor"/>			
 			<SolidColorBrush Color="#FFFFFF" x:Key="TexBoxCommon"/>
 			<SolidColorBrush Color="#CCFFFFFF" x:Key="TexBoxCommon80"/>
 			<SolidColorBrush Color="#28BCBA" x:Key="ButtonAccept"/>

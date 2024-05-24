@@ -1,4 +1,6 @@
-﻿using Avalonia.Media;
+﻿using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.Media;
+using Avalonia.Styling;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using LiveChartsCore;
@@ -29,7 +31,56 @@ namespace VissmaFlow.View.ViewModels
             _logger = logger;
             TrendSettigsViewModel = trendSettigsViewModel;
             InitAsync();
+            if (App.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+            {
+                var app = App.Current as App;
+                if (app != null)
+                {
+                    app.ActualThemeVariantChanged += (s, e) =>
+                    {
+                        if (app.ActualThemeVariant == ThemeVariant.Dark)
+                            ChangeTheme(ThemeVariant.Dark);
+                        else ChangeTheme(ThemeVariant.Light);                        
+                    };
+                    ChangeTheme(app.ActualThemeVariant);
+                }
+                
+            }
         }
+
+
+
+        private void ChangeTheme(ThemeVariant theme)
+        {
+            if(theme == ThemeVariant.Dark)
+            {
+                XAxes[0].LabelsPaint = new SolidColorPaint(SKColors.White.WithAlpha(204));
+                XAxes[0].SeparatorsPaint = new SolidColorPaint(SKColors.White.WithAlpha(128));
+                YAxes[0].LabelsPaint = new SolidColorPaint(SKColors.White.WithAlpha(204));
+                YAxes[0].SeparatorsPaint = new SolidColorPaint(SKColors.White.WithAlpha(128));
+                DrawMarginFrame  =  new DrawMarginFrame
+                {
+                    Fill = new SolidColorPaint(GetSKColor("#2C2C2E")),
+                    Stroke = new SolidColorPaint(SKColors.White.WithAlpha(128))
+                };
+            }
+            else
+            {
+                XAxes[0].LabelsPaint = new SolidColorPaint(SKColors.Black.WithAlpha(204));
+                XAxes[0].SeparatorsPaint = new SolidColorPaint(SKColors.Black.WithAlpha(64));
+                YAxes[0].LabelsPaint = new SolidColorPaint(SKColors.Black.WithAlpha(204));
+                YAxes[0].SeparatorsPaint = new SolidColorPaint(SKColors.Black.WithAlpha(64));
+                DrawMarginFrame = new DrawMarginFrame
+                {
+                    Fill = new SolidColorPaint(GetSKColor("#FFFFFF")),
+                    Stroke = new SolidColorPaint(SKColors.Black.WithAlpha(64))
+                };
+            }
+            
+        }
+
+
+
 
         public List<ZoomAndPanMode> ZoomModes { get; set; } = new List<ZoomAndPanMode>
         {
@@ -90,12 +141,8 @@ namespace VissmaFlow.View.ViewModels
             }
         }
 
-
-        public DrawMarginFrame DrawMarginFrame => new DrawMarginFrame
-        {
-            Fill = new SolidColorPaint(GetSKColor("#2C2C2E")),
-            Stroke = new SolidColorPaint(SKColors.White.WithAlpha(128))
-        };
+        [ObservableProperty]
+        private DrawMarginFrame? _drawMarginFrame;
 
 
 

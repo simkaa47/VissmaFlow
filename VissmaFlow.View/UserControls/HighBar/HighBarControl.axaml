@@ -5,19 +5,21 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 			 x:Name="root"
              x:Class="VissmaFlow.View.UserControls.HighBar.HighBarControl">
-	<Grid Height="80" ColumnDefinitions="162,*,80">
+	<Grid Height="80" ColumnDefinitions="162,*,80"
+		  Background="{DynamicResource HighBarBackground}">
 		<!--Logo-->
 		<Border BorderThickness="0,0,1,1"  BorderBrush="{DynamicResource CommonBorderBrush}">
-			<Image Source="\Resources\Images\Logo_Konvels_blue.png"
+			<Image Source="{DynamicResource Konvels_logo}"
 					   VerticalAlignment="Center" HorizontalAlignment="Center"
 					   Width="110" Height="28"/>
 		</Border>
 		<!--Page tag-->
-		<Border BorderThickness="1,0,1,1" Grid.Column="1"  BorderBrush="{DynamicResource CommonBorderBrush}">
+		<Border BorderThickness="0,0,1,1" Grid.Column="1"  BorderBrush="{DynamicResource CommonBorderBrush}">
 			<TextBlock Text="{Binding ElementName=root, Path=SelectedItem.Tag}"
 					   TextTrimming="CharacterEllipsis"
 					   FontFamily="{StaticResource RobotoFont}"
 					   FontWeight="Medium"
+					   Foreground="White"
 					   FontSize="25"
 					   VerticalAlignment="Center"
 					   Margin="32,0,0,0"/>
