@@ -40,26 +40,10 @@ public partial class PageSelector : DialogWindow
                         }
                     };
                 }
-
-                var themes = this.Find<ComboBox>("Themes");
-                themes!.SelectionChanged += (sender, e) =>
-                {
-                    switch (themes.SelectedIndex)
-                    {
-                        case 0:
-                            app.RequestedThemeVariant = ThemeVariant.Light;
-                            break;
-                        case 1:
-                            app.RequestedThemeVariant = ThemeVariant.Dark;
-                            break;
-                    }
-                };
             }
-        }
-
-        
-
+        }  
     }
+
 
     protected override void OnLoaded(RoutedEventArgs e)
     {
@@ -97,6 +81,22 @@ public partial class PageSelector : DialogWindow
                 {
                     desktop.MainWindow.Close();
                 }
+            }
+        }
+    }
+
+    private  void ChangeTheme(object? sender, RoutedEventArgs args)
+    {
+        if (App.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+        {
+            var app = App.Current as App;
+            if (app != null)
+            {
+                if(app.RequestedThemeVariant == ThemeVariant.Dark)
+                    app.RequestedThemeVariant = ThemeVariant.Light;
+                else
+                    app.RequestedThemeVariant = ThemeVariant.Dark;
+
             }
         }
     }

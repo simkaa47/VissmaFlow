@@ -3,27 +3,20 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-			 x:Name="root"
-			 xmlns:scg="clr-namespace:System.Collections.Generic;assembly=netstandard"
-			 xmlns:sys="clr-namespace:System;assembly=netstandard"
+			 x:Name="root"			 
 			 xmlns:vm="using:VissmaFlow.Core.ViewModels"
 			 x:DataType="vm:MainViewModel"
-             x:Class="VissmaFlow.View.UserControls.PageSelector">
-	<UserControl.Resources>
-		<scg:List x:TypeArguments="sys:Object" x:Key="UserIcons">
-			<Bitmap>\Resources\Images\AccountCircleNonAuthorized.png</Bitmap>
-			<Bitmap>\Resources\Images\AccountCircleAuthorized.png</Bitmap>
-		</scg:List>
-	</UserControl.Resources>
+             x:Class="VissmaFlow.View.UserControls.PageSelector">	
 	<UserControl.Styles>
 		<Style Selector="TextBlock">
 			<Setter Property="FontFamily" Value="{StaticResource RobotoFont}"/>
+			<Setter Property="Foreground" Value="{DynamicResource TexBoxCommon}"/>
 		</Style> 
 		<Style Selector="Border">
-			<Setter Property="BorderBrush" Value="{StaticResource CommonBorderBrush}"/>
+			<Setter Property="BorderBrush" Value="{DynamicResource CommonBorderBrush}"/>
 		</Style>
 		<Style Selector="Button">
-			<Setter Property="BorderBrush" Value="{StaticResource CommonBorderBrush}"/>
+			<Setter Property="BorderBrush" Value="{DynamicResource CommonBorderBrush}"/>
 			<Setter Property="CornerRadius" Value="0"/>
 			<Setter Property="Background" Value="Transparent"/>
 			<Setter Property="VerticalAlignment" Value="Stretch"/>
@@ -31,28 +24,28 @@
 		</Style>
 	</UserControl.Styles>
 	<Grid RowDefinitions="80,*,110">
-		<Grid ColumnDefinitions="*,80">
+		<Grid ColumnDefinitions="*,80,80"
+			  Background="{DynamicResource HighBarBackground}">
 			<Border BorderThickness="0,0,0,1">
-				<Image Source="\Resources\Images\Logo_Konvels_blue.png"
+				<Image Source="{DynamicResource Konvels_logo}"
 					   VerticalAlignment="Top" HorizontalAlignment="Left"
 					   Width="110" Height="28" Margin="43,26,0,0"/>
 			</Border>
-			<Button Grid.Column="1" Click="CloseAppAsync" Background="Black"
+			<Button Grid.Column="1" Click="ChangeTheme" Background="{Binding HighBarButtonsBackground}"
+					BorderThickness="1,0,0,1">
+				<Image Source="{DynamicResource Theme_logo}" Height="40" Width="40"/>
+			</Button>
+			<Button Grid.Column="2" Click="CloseAppAsync" Background="{Binding HighBarButtonsBackground}"
 					BorderThickness="1,0,0,1">
 				<Image Source="\Resources\Images\Close.png" Height="40" Width="40"/>
-			</Button>
-			<ComboBox x:Name="Themes"
-					  SelectedIndex="0"
-					  Padding="10"
-					  Margin="200,10,10,10">
-				<ComboBoxItem>Light</ComboBoxItem>
-				<ComboBoxItem>Dark</ComboBoxItem>
-			</ComboBox>
+			</Button>			
 		</Grid>
 		
 		<ListBox ItemsSource="{Binding ElementName=root, Path=ItemsSource}"
 				 PointerReleased="OnSelectionChanged"
 				 Margin="40"
+				 BorderBrush="{DynamicResource ListBoxBorderBrush}"
+				 BorderThickness="1,1,1,0"
 				 MaxHeight="375"
 				 VerticalAlignment="Top"
 				 ItemContainerTheme="{StaticResource SelectorListBoxItem}"
@@ -73,45 +66,41 @@
 					   DockPanel.Dock="Right"
 					   FontSize="24"
 					   Margin="0,5,0,0"
-					   Foreground="#CCFFFFFF"
+					   Foreground="{DynamicResource TexBoxCommon80}"
 					   TextWrapping="Wrap"/>
 			
 			<Button BorderThickness="0"
 					Padding="5"
 					DockPanel.Dock="Left">
-				<Image Height="32" Width="32"
-					   PointerReleased="LoginClick"
-					   
-					   Source="{Binding AccessViewModel.IsAuthorized, Converter={StaticResource GetIfTrueConverter}, ConverterParameter={StaticResource UserIcons}}"/>
+				<StackPanel>
+					<Image Height="32" Width="32"
+						   PointerReleased="LoginClick"
+						   IsVisible="{Binding !AccessViewModel.IsAuthorized}"
+					       Source="{DynamicResource Non_Authorized_Image}"/>
+					<Image Height="32" Width="32"
+					       PointerReleased="LoginClick"
+						   IsVisible="{Binding AccessViewModel.IsAuthorized}"
+					       Source="{DynamicResource Authorized_Image}"/>
+				</StackPanel>
+				
 			</Button>
 		</DockPanel>
 
-
-
 		<!--Дата и время-->
-		<Border BorderThickness="0" Grid.Row="1" Background="{StaticResource ParameterBackgroundCommonColor}"
+		<Border BorderThickness="0" Grid.Row="1" Background="{DynamicResource DateTimeBackground}"
 				Margin="82,0,0,37" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="208" Height="38">
 			<TextBlock Text="{Binding PcTime, StringFormat={}{0:HH:mm:ss    dd.MM.yyyy}}" 
-					   FontSize="15"
-					   
+					   FontSize="15"					   
 					   FontWeight="Medium"
 					   HorizontalAlignment="Center"
-					   Foreground="#B4FFFFFF"
+					   Foreground="{DynamicResource TexBoxCommon80}"
 					   VerticalAlignment="Center"/>
 		</Border>
 		
-		
-		
-		
-		
-		
-		
-		
-		
-
 
 		<!--Кнопки управления приложением и прибором-->
-		<Grid Grid.Row="2" ColumnDefinitions="*,*,*">
+		<Grid Grid.Row="2" ColumnDefinitions="*,*,*"
+			  Background="{DynamicResource HighBarBackground}">
 			<!--Выключить-->
 			<Button BorderThickness="0,1,1,0" Grid.Column="0"
 					Click="ShutdownPcAsync">
@@ -119,17 +108,19 @@
 					<Image Source="\Resources\Images\PowerSettingsOff.png"
 						   Width="32" Height="32" HorizontalAlignment="Center"/>
 					<TextBlock Text="ВЫКЛЮЧИТЬ" HorizontalAlignment="Center"
-							   Margin="0,9,0,0"/>
+							   Margin="0,9,0,0"
+							   Foreground="White"/>
 				</StackPanel>
 			</Button>
 			<!--Перезагрузка-->
-			<Button BorderThickness="0,1,1,0" Grid.Column="1"
+			<Button BorderThickness="0,1,1,0" Grid.Column="1"					
 					Click="RebootPcAsync">
 				<StackPanel VerticalAlignment="Center">
 					<Image Source="\Resources\Images\Replay.png"
 						   Width="32" Height="32" HorizontalAlignment="Center"/>
 					<TextBlock Text="ПЕРЕЗАГРУЗКА" HorizontalAlignment="Center"
-							   Margin="0,9,0,0"/>
+							   Margin="0,9,0,0"
+							   Foreground="White"/>
 				</StackPanel>
 			</Button>
 			<!--Выход-->
@@ -139,11 +130,11 @@
 					<Image Source="\Resources\Images\Logout.png"
 						   Width="32" Height="32" HorizontalAlignment="Center"/>
 					<TextBlock Text="ВЫХОД" HorizontalAlignment="Center"
+							   Foreground="White"
 							   Margin="0,9,0,0"/>
 				</StackPanel>
 			</Button>
-		</Grid>
-		
+		</Grid>		
 		
 	</Grid>
 	

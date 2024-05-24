@@ -30,6 +30,7 @@
 				<ResourceInclude Source="/Themes/ListBoxItems.axaml"/>
 				<ResourceInclude Source="/Themes/TabItems.axaml"/>
 				<ResourceInclude Source="/Themes/TextBoxes.axaml"/>
+				<ResourceInclude Source="/Resources/Images/Bitmaps.axaml"/>
 				<ResourceInclude Source="/Enums/CommunicationEnums.axaml"/>
 				<ResourceInclude Source="/Converters/GlobalConverters.axaml"/>
 				<ResourceInclude Source="/Resources/Colors.axaml"/>

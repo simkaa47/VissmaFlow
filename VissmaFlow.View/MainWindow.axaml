@@ -41,7 +41,7 @@
 	</Window.Resources>
 	<Grid RowDefinitions="*, Auto">
 		<Border BorderBrush="Gray"
-					Background="{StaticResource CommonColor}"
+					Background="{DynamicResource CommonColor}"
 					Name="MainContentBorder"
 					IsEnabled="{Binding ElementName=KbBorder, Path=!IsVisible}"
 					Height="800" Width="480"

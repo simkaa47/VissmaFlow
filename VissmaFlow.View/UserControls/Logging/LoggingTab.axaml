@@ -28,8 +28,8 @@
 	<Grid RowDefinitions="242, *">
 		
 		<Border BorderThickness="1" Margin="40,20,40,20"
-					BorderBrush="{StaticResource ParameterBackgroundCommonColor}"
-					Background="{StaticResource ParameterBackgroundCommonColor}"
+					BorderBrush="{DynamicResource ParameterBackgroundCommonColor}"
+					Background="{DynamicResource ParameterBackgroundCommonColor}"
 					HorizontalAlignment="Stretch"
 					VerticalAlignment="Stretch">
 			<Grid>
@@ -40,10 +40,10 @@
 							HorizontalAlignment="Right"
 							VerticalAlignment="Center"
 							Height="40"
-							Foreground="{StaticResource TexBoxCommon}"
+							Foreground="{DynamicResource TexBoxCommon}"
 							Background="Transparent"
 							BorderThickness="1"
-							BorderBrush="{StaticResource ButtonAccept}"							
+							BorderBrush="{DynamicResource ButtonAccept}"							
 							IsEnabled="{Binding !IsLogging}"
 							VerticalContentAlignment="Center"
 							HorizontalContentAlignment="Center"
@@ -55,9 +55,9 @@
 				<TextBlock TextWrapping="Wrap"
 							   VerticalAlignment="Center"
 							   DockPanel.Dock="Left">
-						<Run Foreground="{StaticResource TexBoxCommon80}"
+						<Run Foreground="{DynamicResource TexBoxCommon80}"
 							 Text="Сохранить в:"/>
-						<Run Foreground="{StaticResource AquaColor}"
+						<Run Foreground="{DynamicResource AquaColor}"
 							 Text="{Binding Settings.Path}"/>
 					</TextBlock>
 				</DockPanel>
@@ -67,7 +67,7 @@
 					
 					<TextBlock Text="Период логирования, мс"
 							 TextWrapping="Wrap"
-							 Foreground="{StaticResource TexBoxCommon80}"
+							 Foreground="{DynamicResource TexBoxCommon80}"
 							 VerticalAlignment="Center"
 							 DockPanel.Dock="Left"/>
 					<Border CornerRadius="4"
@@ -76,8 +76,8 @@
 							Height="44"
 							HorizontalAlignment="Right"
 							VerticalAlignment="Center"
-							Background="{StaticResource TextBoxBackground}"
-							BorderBrush="{StaticResource TextBoxBorderBrush}">
+							Background="{DynamicResource TextBoxBackground}"
+							BorderBrush="{DynamicResource TextBoxBorderBrush}">
 						<TextBox Text="{Binding Settings.MinPeriod}"
 							 VerticalAlignment="Center"
 							 Padding="12,0,0,0"
@@ -101,8 +101,8 @@
 							BorderThickness="1"
 							Height="40"
 							MinWidth="150"
-							BorderBrush="{StaticResource ButtonAccept}"
-							Background="{Binding IsLogging, Converter={StaticResource GetIfTrueConverter}, ConverterParameter={StaticResource LogColors}}"
+							BorderBrush="{DynamicResource ButtonAccept}"
+							Background="{Binding IsLogging, Converter={StaticResource GetIfTrueConverter}, ConverterParameter={DynamicResource LogColors}}"
 							Command="{Binding SwitchTimerCommand}">
 						<StackPanel Orientation="Horizontal"
 									VerticalAlignment="Center"
@@ -128,8 +128,8 @@
 		
 		<Border BorderThickness="1" Margin="40,0,40,30"
 				Grid.Row="1"
-				BorderBrush="{StaticResource ParameterBackgroundCommonColor}"
-				Background="{StaticResource ParameterBackgroundCommonColor}"
+				BorderBrush="{DynamicResource ParameterBackgroundCommonColor}"
+				Background="{DynamicResource ParameterBackgroundCommonColor}"
 				HorizontalAlignment="Stretch"
 				VerticalAlignment="Stretch">
 			<Grid RowDefinitions="*, Auto">
@@ -138,9 +138,9 @@
 				<ScrollViewer>
 					<StackPanel>
 					<StackPanel Orientation="Horizontal" Margin="17,32,0,0">
-						<TextBlock Foreground="{StaticResource TexBoxCommon}" Text="№" FontWeight="Medium" FontSize="11"/>
-						<TextBlock Foreground="{StaticResource TexBoxCommon}" Margin="29,0,0,0" Text="РТК" FontWeight="Medium" FontSize="11"/>
-						<TextBlock Foreground="{StaticResource TexBoxCommon}" Margin="74,0,0,0" Text="ЛОГИРУЕМЫЙ ПАРАМЕТР" FontWeight="Medium" FontSize="11"/>
+						<TextBlock Foreground="{DynamicResource TexBoxCommon}" Text="№" FontWeight="Medium" FontSize="11"/>
+						<TextBlock Foreground="{DynamicResource TexBoxCommon}" Margin="29,0,0,0" Text="РТК" FontWeight="Medium" FontSize="11"/>
+						<TextBlock Foreground="{DynamicResource TexBoxCommon}" Margin="74,0,0,0" Text="ЛОГИРУЕМЫЙ ПАРАМЕТР" FontWeight="Medium" FontSize="11"/>
 					</StackPanel>
 					<ListBox ItemsSource="{Binding Settings.Cells}"
 							 IsVisible="{Binding Settings.Cells.Count, Converter={StaticResource IfNotEqualConverter}, ConverterParameter=0}">
@@ -152,7 +152,7 @@
 									<!--id-->
 									<Grid Width="40" VerticalAlignment="Center"
 										  HorizontalAlignment="Left">
-										<TextBlock Foreground="{StaticResource TexBoxCommon80}" 
+										<TextBlock Foreground="{DynamicResource TexBoxCommon80}" 
 												Text="{Binding Id}"
 												VerticalAlignment="Center"
 												HorizontalAlignment="Center"
@@ -161,7 +161,7 @@
 									</Grid>
 									
 									<ComboBox Width="86"
-											  BorderBrush="{Binding RelativeSource={RelativeSource Self}, Path=IsDropDownOpen, Converter={StaticResource GetIfTrueConverter}, ConverterParameter={StaticResource ComboBoxColors}}"
+											  BorderBrush="{Binding RelativeSource={RelativeSource Self}, Path=IsDropDownOpen, Converter={StaticResource GetIfTrueConverter}, ConverterParameter={DynamicResource ComboBoxColors}}"
 											  IsEnabled="{Binding ElementName=root, Path=!DataContext.IsLogging}"											  
 											  Padding="12,12,0,12"
 											  VerticalContentAlignment="Stretch"
@@ -175,7 +175,7 @@
 										<ComboBox.ItemTemplate>
 											<DataTemplate>
 												<TextBlock Text="{Binding Name}"
-														   FontSize="14" Foreground="{StaticResource TexBoxCommon}"
+														   FontSize="14" Foreground="{DynamicResource TexBoxCommon}"
 														   TextTrimming="CharacterEllipsis"
 														   FontFamily="{StaticResource RobotoFont}"
 														   FontWeight="Regular"/>
@@ -185,7 +185,7 @@
 									</ComboBox>
 									
 									<ComboBox Width="186"
-											  BorderBrush="{Binding RelativeSource={RelativeSource Self}, Path=IsDropDownOpen, Converter={StaticResource GetIfTrueConverter}, ConverterParameter={StaticResource ComboBoxColors}}"
+											  BorderBrush="{Binding RelativeSource={RelativeSource Self}, Path=IsDropDownOpen, Converter={StaticResource GetIfTrueConverter}, ConverterParameter={DynamicResource ComboBoxColors}}"
 											  IsEnabled="{Binding ElementName=root, Path=!DataContext.IsLogging}"
 											  Padding="12,12,0,12"
 											  VerticalContentAlignment="Stretch"
@@ -199,15 +199,15 @@
 										<ComboBox.ItemTemplate>
 											<DataTemplate>
 												<TextBlock Text="{Binding Description}"
-														   FontSize="14" Foreground="{StaticResource TexBoxCommon}"
+														   FontSize="14" Foreground="{DynamicResource TexBoxCommon}"
 														   TextTrimming="CharacterEllipsis"
 														   FontFamily="{StaticResource RobotoFont}"
 														   FontWeight="Regular"/>
 											</DataTemplate>
 										</ComboBox.ItemTemplate>									
 									</ComboBox>	
-								<Button Background="{StaticResource CommonColor}"
-										BorderBrush="{StaticResource TextBoxBorderBrush}"
+								<Button Background="{DynamicResource CommonColor}"
+										BorderBrush="{DynamicResource TextBoxBorderBrush}"
 										CornerRadius="4"
 										Command="{Binding ElementName=root, Path=DataContext.DeleteCellCommand}"
 									    CommandParameter="{Binding}"

@@ -22,7 +22,7 @@
 					  Margin="40,40,0,0"
 					  Width="146"
 					  Classes="ComboBoxCommonStyle"	
-					  BorderBrush="{Binding RelativeSource={RelativeSource Self}, Path=IsDropDownOpen, Converter={StaticResource GetIfTrueConverter}, ConverterParameter={StaticResource ComboBoxColors}}"
+					  BorderBrush="{Binding RelativeSource={RelativeSource Self}, Path=IsDropDownOpen, Converter={StaticResource GetIfTrueConverter}, ConverterParameter={DynamicResource ComboBoxColors}}"
 					  Height="44"
 					  VerticalContentAlignment="Center"
 					  HorizontalContentAlignment="Center">
@@ -107,7 +107,7 @@
 									   HorizontalAlignment="Left"
 									   VerticalAlignment="Center"
 									   Text="{Binding RtkUnit.Name, StringFormat={}{0}:}"
-									   Foreground="{StaticResource AlmostWhite}"
+									   Foreground="{DynamicResource AlmostWhite}"
 									   FontWeight="Regular"/>
 							<TextBlock FontFamily="{StaticResource RobotoFont}"
 									   FontSize="16"
@@ -115,7 +115,7 @@
 									    VerticalAlignment="Center"
 									   HorizontalAlignment="Left"
 									   Text="{Binding Parameter.Description}"
-									   Foreground="{StaticResource AlmostWhite}"
+									   Foreground="{DynamicResource AlmostWhite}"
 									   TextWrapping="Wrap"
 									   FontWeight="Regular"/>
 						</DockPanel>
