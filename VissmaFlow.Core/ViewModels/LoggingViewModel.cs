@@ -1,6 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.EntityFrameworkCore.Proxies.Internal;
 using Microsoft.Extensions.Logging;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 using VissmaFlow.Core.Contracts.DataAccess;
 using VissmaFlow.Core.Contracts.FileDialog;
@@ -12,8 +14,11 @@ namespace VissmaFlow.Core.ViewModels
     public partial class LoggingViewModel : ObservableObject
     {
         private Timer _timer;
+        private Timer _secondsTimer;
 
         private bool _isWriting;
+
+        private object _locker = new object();
 
 
         private readonly ILogger<LoggingViewModel> _logger;
@@ -34,6 +39,9 @@ namespace VissmaFlow.Core.ViewModels
             _timer = new Timer(OnTimer);
             _timer.Change(Timeout.Infinite,
                        Timeout.Infinite);
+            _secondsTimer = new Timer(OnSecondsTimer);
+            _secondsTimer.Change(Timeout.Infinite,
+                       Timeout.Infinite);
             _logRepository = logRepository;
             CommunicationVm = communicationVm;
             ParameterVm = parameterVm;
@@ -48,29 +56,71 @@ namespace VissmaFlow.Core.ViewModels
         [ObservableProperty]
         private string _fileName = string.Empty;
 
+        [ObservableProperty]
+        private TimeSpan _currentLogTime = TimeSpan.Zero;
+
+        private int _timeHours = 0;
+        [Range(0,23)]
+        public int TimeHours
+        {
+            get=> _timeHours;
+            set
+            {
+                if(value>=0 && value <=23)
+                    SetProperty(ref _timeHours, value); 
+            }
+        }
+
+        private int _timeMinutes = 1;
+        [Range(1, 59)]
+        public int TimeMinutes
+        {
+            get => _timeMinutes;
+            set
+            {
+                if (value >= 1 && value <= 59)
+                    SetProperty(ref _timeMinutes, value);
+            }
+        }
+
+        private void OnSecondsTimer(object? o)
+        {
+            lock (_locker)
+            {
+                CurrentLogTime += TimeSpan.FromSeconds(1);
+                if(CurrentLogTime.TotalSeconds > (TimeHours*3600 + TimeMinutes*60))
+                {
+                    SwitchTimerOff();
+                }
+            }
+        }
+
 
         private void OnTimer(object? o)
         {
-            if (Settings?.Cells is null) return;
-            StringBuilder builder = new StringBuilder();
-            foreach (var cell in Settings.Cells)
+            lock (_locker)
             {
-                if(cell.RtkUnit is not null && cell.Parameter is not null)
+                if (Settings?.Cells is null) return;
+                StringBuilder builder = new StringBuilder();
+                foreach (var cell in Settings.Cells)
                 {
-                    var par = cell.RtkUnit.Parameters.Where(p => p.Id == cell.Parameter.Id).FirstOrDefault();
-                    var value = GetValueFromParameter(par);
-                    if(value is not null)
+                    if (cell.RtkUnit is not null && cell.Parameter is not null)
                     {
-                        builder.Append($"{value.ToString()}\t");
-                        
+                        var par = cell.RtkUnit.Parameters.Where(p => p.Id == cell.Parameter.Id).FirstOrDefault();
+                        var value = GetValueFromParameter(par);
+                        if (value is not null)
+                        {
+                            builder.Append($"{value.ToString()}\t");
+
+                        }
                     }
                 }
-            }
-            if(builder.Length>0)
-            {
-                builder.Insert(0, $"{DateTime.Now.ToString("dd.MM.yyyy HH.mm.ss.f")}\t");
-                WriteString(builder.ToString());
-            }            
+                if (builder.Length > 0)
+                {
+                    builder.Insert(0, $"{DateTime.Now.ToString("dd.MM.yyyy HH.mm.ss.f")}\t");
+                    WriteString(builder.ToString());
+                }
+            }                 
         }
 
         private async void InitAsync()
@@ -79,9 +129,21 @@ namespace VissmaFlow.Core.ViewModels
             {
                 var setts = new List<LogSettings>
             {
-                new LogSettings{MinPeriod = 1000}
+                new LogSettings{MinPeriod = 1}
             };
                 Settings = (await _logRepository.InitAsync(setts, 1)).FirstOrDefault();
+                if(Settings is not null && Settings.Cells is not null)
+                {
+                    var index = 0;
+                    foreach (var cell in Settings.Cells)
+                    {
+                        if(cell is not null)
+                        {
+                            index++;
+                            cell.Index = index;
+                        }
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -166,10 +228,12 @@ namespace VissmaFlow.Core.ViewModels
                 }
                 if (builder.Length > 0)
                 {
-                    if (Settings.MinPeriod < 1000)
-                        Settings.MinPeriod = 1000;
+                    if (Settings.MinPeriod < 1)
+                        Settings.MinPeriod = 1;
                     _timer.Change(100,
-                           Settings.MinPeriod);
+                           Settings.MinPeriod*1000);
+                    _secondsTimer.Change(1000,1000);
+                    CurrentLogTime = new TimeSpan(0, 0, 0);
                     IsLogging = true;
                     builder.Insert(0, dtHeader);
                     WriteString(builder.ToString());
@@ -182,6 +246,8 @@ namespace VissmaFlow.Core.ViewModels
         private void SwitchTimerOff()
         {
             _timer.Change(Timeout.Infinite,
+                       Timeout.Infinite);
+            _secondsTimer.Change(Timeout.Infinite,
                        Timeout.Infinite);
             IsLogging = false;
         }

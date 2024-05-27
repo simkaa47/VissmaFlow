@@ -80,7 +80,7 @@
 					</ScrollViewer>
 
 					<Border Grid.Row="1" Margin="40,0,40,30"
-							BorderBrush="{DynamicResource Scroll}"
+							BorderBrush="{DynamicResource ListBoxBorderBrush}"
 							VerticalAlignment="Stretch"
 							
 							HorizontalAlignment="Stretch"

@@ -32,4 +32,5 @@
 			<Setter Property="Background" Value="{DynamicResource ParameterSelected}"/>			
 		</Style>
 	</ControlTheme>
+	
 </ResourceDictionary>

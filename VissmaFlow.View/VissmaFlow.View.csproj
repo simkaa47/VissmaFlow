@@ -48,6 +48,7 @@
     <None Remove="Resources\Images\ControlCamera_Dark.png" />
     <None Remove="Resources\Images\Dehaze.png" />
     <None Remove="Resources\Images\Group 2865.png" />
+    <None Remove="Resources\Images\Group 2865_gray.png" />
     <None Remove="Resources\Images\konvels_logo_white.png" />
     <None Remove="Resources\Images\Layer_1.png" />
     <None Remove="Resources\Images\Layer_1_Black.png" />
@@ -88,6 +89,7 @@
 	<AvaloniaResource Include="Resources\Images\ControlCamera_Dark.png" />
 	<AvaloniaResource Include="Resources\Images\Dehaze.png" />
 	<AvaloniaResource Include="Resources\Images\Group 2865.png" />
+	<AvaloniaResource Include="Resources\Images\Group 2865_gray.png" />
 	<AvaloniaResource Include="Resources\Images\konvels_logo_white.png" />
 	<AvaloniaResource Include="Resources\Images\Layer_1.png">
 	  <CopyToOutputDirectory>Never</CopyToOutputDirectory>

@@ -5,6 +5,7 @@
 	
 	<ResourceDictionary.ThemeDictionaries>
 		<ResourceDictionary x:Key='Light'>
+			<Bitmap x:Key="Basket">\Resources\Images\Group 2865_gray.png</Bitmap>
 			<Bitmap x:Key="Konvels_logo">\Resources\Images\konvels_logo_white.png</Bitmap>
 			<Bitmap x:Key="Non_Authorized_Image">\Resources\Images\AccountCircleNonAuthorized.png</Bitmap>
 			<Bitmap x:Key="Authorized_Image">\Resources\Images\AccountCircle_Gray.png</Bitmap>
@@ -16,6 +17,7 @@
 			<Bitmap x:Key="ZoomOut">\Resources\Images\ZoomOut_Dark.png</Bitmap>
 		</ResourceDictionary>
 		<ResourceDictionary x:Key='Dark'>
+			<Bitmap x:Key="Basket">\Resources\Images\Group 2865.png</Bitmap>
 			<Bitmap x:Key="Konvels_logo">\Resources\Images\Logo_Konvels_blue.png</Bitmap>
 			<Bitmap x:Key="Theme_logo">\Resources\Images\Sun.png</Bitmap>
 			<Bitmap x:Key="Non_Authorized_Image">\Resources\Images\AccountCircleNonAuthorized.png</Bitmap>
