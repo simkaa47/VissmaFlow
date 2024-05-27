@@ -39,7 +39,7 @@
 			<SolidColorBrush Color="#CC000000" x:Key="TexBoxCommon80"/>
 			<SolidColorBrush Color="#28BCBA" x:Key="ButtonAccept"/>
 			<SolidColorBrush Color="#61000000" x:Key="ButtonDeny"/>
-			<SolidColorBrush Color="#6B6B6B" x:Key="Scroll"/>
+			<SolidColorBrush Color="#E0E0E0" x:Key="Scroll"/>
 			<SolidColorBrush Color="Black" x:Key="TextBoxBackground"/>
 			<SolidColorBrush Color="#616161" x:Key="TextBoxBorderBrush"/>
 			<SolidColorBrush Color="#80FF3B30" x:Key="ErrorColor"/>

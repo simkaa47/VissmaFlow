@@ -79,9 +79,6 @@ namespace VissmaFlow.View.ViewModels
             
         }
 
-
-
-
         public List<ZoomAndPanMode> ZoomModes { get; set; } = new List<ZoomAndPanMode>
         {
             ZoomAndPanMode.None,

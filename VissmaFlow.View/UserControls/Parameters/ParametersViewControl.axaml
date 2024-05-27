@@ -32,36 +32,36 @@
 								Height="40"
 								HorizontalAlignment="Stretch"
 								VerticalContentAlignment="Center"
-								Background="{StaticResource ButtonAccept}"
+								Background="#28BCBA"
 								HorizontalContentAlignment="Center"
 								CommandParameter="{Binding}"
 								Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=DataContext.CommunicationService.ReadFromEepromCommand}"
 								Margin="0,0,1,0">
-							<TextBlock Text="Чтение из EEMPROM" Foreground="{StaticResource TexBoxCommon}"
+							<TextBlock Text="Чтение из EEMPROM" Foreground="White"
 									   FontSize="16" FontFamily="{StaticResource RobotoFont}"/>
 						</Button>
 						<Button Grid.Column="1"
 								Height="40"
 								VerticalAlignment="Stretch"
-								Background="{StaticResource ButtonAccept}"
+								Background="#28BCBA"
 								HorizontalAlignment="Stretch"
 								VerticalContentAlignment="Center"
 								HorizontalContentAlignment="Center"
 								CommandParameter="{Binding}"
 								Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=DataContext.CommunicationService.WriteToEepromCommand}"
 								Margin="0,0,1,0">
-							<TextBlock Text="Запись в EEMPROM" Foreground="{StaticResource TexBoxCommon}"
+							<TextBlock Text="Запись в EEMPROM" Foreground="White"
 									   FontSize="16" FontFamily="{StaticResource RobotoFont}" FontWeight="Regular"/>
 						</Button>
 					</Grid>
+					
 					<ScrollViewer Grid.Row="1" Margin="0,0,9,30">
 						<ListBox ScrollViewer.VerticalScrollBarVisibility="Disabled"
 							 ItemsSource="{Binding Parameters}"
-								 BorderBrush="{StaticResource CommonBorderBrush}"
-								 BorderThickness="1"
-								 Background="{StaticResource ParameterBackgroundCommonColor}"
-							 Margin="40,0,31,0"
-							 IsTextSearchEnabled="False">
+								 BorderThickness="0"
+								 Background="{DynamicResource ParameterBackgroundCommonColor}"
+								Margin="40,0,31,0"
+								IsTextSearchEnabled="False">
 							<ListBox.ItemTemplate>
 								<DataTemplate DataType="p:ParameterBase">
 									<par:NumericParameter ParamWidth="86"
@@ -78,6 +78,15 @@
 							</ListBox.ItemTemplate>
 						</ListBox>
 					</ScrollViewer>
+
+					<Border Grid.Row="1" Margin="40,0,40,30"
+							BorderBrush="{DynamicResource Scroll}"
+							VerticalAlignment="Stretch"
+							
+							HorizontalAlignment="Stretch"
+							BorderThickness="1">
+
+					</Border>
 					
 				</Grid>
 
