@@ -43,7 +43,7 @@ namespace VissmaFlow.Core.ViewModels
             {
                 _logger.LogInformation($"Инициализация данных пользователей");
                 Users = await _userRepository.InitAsync(UserDataFactory.GetUsers(), 3);
-                CurrentUser = Users.Where(u => u.AccessLevel == UserAccessLevel.Admin).FirstOrDefault();
+                //CurrentUser = Users.Where(u => u.AccessLevel == UserAccessLevel.Admin).FirstOrDefault();
             }
             catch (Exception ex)
             {

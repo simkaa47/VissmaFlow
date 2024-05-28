@@ -14,17 +14,18 @@
 				<Setter Property="FontSize" Value="24"/>
 				<Setter Property="FontFamily" Value="{StaticResource RobotoFont}"/>
 				<Setter Property="FontWeight" Value="Medium"/>
-				<Setter Property="Foreground" Value="{DynamicResource TexBoxCommon}"/>
+				<Setter Property="Foreground" Value="White"/>
 			</Style>
 		</Grid.Styles>
 		<TextBlock  Name="Content"
+					Foreground="{DynamicResource TexBoxCommon}"
 					TextWrapping="Wrap" />
 		<WrapPanel VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,15,0,40">
-			<Button Background="{StaticResource ButtonAccept}" IsDefault="True" Click="Accept_Click" MinWidth="200" Margin="0,0,10,0">
+			<Button Background="{DynamicResource ButtonAccept}" IsDefault="True" Click="Accept_Click" MinWidth="200" Margin="0,0,10,0">
 				<TextBlock Text="ОК"/>
 			</Button>
 			<Button Click="Cancel_Click"
-					Background="{StaticResource ButtonDeny}"
+					Background="{DynamicResource  ButtonDeny}"
 					MinWidth="200">
 				<TextBlock Text="Отмена"/>
 			</Button>
