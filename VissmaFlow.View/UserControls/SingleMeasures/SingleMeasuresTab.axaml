@@ -4,6 +4,7 @@
 			 xmlns:vm="using:VissmaFlow.Core.ViewModels"
 			 xmlns:s="using:VissmaFlow.Core.Models.SingleMeasures"
 			 xmlns:mi="using:Material.Icons.Avalonia"
+			 xmlns:p="using:VissmaFlow.Core.Models.Parameters"
 			 xmlns:ma="using:Material.Avalonia"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
@@ -22,16 +23,16 @@
 		</TabControl.ItemTemplate>
 		<TabControl.ContentTemplate>
 			<DataTemplate DataType="s:SingleMeasuresInstance">
-				<ScrollViewer Margin="40,20,9,36"
-							  Background="{StaticResource CommonColor}">
-					<Border HorizontalAlignment="Stretch"
+				<Grid>
+					<Border Margin="40,20,40,36"
+							ZIndex="1"
+							HorizontalAlignment="Stretch"
 							VerticalAlignment="Stretch"
-							BorderBrush="{StaticResource CommonBorderBrush}"
-							Background="{StaticResource ParameterBackgroundCommonColor}"
-							BorderThickness="0,0,1,0"
-							Margin="0,0,31,0">
-						<Grid RowDefinitions="Auto,*"
-					  Grid.Row="1">
+							BorderBrush="{DynamicResource ListBoxBorderBrush}"
+							BorderThickness="1"/>
+					<ScrollViewer Margin="40,20,9,36">
+						<Grid RowDefinitions="Auto,*" Margin="0,0,31,0"
+							  Background="{DynamicResource ParameterBackgroundCommonColor}">
 							<DockPanel Margin="20,14,35,18">
 								<TextBlock Text="Время ед. измерения, с"
 								   DockPanel.Dock="Left"
@@ -45,8 +46,10 @@
 										 Width="86"
 										 VerticalContentAlignment="Center"
 										 Height="44"
+										 Tag="{x:Static p:DataType.int16}"
 										 CornerRadius="4"
-										 BorderBrush="{StaticResource TextBoxBorderBrush}"
+										 BorderBrush="{DynamicResource TextBoxParameterBorderBrush}"
+										 Background="{DynamicResource TextBoxParameterBackground}"
 										 FontSize="20"
 										   Foreground="{StaticResource TexBoxCommon}"
 										   FontFamily="{StaticResource RobotoFont}"
@@ -57,26 +60,29 @@
 							</DockPanel>
 							<DataGrid ItemsSource="{Binding MeasureSettings.Points}"
 									  GridLinesVisibility="Vertical"
-									  VerticalGridLinesBrush="{StaticResource CommonBorderBrush}"
+									  VerticalGridLinesBrush="{DynamicResource DataGridVerticalBrush}"
+									  HorizontalGridLinesBrush="Transparent"
 									  HorizontalAlignment="Left"
+									  HeadersVisibility="Column"
 									  VerticalScrollBarVisibility="Disabled"
+									  HorizontalScrollBarVisibility="Disabled"
 									  Grid.Row="1" >
 								<DataGrid.Columns>
 									<DataGridTextColumn x:DataType="s:SingleMeasurePoint" Header="№"
-														Binding="{Binding Id}" 
+														Binding="{Binding Id}"
 														Width="44"
 														FontSize="16"
 														Foreground="{DynamicResource TexBoxCommon80}"
 														FontFamily="{StaticResource RobotoFont}"
 														FontWeight="Regular"/>
 									<DataGridTemplateColumn x:DataType="s:SingleMeasurePoint" Width="118"
-															Header="УСРЕДНЯЕМАЯ ВЕЛИЧИНА">										
+															Header="УСРЕДНЯЕМАЯ ВЕЛИЧИНА">
 										<DataGridTemplateColumn.CellTemplate>
 											<DataTemplate>
 												<par:NumericParameter DescriptionInvisible="True"
 																	  HorizontalAlignment="Center"
 																	  ParamWidth="86"
-																	  Margin="0,8,0,8"
+																	  Margin="0,9,0,9"
 																	  Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=DataContext.ComminicationService.WriteParameterCommand}"
 																	  DataContext="{Binding AvgValue}"/>
 											</DataTemplate>
@@ -86,7 +92,7 @@
 										<DataGridTemplateColumn.CellTemplate>
 											<DataTemplate>
 												<par:NumericParameter DescriptionInvisible="True"
-																	  HorizontalAlignment="Center"	
+																	  HorizontalAlignment="Center"
 																	  ParamWidth="86"
 																	  Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=DataContext.ComminicationService.WriteParameterCommand}"
 																	  DataContext="{Binding Destination}"/>
@@ -94,21 +100,22 @@
 										</DataGridTemplateColumn.CellTemplate>
 									</DataGridTemplateColumn>
 									<DataGridTemplateColumn x:DataType="s:SingleMeasurePoint"
-															Header="ИЗМЕРИТЬ" Width="120">
+															Header="ИЗМЕРИТЬ" Width="122">
 										<DataGridTemplateColumn.CellTemplate>
 											<DataTemplate>
 												<StackPanel Orientation="Horizontal">
 													<Button Width="86"
 															Height="44"
-															Background="{StaticResource TextBoxBackground}"
 															CornerRadius="4"
 															VerticalContentAlignment="Center"
 															HorizontalContentAlignment="Stretch"
-															BorderBrush="{StaticResource TextBoxBorderBrush}"
+															Classes="ColumnStyle"
+															Background="{DynamicResource DeleteLogCellButtonBackground}"
+															BorderBrush="{DynamicResource DeleteLogCellButtonBorderBrush}"
 															IsVisible="{Binding !SingleMeasFlag}"
 															CommandParameter="{Binding}"
 															Command="{Binding ElementName=root, Path=DataContext.SingleMeasureCommand}">
-														<Image Source="\Resources\Images\Timeline.png" Height="32" Width="32"/>
+														<Image Source="{DynamicResource TimeLine}" Height="32" Width="32"/>
 
 													</Button>
 													<TextBlock VerticalAlignment="Center"
@@ -126,9 +133,10 @@
 								</DataGrid.Columns>
 							</DataGrid>
 						</Grid>
-					</Border>
 
-				</ScrollViewer>
+					</ScrollViewer>
+				</Grid>
+				
 
 			</DataTemplate>
 		</TabControl.ContentTemplate>

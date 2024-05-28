@@ -5,22 +5,6 @@
              x:Class="VissmaFlow.View.App"
 			 RequestedThemeVariant="Dark">
 
-    <Application.Styles>		
-        <FluentTheme />		
-		<mat:MaterialIconStyles />		
-		<StyleInclude Source="/Styles/Validation/ValidationErrors.xaml"/>
-		<StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml"/>
-		<StyleInclude Source="/Styles/TabItems.axaml"/>
-		<StyleInclude Source="/Styles/ScrollBars.axaml"/>
-		<StyleInclude Source="/Styles/DataGrid/DataGridHeaders.axaml"/>
-		<StyleInclude Source="/Styles/DataGrid/DataGridRows.axaml"/>
-		<StyleInclude Source="/Styles/DataGrid/DataGridColumnCells.axaml"/>
-		<StyleInclude Source="/Styles/ComboBoxes.axaml"/>
-		<StyleInclude Source="avares://Avalonia.Controls.TreeDataGrid/Themes/Fluent.axaml"/>
-		<StyleInclude Source="/UserControls/DateAndTime/DateTimePickerStyle.axaml"/>
-		<StyleInclude Source="avares://ThemeEditor.Controls.ColorPicker/ColorPicker.axaml" />
-    </Application.Styles>
-
 	<Application.Resources>
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
@@ -39,4 +23,23 @@
 			</ResourceDictionary.MergedDictionaries>
 		</ResourceDictionary>
 	</Application.Resources>
+
+    <Application.Styles>		
+        <FluentTheme />		
+		<mat:MaterialIconStyles />		
+		<StyleInclude Source="/Styles/Validation/ValidationErrors.xaml"/>
+		<StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml"/>
+		<StyleInclude Source="/Styles/TabItems.axaml"/>
+		<StyleInclude Source="/Styles/ScrollBars.axaml"/>
+		<StyleInclude Source="/Styles/Buttons.axaml"/>
+		<StyleInclude Source="/Styles/DataGrid/DataGridHeaders.axaml"/>
+		<StyleInclude Source="/Styles/DataGrid/DataGridRows.axaml"/>
+		<StyleInclude Source="/Styles/DataGrid/DataGridColumnCells.axaml"/>
+		<StyleInclude Source="/Styles/ComboBoxes.axaml"/>
+		<StyleInclude Source="avares://Avalonia.Controls.TreeDataGrid/Themes/Fluent.axaml"/>
+		<StyleInclude Source="/UserControls/DateAndTime/DateTimePickerStyle.axaml"/>
+		<StyleInclude Source="avares://ThemeEditor.Controls.ColorPicker/ColorPicker.axaml" />
+    </Application.Styles>
+
+	
 </Application>

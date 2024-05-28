@@ -15,6 +15,7 @@
 			<Bitmap x:Key="Panning_Enable">\Resources\Images\ControlCamera_Dark.png</Bitmap>
 			<Bitmap x:Key="Zoom_Enable">\Resources\Images\ZoomIn_Dark.png</Bitmap>
 			<Bitmap x:Key="ZoomOut">\Resources\Images\ZoomOut_Dark.png</Bitmap>
+			<Bitmap x:Key="TimeLine">\Resources\Images\Timeline_gray.png</Bitmap>
 		</ResourceDictionary>
 		<ResourceDictionary x:Key='Dark'>
 			<Bitmap x:Key="Basket">\Resources\Images\Group 2865.png</Bitmap>
@@ -27,6 +28,7 @@
 			<Bitmap x:Key="Panning_Enable">\Resources\Images\ControlCamera.png</Bitmap>
 			<Bitmap x:Key="Zoom_Enable">\Resources\Images\ZoomIn.png</Bitmap>
 			<Bitmap x:Key="ZoomOut">\Resources\Images\ZoomOut.png</Bitmap>
+			<Bitmap x:Key="TimeLine">\Resources\Images\Timeline.png</Bitmap>
 		</ResourceDictionary>
 	</ResourceDictionary.ThemeDictionaries>
 </ResourceDictionary>

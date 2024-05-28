@@ -244,14 +244,7 @@
 						<ListBox.ItemTemplate>
 							<DataTemplate x:DataType="log:LogCell">
 								<Grid VerticalAlignment="Top"
-									  HorizontalAlignment="Left">
-									<Grid.Styles>
-										<Style Selector="Button">
-											<Style Selector="^:pointerover /template/ ContentPresenter#PART_ContentPresenter">
-												<Setter Property="Background" Value="{DynamicResource ButtonBackgroundSelected1}" />												
-											</Style>
-										</Style>
-									</Grid.Styles>
+									  HorizontalAlignment="Left">									
 									<!--id-->
 									<Grid Width="40" VerticalAlignment="Center"
 										  HorizontalAlignment="Left">
@@ -311,7 +304,8 @@
 									</ComboBox>
 									<Button Background="{DynamicResource DeleteLogCellButtonBackground}"
 											BorderBrush="{DynamicResource DeleteLogCellButtonBorderBrush}"
-											CornerRadius="4"											
+											CornerRadius="4"	
+											Classes="ColumnStyle"
 											IsEnabled="{Binding ElementName=root, Path=!DataContext.IsLogging}"
 											Command="{Binding ElementName=root, Path=DataContext.DeleteCellCommand}"
 											CommandParameter="{Binding}"

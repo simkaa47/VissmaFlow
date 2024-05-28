@@ -10,6 +10,14 @@
 		<SolidColorBrush Color="{DynamicResource ComboBoxClosed}"/>
 		<SolidColorBrush Color="{DynamicResource ComboBoxOpened}"/>
 	</scg:List>
+	<scg:List x:TypeArguments="sys:Object" x:Key="SingleMeasureColors">
+		<SolidColorBrush Color="Transparent"/>
+		<SolidColorBrush Color="{DynamicResource SingleMeasureColor}"/>
+	</scg:List>
+	<scg:List x:TypeArguments="sys:Object" x:Key="SingleMeasureColorsOdd">
+		<SolidColorBrush Color="{DynamicResource NotSingleMeasureColor}"/>
+		<SolidColorBrush Color="{DynamicResource SingleMeasureColor}"/>
+	</scg:List>
 	<scg:List x:TypeArguments="sys:Object" x:Key="LogColors">
 		<SolidColorBrush Color="{DynamicResource LogOff}"/>
 		<SolidColorBrush Color="{DynamicResource LogOn}"/>
@@ -26,6 +34,9 @@
 			<Color x:Key="ComboBoxOpened">#28BCBA</Color>
 			<Color x:Key="LogOff">#28BCBA</Color>
 			<Color x:Key="LogOn">Red</Color>
+			<Color x:Key="SingleMeasureColor">#DBF1F0</Color>
+			<Color x:Key="NotSingleMeasureColor">Transparent</Color>
+			<SolidColorBrush Color="#E0E0E0" x:Key="DataGridVerticalBrush"/>					
 			<SolidColorBrush Color="#0F000000" x:Key="ScrollBarBorderBrush"/>
 			<SolidColorBrush Color="#E0E0E0" x:Key="DeleteLogCellButtonBackground"/>
 			<SolidColorBrush Color="Transparent" x:Key="DeleteLogCellButtonBorderBrush"/>
@@ -69,6 +80,9 @@
 			<Color x:Key="ComboBoxOpened">#28BCBA</Color>
 			<Color x:Key="LogOff">Transparent</Color>
 			<Color x:Key="LogOn">Red</Color>
+			<Color x:Key="SingleMeasureColor">#19FFFFFF</Color>
+			<Color x:Key="NotSingleMeasureColor">#801C1C1E</Color>
+			<SolidColorBrush Color="#3F3F42" x:Key="DataGridVerticalBrush"/>			
 			<SolidColorBrush Color="#5B5B5B" x:Key="ScrollBarBorderBrush"/>
 			<SolidColorBrush Color="Black" x:Key="DeleteLogCellButtonBackground"/>
 			<SolidColorBrush Color="#616161" x:Key="DeleteLogCellButtonBorderBrush"/>

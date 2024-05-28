@@ -11,5 +11,14 @@
 		<Setter Property="HorizontalContentAlignment" Value="Center"/>
 		<Setter Property="BorderThickness" Value="0,0,0,0"/>
 		<Setter Property="BorderBrush" Value="{DynamicResource CommonBorderBrush}"/>
+		<Style Selector="^:current /template/ Rectangle#CurrencyVisual">
+			<Setter Property="IsVisible" Value="False" />
+		</Style>
+		<Style Selector="^:focus /template/ Grid#FocusVisual">
+			<Setter Property="IsVisible" Value="False" />
+		</Style>
+		<Style Selector="^:invalid /template/ Rectangle#InvalidVisualElement">
+			<Setter Property="IsVisible" Value="False" />
+		</Style>
 	</Style>
 </Styles>
