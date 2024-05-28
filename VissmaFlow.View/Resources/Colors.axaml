@@ -65,7 +65,7 @@
 			<SolidColorBrush Color="#E0E0E0" x:Key="Scroll"/>
 			<SolidColorBrush Color="Black" x:Key="TextBoxBackground"/>
 			<SolidColorBrush Color="#616161" x:Key="TextBoxBorderBrush"/>
-			<SolidColorBrush Color="#80FF3B30" x:Key="ErrorColor"/>		
+			<SolidColorBrush Color="#50FF3B30" x:Key="ErrorColor"/>		
 
 			
 		</ResourceDictionary>
