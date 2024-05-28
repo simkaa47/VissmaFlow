@@ -21,6 +21,7 @@
 			<ComboBox SelectedIndex="{Binding SelectedZoomIndex}"
 					  Margin="40,40,0,0"
 					  Width="146"
+					  ItemContainerTheme="{StaticResource SelectorComboBoxItem}"
 					  Classes="ComboBoxCommonStyle"	
 					  BorderBrush="{Binding RelativeSource={RelativeSource Self}, Path=IsDropDownOpen, Converter={StaticResource GetIfTrueConverter}, ConverterParameter={StaticResource ComboBoxColors}}"
 					  Height="44"
@@ -31,33 +32,18 @@
 						<Setter Property="FontSize" Value="16"/>
 						<Setter Property="FontFamily" Value="{StaticResource RobotoFont}"/>
 						<Setter Property="FontWeight" Value="Regular"/>
+						<Setter Property="Foreground" Value="{DynamicResource TexBoxCommon}"/>
 					</Style>
 				</ComboBox.Styles>
 				<ComboBoxItem>
 					<StackPanel>
-						<Image Source="/Resources/Images/NotInterested.png"
+						<Image Source="{DynamicResource Zoom_Panning_Disable}"
 							   Height="24" Width="24" Margin="7,7,16,7"/>
 					</StackPanel>
 				</ComboBoxItem>
 				<ComboBoxItem>
 					<StackPanel Orientation="Horizontal">
-						<Image Source="/Resources/Images/ControlCamera.png"
-							   Height="24" Width="24" Margin="7,7,16,7"/>
-						<TextBlock Text="X"
-								   VerticalAlignment="Center"/>
-					</StackPanel>
-				</ComboBoxItem>
-				<ComboBoxItem>
-					<StackPanel Orientation="Horizontal">
-						<Image Source="/Resources/Images/ControlCamera.png"
-							   Height="24" Width="24" Margin="7,7,16,7"/>
-						<TextBlock Text="Y"
-								   VerticalAlignment="Center"/>
-					</StackPanel>
-				</ComboBoxItem>
-				<ComboBoxItem>
-					<StackPanel Orientation="Horizontal">
-						<Image Source="/Resources/Images/ZoomIn.png"
+						<Image Source="{DynamicResource Panning_Enable}"
 							   Height="24" Width="24" Margin="7,7,16,7"/>
 						<TextBlock Text="X"
 								   VerticalAlignment="Center"/>
@@ -65,7 +51,7 @@
 				</ComboBoxItem>
 				<ComboBoxItem>
 					<StackPanel Orientation="Horizontal">
-						<Image Source="/Resources/Images/ZoomIn.png"
+						<Image Source="{DynamicResource Panning_Enable}"
 							   Height="24" Width="24" Margin="7,7,16,7"/>
 						<TextBlock Text="Y"
 								   VerticalAlignment="Center"/>
@@ -73,9 +59,25 @@
 				</ComboBoxItem>
 				<ComboBoxItem>
 					<StackPanel Orientation="Horizontal">
-						<Image Source="/Resources/Images/ControlCamera.png"
+						<Image Source="{DynamicResource Zoom_Enable}"
+							   Height="24" Width="24" Margin="7,7,16,7"/>
+						<TextBlock Text="X"
+								   VerticalAlignment="Center"/>
+					</StackPanel>
+				</ComboBoxItem>
+				<ComboBoxItem>
+					<StackPanel Orientation="Horizontal">
+						<Image Source="{DynamicResource Zoom_Enable}"
+							   Height="24" Width="24" Margin="7,7,16,7"/>
+						<TextBlock Text="Y"
+								   VerticalAlignment="Center"/>
+					</StackPanel>
+				</ComboBoxItem>
+				<ComboBoxItem>
+					<StackPanel Orientation="Horizontal">
+						<Image Source="{DynamicResource Panning_Enable}"
 							   Height="24" Width="24" Margin="7,7,8,7"/>
-						<Image Source="/Resources/Images/ZoomIn.png"
+						<Image Source="{DynamicResource Zoom_Enable}"
 							   Height="24" Width="24" Margin="0,7,8,7"/>
 						<TextBlock Text="XY"
 								   VerticalAlignment="Center"/>
@@ -107,7 +109,7 @@
 									   HorizontalAlignment="Left"
 									   VerticalAlignment="Center"
 									   Text="{Binding RtkUnit.Name, StringFormat={}{0}:}"
-									   Foreground="{StaticResource AlmostWhite}"
+									   Foreground="{DynamicResource TexBoxCommon80}"
 									   FontWeight="Regular"/>
 							<TextBlock FontFamily="{StaticResource RobotoFont}"
 									   FontSize="16"
@@ -115,7 +117,7 @@
 									    VerticalAlignment="Center"
 									   HorizontalAlignment="Left"
 									   Text="{Binding Parameter.Description}"
-									   Foreground="{StaticResource AlmostWhite}"
+									   Foreground="{DynamicResource TexBoxCommon80}"
 									   TextWrapping="Wrap"
 									   FontWeight="Regular"/>
 						</DockPanel>
@@ -134,6 +136,7 @@
 		 FontSize="16"
 		 DrawMarginFrame="{Binding DrawMarginFrame}"
 		 LegendPosition="Hidden"
+		 Background="Transparent"
 		 LegendTextSize="12"
 		 TooltipPosition="Hidden"		 
 		 YAxes="{Binding YAxes}"
@@ -145,10 +148,11 @@
 					VerticalAlignment="Bottom"
 					Margin="40,0,0,10"
 					CornerRadius="33"					
-					Height="66"					
-					Background="Black"
+					Height="66"
+					BorderBrush="{DynamicResource TextBoxParameterBorderBrush}"
+					Background="{DynamicResource TextBoxParameterBackground}"
 					Width="66">
-				<Image Source="\Resources\Images\ZoomOut.png"
+				<Image Source="{DynamicResource ZoomOut}"
 					   VerticalAlignment="Center" HorizontalAlignment="Center"
 					   Width="46" Height="46"/>
 			</Button>

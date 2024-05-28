@@ -132,9 +132,10 @@ public class VirtualKey : TemplatedControl
                 _toggleButton = new ToggleButton
                 {
                     BorderThickness = new Thickness(1),
-                    Background = GetByResource("ParameterBackgroundCommonColor"),
+                    Background = new SolidColorBrush(Color.Parse("#28BCBA")),
+                    Foreground = new SolidColorBrush(Color.Parse("White")),
                     FontSize = 20,
-                    BorderBrush = new SolidColorBrush(Color.Parse("Black")),
+                    BorderBrush = new SolidColorBrush(Color.Parse("White")),
                     [!ToggleButton.WidthProperty] = new Binding("Width"),
                     [!ToggleButton.HeightProperty] = new Binding("Height"),
                     [!ToggleButton.ContentProperty] = new Binding("Caption"),
@@ -178,9 +179,10 @@ public class VirtualKey : TemplatedControl
                 return new Button
                 {
                     BorderThickness = new Thickness(1),
-                    Background = GetByResource("ParameterBackgroundCommonColor"),
+                    Background = new SolidColorBrush(Color.Parse("#28BCBA")),
+                    Foreground = new SolidColorBrush(Color.Parse("White")),
                     FontSize = 20,
-                        BorderBrush = new SolidColorBrush(Color.Parse("Black")),
+                        BorderBrush = new SolidColorBrush(Color.Parse("White")),
                         [!Button.WidthProperty] = new Binding("Width"),
                         [!Button.HeightProperty] = new Binding("Height"),
                         [!Button.ContentProperty] = new Binding("Caption"),

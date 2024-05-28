@@ -75,7 +75,7 @@
 									   FontFamily="{StaticResource RobotoFont}"
 									   Canvas.Bottom="560"
 									   Canvas.Left="54"
-									   Foreground="{StaticResource ErrorMainColor}"
+									   Foreground="{DynamicResource ErrorMainColor}"
 									   FontWeight="Regular">
 								
 							</TextBlock>

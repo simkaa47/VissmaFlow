@@ -11,11 +11,12 @@
 		<Border VerticalAlignment="Stretch"
 				HorizontalAlignment="Stretch"
 				Margin="0,0,31,0"
-				Background="{StaticResource ParameterBackgroundCommonColor}">
+				BorderThickness="1"
+			    BorderBrush="{DynamicResource ListBoxBorderBrush}"
+				Background="{DynamicResource ParameterBackgroundCommonColor}">
 			<DataGrid HorizontalAlignment="Stretch"
 				  IsReadOnly="True"
-			      Name="EventsGrid"
-				  
+			      Name="EventsGrid"				  
 			      HorizontalGridLinesBrush="Transparent"
 				  HorizontalScrollBarVisibility="Disabled"
 			      VerticalAlignment="Stretch"
@@ -54,13 +55,20 @@
 						</Setter>
 					</Style>
 					<Style Selector="DataGridRow" x:DataType="e:Event">
-						<Setter Property="MinHeight" Value="32"/>
-						<Setter Property="Background" Value="{DynamicResource ErrorColor}"/>
-						<Setter Property="Margin" Value="0,0,0,4"/>
-						<Setter Property="IsVisible" Value="{Binding IsActive, Mode=OneWay}"/>
-						<Style Selector="^:nth-child(even)">
-							<Setter Property="Background" Value="{DynamicResource ErrorColor}"/>
-						</Style>
+						
+						<Setter Property="Template">
+							
+							<ControlTemplate TargetType="DataGridRow">
+								<Border Margin="0,0,0,4"
+										BorderThickness="0"
+										Background="{DynamicResource ErrorColor}"
+										MinHeight="32">
+									<DataGridCellsPresenter Name="PART_CellsPresenter"
+                                      Grid.Column="1"/>
+								</Border>
+								
+							</ControlTemplate>
+						</Setter>					
 					</Style>
 					<Style Selector="DataGridCell">
 						<Setter Property="VerticalContentAlignment" Value="Center"/>

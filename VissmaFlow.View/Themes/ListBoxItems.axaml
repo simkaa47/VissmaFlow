@@ -1,12 +1,20 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+	<ResourceDictionary.ThemeDictionaries>
+		<ResourceDictionary x:Key='Light'>			
+			<SolidColorBrush Color="#80FF3B30" x:Key="ListBoxSelectorBackgroundColor"/>			
+		</ResourceDictionary>
+		<ResourceDictionary x:Key='Dark'>			
+			<SolidColorBrush Color="#80FF3B30" x:Key="ListBoxSelectorBackgroundColor"/>
+		</ResourceDictionary>
+	</ResourceDictionary.ThemeDictionaries>
 	<ControlTheme x:Key="SelectorListBoxItem"
 					TargetType="ListBoxItem">
-		<Setter Property="Background" Value="{StaticResource ParameterBackgroundCommonColor}"/>
+		<Setter Property="Background" Value="{DynamicResource ParameterBackgroundCommonColor}"/>
 		<Setter Property="Template">			
 			<Setter.Value>
 				<ControlTemplate TargetType="{x:Type ListBoxItem}">
-					<Border BorderBrush="{DynamicResource CommonBorderBrush}"
+					<Border BorderBrush="{DynamicResource ListBoxItemBorderBrush}"
 							x:CompileBindings="False"
 							Height="75"
                             Background="{TemplateBinding Background}"
@@ -21,7 +29,8 @@
 			</Setter.Value>
 		</Setter>
 		<Style Selector="^:selected">
-			<Setter Property="Background" Value="{StaticResource ParameterSelected}"/>			
+			<Setter Property="Background" Value="{DynamicResource ParameterSelected}"/>			
 		</Style>
 	</ControlTheme>
+	
 </ResourceDictionary>

@@ -2,34 +2,125 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:scg="clr-namespace:System.Collections.Generic;assembly=netstandard"
 					xmlns:sys="clr-namespace:System;assembly=netstandard">
-	<scg:List x:TypeArguments="sys:Object" x:Key="ErrorColors">
-		<SolidColorBrush Color="Red"/>
-		<SolidColorBrush Color="LightGreen"/>
+	<scg:List x:TypeArguments="sys:Object" x:Key="TextBoxErrorColors">
+		<SolidColorBrush Color="{DynamicResource TextBoxErrorColorOk}"/>
+		<SolidColorBrush Color="{DynamicResource TextBoxErrorColorNotOk}"/>
 	</scg:List>
-	<SolidColorBrush Color="#F44336" x:Key="ErrorMainColor"/>
-	<SolidColorBrush Color="#1C1C1E" x:Key="CommonColor"/>
-	<SolidColorBrush Color="#5B5B5B" x:Key="CommonBorderBrush"/>
-	<SolidColorBrush Color="#5B5B5B" x:Key="ParameterSelected"/>
-	<SolidColorBrush Color="#3F3F42" x:Key="ComboboxPopupBackground"/>
-	<SolidColorBrush Color="#28BCBA" x:Key="AquaColor"/>
-	<SolidColorBrush Color="#2C2C2E" x:Key="ParameterBackgroundCommonColor"/>
-	<SolidColorBrush Color="#CCFFFFFF" x:Key="AlmostWhite"/>
-	<SolidColorBrush Color="#FFFFFF" x:Key="TexBoxCommon"/>
-	<SolidColorBrush Color="#CCFFFFFF" x:Key="TexBoxCommon80"/>
-	<SolidColorBrush Color="#28BCBA" x:Key="ButtonAccept"/>
-	<SolidColorBrush Color="#3F3F42" x:Key="ButtonDeny"/>
-	<SolidColorBrush Color="#6B6B6B" x:Key="Scroll"/>
-	<SolidColorBrush Color="Black" x:Key="TextBoxBackground"/>
-	<SolidColorBrush Color="#616161" x:Key="TextBoxBorderBrush"/>
-	<SolidColorBrush Color="#80FF3B30" x:Key="ErrorColor"/>
-
-	<scg:List x:TypeArguments="sys:Object" x:Key="LogColors">
-		<SolidColorBrush Color="Transparent"/>
-		<SolidColorBrush Color="Red"/>
-	</scg:List>
-
 	<scg:List x:TypeArguments="sys:Object" x:Key="ComboBoxColors">
-		<SolidColorBrush Color="#616161"/>
-		<SolidColorBrush Color="#28BCBA"/>
+		<SolidColorBrush Color="{DynamicResource ComboBoxClosed}"/>
+		<SolidColorBrush Color="{DynamicResource ComboBoxOpened}"/>
 	</scg:List>
+	<scg:List x:TypeArguments="sys:Object" x:Key="SingleMeasureColors">
+		<SolidColorBrush Color="Transparent"/>
+		<SolidColorBrush Color="{DynamicResource SingleMeasureColor}"/>
+	</scg:List>
+	<scg:List x:TypeArguments="sys:Object" x:Key="SingleMeasureColorsOdd">
+		<SolidColorBrush Color="{DynamicResource NotSingleMeasureColor}"/>
+		<SolidColorBrush Color="{DynamicResource SingleMeasureColor}"/>
+	</scg:List>
+	<scg:List x:TypeArguments="sys:Object" x:Key="LogColors">
+		<SolidColorBrush Color="{DynamicResource LogOff}"/>
+		<SolidColorBrush Color="{DynamicResource LogOn}"/>
+	</scg:List>
+	<ResourceDictionary.ThemeDictionaries>
+		<ResourceDictionary x:Key='Light'>
+			<scg:List x:TypeArguments="sys:Object" x:Key="ErrorColors">
+				<SolidColorBrush Color="Red"/>
+				<SolidColorBrush Color="LightGreen"/>
+			</scg:List>
+			<Color x:Key="TextBoxErrorColorOk">#99000000</Color>
+			<Color x:Key="TextBoxErrorColorNotOk">Red</Color>
+			<Color x:Key="ComboBoxClosed">#61000000</Color>
+			<Color x:Key="ComboBoxOpened">#28BCBA</Color>
+			<Color x:Key="LogOff">#28BCBA</Color>
+			<Color x:Key="LogOn">Red</Color>
+			<Color x:Key="SingleMeasureColor">#DBF1F0</Color>
+			<Color x:Key="NotSingleMeasureColor">Transparent</Color>
+			<SolidColorBrush Color="#E0E0E0" x:Key="DataGridVerticalBrush"/>					
+			<SolidColorBrush Color="#0F000000" x:Key="ScrollBarBorderBrush"/>
+			<SolidColorBrush Color="#E0E0E0" x:Key="DeleteLogCellButtonBackground"/>
+			<SolidColorBrush Color="Transparent" x:Key="DeleteLogCellButtonBorderBrush"/>
+			<SolidColorBrush Color="#28BCBA" x:Key="ButtonBackground1"/>
+			<SolidColorBrush Color="#8028BCBA" x:Key="ButtonBackgroundSelected1"/>
+			<SolidColorBrush Color="#FAFAFA" x:Key="ScrollBarBackground"/>
+			<SolidColorBrush Color="#DBF1F0" x:Key="ItemMouseOverBackground"/>
+			<SolidColorBrush Color="White" x:Key="TextBoxParameterBackground"/>
+			<SolidColorBrush Color="#61000000" x:Key="TextBoxParameterBorderBrush"/>
+			<SolidColorBrush Color="#E0E0E0" x:Key="ListBoxBorderBrush"/>
+			<SolidColorBrush Color="#E0E0E0" x:Key="ListBoxItemBorderBrush"/>			
+			<SolidColorBrush Color="#E0E0E0" x:Key="DateTimeBackground"/>
+			<SolidColorBrush Color="#28BCBA" x:Key="HighBarBackground"/>
+			<SolidColorBrush Color="#28BCBA" x:Key="HighBarButtonsBackground"/>			
+			<SolidColorBrush Color="#F44336" x:Key="ErrorMainColor"/>
+			<SolidColorBrush Color="White" x:Key="CommonColor"/>
+			<SolidColorBrush Color="White" x:Key="CommonBorderBrush"/>
+			<SolidColorBrush Color="#DBF1F0" x:Key="ParameterSelected"/>
+			<SolidColorBrush Color="White" x:Key="ComboboxPopupBackground"/>
+			<SolidColorBrush Color="#28BCBA" x:Key="AquaColor"/>
+			<SolidColorBrush Color="White" x:Key="ParameterBackgroundCommonColor"/>			
+			<SolidColorBrush Color="Black" x:Key="TexBoxCommon"/>
+			<SolidColorBrush Color="#CC000000" x:Key="TexBoxCommon80"/>
+			<SolidColorBrush Color="#28BCBA" x:Key="ButtonAccept"/>
+			<SolidColorBrush Color="#61000000" x:Key="ButtonDeny"/>
+			<SolidColorBrush Color="#E0E0E0" x:Key="Scroll"/>
+			<SolidColorBrush Color="Black" x:Key="TextBoxBackground"/>
+			<SolidColorBrush Color="#616161" x:Key="TextBoxBorderBrush"/>
+			<SolidColorBrush Color="#50FF3B30" x:Key="ErrorColor"/>		
+
+			
+		</ResourceDictionary>
+		<ResourceDictionary x:Key='Dark'>
+			<scg:List x:TypeArguments="sys:Object" x:Key="ErrorColors">
+				<SolidColorBrush Color="Red"/>
+				<SolidColorBrush Color="LightGreen"/>
+			</scg:List>
+			<Color x:Key="TextBoxErrorColorOk">White</Color>
+			<Color x:Key="TextBoxErrorColorNotOk">Red</Color>
+			<Color x:Key="ComboBoxClosed">#616161</Color>
+			<Color x:Key="ComboBoxOpened">#28BCBA</Color>
+			<Color x:Key="LogOff">Transparent</Color>
+			<Color x:Key="LogOn">Red</Color>
+			<Color x:Key="SingleMeasureColor">#19FFFFFF</Color>
+			<Color x:Key="NotSingleMeasureColor">#801C1C1E</Color>
+			<SolidColorBrush Color="#3F3F42" x:Key="DataGridVerticalBrush"/>			
+			<SolidColorBrush Color="#5B5B5B" x:Key="ScrollBarBorderBrush"/>
+			<SolidColorBrush Color="Black" x:Key="DeleteLogCellButtonBackground"/>
+			<SolidColorBrush Color="#616161" x:Key="DeleteLogCellButtonBorderBrush"/>
+			<SolidColorBrush Color="Transparent" x:Key="ButtonBackground1"/>
+			<SolidColorBrush Color="#565658" x:Key="ButtonBackgroundSelected1"/>
+			<SolidColorBrush Color="Black" x:Key="ScrollBarBackground"/>
+			<SolidColorBrush Color="#5B5B5B" x:Key="ItemMouseOverBackground"/>
+			<SolidColorBrush Color="Black" x:Key="TextBoxParameterBackground"/>
+			<SolidColorBrush Color="#616161" x:Key="TextBoxParameterBorderBrush"/>
+			<SolidColorBrush Color="Transparent" x:Key="ListBoxBorderBrush"/>
+			<SolidColorBrush Color="#5B5B5B" x:Key="ListBoxItemBorderBrush"/>		
+			<SolidColorBrush Color="#2C2C2E" x:Key="DateTimeBackground"/>
+			<SolidColorBrush Color="#1C1C1E" x:Key="HighBarBackground"/>
+			<SolidColorBrush Color="Black" x:Key="HighBarButtonsBackground"/>
+			<SolidColorBrush Color="#F44336" x:Key="ErrorMainColor"/>
+			<SolidColorBrush Color="#1C1C1E" x:Key="CommonColor"/>
+			<SolidColorBrush Color="#5B5B5B" x:Key="CommonBorderBrush"/>
+			<SolidColorBrush Color="#5B5B5B" x:Key="ParameterSelected"/>
+			<SolidColorBrush Color="#3F3F42" x:Key="ComboboxPopupBackground"/>
+			<SolidColorBrush Color="#28BCBA" x:Key="AquaColor"/>
+			<SolidColorBrush Color="#2C2C2E" x:Key="ParameterBackgroundCommonColor"/>			
+			<SolidColorBrush Color="#FFFFFF" x:Key="TexBoxCommon"/>
+			<SolidColorBrush Color="#CCFFFFFF" x:Key="TexBoxCommon80"/>
+			<SolidColorBrush Color="#28BCBA" x:Key="ButtonAccept"/>
+			<SolidColorBrush Color="#3F3F42" x:Key="ButtonDeny"/>
+			<SolidColorBrush Color="#6B6B6B" x:Key="Scroll"/>
+			<SolidColorBrush Color="Black" x:Key="TextBoxBackground"/>
+			<SolidColorBrush Color="#616161" x:Key="TextBoxBorderBrush"/>
+			<SolidColorBrush Color="#80FF3B30" x:Key="ErrorColor"/>
+
+			
+
+			<scg:List x:TypeArguments="sys:Object" x:Key="ComboBoxColors">
+				<SolidColorBrush Color="#616161"/>
+				<SolidColorBrush Color="#28BCBA"/>
+			</scg:List>
+		</ResourceDictionary>
+	</ResourceDictionary.ThemeDictionaries>
+	
+	
 </ResourceDictionary>

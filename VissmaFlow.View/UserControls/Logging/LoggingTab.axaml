@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 			 xmlns:vm="using:VissmaFlow.Core.ViewModels"
+			 xmlns:p="using:VissmaFlow.Core.Models.Parameters"
 			 xmlns:log="using:VissmaFlow.Core.Models.Logging"
 			 xmlns:ma="using:Material.Icons.Avalonia"
 			 x:DataType="vm:LoggingViewModel"
@@ -25,14 +26,14 @@
 			<Setter Property="VerticalAlignment" Value="Stretch"/>
 		</Style>
 	</UserControl.Styles>
-	<Grid RowDefinitions="242, *">
+	<Grid RowDefinitions="Auto, *">
 		
 		<Border BorderThickness="1" Margin="40,20,40,20"
-					BorderBrush="{StaticResource ParameterBackgroundCommonColor}"
-					Background="{StaticResource ParameterBackgroundCommonColor}"
+					BorderBrush="{DynamicResource ListBoxBorderBrush}"
+					Background="{DynamicResource ParameterBackgroundCommonColor}"
 					HorizontalAlignment="Stretch"
-					VerticalAlignment="Stretch">
-			<Grid>
+					VerticalAlignment="Top">
+			<StackPanel>
 				<!--Save in-->
 				<DockPanel Margin="16,24,16,0">
 					
@@ -40,10 +41,10 @@
 							HorizontalAlignment="Right"
 							VerticalAlignment="Center"
 							Height="40"
-							Foreground="{StaticResource TexBoxCommon}"
-							Background="Transparent"
+							Foreground="White"
+							Background="{DynamicResource ButtonBackground1}"
 							BorderThickness="1"
-							BorderBrush="{StaticResource ButtonAccept}"							
+							BorderBrush="{DynamicResource ButtonAccept}"							
 							IsEnabled="{Binding !IsLogging}"
 							VerticalContentAlignment="Center"
 							HorizontalContentAlignment="Center"
@@ -55,19 +56,19 @@
 				<TextBlock TextWrapping="Wrap"
 							   VerticalAlignment="Center"
 							   DockPanel.Dock="Left">
-						<Run Foreground="{StaticResource TexBoxCommon80}"
+						<Run Foreground="{DynamicResource TexBoxCommon80}"
 							 Text="Сохранить в:"/>
-						<Run Foreground="{StaticResource AquaColor}"
+						<Run Foreground="{DynamicResource AquaColor}"
 							 Text="{Binding Settings.Path}"/>
 					</TextBlock>
 				</DockPanel>
 
 				<!--Log period-->
-				<DockPanel Margin="16,80,16,0">
+				<DockPanel Margin="16,16,16,0">
 					
-					<TextBlock Text="Период логирования, мс"
-							 TextWrapping="Wrap"
-							 Foreground="{StaticResource TexBoxCommon80}"
+					<TextBlock Text="Период логирования, с"
+							 TextWrapping="Wrap"							 
+							 Foreground="{DynamicResource TexBoxCommon80}"
 							 VerticalAlignment="Center"
 							 DockPanel.Dock="Left"/>
 					<Border CornerRadius="4"
@@ -76,32 +77,34 @@
 							Height="44"
 							HorizontalAlignment="Right"
 							VerticalAlignment="Center"
-							Background="{StaticResource TextBoxBackground}"
-							BorderBrush="{StaticResource TextBoxBorderBrush}">
+							BorderBrush="{DynamicResource TextBoxParameterBorderBrush}"
+							Background="{DynamicResource TextBoxParameterBackground}">
 						<TextBox Text="{Binding Settings.MinPeriod}"
-							 VerticalAlignment="Center"
-							 Padding="12,0,0,0"
-							 Background="Transparent"
-							 VerticalContentAlignment="Center"
-							 BorderThickness="0"
-							 FontSize="20"
-							 FontWeight="Medium"/>
-					
+								 VerticalAlignment="Center"
+								 Padding="12,0,0,0"
+								 Tag="{x:Static p:DataType.int16}"
+								 Background="Transparent"
+								 VerticalContentAlignment="Center"
+								 BorderThickness="0"
+								 FontSize="20"
+							    FontWeight="Medium"/>
+
 					</Border>
 
 					
 				
 				</DockPanel>
-				
+
 				<!--Log button-->
 				<StackPanel HorizontalAlignment="Right"
-							Margin="0,140,16,0">
+							Margin="0,16,16,0">
 					<Button HorizontalContentAlignment="Center"
 							HorizontalAlignment="Right"
 							BorderThickness="1"
 							Height="40"
+							Foreground="White"
 							MinWidth="150"
-							BorderBrush="{StaticResource ButtonAccept}"
+							BorderBrush="{DynamicResource ButtonAccept}"
 							Background="{Binding IsLogging, Converter={StaticResource GetIfTrueConverter}, ConverterParameter={StaticResource LogColors}}"
 							Command="{Binding SwitchTimerCommand}">
 						<StackPanel Orientation="Horizontal"
@@ -111,7 +114,9 @@
 									   FontSize="14"
 									   FontWeight="Medium"/>
 							<TextBlock Text="{Binding FileName, StringFormat={} ({0})}"
-									   IsVisible="{Binding IsLogging}"/>							
+									   IsVisible="{Binding IsLogging}"/>
+							<TextBlock Text="{Binding CurrentLogTime}"
+									   IsVisible="{Binding IsLogging}"/>
 						</StackPanel>
 
 					</Button>
@@ -120,70 +125,161 @@
 										Text="{Binding ErrStatus}"
 										TextWrapping="Wrap"/>
 				</StackPanel>
-			</Grid>			
+
+				<!--Time span-->
+				<DockPanel Margin="16,24,16,22">
+
+					<StackPanel Orientation="Horizontal"
+								DockPanel.Dock="Right">
+						<TextBox Text="{Binding TimeHours}"
+								 VerticalAlignment="Center"
+								 HorizontalAlignment="Left"
+								 BorderThickness="1"
+								 BorderBrush="{DynamicResource TextBoxParameterBorderBrush}"
+								 Background="{DynamicResource TextBoxParameterBackground}"
+								 Width="60"
+								 Tag="{x:Static p:DataType.int16}"
+								 Padding="12,9,0,9"
+									 CornerRadius="4"
+									 Height="44"
+									 Margin="0,0,4,0"
+									 FontFamily="{StaticResource RobotoFont}"
+									 FontSize="20"
+									 FontWeight="Medium"/>
+						<TextBlock TextWrapping="Wrap"
+							   Text="часов"
+								   Foreground="{DynamicResource TexBoxCommon80}"
+							   VerticalAlignment="Center"
+							   DockPanel.Dock="Left"/>
+						<TextBox Text="{Binding TimeMinutes}"
+								 VerticalAlignment="Center"
+								 HorizontalAlignment="Left"
+								 BorderThickness="1"
+								 BorderBrush="{DynamicResource TextBoxParameterBorderBrush}"
+								 Background="{DynamicResource TextBoxParameterBackground}"
+								 Width="60"
+								 Tag="{x:Static p:DataType.int16}"
+								 Padding="12,9,0,9"
+								 CornerRadius="4"
+									 Height="44"
+									 Margin="10,0,4,0"
+									 FontFamily="{StaticResource RobotoFont}"
+									 FontSize="20"
+									 FontWeight="Medium"/>
+						<TextBlock TextWrapping="Wrap"
+							   Text="минут"
+								   Foreground="{DynamicResource TexBoxCommon80}"
+							   VerticalAlignment="Center"
+							   DockPanel.Dock="Left"/>
+					</StackPanel>
+					<TextBlock TextWrapping="Wrap"
+							   Text="Таймер логирования: "
+							   Foreground="{DynamicResource TexBoxCommon80}"
+							   VerticalAlignment="Center"
+							   DockPanel.Dock="Left"/>
+				</DockPanel>
+			</StackPanel>			
 			
 		</Border>
 		
 		<!--Конфигурация логирования-->
-		
-		<Border BorderThickness="1" Margin="40,0,40,30"
-				Grid.Row="1"
-				BorderBrush="{StaticResource ParameterBackgroundCommonColor}"
-				Background="{StaticResource ParameterBackgroundCommonColor}"
-				HorizontalAlignment="Stretch"
-				VerticalAlignment="Stretch">
-			<Grid RowDefinitions="*, Auto">
-				<!--Table-->
-				
-				<ScrollViewer>
-					<StackPanel>
+
+		<Grid Grid.Row="1"
+			  Margin="40,0,0,30"
+			  RowDefinitions="*, Auto">
+			<Border BorderThickness="1" 
+				    Grid.RowSpan="2"
+					Margin="0,0,40,0"
+				   BorderBrush="{DynamicResource ListBoxBorderBrush}"
+					Background="{DynamicResource ParameterBackgroundCommonColor}"
+				    HorizontalAlignment="Stretch"
+				    VerticalAlignment="Stretch"/>
+			
+			<!--Table-->
+			<ScrollViewer Margin="0,0,9,0">
+				<StackPanel>
 					<StackPanel Orientation="Horizontal" Margin="17,32,0,0">
-						<TextBlock Foreground="{StaticResource TexBoxCommon}" Text="№" FontWeight="Medium" FontSize="11"/>
-						<TextBlock Foreground="{StaticResource TexBoxCommon}" Margin="29,0,0,0" Text="РТК" FontWeight="Medium" FontSize="11"/>
-						<TextBlock Foreground="{StaticResource TexBoxCommon}" Margin="74,0,0,0" Text="ЛОГИРУЕМЫЙ ПАРАМЕТР" FontWeight="Medium" FontSize="11"/>
+						<TextBlock Foreground="{DynamicResource TexBoxCommon}" Text="№" FontWeight="Medium" FontSize="11"/>
+						<TextBlock Foreground="{DynamicResource TexBoxCommon}" Margin="29,0,0,0" Text="РТК" FontWeight="Medium" FontSize="11"/>
+						<TextBlock Foreground="{DynamicResource TexBoxCommon}" Margin="74,0,0,0" Text="ЛОГИРУЕМЫЙ ПАРАМЕТР" FontWeight="Medium" FontSize="11"/>
 					</StackPanel>
 					<ListBox ItemsSource="{Binding Settings.Cells}"
+							 Background="Transparent"
+							 Margin="0,0,31,0"
 							 IsVisible="{Binding Settings.Cells.Count, Converter={StaticResource IfNotEqualConverter}, ConverterParameter=0}">
+						<ListBox.Styles>
+							<Style Selector="ListBoxItem">
+								<!--  PointerOver State  -->
+								<Style Selector="^:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+									<Setter Property="Background" Value="Transparent" />
+								</Style>
+								<!--  Pressed State  -->
+								<Style Selector="^:pressed /template/ ContentPresenter#PART_ContentPresenter">
+									<Setter Property="Background" Value="Transparent" />
+								</Style>
+								<!--  Selected State  -->
+								<Style Selector="^:selected">
+
+									<Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter">
+										<Setter Property="Background" Value="Transparent" />
+									</Style>
+
+									<!--  Selected Unfocused State  -->
+									<Style Selector="^:not(:focus) /template/ ContentPresenter#PART_ContentPresenter">
+										<Setter Property="Background" Value="Transparent" />
+									</Style>
+
+									<!--  Selected PointerOver State  -->
+									<Style Selector="^:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+										<Setter Property="Background" Value="Transparent" />
+									</Style>
+
+									<!--  Selected Pressed State  -->
+									<Style Selector="^:pressed /template/ ContentPresenter#PART_ContentPresenter">
+										<Setter Property="Background" Value="Transparent" />
+									</Style>
+								</Style>
+							</Style>
+						</ListBox.Styles>
 						<ListBox.ItemTemplate>
 							<DataTemplate x:DataType="log:LogCell">
 								<Grid VerticalAlignment="Top"
-								  
-								  HorizontalAlignment="Left">
+									  HorizontalAlignment="Left">									
 									<!--id-->
 									<Grid Width="40" VerticalAlignment="Center"
 										  HorizontalAlignment="Left">
-										<TextBlock Foreground="{StaticResource TexBoxCommon80}" 
-												Text="{Binding Id}"
+										<TextBlock Foreground="{DynamicResource TexBoxCommon80}"
+												Text="{Binding Index}"
 												VerticalAlignment="Center"
 												HorizontalAlignment="Center"
-												FontWeight="Regular" 
+												FontWeight="Regular"
 												FontSize="16"/>
 									</Grid>
-									
+
 									<ComboBox Width="86"
 											  BorderBrush="{Binding RelativeSource={RelativeSource Self}, Path=IsDropDownOpen, Converter={StaticResource GetIfTrueConverter}, ConverterParameter={StaticResource ComboBoxColors}}"
-											  IsEnabled="{Binding ElementName=root, Path=!DataContext.IsLogging}"											  
+											  IsEnabled="{Binding ElementName=root, Path=!DataContext.IsLogging}"
 											  Padding="12,12,0,12"
 											  VerticalContentAlignment="Stretch"
-											  HorizontalContentAlignment="Left"											 
+											  HorizontalContentAlignment="Left"
 											  Background="Transparent"
 											  ItemsSource="{Binding ElementName=root, Path=DataContext.CommunicationVm.RtkUnits}"
 											  VerticalAlignment="Stretch"
 											  SelectedItem="{Binding RtkUnit}"
-											  Classes="ComboBoxCommonStyle"	
+											  Classes="ComboBoxCommonStyle"
 											  Margin="46,8,0,8">
 										<ComboBox.ItemTemplate>
 											<DataTemplate>
 												<TextBlock Text="{Binding Name}"
-														   FontSize="14" Foreground="{StaticResource TexBoxCommon}"
+														   FontSize="14" Foreground="{DynamicResource TexBoxCommon}"
 														   TextTrimming="CharacterEllipsis"
 														   FontFamily="{StaticResource RobotoFont}"
 														   FontWeight="Regular"/>
 											</DataTemplate>
 										</ComboBox.ItemTemplate>
-									
+
 									</ComboBox>
-									
+
 									<ComboBox Width="186"
 											  BorderBrush="{Binding RelativeSource={RelativeSource Self}, Path=IsDropDownOpen, Converter={StaticResource GetIfTrueConverter}, ConverterParameter={StaticResource ComboBoxColors}}"
 											  IsEnabled="{Binding ElementName=root, Path=!DataContext.IsLogging}"
@@ -194,76 +290,83 @@
 											  ItemsSource="{Binding ElementName=root, Path=DataContext.ParameterVm.Parameters}"
 											  VerticalAlignment="Stretch"
 											  SelectedItem="{Binding Parameter}"
-											  Classes="ComboBoxCommonStyle"	
+											  Classes="ComboBoxCommonStyle"
 											  Margin="142,8,0,8">
 										<ComboBox.ItemTemplate>
 											<DataTemplate>
 												<TextBlock Text="{Binding Description}"
-														   FontSize="14" Foreground="{StaticResource TexBoxCommon}"
+														   FontSize="14" Foreground="{DynamicResource TexBoxCommon}"
 														   TextTrimming="CharacterEllipsis"
 														   FontFamily="{StaticResource RobotoFont}"
 														   FontWeight="Regular"/>
 											</DataTemplate>
-										</ComboBox.ItemTemplate>									
-									</ComboBox>	
-								<Button Background="{StaticResource CommonColor}"
-										BorderBrush="{StaticResource TextBoxBorderBrush}"
-										CornerRadius="4"
-										Command="{Binding ElementName=root, Path=DataContext.DeleteCellCommand}"
-									    CommandParameter="{Binding}"
-										Height="40"
-										Width="40"
-										Margin="344,8,0,8">
-									<Image Source="\Resources\Images\Group 2865.png"
-										   VerticalAlignment="Center" HorizontalAlignment="Center"
-										   Width="24" Height="24"/>
-								</Button>
-							</Grid>
+										</ComboBox.ItemTemplate>
+									</ComboBox>
+									<Button Background="{DynamicResource DeleteLogCellButtonBackground}"
+											BorderBrush="{DynamicResource DeleteLogCellButtonBorderBrush}"
+											CornerRadius="4"	
+											Classes="ColumnStyle"
+											IsEnabled="{Binding ElementName=root, Path=!DataContext.IsLogging}"
+											Command="{Binding ElementName=root, Path=DataContext.DeleteCellCommand}"
+											CommandParameter="{Binding}"
+											Height="40"
+											Width="40"
+											Margin="344,8,0,8">
+										<Image Source="{DynamicResource Basket}"
+											   VerticalAlignment="Center" HorizontalAlignment="Center"
+											   Width="24" Height="24"/>
+									</Button>
+								</Grid>
+
 							</DataTemplate>
 
 
-							
+
 						</ListBox.ItemTemplate>
 					</ListBox>
 				</StackPanel>
-				</ScrollViewer>
-				
+			</ScrollViewer>
+
+			<!--Add and Save buttons-->
+			<StackPanel Orientation="Horizontal"
+						Grid.Row="1"
+						Margin="0,20,0,32">
+				<StackPanel.Styles>
+					<Style Selector="Button">
+						<Setter Property="Margin" Value="16,0,0,0"/>
+						<Setter Property="FontFamily" Value="{StaticResource RobotoFont}"/>
+						<Setter Property="FontWeight" Value="Medium"/>
+						<Setter Property="Height" Value="40"/>
+						<Setter Property="Foreground" Value="White"/>
+						<Setter Property="CornerRadius" Value="4"/>
+						<Setter Property="Background" Value="{DynamicResource ButtonBackground1}"/>
+						<Setter Property="BorderThickness" Value="1"/>
+						<Setter Property="BorderBrush" Value="{DynamicResource ButtonAccept}"/>
+						<Setter Property="FontSize" Value="14"/>
+						<Setter Property="HorizontalContentAlignment" Value="Center"/>
+						<Setter Property="VerticalContentAlignment" Value="Center"/>
+					</Style>
+				</StackPanel.Styles>
+				<Button Command="{Binding AddParameterCommand}"
+						Width="216"
+						Content="ДОБАВИТЬ ПАРАМЕТР"
+						IsEnabled="{Binding !IsLogging}"/>
+
+				<Button Command="{Binding SaveConfigCommand}"
+						Width="136"
+						Content="СОХРАНИТЬ"
+						IsEnabled="{Binding !IsLogging}">
+				</Button>
+			</StackPanel>
+
 			
-				
 			
-				<!--Add and Save buttons-->
-				<StackPanel Orientation="Horizontal"
-							Grid.Row="1"
-							Margin="0,20,0,32">
-					<StackPanel.Styles>
-						<Style Selector="Button">
-							<Setter Property="Margin" Value="16,0,0,0"/>
-							<Setter Property="FontFamily" Value="{StaticResource RobotoFont}"/>
-							<Setter Property="FontWeight" Value="Medium"/>
-							<Setter Property="Height" Value="40"/>
-							<Setter Property="CornerRadius" Value="4"/>
-							<Setter Property="Background" Value="Transparent"/>
-							<Setter Property="BorderThickness" Value="1"/>
-							<Setter Property="BorderBrush" Value="{DynamicResource ButtonAccept}"/>
-							<Setter Property="FontSize" Value="14"/>
-							<Setter Property="HorizontalContentAlignment" Value="Center"/>
-							<Setter Property="VerticalContentAlignment" Value="Center"/>
-						</Style>
-					</StackPanel.Styles>
-					<Button Command="{Binding AddParameterCommand}"							
-							Width="216"							
-							Content="ДОБАВИТЬ ПАРАМЕТР"
-							IsEnabled="{Binding !IsLogging}"/>
-				
-					<Button Command="{Binding SaveConfigCommand}"
-							Width="136"	
-							Content="СОХРАНИТЬ"
-							IsEnabled="{Binding !IsLogging}">
-					</Button>
-				</StackPanel>
-			</Grid>
+		</Grid>
 		
-		</Border>		
+		
+			
+		
+			
 		
 		
 	</Grid>

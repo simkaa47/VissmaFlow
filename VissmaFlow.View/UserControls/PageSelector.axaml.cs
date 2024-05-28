@@ -3,6 +3,7 @@ using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Input;
 using Avalonia.Interactivity;
+using Avalonia.Styling;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -40,8 +41,9 @@ public partial class PageSelector : DialogWindow
                     };
                 }
             }
-        }
+        }  
     }
+
 
     protected override void OnLoaded(RoutedEventArgs e)
     {
@@ -79,6 +81,22 @@ public partial class PageSelector : DialogWindow
                 {
                     desktop.MainWindow.Close();
                 }
+            }
+        }
+    }
+
+    private  void ChangeTheme(object? sender, RoutedEventArgs args)
+    {
+        if (App.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+        {
+            var app = App.Current as App;
+            if (app != null)
+            {
+                if(app.RequestedThemeVariant == ThemeVariant.Dark)
+                    app.RequestedThemeVariant = ThemeVariant.Light;
+                else
+                    app.RequestedThemeVariant = ThemeVariant.Dark;
+
             }
         }
     }

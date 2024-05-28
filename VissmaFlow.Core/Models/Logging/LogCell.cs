@@ -1,4 +1,5 @@
-﻿using VissmaFlow.Core.Infrastructure.DataAccess;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using VissmaFlow.Core.Infrastructure.DataAccess;
 using VissmaFlow.Core.Models.Communication;
 using VissmaFlow.Core.Models.Parameters;
 
@@ -31,5 +32,14 @@ namespace VissmaFlow.Core.Models.Logging
             }
         }
         #endregion
+
+
+        private int _index;
+        [NotMapped]
+        public int Index
+        {
+            get=> _index;
+            set => SetProperty(ref _index, value);
+        }
     }
 }
