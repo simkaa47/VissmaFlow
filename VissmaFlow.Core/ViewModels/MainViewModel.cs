@@ -11,6 +11,7 @@ namespace VissmaFlow.Core.ViewModels
 
         public MainViewModel(ILogger<MainViewModel> logger,
             ParameterVm parameterVm,
+            ZondMeasuresViewModel zondMeasuresViewModel,
             PcSettingsViewModel pdcSettingsViewModel,
             MainCommunicationService communicationService,
             CommunicationVm communicationVm,
@@ -23,6 +24,7 @@ namespace VissmaFlow.Core.ViewModels
         {
             _logger = logger;
             ParameterVm = parameterVm;
+            ZondMeasuresViewModel = zondMeasuresViewModel;
             PdcSettingsViewModel = pdcSettingsViewModel;
             CommunicationService = communicationService;
             CommunicationVm = communicationVm;
@@ -48,6 +50,7 @@ namespace VissmaFlow.Core.ViewModels
         #endregion
 
         public ParameterVm ParameterVm { get; }
+        public ZondMeasuresViewModel ZondMeasuresViewModel { get; }
         public PcSettingsViewModel PdcSettingsViewModel { get; }
         public MainCommunicationService CommunicationService { get; }
         public CommunicationVm CommunicationVm { get; }

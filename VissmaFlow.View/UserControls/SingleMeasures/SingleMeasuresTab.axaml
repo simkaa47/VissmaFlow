@@ -67,6 +67,23 @@
 									  VerticalScrollBarVisibility="Disabled"
 									  HorizontalScrollBarVisibility="Disabled"
 									  Grid.Row="1" >
+								<DataGrid.Styles>
+									<Style Selector="TextBlock">
+										<Setter Property="HorizontalAlignment" Value="Left"/>
+										<Setter Property="Margin" Value="0"/>
+									</Style>
+									<Style Selector="DataGridRow">
+										<Setter Property="Background" Value="{Binding SingleMeasFlag, Converter={StaticResource GetIfTrueConverter}, ConverterParameter={StaticResource SingleMeasureColors}}"/>
+										<Setter Property="BorderThickness" Value="0"/>
+										<Style Selector="^:nth-child(odd)">
+											<Setter Property="Background" Value="{Binding SingleMeasFlag, Converter={StaticResource GetIfTrueConverter}, ConverterParameter={StaticResource SingleMeasureColorsOdd}}"/>
+										</Style>
+
+										<Style Selector="^:pointerover /template/ Rectangle#BackgroundRectangle">
+											<Setter Property="Fill" Value="Transparent" />
+										</Style>
+									</Style>
+								</DataGrid.Styles>
 								<DataGrid.Columns>
 									<DataGridTextColumn x:DataType="s:SingleMeasurePoint" Header="№"
 														Binding="{Binding Id}"

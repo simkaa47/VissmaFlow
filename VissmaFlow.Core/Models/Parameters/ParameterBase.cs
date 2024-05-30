@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Net.Http.Headers;
 using VissmaFlow.Core.Infrastructure.DataAccess;
 using VissmaFlow.Core.Models.AccessControl;
 using VissmaFlow.Core.Models.Communication;
@@ -88,6 +89,24 @@ namespace VissmaFlow.Core.Models.Parameters
         [ObservableProperty]
         private bool _isWriting;
         #endregion
+
+        public (bool isNumeric, float value) GetValue()
+        {
+            if (this is Parameter<short> parShort)
+                return (true, parShort.Value);
+            else if(this is Parameter<ushort> parUshort)
+                return (true, parUshort.Value);
+            else if (this is Parameter<int> parInt)
+                return (true, parInt.Value);
+            else if (this is Parameter<uint> parUint)
+                return (true, parUint.Value);
+            else if (this is Parameter<float> parFloat)
+                return (true, parFloat.Value);
+            else if (this is Parameter<double> parDouble)
+                return (true, (float)parDouble.Value);
+            return (false, 0);
+
+        }
 
 
     }
