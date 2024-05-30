@@ -7,5 +7,7 @@ namespace VissmaFlow.Core.Models.Administration
     {
         [ObservableProperty]
         private string? _password = string.Empty;
+        [ObservableProperty]
+        private Themes _theme;
     }
 }

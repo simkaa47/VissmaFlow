@@ -14,6 +14,7 @@ using VissmaFlow.Core.Models.AccessControl;
 using VissmaFlow.Core.ViewModels;
 using VissmaFlow.View.Dialogs;
 using VissmaFlow.View.Dialogs.AccessControl;
+using VissmaFlow.View.Services;
 
 namespace VissmaFlow.View.UserControls;
 
@@ -85,19 +86,17 @@ public partial class PageSelector : DialogWindow
         }
     }
 
-    private  void ChangeTheme(object? sender, RoutedEventArgs args)
+    private async  void ChangeTheme(object? sender, RoutedEventArgs args)
     {
         if (App.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             var app = App.Current as App;
-            if (app != null)
+            var service = app?.GetService<ThemeService>();
+            if(service != null)
             {
-                if(app.RequestedThemeVariant == ThemeVariant.Dark)
-                    app.RequestedThemeVariant = ThemeVariant.Light;
-                else
-                    app.RequestedThemeVariant = ThemeVariant.Dark;
+                await service?.ChangeThemeAsync();
+            }           
 
-            }
         }
     }
 

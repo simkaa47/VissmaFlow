@@ -24,6 +24,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using VissmaFlow.Core.Contracts.FileDialog;
 using VissmaFlow.View.Dialogs.FileDialogs;
+using VissmaFlow.View.Services;
+using static System.Formats.Asn1.AsnWriter;
 
 namespace VissmaFlow.View
 {
@@ -33,6 +35,11 @@ namespace VissmaFlow.View
         {
             T servise = _host.Services.GetRequiredService<T>();
             return servise;
+        }
+
+        public override void RegisterServices()
+        {
+            base.RegisterServices();            
         }
 
         private readonly IHost _host;
@@ -46,6 +53,7 @@ namespace VissmaFlow.View
                 {
                     services.AddApplicationServices();
                     services.AddSingleton<TrendsViewModel>();
+                    services.AddSingleton<ThemeService>();
                     services.AddTransient<IFileDialog, AvaloniaFileDialog>();
                     services.AddTransient<IParameterDialogService, ParameterDialogService>();
                     services.AddTransient<IQuestionDialog, AskDialog>();
@@ -65,26 +73,31 @@ namespace VissmaFlow.View
                 catch (Exception ex)
                 {
                     var logger = loggerFactory.CreateLogger<Program>();
-                    logger.LogError(ex, "An error occured diring migration");
+                    logger.LogError(ex, "An error occured diring migration");                    
                 }
+                
             }
         }
 
         public override void Initialize()
         {
             AvaloniaXamlLoader.Load(this);
-        }
+            
+        }        
+
+        
 
         public override void OnFrameworkInitializationCompleted()
         {
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
                 desktop.MainWindow = new MainWindow();
-                desktop.MainWindow.DataContext = GetService<MainViewModel>();
+                desktop.MainWindow.DataContext = GetService<MainViewModel>();                
 
             }
-
             base.OnFrameworkInitializationCompleted();
+            var themeService = GetService<ThemeService>();
+
         }
     }
 }
