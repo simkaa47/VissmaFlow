@@ -70,19 +70,12 @@ namespace VissmaFlow.Core.Models.SingleMeasures
         private void OnTimer(object? o)
         {
             if (_source is null) return;
-            _cnt++;
-            if (_source is ParameterShort parameterShort)
-                _sum += parameterShort.Value;
-            else if (_source is ParameterDouble parameterDouble)
-                _sum += (float)parameterDouble.Value;
-            else if (_source is ParameterUshort parameterUshort)
-                _sum += parameterUshort.Value;
-            else if (_source is ParameterUint parameterUint)
-                _sum += parameterUint.Value;
-            else if (_source is ParameterInt parameterInt)
-                _sum += parameterInt.Value;
-            else if (_source is ParameterFloat parameterFloat)
-                _sum += parameterFloat.Value;
+            var parValue = _source.GetValue();
+            if(parValue.isNumeric)
+            {
+                _cnt++;
+                _sum += parValue.value;
+            }   
             CurTime--;
             if(CurTime <= 0)
             {

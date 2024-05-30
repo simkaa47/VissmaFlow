@@ -17,6 +17,7 @@ namespace VissmaFlow.Core
             services.AddSingleton<ParameterVm>();
             services.AddSingleton<AccessViewModel>();
             services.AddSingleton<LoggingViewModel>();
+            services.AddSingleton<ZondMeasuresViewModel>();
             services.AddSingleton<TrendSettigsViewModel>();
             services.AddSingleton<SingleMeasuresViewModel>();
             services.AddSingleton<MainCommunicationService>();

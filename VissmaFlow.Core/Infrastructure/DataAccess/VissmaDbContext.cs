@@ -8,6 +8,7 @@ using VissmaFlow.Core.Models.Logging;
 using VissmaFlow.Core.Models.Parameters;
 using VissmaFlow.Core.Models.SingleMeasures;
 using VissmaFlow.Core.Models.Trends;
+using VissmaFlow.Core.Models.ZondMeasuring;
 
 namespace VissmaFlow.Core.Infrastructure.DataAccess
 {
@@ -21,6 +22,7 @@ namespace VissmaFlow.Core.Infrastructure.DataAccess
         public DbSet<Event> Events => Set<Event>();
         public DbSet<SingleMeasureSettings> SingleMeasureSettingses => Set<SingleMeasureSettings>();
         public DbSet<TrendSettings> TrendSettings => Set<TrendSettings>();
+        public DbSet<ZondMeasureSettings> ZondMeasureSettingses => Set<ZondMeasureSettings>();
 
         public DbSet<IndicationCell> IndicationCells => Set<IndicationCell>();
 

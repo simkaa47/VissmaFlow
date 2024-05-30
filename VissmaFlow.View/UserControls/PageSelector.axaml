@@ -43,7 +43,7 @@
 
 		<ScrollViewer Margin="40,40,9,40"
 					  Grid.Row="1"
-					  MaxHeight="375"
+					  MaxHeight="377"
 				      VerticalAlignment="Top">
 			<ListBox ItemsSource="{Binding ElementName=root, Path=ItemsSource}"
 				     PointerReleased="OnSelectionChanged"				 

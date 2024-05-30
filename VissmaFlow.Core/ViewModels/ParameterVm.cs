@@ -42,7 +42,7 @@ namespace VissmaFlow.Core.ViewModels
 
         public CommunicationVm CommunicationVm { get; }
 
-
+        
 
         #region Добавить параметр
         [RelayCommand]
