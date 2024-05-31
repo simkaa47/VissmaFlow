@@ -132,7 +132,8 @@
 			<lvc:CartesianChart
 		 Series="{Binding Series}"
 		 ZoomMode="{Binding SelectedZoomMode}"
-		 ZoomingSpeed="0.01"
+		 EasingFunction="{x:Null}"
+		 ZoomingSpeed="1"		 
 		 FontSize="16"
 		 DrawMarginFrame="{Binding DrawMarginFrame}"
 		 LegendPosition="Hidden"
@@ -141,7 +142,7 @@
 		 TooltipPosition="Hidden"		 
 		 YAxes="{Binding YAxes}"
 		 SyncContext="{Binding Sync}"
-		 XAxes="{Binding XAxes}">
+		 XAxes="{Binding XAxes}">				
 			</lvc:CartesianChart>
 			<Button Command="{Binding EnableRealTimeCommand}"
 					HorizontalAlignment="Left"

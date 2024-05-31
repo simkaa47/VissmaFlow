@@ -6,6 +6,7 @@ using Avalonia.Markup.Xaml;
 using CommunityToolkit.Mvvm.Messaging;
 using System;
 using System.Globalization;
+using System.Text;
 using VissmaFlow.View.UserControls.Keyboard;
 using VissmaFlow.View.ViewModels;
 
@@ -18,6 +19,7 @@ namespace VissmaFlow.View
             InitializeComponent();
             CultureInfo.CurrentCulture = new CultureInfo("ru-RU", true);
             CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator = ",";
+            
 
             CultureInfo.CurrentUICulture = new CultureInfo("ru-RU", true);
             CultureInfo.CurrentUICulture.NumberFormat.NumberDecimalSeparator = ",";

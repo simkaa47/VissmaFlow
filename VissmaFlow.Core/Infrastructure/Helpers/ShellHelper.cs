@@ -23,7 +23,7 @@ namespace VissmaFlow.Core.Infrastructure.Helpers
 
             try
             {
-                process.Start();
+                var process_result = process.Start();
                 result = process.StandardOutput.ReadToEnd();
                 process.WaitForExit();                
             }

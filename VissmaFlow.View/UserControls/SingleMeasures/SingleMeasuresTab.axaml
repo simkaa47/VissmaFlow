@@ -31,6 +31,10 @@
 							BorderBrush="{DynamicResource ListBoxBorderBrush}"
 							BorderThickness="1"/>
 					<ScrollViewer Margin="40,20,9,36">
+						<ScrollViewer.GestureRecognizers>
+							<ScrollGestureRecognizer CanHorizontallyScroll="False"
+                                         CanVerticallyScroll="True"/>
+						</ScrollViewer.GestureRecognizers>
 						<Grid RowDefinitions="Auto,*" Margin="0,0,31,0"
 							  Background="{DynamicResource ParameterBackgroundCommonColor}">
 							<DockPanel Margin="20,14,35,18">
@@ -67,6 +71,10 @@
 									  VerticalScrollBarVisibility="Disabled"
 									  HorizontalScrollBarVisibility="Disabled"
 									  Grid.Row="1" >
+								<DataGrid.GestureRecognizers>
+									<ScrollGestureRecognizer CanHorizontallyScroll="False"
+                                         CanVerticallyScroll="True"/>
+								</DataGrid.GestureRecognizers>
 								<DataGrid.Styles>
 									<Style Selector="TextBlock">
 										<Setter Property="HorizontalAlignment" Value="Left"/>

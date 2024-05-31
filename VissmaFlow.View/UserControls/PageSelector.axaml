@@ -45,6 +45,10 @@
 					  Grid.Row="1"
 					  MaxHeight="377"
 				      VerticalAlignment="Top">
+			<ScrollViewer.GestureRecognizers>
+				<ScrollGestureRecognizer CanHorizontallyScroll="False"
+                                         CanVerticallyScroll="True"/>
+			</ScrollViewer.GestureRecognizers>
 			<ListBox ItemsSource="{Binding ElementName=root, Path=ItemsSource}"
 				     PointerReleased="OnSelectionChanged"				 
 				     BorderBrush="{DynamicResource ListBoxBorderBrush}"					 

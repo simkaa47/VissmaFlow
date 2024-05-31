@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 			 Width="480" Height="800"
+			 x:Name="root"
              x:Class="VissmaFlow.View.Dialogs.Common.QuestionControl">
 	<Grid>
 		<Grid.Styles>
@@ -17,8 +18,9 @@
 				<Setter Property="Foreground" Value="White"/>
 			</Style>
 		</Grid.Styles>
-		<TextBlock  Name="Content"
-					Foreground="{DynamicResource TexBoxCommon}"
+		<TextBlock  Foreground="{DynamicResource TexBoxCommon}"
+					
+					Text="{Binding ElementName=root, Path=Question, }"
 					TextWrapping="Wrap" />
 		<WrapPanel VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,15,0,40">
 			<Button Background="{DynamicResource ButtonAccept}" IsDefault="True" Click="Accept_Click" MinWidth="200" Margin="0,0,10,0">

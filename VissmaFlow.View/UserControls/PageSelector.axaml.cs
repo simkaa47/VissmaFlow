@@ -3,7 +3,6 @@ using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Input;
 using Avalonia.Interactivity;
-using Avalonia.Styling;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -31,18 +30,18 @@ public partial class PageSelector : DialogWindow
             if (app != null)
             {
                 AccessViewModel = app.GetService<AccessViewModel>();
-                if(AccessViewModel is not null)
+                if (AccessViewModel is not null)
                 {
-                    AccessViewModel.PropertyChanged += (o, args) => 
-                    { 
-                        if(args.PropertyName == nameof(AccessViewModel.CurrentUser))
+                    AccessViewModel.PropertyChanged += (o, args) =>
+                    {
+                        if (args.PropertyName == nameof(AccessViewModel.CurrentUser))
                         {
                             GetActualTabs();
                         }
                     };
                 }
             }
-        }  
+        }
     }
 
 
@@ -58,9 +57,9 @@ public partial class PageSelector : DialogWindow
         if (AccessViewModel is null) return;
         UserAccessLevel level = AccessViewModel.CurrentUser is null ? UserAccessLevel.None : AccessViewModel.CurrentUser.AccessLevel;
         if (Tabs is null || !(Tabs is List<UserAccessControl> controls)) return;
-        ItemsSource = controls.Where(c=>level>=c.UserLevel).
-            Select(c=>c.Tag).ToList();
-        if(SelectedItem is null && Tab is not null && Tab is UserControl control)
+        ItemsSource = controls.Where(c => level >= c.UserLevel).
+            Select(c => c.Tag).ToList();
+        if (SelectedItem is null && Tab is not null && Tab is UserControl control)
         {
             if (ItemsSource is List<object> list)
                 SelectedItem = list.Where(i => i == control.Tag).FirstOrDefault();
@@ -86,16 +85,16 @@ public partial class PageSelector : DialogWindow
         }
     }
 
-    private async  void ChangeTheme(object? sender, RoutedEventArgs args)
+    private async void ChangeTheme(object? sender, RoutedEventArgs args)
     {
         if (App.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             var app = App.Current as App;
             var service = app?.GetService<ThemeService>();
-            if(service != null)
+            if (service != null)
             {
-                await service?.ChangeThemeAsync();
-            }           
+                await service.ChangeThemeAsync();
+            }
 
         }
     }
@@ -117,7 +116,7 @@ public partial class PageSelector : DialogWindow
                     {
                         desktop.MainWindow.Close();
                     }
-                    ShellHelper.BashCommand($"echo {settService.PcSettings.Password} | sudo {cmd}");
+                    ShellHelper.BashCommand($"echo {settService.PcSettings.Password} | sudo -S {cmd}");
                 }
             }
         }
@@ -171,7 +170,7 @@ public partial class PageSelector : DialogWindow
         get { return (object?)GetValue(SelectedItemProperty); }
         set
         {
-            SetValue(SelectedItemProperty, value);   
+            SetValue(SelectedItemProperty, value);
         }
     }
 
@@ -182,7 +181,7 @@ public partial class PageSelector : DialogWindow
 
     private void OnSelectionChanged(object sender, PointerReleasedEventArgs args)
     {
-        if(SelectedItem is not null && SelectedItem is string str)
+        if (SelectedItem is not null && SelectedItem is string str)
         {
             if (Tabs is not null && Tabs is List<UserAccessControl> controls)
             {

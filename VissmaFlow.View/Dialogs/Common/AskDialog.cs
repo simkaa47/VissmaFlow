@@ -12,8 +12,7 @@ namespace VissmaFlow.View.Dialogs.Common
             {
                 return false;
             }
-            QuestionControl questionControl = new QuestionControl();
-            questionControl.Content.Text = message;
+            QuestionControl questionControl = new QuestionControl(message);           
             await questionControl.ShowDialogAsync();
             return questionControl.DialogResult;
 
