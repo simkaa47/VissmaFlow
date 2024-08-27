@@ -10,8 +10,6 @@
 
 	<Style Selector="DataGridRow">
 		
-
-		
 		<Style Selector="^:selected">
 			<Style Selector="^ /template/ Rectangle#BackgroundRectangle">
 				<Setter Property="Fill" Value="Transparent" />				

@@ -11,7 +11,7 @@ namespace VissmaFlow.Core.Models.ZondMeasuring
         private PipeType _pipeType = PipeType.Round;
 
         [ObservableProperty]
-        [Range(0.1,2000)]
+        [Range(0.1,100000)]
         private float _height = 400;
 
         

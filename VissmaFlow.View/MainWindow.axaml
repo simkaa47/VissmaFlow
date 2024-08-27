@@ -8,6 +8,10 @@
 		xmlns:sys="clr-namespace:System;assembly=netstandard"
 		xmlns:vm="using:VissmaFlow.Core.ViewModels"
 		x:DataType="vm:MainViewModel"
+		MaxHeight="800"
+		MaxWidth="480"
+		Height="800"
+		Width="480"
 		xmlns:sm="using:VissmaFlow.View.UserControls.SingleMeasures"		
 		xmlns:main="using:VissmaFlow.View.UserControls.Main"
 		xmlns:e="using:VissmaFlow.View.UserControls.Events"
@@ -39,19 +43,17 @@
 		</scg:List>
 	</Window.Resources>
 	<Grid RowDefinitions="*, Auto">
-		<Viewbox >
-			<Border BorderBrush="Gray"
+		<Border BorderBrush="Gray"
 					Background="{DynamicResource CommonColor}"
 					Name="MainContentBorder"
 					IsEnabled="{Binding ElementName=KbBorder, Path=!IsVisible}"
 					Height="800" Width="480"
 			BorderThickness="0">
-				<Grid RowDefinitions="80,*">
-					<hb:HighBarControl Name="hb"  ItemsSource="{StaticResource Pages}"/>
-					<UserControl Grid.Row="1" Content="{Binding ElementName=hb, Path=SelectedItem}"/>
-				</Grid>
-			</Border>
-		</Viewbox>
+			<Grid RowDefinitions="80,*">
+				<hb:HighBarControl Name="hb"  ItemsSource="{StaticResource Pages}"/>
+				<UserControl Grid.Row="1" Content="{Binding ElementName=hb, Path=SelectedItem}"/>
+			</Grid>
+		</Border>
 		
 		<Border Background="LightGray"
 				Name="KbBorder"

@@ -29,7 +29,7 @@
 				<SolidColorBrush Color="LightGreen"/>
 			</scg:List>
 			<Color x:Key="TextBoxErrorColorOk">#99000000</Color>
-			<Color x:Key="TextBoxErrorColorNotOk">Red</Color>
+            <Color x:Key="TextBoxErrorColorNotOk">Red</Color>
 			<Color x:Key="ComboBoxClosed">#61000000</Color>
 			<Color x:Key="ComboBoxOpened">#28BCBA</Color>
 			<Color x:Key="LogOff">#28BCBA</Color>

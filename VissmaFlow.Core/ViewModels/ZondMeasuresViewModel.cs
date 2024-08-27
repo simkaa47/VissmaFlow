@@ -35,7 +35,7 @@ namespace VissmaFlow.Core.ViewModels
             {
                 if (args.PropertyName == nameof(Settings.Source)
                 || args.PropertyName == nameof(Settings.PipeType)
-                || args.PropertyName == nameof(Settings.MeasTime))
+                || args.PropertyName == nameof(Settings.Height))
                 {
                     await ClearPoints();
                 }
@@ -179,7 +179,7 @@ namespace VissmaFlow.Core.ViewModels
             {
                 for (int i = 0; i < points.Count; i++)
                 {
-                    points[i].Distance += 30;
+                    points[i].Distance += 33;
                     Settings.ZondMeasures[i].Index = i + 1;
                     if (Settings.ZondMeasures[i].Distance != points[i].Distance)
                     {

@@ -11,7 +11,6 @@ public partial class DateTimePicker : UserControl
     public DateTimePicker()
     {
         InitializeComponent();
-        InitializeComponent();
         sabri_ = this.FindControl<Button>("sabri");
         pop = this.FindControl<Popup>("Popup");
         popPresenter = this.FindControl<FBCDateTimePickerPresenter>("PopPresenter");

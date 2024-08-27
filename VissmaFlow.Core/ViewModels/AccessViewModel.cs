@@ -119,9 +119,9 @@ namespace VissmaFlow.Core.ViewModels
 
 
         [RelayCommand]
-        public async Task LoginAsync(object parameter)
+        public async Task<bool> LoginAsync(object parameter)
         {
-            if (!(parameter is Login login)) return;
+            if (!(parameter is Login login)) return false;
             try
             {
                 var user = await _userRepository.GetFirstWhere(u => u.Login == login.LoginName && u.Password == login.Password);
@@ -135,12 +135,14 @@ namespace VissmaFlow.Core.ViewModels
                     CurrentUser = user;
                     IsAuthorized = true;
                     _logger.LogInformation($"Пользователь c логином {login.LoginName}");
+                    return true;
                 }
             }
             catch (Exception ex)
             {
                 _logger.LogError($"Ошибка при авторизации пользователя с логином  {login.LoginName} - {ex.Message}");
             }
+            return false;
         }
 
         [RelayCommand]

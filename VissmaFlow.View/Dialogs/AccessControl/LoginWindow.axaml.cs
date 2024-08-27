@@ -23,13 +23,9 @@ public partial class LoginWindow : DialogWindow
             if (App.Current is App app )
             {
                 var vm = app.GetService<AccessViewModel>();
-                if (vm != null)
+                if (vm is not null && await vm.LoginAsync(Login))
                 {
-                    await vm.LoginAsync(Login);
-                    if (vm.CurrentUser != null)
-                    {
-                        needToCloseDialog = true;
-                    }
+                    needToCloseDialog = true;
                 }
             }
         }
